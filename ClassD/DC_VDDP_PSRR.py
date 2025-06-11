@@ -1,0 +1,31 @@
+from dfttools import *
+from time import sleep 
+import random
+Test_Name = 'DC_VDDP_PSRR'
+from Procedures import Startup
+from Procedures import Playback
+
+print(f'............ {Test_Name} ........')
+
+'''
+DC_VDDP_PSRR test
+Step 1. Configure the device registers to enable testing.
+Step 2. Measure the classD DC output voltage at "PVDD"=2.5V 
+Step 3. Measure the classD DC output voltage at "PVDD"=5V 
+Step 4. Calculate the DC PSRR as 20*log10((|VOUT_5V - VOUT_2p5V|)/2.5)
+
+'''
+# Step 1
+I2C_WRITE(device_address="0x68", field_info=page_sel, write_value=1) 
+I2C_WRITE(device_address="0x68", field_info={'fieldname': 'force_dac_zero', 'length': 1, 'registers': [{'REG': '0x1E', 'POS': 1, 'RegisterName': 'Force registers 7', 'RegisterLength': 8, 'Name': 'force_dac_zero', 'Mask': '0x2', 'Length': 1, 'FieldMSB': 1, 'FieldLSB': 1, 'Attribute': '000NNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=1) 
+
+# Step 2
+sleep(0.0001) 
+#Set  VDDP=5V
+Vout_5V = VMEASURE(signal="OUTP", reference="OUTN")
+#set VDDP=2.5V
+Vout_2p5V = VMEASURE(signal="OUTP", reference="OUTN")
+
+measured_value=20*log10(abs(Vout_5V-Vout_2p5V)/2.5)
+#expected value is -90dB
+
