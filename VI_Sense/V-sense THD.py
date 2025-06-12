@@ -18,5 +18,8 @@ from Procedures import VI_SNS_turn_on
 sleep(0.001)  # 1 ms
 # realize FFT expexted value = 83dB, error: +/- 3dB
 expected_vals = {'THD': 83}
-measured_THD = FFT(signal='TDM_OUTPUT',reference='"GND"',signal_type='Digital',sample_number=9202,sample_time=0.003,window='Hanning',expected_values=expected_vals) 
-print(measured_THD)
+measured_THD = FFT(signal='TDM_OUTPUT',reference="GND",signal_type='Digital',sample_number=9202,sample_time=0.003,window='Hanning',expected_values=expected_vals) 
+if meausred_THD < 80.0:
+  print(f' ....... {Test_Name} ... Failed  :>  {measured_THD}dB')
+else:
+  print(f' ....... {Test_Name} ... Passed  :>  {measured_THD}dB')
