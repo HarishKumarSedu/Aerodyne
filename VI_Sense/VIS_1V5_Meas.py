@@ -26,7 +26,7 @@ I2C_WRITE("0x68", field_info={'fieldname': 'test_sel', 'length': 4, 'registers':
 # Step 4: First DC Voltage Measurement
 expected_dc1 = 1.5       # Target voltage on "ADDR"
 dc1_error = 0.005        # ±5mV tolerance
-vref1V5 = VMEASURE(signal='"ADDR"', reference='"GND"', expected_value=expected_dc1, error_spread=dc1_error)
+vref1V5 = VMEASURE(signal="ADDR", reference="GND", expected_value=expected_dc1, error_spread=dc1_error)
 print(f'DC Reference Voltage: {vref1V5:.5f} V [Target: {expected_dc1:.2f}V ±{dc1_error*1000:.0f}mV]')
 # Pass/Fail Criteria
 if abs(vref1V5 - expected_dc1) <= dc1_error:
@@ -37,7 +37,7 @@ else:
 # Step 5: Second DC Voltage Measurement
 expected_dc2 = 0       # Target voltage on "IODATA1"
 dc2_error = 0.002        # ±5mV tolerance
-vref0V0 = VMEASURE(signal='"IODATA1"', reference='"GND"', expected_value=expected_dc2, error_spread=dc2_error)
+vref0V0 = VMEASURE(signal="IODATA1", reference="GND", expected_value=expected_dc2, error_spread=dc2_error)
 print(f'DC Reference Voltage: {vref0V0:.5f} V [Target: {expected_dc2:.2f}V ±{dc2_error*1000:.0f}mV]')
 # Pass/Fail Criteria
 if abs(vref0V0 - expected_dc2) <= dc2_error:
