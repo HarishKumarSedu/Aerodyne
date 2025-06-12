@@ -16,7 +16,7 @@ from Procedures import VI_SNS_turn_on
   Desired value is 83dB
  '''
 sleep(0.001)  # 1 ms
-# MEasure TDM Dgital from "IODATA1" for FFT Computations 
+# Measure TDM Dgital from "IODATA1" for FFT Computations 
 # realize FFT expexted value = 83dB, error: +/- 3dB
 expected_vals = {'THD': 83}
 measured_THD = FFT(signal="IODATA1",reference="GND",signal_type='Digital',sample_number=9202,sample_time=0.003,window='Hanning',expected_values=expected_vals).get('THD') 
