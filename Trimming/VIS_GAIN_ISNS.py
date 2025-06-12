@@ -19,7 +19,7 @@ from Procedures import Global_enable
 from Procedures import VI_SNS_turn_on
 print(f' ........ Source 500mA from SPKRP/SPKRM ........ ')
 source_current = 500e-3
-from Procedures import CLASSD_OUT_CURR_TRIMM
+from Procedures import CLASSD_OUT_CURR_TRIM
 AFORCE(signal="OUTP",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
 AFORCE(signal=OUTM,reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
 sleep(0.1)
