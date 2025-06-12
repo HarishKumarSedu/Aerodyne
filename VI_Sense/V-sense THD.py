@@ -16,18 +16,7 @@ from Procedures import VI_SNS_turn_on
   Desired value is 83dB
  '''
 sleep(0.001)  # 1 ms
-
-
 # realize FFT expexted value = 83dB, error: +/- 3dB
-expected_vals = {'fundamental_freq': 1000, 'harmonic_freq': 3000}
-    error_spreads = {'fundamental_freq': 0.5, 'harmonic_freq': 1.0}
-FFT(
-            signal='CLK',
-            reference='"GND"',
-            signal_type='Digital',
-            sample_number=9202,
-            sample_time=0.003,
-            window='Hanning',
-            expected_values=expected_vals,
-            error_spreads=error_spreads
-        ) 
+expected_vals = {'THD': 83}
+measured_THD = FFT(signal='TDM_OUTPUT',reference='"GND"',signal_type='Digital',sample_number=9202,sample_time=0.003,window='Hanning',expected_values=expected_vals) 
+print(measured_THD)
