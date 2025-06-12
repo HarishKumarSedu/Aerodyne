@@ -19,16 +19,14 @@ sleep(0.001)  # 1 ms
 
 
 # realize FFT expexted value = 83dB, error: +/- 3dB
-fundamental_freq=1000
-harmonic_freq=3000 #3rd harmonic
 expected_vals = {'fundamental_freq': 1000, 'harmonic_freq': 3000}
     error_spreads = {'fundamental_freq': 0.5, 'harmonic_freq': 1.0}
 FFT(
             signal='CLK',
             reference='"GND"',
             signal_type='Digital',
-            sample_number=1000,
-            sample_time=0.001,
+            sample_number=9202,
+            sample_time=0.003,
             window='Hanning',
             expected_values=expected_vals,
             error_spreads=error_spreads
