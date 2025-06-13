@@ -16,7 +16,7 @@ sleep (0.01)
 # Acquire via TDM V-sns stream
 I2C_WRITE(device_address="0x38", field_info={'fieldname': 'pcm_vmon_en', 'length': 1, 'registers': [{'REG': '0x5D', 'POS': 0, 'RegisterName': 'TDM settings 15', 'RegisterLength': 8, 'Name': 'pcm_vmon_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '00000NNN', 'Default': '00', 'User': '00000YYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=hex(0x01))  # Setting V-sns output
 I2C_WRITE(device_address="0x38", field_info={'fieldname': 'tdm_tx_en', 'length': 1, 'registers': [{'REG': '0x5F', 'POS': 0, 'RegisterName': 'TDM settings 17', 'RegisterLength': 8, 'Name': 'tdm_tx_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=hex(0x01))  # Enable tdm in transmission
-Sleep (0.01)
+sleep (0.01)
 
 '''
   Wait for 1ms, waiting for settling
