@@ -1,4 +1,4 @@
- in from dfttools import *
+from dfttools import *
 from time import sleep
 import random
 Test_Name = 'V-sense THD'
