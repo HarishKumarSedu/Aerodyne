@@ -1,6 +1,6 @@
 from dfttools import *
 from time import sleep 
-from math import log10
+import math
 import random
 Test_Name = 'DC_VDDP_PSRR'
 from Procedures import Startup
@@ -26,5 +26,5 @@ sleep(0.0001)
 Vout_5V = VMEASURE(signal="OUTP", reference="OUTN")
 #set VDDP=2.5V
 Vout_2p5V = VMEASURE(signal="OUTP", reference="OUTN")
-measured_value=20*log10(abs(Vout_5V-Vout_2p5V)/2.5)
+measured_value=20*math.log10(abs(Vout_5V-Vout_2p5V)/2.5)
 #expected value is -90dB
