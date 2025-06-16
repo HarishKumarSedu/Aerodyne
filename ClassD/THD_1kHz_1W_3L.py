@@ -20,7 +20,9 @@ error_percentage = 0.075 # 7.5%
 expeted_thd = -80
 expected_vals = {'THD': expeted_thd}
 error_spreads = {'THD': expeted_thd*error_percentage}
-measured_THD = FFT(signal="IODATA1",reference="GND",signal_type='Digital',sample_number=9202,sample_time=0.003,window='Hanning',expected_values=expected_vals,error_spreads=error_spreads).get('THD') 
+
+measured_Values = FFT(signal="IODATA1",reference="GND",signal_type='Digital',sample_number=9202,sample_time=0.003,window='Hanning',expected_values=expected_vals,error_spreads=error_spreads)
+measured_THD = measured_Values.get('THD') 
 
 if measured_THD < maximum_thd:
   print(f'...... {Test_Name}..Passed THD:{measured_THD}dB ')
