@@ -8,16 +8,10 @@ from Procedures import Internal_sin_1kHz_1W
 print(f'............ {Test_Name} ........')
 
 '''
-Reach the playback state with 3L modulation
-
-Enable internal sinusoid generator to play 1W at 1 kHz.
-
-Wait 1ms.
-
-Perform THD measurement on the differential voltage signal measured as  voltage @"OUTP" pin - voltage #"OUTN" pin.
-
-Expected value is -80dB.
-Maximum value is -77dB.
+1.Reach the playback state with 3L modulation
+2.Enable internal sinusoid generator to play 1W at 1 kHz.
+3.Wait 1ms.
+4.Perform THD measurement on the differential voltage signal measured as  voltage @"OUTP" pin - voltage #"OUTN" pin.
+5.Expected value is -80dB.
+6.Maximum value is -77dB.
 '''
-
-
