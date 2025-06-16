@@ -1,6 +1,6 @@
 from dfttools import *
 from time import sleep 
-import math
+from math import *
 import random
 Test_Name = 'DC_VDDP_PSRR'
 from Procedures import Startup
@@ -28,5 +28,6 @@ sleep(0.0001)
 Vout_5V = VMEASURE(signal="OUTP", reference="OUTN", expected_value = expected_VDDP_5V_value, error_spread = expected_VDDP_5V_value*error_percentage)
 #set VDDP=2.5V
 Vout_2p5V = VMEASURE(signal="OUTP", reference="OUTN",expected_value = expected_VDDP_2p5V_value, error_spread = expected_VDDP_2p5V_value*error_percentage)
-measured_value=20*math.log10(abs(Vout_5V-Vout_2p5V)/2.5)
+measured_value_db=20*math.log10(abs(Vout_5V-Vout_2p5V)/2.5)
 #expected value is -90dB
+print(measured_value_db)
