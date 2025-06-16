@@ -1,52 +1,52 @@
-from dfttools import *
-from time import sleep
-import random
-
-Test_Name = 'Low_Side_N_Ron'
-from Procedures import Startup
-
-print(f'............ {Test_Name} ........')
-
-'''
-Low-Side N-Channel Ron Measurement
--------------------------------------------------
-1. Enable bridge n-cascode, mid, and ls devices
-2. Force 500mA current into "OUTP" pin
-3. Measure differential voltage between "VMID" and PGND_sns
-4. Calculate Ron = dV / 500mA
-'''
-
-# Define device address (replace with actual address)
-# "0x68" = 0xXX  # Example device address, update accordingly
-
-'''
-! Important designers must correct the fields and write the procedure
-# Step 1: Enable bridge n-cascode, mid, and ls devices
-'''
-# I2C_WRITE(device_address="0x68", field_info=bridge_n_cascode_en, write_value=1)
-# I2C_WRITE(device_address="0x68", field_info=bridge_n_mid_en, write_value=1)
-# I2C_WRITE(device_address="0x68", field_info=bridge_n_ls_en, write_value=1)
-
-'''
-# Step 2: Configure analog test mux for differential measurement
-# Route "VMID" and PGND_sns to measurement channels through test mux
-'''
-# I2C_WRITE(device_address="0x68", field_info=analog_test_mux_sel1, write_value=0xXX)  # "VMID"
-# I2C_WRITE(device_address="0x68", field_info=analog_test_mux_sel2, write_value=0xYY)  # PGND_sns
-
-# Wait for device stabilization (critical for N-channel measurements[^8^])
-sleep(0.0001)  # 100 �s
-
-# Step 3: Force 500mA current into "OUTP" pin
-I_forced = 500e-3  # 500mA
-AFORCE(signal="OUTP", reference="GND", value=I_forced, error_spread=0.05)  # Current forcing
-
-# Wait for current settling (consider thermal effects[^6^])
-sleep(0.001)  # 1 ms
-
-# Step 4: Measure differential voltage and calculate Ron
-dV = VMEASURE(signal="VMID", reference="PGND", expected_value=0.1, error_spread=0.05)
-LSN_ron = dV / I_forced  # R = V/I
-
-print(f'Calculated Low-Side N-Ron: {LSN_ron:.3f} Ohms')
-print(f'[Expected ~XXXm Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
+from dfttools import *
+from time import sleep
+import random
+
+Test_Name = 'Low_Side_P_Ron'
+from Procedures import speakerOff
+
+print(f'............ {Test_Name} ........')
+#I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 2, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0) # page 0
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 2, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=1) # page 1
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'atp_p_en', 'length': 1, 'registers': [{'REG': '0x17', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_EN2', 'RegisterLength': 8, 'Name': 'atp_p_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000NNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=1) # enable atp
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'atp_n_en', 'length': 1, 'registers': [{'REG': '0x17', 'POS': 1, 'RegisterName': 'ANA_TESTMUX_EN2', 'RegisterLength': 8, 'Name': 'atp_n_en', 'Mask': '0x2', 'Length': 1, 'FieldMSB': 1, 'FieldLSB': 1, 'Attribute': '0000NNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=1)
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_shared_force', 'length': 1, 'registers': [{'REG': '0x18', 'POS': 0, 'RegisterName': 'Force registers 1', 'RegisterLength': 8, 'Name': 'cld_shared_force', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '00NNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1)  # class D force enable
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x0)  # {'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_bias_en_m', 'length': 1, 'registers': [{'REG': '0x19', 'POS': 0, 'RegisterName': 'Force registers 2', 'RegisterLength': 8, 'Name': 'cld_bias_en_m', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0NNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1) # cld_bias enable
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_dac_vddp_en_m', 'length': 1, 'registers': [{'REG': '0x19', 'POS': 4, 'RegisterName': 'Force registers 2', 'RegisterLength': 8, 'Name': 'cld_dac_vddp_en_m', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': '0NNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x0) # cld_dac disable
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_pwm_en_m', 'length': 1, 'registers': [{'REG': '0x19', 'POS': 6, 'RegisterName': 'Force registers 2', 'RegisterLength': 8, 'Name': 'cld_pwm_en_m', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': '0NNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x0) # cld_pwm disable
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_lpf_en_m', 'length': 1, 'registers': [{'REG': '0x19', 'POS': 5, 'RegisterName': 'Force registers 2', 'RegisterLength': 8, 'Name': 'cld_lpf_en_m', 'Mask': '0x20', 'Length': 1, 'FieldMSB': 5, 'FieldLSB': 5, 'Attribute': '0NNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x0) # cld_lpf disable
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_dac_en_m', 'length': 1, 'registers': [{'REG': '0x19', 'POS': 2, 'RegisterName': 'Force registers 2', 'RegisterLength': 8, 'Name': 'cld_dac_en_m', 'Mask': '0x4', 'Length': 1, 'FieldMSB': 2, 'FieldLSB': 2, 'Attribute': '0NNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x0) # cld_dac disable
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_dac_en_d_m', 'length': 1, 'registers': [{'REG': '0x19', 'POS': 3, 'RegisterName': 'Force registers 2', 'RegisterLength': 8, 'Name': 'cld_dac_en_d_m', 'Mask': '0x8', 'Length': 1, 'FieldMSB': 3, 'FieldLSB': 3, 'Attribute': '0NNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x0)  # cld_dac disable
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_driver_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 2, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'cld_driver_test_en', 'Mask': '0x4', 'Length': 1, 'FieldMSB': 2, 'FieldLSB': 2, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]} , write_value=0x1)  # test enable for driver
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 2, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0) # page 0
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_dvr_force_sel', 'length': 8, 'registers': [{'REG': '0x9C', 'POS': 0, 'RegisterName': 'CLD analog setting reg 6', 'RegisterLength': 8, 'Name': 'cld_dvr_force_sel[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x0)  # select all switch off
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_drv_force', 'length': 1, 'registers': [{'REG': '0x9B', 'POS': 4, 'RegisterName': 'CLD analog setting reg 5', 'RegisterLength': 8, 'Name': 'cld_drv_force', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': 'NNNNNNNN', 'Default': '81', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x1)  # force the switch in the selected position above
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_int_fb_byp', 'length': 1, 'registers': [{'REG': '0x9A', 'POS': 4, 'RegisterName': 'CLD analog setting reg 4', 'RegisterLength': 8, 'Name': 'cld_int_fb_byp', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': 'NNNNNNNN', 'Default': '86', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x1)  # bypass of the internal feedback conditioning 
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_sel_part_byp', 'length': 1, 'registers': [{'REG': '0x9A', 'POS': 5, 'RegisterName': 'CLD analog setting reg 4', 'RegisterLength': 8, 'Name': 'cld_sel_part_byp', 'Mask': '0x20', 'Length': 1, 'FieldMSB': 5, 'FieldLSB': 5, 'Attribute': 'NNNNNNNN', 'Default': '86', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x1)  # bypass partitioning conditioning 
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 2, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=1) # page 1
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_intfb_en_force', 'length': 1, 'registers': [{'REG': '0x1A', 'POS': 2, 'RegisterName': 'Force registers 3', 'RegisterLength': 8, 'Name': 'cld_intfb_en_force', 'Mask': '0x4', 'Length': 1, 'FieldMSB': 2, 'FieldLSB': 2, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1)  # force internal feedback selection
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_intfb_en_m', 'length': 1, 'registers': [{'REG': '0x1B', 'POS': 2, 'RegisterName': 'Force registers 4', 'RegisterLength': 8, 'Name': 'cld_intfb_en_m', 'Mask': '0x4', 'Length': 1, 'FieldMSB': 2, 'FieldLSB': 2, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x0)  # seclect external feedback
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_sel_part_force', 'length': 1, 'registers': [{'REG': '0x1A', 'POS': 4, 'RegisterName': 'Force registers 3', 'RegisterLength': 8, 'Name': 'cld_sel_part_force', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1)  # force partitioning
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_sel_part_m', 'length': 1, 'registers': [{'REG': '0x1B', 'POS': 4, 'RegisterName': 'Force registers 4', 'RegisterLength': 8, 'Name': 'cld_sel_part_m', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1)  # force full switch on
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_drv_en_m', 'length': 1, 'registers': [{'REG': '0x19', 'POS': 1, 'RegisterName': 'Force registers 2', 'RegisterLength': 8, 'Name': 'cld_drv_en_m', 'Mask': '0x2', 'Length': 1, 'FieldMSB': 1, 'FieldLSB': 1, 'Attribute': '0NNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1)   # cld_driver enable
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 2, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0) # page 0
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_dvr_force_sel', 'length': 8, 'registers': [{'REG': '0x9C', 'POS': 0, 'RegisterName': 'CLD analog setting reg 6', 'RegisterLength': 8, 'Name': 'cld_dvr_force_sel[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0xE0)  # set bridge switch (LSp on, MIDp on, CASp on, HSp off, LSn off, MIDn off, CASn off, HSn off)
+
+# Wait for device stabilization
+sleep(0.0001)  # 100 µs
+
+I_forced= 0.5
+
+# Step 3: Force 500mA current into "OUTP" pin
+AFORCE(signal="OUTN", reference="PGND", value=I_forced, error_spread=0.05)  # 500mA ±5%
+
+dV = VMEASURE(signal="VMID", reference="ADDR", expected_value=0.015, error_spread=0.01)
+LSN_ron = dV / I_forced  # R = V/I
+
+print(f'Calculated Low-Side N-Ron: {LSN_ron:.3f} Ohms')
+print(f'[Expected ~30m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
+
+AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
+
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_dvr_force_sel', 'length': 8, 'registers': [{'REG': '0x9C', 'POS': 0, 'RegisterName': 'CLD analog setting reg 6', 'RegisterLength': 8, 'Name': 'cld_dvr_force_sel[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x0) 
