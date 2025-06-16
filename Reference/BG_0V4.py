@@ -1,33 +1,24 @@
-from dfttools import *
-from time import sleep
-import random
-
-Test_Name = 'BG_0V4'
-from Procedures import Startup
-print(f'............ {Test_Name} ........')
-
-'''
-Bring 0.4V bandgap geremnce voltage to "IODATA1"
-through the analog test mux and measure 
-its value 
------------------------------------------------
-  1.BG 0v4
-  2.Turn ON the part in active mode, temp=27°C, vddp=3.7V, vddd=1.2V, UVLO trimmed, enable ref_bg;
-  3.Wait 400 us;
-  4.Bring out to the analog test point (rfu_ds_ref_test_en_vddd=7d) the 0.4V reference output voltage. Target voltage is 0.4V.
-'''
-# select the page 
-# I2C_WRITE(device_address="0x68",field_info={'fieldname': 'i2c_page_sel', 'length': 2, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=)
-# 1. Enable ref_bg  select the field 
-# I2C_WRITE(device_address="0x68",field_info=,write_value=)
-# Bring out to the analog test point (rfu_ds_ref_test_en_vddd=7d)
-# I2C_WRITE(device_address="0x68",field_info=,write_value=)
-
-target_value = 0.4 # 0.4V
-error_spread = target_value*0.05 # 5% of target value
-measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=error_spread)
-error = abs(measured_value - target_value)/abs(target_value) *100
-print(f"Optimal measured value : {measured_value}V, Target vlaue : {target_value}V")
-print(f"Minimum Error: {error}%")
-
-
+from dfttools import *
+from time import sleep
+import random
+
+Test_Name = 'BG_0v4'
+from Procedures import Startup
+from Procedures import Global_enable
+print(f'............ {Test_Name} ........')
+
+# Enabling test page
+I2C_WRITE(device_address="0x38",field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0x1)
+# Enabling the analog TMUX
+I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 7, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'ref_test_en', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
+I2C_WRITE(device_address="0x38",field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x7)
+I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en_buff', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 6, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'ref_test_en_buff', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
+I2C_WRITE(device_address="0x38",field_info={'fieldname': 'atp_p_en', 'length': 1, 'registers': [{'REG': '0x17', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_EN2', 'RegisterLength': 8, 'Name': 'atp_p_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000NNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
+
+target_value = 0.4 # 0.4V
+buffer_offset = 10e-3 # 10mV
+error_spread = target_value*0.04 # 4% of target value
+measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=error_spread) - buffer_offset
+error = abs(measured_value - target_value)/abs(target_value) *100
+print(f"Optimal measured value : {measured_value}V, Target value : {target_value}V")
+print(f"Minimum Error: {error}%")
