@@ -1,4 +1,4 @@
-eighted from dfttools import *
+from dfttools import *
 from time import sleep 
 import random
 Test_Name = 'noise floor_1kHz_-60dBFS_3L'
