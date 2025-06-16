@@ -15,9 +15,15 @@ print(f'............ {Test_Name} ........')
 5.Expected value is -80dB.
 6.Maximum value is -77dB.
 '''
+maximum_thd = -77
 error_percentage = 0.075 # 7.5%
 expeted_thd = -80
 expected_vals = {'THD': expeted_thd}
 error_spreads = {'THD': expeted_thd*error_percentage}
 measured_THD = FFT(signal="IODATA1",reference="GND",signal_type='Digital',sample_number=9202,sample_time=0.003,window='Hanning',expected_values=expected_vals,error_spreads=error_spreads).get('THD') 
-print(measured_THD)
+
+if measured_THD < maximum_thd:
+  print(f'...... {Test_name}..Passed THD:{measured_THD}dB ')
+else:
+  print(f'...... {Test_name}..Failed THD:{measured_THD}dB ')
+  
