@@ -6,7 +6,6 @@ from Procedures import Playback
 from Procedures import Internal_sin_1kHz_1W
 
 print(f'............ {Test_Name} ........')
-
 '''
 1.Reach the playback state with 3L modulation
 2.Enable internal sinusoid generator to play 1W at 1 kHz.
