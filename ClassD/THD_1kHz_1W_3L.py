@@ -15,3 +15,6 @@ print(f'............ {Test_Name} ........')
 5.Expected value is -80dB.
 6.Maximum value is -77dB.
 '''
+expected_vals = {'THD': -80}
+measured_THD = FFT(signal="IODATA1",reference="GND",signal_type='Digital',sample_number=9202,sample_time=0.003,window='Hanning',expected_values=expected_vals).get('THD') 
+print(measured_THD)
