@@ -1,34 +1,35 @@
-from dfttools import *
-from time import sleep
-
-Test_Name = 'PLL_VCO_Bias'
-from Procedures import Startup
-print(f'............ {Test_Name} ........')
-
-pll_target_value = 0.5e-6 # 0.5uA
-BLCK_Set = 3.072e6 # 3.072MHz
-pll_error_spread = pll_target_value*0.01 # 1% of target value
-
-'''
-  1.Turn ON the part in active mode (PLL ON), T=25degC, vddd=1.2V, Main bandgap trimmed,
-    dig_pll_freerun_en_vddd=1
-    BCLK frequency=3.072MHz,
-    dig_pll_prediv_vddd<5:0>=6d
-    dig_pll_n<5:0>=24d
-    rfu_pll_ldet_cnt<4:0>=16d
-  2.Wait for 300us
-  3.Bring out on the analog test point the PLL VCO biasing current. Measure it with an amperemeter connected to ground
-  4.Target value is around 0.5uA (typ)
-'''
-# I2C_WRITE(device_address="0x68",field_info=,write_value=)
-# BLCK = "IOCLK0"
-# BCLK frequency=3.072MHz
-FREQFORCE(signal="IOCLK0",reference="GND",value=BLCK_Set)#
-'''
-Bring out all the necessary signals 
-'''
-# I2C_WRITE(device_address="0x68",field_info=,write_value=)
-pll_measured_bias_current = AMEASURE(signal="IODATA1", reference="GND", expected_value=pll_target_value,error_spread=pll_error_spread)
-error = abs(pll_measured_bias_current - pll_target_value)/abs(pll_target_value) *100
-print(f"Optimal measured value : {pll_measured_bias_current/ 1e-6}uA, Target vlaue : {pll_target_value/ 1e-6}uA")
-print(f"Minimum Error: {error}%")
+from dfttools import *
+from time import sleep
+
+Test_Name = 'PLL_VCO_Bias_Current'
+from Procedures import Startup
+print(f'............ {Test_Name} ........')
+
+pll_vco_current_target_value = 0.5e-6 # 0.5uA
+BLCK_Set = 3.072e6 # 3.072MHz
+pll_vco_current_error_spread = pll_vco_current_target_value*0.01 # 1% of target value
+
+'''
+  
+  3.Bring out on the analog test point the PLL VCO biasing current. Measure it with an amperemeter connected to ground
+  4.Target value is around 0.5uA (typ)
+'''
+I2C_WRITE(device_address="0x38",field_info={'fieldname': 'pll_mode', 'length': 2, 'registers': [{'REG': '0x84', 'POS': 6, 'RegisterName': 'PLL_REG_5', 'RegisterLength': 8, 'Name': 'pll_mode[1:0]', 'Mask': '0xC0', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '17', 'User': '000YYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=hex(2))      #dig_pll_freerun_en_vddd=0
+I2C_WRITE(device_address="0x38",field_info={'fieldname': 'pll_p', 'length': 6, 'registers': [{'REG': '0x81', 'POS': 0, 'RegisterName': 'PLL reg 2', 'RegisterLength': 8, 'Name': 'pll_p[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': '00NNNNNN', 'Default': '06', 'User': '000YYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=hex(6))         #dig_pll_prediv_vddd<5:0>=6d 
+I2C_WRITE(device_address="0x38",field_info={'fieldname': 'pll_n', 'length': 6, 'registers': [{'REG': '0x82', 'POS': 0, 'RegisterName': 'PLL reg 3', 'RegisterLength': 8, 'Name': 'pll_n[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': '00NNNNNN', 'Default': '18', 'User': '000YYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=hex(18))        #dig_pll_n<5:0>=24d 
+I2C_WRITE(device_address="0x38",field_info={'fieldname': 'pll_ldet_cnt', 'length': 5, 'registers': [{'REG': '0x83', 'POS': 0, 'RegisterName': 'PLL reg 4', 'RegisterLength': 8, 'Name': 'pll_ldet_cnt[4:0]', 'Mask': '0x1F', 'Length': 5, 'FieldMSB': 4, 'FieldLSB': 0, 'Attribute': '000NNNNN', 'Default': '10', 'User': '000YYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=hex(10)) #rfu_pll_ldet_cnt<4:0>=16d
+FREQFORCE(signal="IOCLK0",reference="GND",value=BLCK_Set)                            #BCLK frequency=3.072MHz
+sleep(0.0001)                                                                    #wait 100us
+
+'''
+Bring out all the necessary signals 
+'''
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=hex(1))  #Change page in regmap
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'pll_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'pll_test_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=hex(1))   #enable ANA_TESTMUX1
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=hex(0))      #enable pll vco current test
+
+
+pll_measured_bias_current = AMEASURE(signal="IODATA1", reference="GND", expected_value=pll_vco_current_target_value,error_spread=pll_vco_current_error_spread) #measure with amperometer shorted to ground
+error = abs(pll_measured_bias_current - pll_vco_current_target_value)/abs(pll_vco_current_target_value) *100
+print(f"Measured current value : {pll_measured_bias_current/ 1e-6}uA, Target vlaue : {pll_vco_current_target_value/ 1e-6}uA")
+print(f"Percentage Error: {error}%")
