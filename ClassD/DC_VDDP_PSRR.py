@@ -30,4 +30,4 @@ Vout_5V = VMEASURE(signal="OUTP", reference="OUTN", expected_value = expected_VD
 Vout_2p5V = VMEASURE(signal="OUTP", reference="OUTN",expected_value = expected_VDDP_2p5V_value, error_spread = expected_VDDP_2p5V_value*error_percentage)
 measured_value_db=20*log10(abs(Vout_5V-Vout_2p5V)/2.5)
 #expected value is -90dB
-print(abs(f'{Test_Name} ..... Measured :>  {measured_value_db}db')
+print(f'{Test_Name} ..... Measured :>  {measured_value_db}db')
