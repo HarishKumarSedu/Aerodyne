@@ -13,9 +13,6 @@ Procedure
     3.Measure the Temperature register after 8 average save in the Variable CODE0
     4. Check that 563<CODE0<567
     5.ROUND(-1.628904*(Temp+40)+674)
-    
-    
-
 '''
 I2C_WRITE(device_address="0x38",field_info={'fieldname': 'global_en', 'length': 1, 'registers': [{'REG': '0x0F', 'POS': 0, 'RegisterName': 'GLOBAL_EN_REG', 'RegisterLength': 8, 'Name': 'global_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '0000000Y', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0x1)
 sleep(0.001)
