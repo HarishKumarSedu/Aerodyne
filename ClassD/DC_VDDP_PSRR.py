@@ -35,3 +35,6 @@ measured_value_db=20*log10(abs(Vout_V1-Vout_V2)/2.5)
 #expected value is -90dB
 if measured_value_db < -90:
   print(f'{Test_Name} ..... Passed... Measured :>  {measured_value_db} dB')
+else:
+  print(f'{Test_Name} ..... Failed... Measured :>  {measured_value_db} dB')
+  
