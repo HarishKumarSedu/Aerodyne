@@ -36,7 +36,7 @@ error_spreads = {'SNR': expected_thd*error_percentage}
 measured_Values = FFT(signal="OUTP",reference="OUTN",signal_type='Analog',expected_values=expected_vals,error_spreads=error_spreads) #,sample_number=?,sample_time=?,window='Hanning' do we need to specify them?
 measured_AWSNR = measured_Values.get('SNR') 
 # 5.
-if measured_AWSNR < maximum_thd:
+if measured_AWSNR < minimum_AWSNR:
   print(f'...... {Test_Name}..Passed SNR:{measured_AWSNR}dB ')
 else:
   print(f'...... {Test_Name}..Failed SNR:{measured_AWSNR}dB ')
