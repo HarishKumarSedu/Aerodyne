@@ -25,10 +25,12 @@ expected_VDDP_2p5V_value = 0
 # Step 2
 sleep(0.0001) 
 #Set  VDDP=5V
-Vout_5V = VMEASURE(signal="OUTP", reference="OUTN", expected_value = expected_VDDP_5V_value, error_spread = error_percentage)
+VFORCE(signal="PVDD", referece="GND", value=5, expected_value=5) # force 5v between "PVDD" wrt "GND"
+Vout_V1 = VMEASURE(signal="OUTP", reference="OUTN", expected_value = expected_VDDP_5V_value, error_spread = error_percentage)
+VFORCE(signal="PVDD", referece="GND", value=2.5, expected_value=2.5)  # force 2.5v between "PVDD" wrt "GND"
 #set VDDP=2.5V
-Vout_2p5V = VMEASURE(signal="OUTP", reference="OUTN",expected_value = expected_VDDP_2p5V_value, error_spread = error_percentage)
-print(f'Vout_5V {Vout_5V} Vout_2p5V : {Vout_2p5V} , {20*log10(abs(Vout_5V-Vout_2p5V) / 2.5)}')
-measured_value_db=20*log10(abs(Vout_5V-Vout_2p5V)/2.5)
+Vout_V2 = VMEASURE(signal="OUTP", reference="OUTN",expected_value = expected_VDDP_2p5V_value, error_spread = error_percentage)
+# print(f'Vout_V1 {Vout_V1} Vout_V2 : {Vout_V2} , {20*log10(abs(Vout_V1-Vout_V2) / 2.5)}')
+measured_value_db=20*log10(abs(Vout_V1-Vout_V2)/2.5)
 #expected value is -90dB
 print(f'{Test_Name} ..... Measured :>  {measured_value_db} dB')
