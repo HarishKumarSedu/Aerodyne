@@ -35,6 +35,6 @@ measured_Values = FFT(signal="OUTP",reference="OUTN",signal_type='Analog',expect
 measured_THD = measured_Values.get('THD') 
 # 5.
 if measured_THD < maximum_thd:
-  print(f'...... {Test_Name}..Passed THD:{measured_THD}dB ')
+  print(f'...... {Test_Name}..Passed THD:{measured_THD} dB ')
 else:
-  print(f'...... {Test_Name}..Failed THD:{measured_THD}dB ')
+  print(f'...... {Test_Name}..Failed THD:{measured_THD} dB ')
