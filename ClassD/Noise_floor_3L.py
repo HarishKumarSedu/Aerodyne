@@ -31,8 +31,8 @@ sleep(0.0001)
 minimum_AWSNR = 55
 error_percentage = 0.03
 expected_AWSNR = 57
-expected_vals = {'SNR': expected_thd}
-error_spreads = {'SNR': expected_thd*error_percentage}
+expected_vals = {'SNR': expected_AWSNR}
+error_spreads = {'SNR': expected_AWSNR*error_percentage}
 measured_Values = FFT(signal="OUTP",reference="OUTN",signal_type='Analog',expected_values=expected_vals,error_spreads=error_spreads) #,sample_number=?,sample_time=?,window='Hanning' do we need to specify them?
 measured_AWSNR = measured_Values.get('SNR') 
 # 5.
