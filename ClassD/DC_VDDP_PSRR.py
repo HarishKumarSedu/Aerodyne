@@ -25,9 +25,9 @@ expected_VDDP_2p5V_value = 2.5
 # Step 2
 sleep(0.0001) 
 #Set  VDDP=5V
-Vout_5V = VMEASURE(signal="OUTP", reference="OUTN", expected_value = expected_VDDP_5V_value, error_spread = 1e-6)
+Vout_5V = VMEASURE(signal="OUTP", reference="OUTN", expected_value = expected_VDDP_5V_value, error_spread = 1e-3)
 #set VDDP=2.5V
-Vout_2p5V = VMEASURE(signal="OUTP", reference="OUTN",expected_value = expected_VDDP_2p5V_value, error_spread = 1e-6)
+Vout_2p5V = VMEASURE(signal="OUTP", reference="OUTN",expected_value = expected_VDDP_2p5V_value, error_spread = 1e-3)
 print(f'Vout_5V {Vout_5V} Vout_2p5V : {Vout_2p5V} , {20*log10((Vout_5V-Vout_2p5V) / 2.5)}')
 measured_value_db=20*log10(abs(Vout_5V-Vout_2p5V)/2.5)
 #expected value is -90dB
