@@ -20,7 +20,7 @@ sleep (0.01)
 '''
   Wait for 1ms, waiting for settling
   Measure from TDM V-sns digital output
-  Desired value is 83dB
+  Desired value is 93dB
 '''
 sleep(0.001)  # 1 ms
 # Measure TDM Dgital from "IODATA1" for FFT Computations 
