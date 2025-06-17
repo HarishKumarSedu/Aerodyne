@@ -28,6 +28,6 @@ sleep(0.001)  # 1 ms
 expected_vals = {'DNR': 93}
 measured_DNR = FFT(signal="IODATA1",reference="GND",signal_type='Digital',sample_number=9202,sample_time=0.003,window='Hanning',expected_values=expected_vals).get('DNR') 
 if measured_DNR < 90.0:
-  print(f' ....... {Test_Name} ... Failed  :>  {measured_THD}dB')
+  print(f' ....... {Test_Name} ... Failed  :>  {measured_DNR}dB')
 else:
-  print(f' ....... {Test_Name} ... Passed  :>  {measured_THD}dB')
+  print(f' ....... {Test_Name} ... Passed  :>  {measured_DNR}dB')
