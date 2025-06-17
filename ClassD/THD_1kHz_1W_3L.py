@@ -31,7 +31,7 @@ error_percentage = 0.075 #7.5%
 expeted_thd = -80
 expected_vals = {'THD': expeted_thd}
 error_spreads = {'THD': expeted_thd*error_percentage}
-measured_Values = FFT(signal="OUTP",reference="OUTN",signal_type='Digital',expected_values=expected_vals,error_spreads=error_spreads) #,sample_number=?,sample_time=?,window='Hanning' do we need to specify them?
+measured_Values = FFT(signal="OUTP",reference="OUTN",signal_type='Analog',expected_values=expected_vals,error_spreads=error_spreads) #sample_number=?,sample_time=?,window='Hanning' do we need to specify them?
 measured_THD = measured_Values.get('THD') 
 # 5.
 if measured_THD < maximum_thd:
