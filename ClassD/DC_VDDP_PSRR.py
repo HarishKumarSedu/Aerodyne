@@ -33,4 +33,5 @@ Vout_V2 = VMEASURE(signal="OUTP", reference="OUTN",expected_value = 0, error_spr
 # print(f'Vout_V1 {Vout_V1} Vout_V2 : {Vout_V2} , {20*log10(abs(Vout_V1-Vout_V2) / 2.5)}')
 measured_value_db=20*log10(abs(Vout_V1-Vout_V2)/2.5)
 #expected value is -90dB
-print(f'{Test_Name} ..... Measured :>  {measured_value_db} dB')
+if measured_value_db < -90:
+  print(f'{Test_Name} ..... Passed... Measured :>  {measured_value_db} dB')
