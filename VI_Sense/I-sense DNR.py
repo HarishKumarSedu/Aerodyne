@@ -25,5 +25,11 @@ sleep (0.01)
   Desired value is 65dB
  '''
 sleep(0.001)  # 1 ms
-
-# realize FFT: expexted value = 65dB, error: +/- 3dB
+# Measure TDM Dgital from "IODATA1" for FFT Computations 
+# realize FFT expexted value = 93dB, error: +/- 3dB
+expected_vals = {'DNR': 65}
+measured_DNR = FFT(signal="IODATA1",reference="GND",signal_type='Digital',sample_number=9202,sample_time=0.003,window='Hanning',expected_values=expected_vals).get('DNR') 
+if measured_DNR < 62.0:
+  print(f' ....... {Test_Name} ... Failed  :>  {measured_DNR}dB')
+else:
+  print(f' ....... {Test_Name} ... Passed  :>  {measured_DNR}dB')
