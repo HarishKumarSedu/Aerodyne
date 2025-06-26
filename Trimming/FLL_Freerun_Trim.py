@@ -73,31 +73,3 @@ else:
 print(f"Optimal Code: {optimal_code}")
 print(f"Optimal measured value : {optimal_measured_value}Hz, Target value : {target_value}Hz")
 print(f"Minimum Error: {min_error}%")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
