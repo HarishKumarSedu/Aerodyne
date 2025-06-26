@@ -1,4 +1,9 @@
+import os
+import sys
 
+package_name = "dfttools"
+os.system(f"{sys.executable} -m pip uninstall {package_name}")
+os.system(f"{sys.executable} -m pip install git+https://github.com/HarishKumarSedu/dfttools.git@main")
 from dfttools import *
 from time import sleep
 import random
