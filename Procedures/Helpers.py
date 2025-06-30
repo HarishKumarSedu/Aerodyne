@@ -13,7 +13,7 @@ from dfttools import *
 
 VFORCE(signal="VDD",reference="GND",value=1.8)
 VFORCE(signal="RESETB",reference="GND",value=1.8)
-VFORCE(signal="PVDD",reference="GND",value=3.7)
+VMEASURE(signal="PVDD",reference="GND",expected_value=3.7)
 
 sleep(0.001)
 
