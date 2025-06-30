@@ -54,5 +54,5 @@ else:
     # if the trimh failed program detult zero
     # I2C_WRITE(device_address="0x38",field_info=pll_vco_ctrl,write_value=0x0)
 print(f"Optimal Code: {optimal_code}")
-print(f"Optimal measured value : {optimal_measured_value}Hz, Target vlaue : {target_value/1e6}MHz")
+print(f"Optimal measured value : {optimal_measured_value/1e6}MHz, Target vlaue : {target_value/1e6}MHz")
 print(f"Minimum Error: {min_error}%")
