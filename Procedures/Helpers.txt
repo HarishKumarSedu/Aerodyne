@@ -1,9 +1,9 @@
 [voltage_force] signal=VDD, reference=GND, value=1.8
 [voltage_force] signal=RESETB, reference=GND, value=1.8
 [voltage_force] signal=PVDD, reference=GND, value=3.7
-[i2c_write] device_addr=0x68, register_addr=0xFE, data=1, Mask=('0x1', 0), Default=('00', 0)
-[i2c_write] device_addr=0x68, register_addr=0xFE, data=1, Mask=('0x1', 0), Default=('00', 0)
+[i2c_write] device_addr=0x68, register_addr=0xFE, data=1, Mask=0x1, Default=0
+[i2c_write] device_addr=0x68, register_addr=0xFE, data=1, Mask=0x1, Default=0
 [i2c_reg_write] device_addr=0x68, register_addr=0x2F, value=0xAA,, Mask=0x00, Default=0x00
 [i2c_reg_write] device_addr=0x68, register_addr=0x2F, value=0xBB,, Mask=0x00, Default=0x00
-[i2c_write] device_addr=0x68, register_addr=0xFE, data=0, Mask=('0x1', 0), Default=('00', 0)
-[i2c_write] device_addr=0x68, register_addr=0xFE, data=0, Mask=('0x1', 0), Default=('00', 0)
+[i2c_write] device_addr=0x68, register_addr=0xFE, data=0, Mask=0x1, Default=0
+[i2c_write] device_addr=0x68, register_addr=0xFE, data=0, Mask=0x1, Default=0
