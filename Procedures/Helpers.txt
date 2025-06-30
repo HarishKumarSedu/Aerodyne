@@ -1,0 +1,1 @@
+[voltage_measure] signal=PVDD, reference=GND, expected_value=3.7
