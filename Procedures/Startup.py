@@ -1,6 +1,14 @@
 from time import sleep
 import os 
 import sys
+import os
+import sys
+
+command = f"{sys.executable} -m pip uninstall dfttools -y"
+os.system(command)
+command = f"{sys.executable} -m pip install git+https://github.com/HarishKumarSedu/dfttools.git@main"
+os.system(command)
+
 Test_Name = 'Startup'
 print(f'............ {Test_Name} ........')
 from dfttools import *
