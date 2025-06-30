@@ -1,0 +1,2 @@
+[voltage_measure_callback] signal=PVDD, reference=GND, expected_value=1.8, error_spread=0.0
+[voltage_measure_callback] signal=PVDD, reference=GND, expected_value=1.8, error_spread=0.0
