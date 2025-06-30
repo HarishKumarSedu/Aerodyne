@@ -51,7 +51,7 @@ if lower_limit < optimal_measured_value < higher_limit:
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'pll_vco_ctrl', 'length': 2, 'registers': [{'REG': '0xCF', 'POS': 0, 'RegisterName': 'OTP FIELDS 31', 'RegisterLength': 8, 'Name': 'pll_vco_ctrl[1:0]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '02', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=optimal_code)
 else:
     print(f'............ {Test_Name} Failed ........')
-    if the trimh failed program detult zero
+    # if the trimh failed program detult zero
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'pll_vco_ctrl', 'length': 2, 'registers': [{'REG': '0xCF', 'POS': 0, 'RegisterName': 'OTP FIELDS 31', 'RegisterLength': 8, 'Name': 'pll_vco_ctrl[1:0]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '02', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
 print(f"Optimal Code: {optimal_code}")
 print(f"Optimal measured value : {optimal_measured_value/1e6}MHz, Target vlaue : {target_value/1e6}MHz")
