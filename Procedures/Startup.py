@@ -22,6 +22,6 @@ I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel', 'lengt
 
 command = f"{sys.executable} -m pip uninstall dfttools -y"
 os.system(command)
-command = f"{sys.executable} -m pip install dfttools"
+command = f"{sys.executable} -m pip install git+https://github.com/HarishkumarSedu/dfttools.git@master"
 os.system(command)
 
