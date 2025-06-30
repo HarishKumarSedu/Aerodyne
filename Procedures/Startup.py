@@ -1,3 +1,5 @@
+command = f"{sys.executable} -m pip install git+https://github.com/HarishkumarSedu/dfttools.git@master"
+os.system(command)
 from time import sleep
 import os 
 import sys
@@ -20,6 +22,4 @@ print(f'............ {Test_Name} ........')
 # I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 2, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x0)
 
 
-command = f"{sys.executable} -m pip install git+https://github.com/HarishkumarSedu/dfttools.git@master"
-os.system(command)
 
