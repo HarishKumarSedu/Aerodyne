@@ -38,7 +38,7 @@ if (pll_target_value_1 - pll_error_spread_1) < pll_measured_value_1 < (pll_targe
   sleep(0.0001)                                                                    #wait 100us
   pll_measured_value_2 = FREQMEASURE(signal="IODATA1", reference="GND", expected_value=pll_target_value_2, error_spread=pll_error_spread_2)
   
-  if (pll_target_value_2 - pll_error_spread_2) < pll_measured_value_2 < (pll_target_value_2 + pll_error_spread_2)
+  if (pll_target_value_2 - pll_error_spread_2) < pll_measured_value_2 < (pll_target_value_2 + pll_error_spread_2):
     # check for the intial lock frequency pass 13.6MHz
     #  BCLK frequency=3.4MHz
     print(f'.... {Test_Name}.., Passed....')
