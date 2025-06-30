@@ -1,0 +1,1016 @@
+[voltage_force] signal=VDD, reference=GND, value=1.8
+[voltage_force] signal=RESETB, reference=GND, value=1.8
+[voltage_force] signal=PVDD, reference=GND, value=3.7
+[i2c_write] device_addr=0x68, register_addr=0xFE, data=1, Mask=0x1, Default=0
+[i2c_write] device_addr=0x68, register_addr=0xFE, data=1, Mask=0x1, Default=0
+[i2c_write] device_addr=0x68, register_addr=0x1D, data=1, Mask=0x20, Default=0
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=0, Mask=0x1F, Default=0
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=0, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=1, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=2, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=3, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=4, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=5, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=6, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=7, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=8, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=9, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=10, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=11, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=12, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=13, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=14, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=15, Mask=0x1F, Default=0
+[voltage_force] signal=IODATA0, reference=GND, value=3.7
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.7
+[voltage_force] signal=IODATA0, reference=GND, value=3.6500000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6500000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=3.6000000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.6000000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=3.5500000000000007
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.5500000000000007
+[voltage_force] signal=IODATA0, reference=GND, value=3.500000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.500000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.450000000000001
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.450000000000001
+[voltage_force] signal=IODATA0, reference=GND, value=3.4000000000000012
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.4000000000000012
+[voltage_force] signal=IODATA0, reference=GND, value=3.3500000000000014
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3500000000000014
+[voltage_force] signal=IODATA0, reference=GND, value=3.3000000000000016
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.3000000000000016
+[voltage_force] signal=IODATA0, reference=GND, value=3.2500000000000018
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.2500000000000018
+[voltage_force] signal=IODATA0, reference=GND, value=3.200000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.200000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.150000000000002
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.150000000000002
+[voltage_force] signal=IODATA0, reference=GND, value=3.1000000000000023
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.1000000000000023
+[voltage_force] signal=IODATA0, reference=GND, value=3.0500000000000025
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0500000000000025
+[voltage_force] signal=IODATA0, reference=GND, value=3.0000000000000027
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=3.0000000000000027
+[voltage_force] signal=IODATA0, reference=GND, value=2.950000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.950000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.900000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.900000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.850000000000003
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.850000000000003
+[voltage_force] signal=IODATA0, reference=GND, value=2.8000000000000034
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.8000000000000034
+[voltage_force] signal=IODATA0, reference=GND, value=2.7500000000000036
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7500000000000036
+[voltage_force] signal=IODATA0, reference=GND, value=2.7000000000000037
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.7000000000000037
+[voltage_force] signal=IODATA0, reference=GND, value=2.650000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.650000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.600000000000004
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.600000000000004
+[voltage_force] signal=IODATA0, reference=GND, value=2.5500000000000043
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5500000000000043
+[voltage_force] signal=IODATA0, reference=GND, value=2.5000000000000044
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.5000000000000044
+[voltage_force] signal=IODATA0, reference=GND, value=2.4500000000000046
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.4500000000000046
+[voltage_force] signal=IODATA0, reference=GND, value=2.400000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.400000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.350000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.350000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.300000000000005
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.300000000000005
+[voltage_force] signal=IODATA0, reference=GND, value=2.2500000000000053
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2500000000000053
+[voltage_force] signal=IODATA0, reference=GND, value=2.2000000000000055
+[voltage_trigger_hl] signal=PVDD, reference=GND, threshold=2.25, simulated_value=2.2000000000000055
+[i2c_write] device_addr=0x68, register_addr=0xB3, data=3, Mask=0x1F, Default=0
