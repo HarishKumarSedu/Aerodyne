@@ -29,10 +29,10 @@ I2C_WRITE(device_address="0x38", field_info={'fieldname': 'dig_test_sel', 'lengt
 min_error = float('inf')
 optimal_code = None
 optimal_measured_value = None
-num_steps = 2**pll_vco_ctrl.get('length')          # trimming field is 2 bit
+num_steps = 2**2         # trimming field is 2 bit
 
 for i in range(num_steps):
-    I2C_WRITE(device_address="0x38",field_info=pll_vco_ctrl,write_value=i) # sweep trim code
+    # I2C_WRITE(device_address="0x38",field_info=pll_vco_ctrl,write_value=i) # sweep trim code
     # time.sleep(0.0001)                                                                   # wait 100us
     measured_value = FREQMEASURE(signal="IODATA1", reference="GND")                     # Measure Frequency at "IODATA1"
     error = abs(measured_value - target_value)                                      # Calculate the distance from the target 12.288MHz
@@ -48,11 +48,11 @@ for i in range(num_steps):
 if lower_limit < optimal_measured_value < higher_limit:
     print(f'............ {Test_Name} Passed ........')
     # write the optimized code if the trim passed
-    I2C_WRITE(device_address="0x38",field_info=pll_vco_ctrl,write_value=optimal_code)
+    # I2C_WRITE(device_address="0x38",field_info=pll_vco_ctrl,write_value=optimal_code)
 else:
     print(f'............ {Test_Name} Failed ........')
     # if the trimh failed program detult zero
-    I2C_WRITE(device_address="0x38",field_info=pll_vco_ctrl,write_value=0x0)
+    # I2C_WRITE(device_address="0x38",field_info=pll_vco_ctrl,write_value=0x0)
 print(f"Optimal Code: {optimal_code}")
 print(f"Optimal measured value : {optimal_measured_value}Hz, Target vlaue : {target_value}Hz")
 print(f"Minimum Error: {min_error}%")
