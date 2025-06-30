@@ -28,7 +28,7 @@ sleep (0.00002);
 BIST_RESULT_BIT=I2C_READ(device_address="0x38",field_info={'fieldname': 'bist_result', 'length': 1, 'registers': [{'REG': '0x28', 'POS': 2, 'RegisterName': 'BIST reg', 'RegisterLength': 8, 'Name': 'bist_result', 'Mask': '0x4', 'Length': 1, 'FieldMSB': 2, 'FieldLSB': 2, 'Attribute': '0000RRNN', 'Default': '00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},expected_value=0x0)
 BIST_END_BIT=I2C_READ(device_address="0x38",field_info={'fieldname': 'bist_end', 'length': 1, 'registers': [{'REG': '0x28', 'POS': 3, 'RegisterName': 'BIST reg', 'RegisterLength': 8, 'Name': 'bist_end', 'Mask': '0x8', 'Length': 1, 'FieldMSB': 3, 'FieldLSB': 3, 'Attribute': '0000RRNN', 'Default': '00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},expected_value=0x1)
 
-if ((BIST_END_BIT == 1) and(BIST_RESULT_BIT== 0)):
+if ((BIST_END_BIT == 1) and (BIST_RESULT_BIT== 0)):
   print(f'............ {Test_Name} Passed ........')
 
 
