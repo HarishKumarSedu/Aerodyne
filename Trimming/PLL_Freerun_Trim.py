@@ -33,7 +33,7 @@ num_steps = 2**pll_vco_ctrl.get('length')          # trimming field is 2 bit
 
 for i in range(num_steps):
     I2C_WRITE(device_address="0x38",field_info=pll_vco_ctrl,write_value=i) # sweep trim code
-    time.sleep(0.0001)                                                                   # wait 100us
+    # time.sleep(0.0001)                                                                   # wait 100us
     measured_value = FREQMEASURE(signal="IODATA1", reference="GND")                     # Measure Frequency at "IODATA1"
     error = abs(measured_value - target_value)                                      # Calculate the distance from the target 12.288MHz
  
