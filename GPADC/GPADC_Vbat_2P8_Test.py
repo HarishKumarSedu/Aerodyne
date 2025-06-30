@@ -27,6 +27,7 @@ I2C_WRITE(device_address="0x38",field_info={'fieldname': 'gpadc_en', 'length': 1
 pvdd_forced_voltage = VFORCE(signal="PVDD", reference="GND", value=2.8,error_spread=0)
 sleep(0.01)
 VB0 = VMEASURE(signal="PVDD", reference="GND", expected_value=2.8,error_spread=0)
+print(VB0)
 sleep(0.001)
 expected_value=round(((VB0*22/(22+79))*1024/(0.6*2)))
 
