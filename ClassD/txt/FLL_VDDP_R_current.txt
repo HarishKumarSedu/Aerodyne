@@ -1,0 +1,28 @@
+# Processed on 2025-07-02 16:22:37
+from dfttools import *
+from time import sleep 
+import random
+Test_Name = 'FLL_VDDP_R_current'
+from Procedures import Startup
+from Procedures import Playback
+
+print(f'............ {Test_Name} ........')
+
+'''
+FLL_VDDP_R_current
+The FLL is trimmed, "IOCLK0" has 3.072MHz clock.
+Step 1. Bring out on "IODATA1" VDDP/R current of the FLL
+Step 2. Measure it.
+'''
+
+# Step 1
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0 #enable "IODATA1"
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x3, Mask=0xF, Default=0x0 #bring out the VDDD/R current
+sleep(0.0001) 
+expected_value = 0.000001 #3.6/(3*1200000)->(vddp/3R)
+error_spread = expected_value*0.2
+measured_value=VMEASURE(signal="IODATA1", reference="GND", expected_value=expected_value, error_spread=error_spread)
+
+print(f'FLL VDDP/R current is: {measured_value}')
