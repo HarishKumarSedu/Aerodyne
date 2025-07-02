@@ -1,0 +1,36 @@
+# Processed on 2025-07-02 16:17:29
+from dfttools import *
+from time import sleep
+import random
+Test_Name = 'V-sense THD'
+from Procedures import Startup
+print(f'............ {Test_Name} ........')
+from Procedures import Playback
+# from Procedures import Internal_sin_1kHz_1W # set the internal sinusoidal generator at 1kHz 1W
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Page 1 in regmap
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x0, Mask=0xF0, Default=0x0  # 0dB sine amplitude
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x2, Mask=0x7, Default=0x0  # 1kHz sine frequncy
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x0, Mask=0x8, Default=0x0  # internal sine enable
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Page 0 in regmap
+from Procedures import VI_SNS_turn_on
+sleep (0.01)
+# Acquire via TDM V-sns stream, (fsyn 48KHz, BCLK 3 MHz, delay_mode=1)
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x5D, data=0x0, Mask=0x1, Default=0x0  # Setting I-sns output
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x5F, data=0x1, Mask=0x1, Default=0x0  # Enable tdm in transmission
+sleep (0.01)
+'''
+  Wait for 1ms, waiting for settling
+  Measure from TDM V-sns digital output
+  Desired value is 65dB
+ '''
+sleep(0.001)  # 1 ms
+# Measure TDM Dgital from "IODATA1" for FFT Computations 
+# realize FFT expexted value = 65dB, error: +/- 3dB
+expected_vals = {'THD': 65}
+measured_THD = FFT(signal="IODATA1",reference="GND",signal_type='Digital',sample_number=9202,sample_time=0.003,window='Hanning',expected_values=expected_vals).get('THD') 
+if measured_THD < 62.0:
+  print(f' ....... {Test_Name} ... Failed  :>  {measured_THD}dB')
+else:
+  print(f' ....... {Test_Name} ... Passed  :>  {measured_THD}dB')
