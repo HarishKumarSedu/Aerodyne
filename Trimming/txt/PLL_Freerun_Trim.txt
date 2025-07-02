@@ -1,0 +1,60 @@
+# Processed on 2025-07-02 15:13:56
+from dfttools import *
+import time
+import random
+
+Test_Name = 'PLL_Freerun_Trim'
+from Procedures import Startup
+print(f'............ {Test_Name} ........')
+
+target_value = 12.288e6          # 12.288MHz
+lower_limit = 11.288e6 
+higher_limit = 13.288e6 
+
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0xC0, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=1
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x81, data=0x6, Mask=0x3F, Default=0x6         #dig_pll_prediv_vddd<5:0>=6d 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x82, data=0x12, Mask=0x3F, Default=0x18        #dig_pll_n<5:0>=24d 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x83, data=0xA, Mask=0x1F, Default=0x10 #rfu_pll_ldet_cnt<4:0>=16d
+# FREQFORCE(signal="IOCLK0",reference="GND",value=3.072e6)                             #BCLK frequency=3.072MHz
+ 
+'''
+Bring out on the digital test point the 
+PLL output (divided?) and measure the clock frequency 
+'''
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x8, Mask=0x7F, Default=0x0   #enable "IODATA1" TMUX
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x23, Mask=0x7F, Default=0x0 #bring out the pll output
+
+
+# Initialize minimum error and optimal code
+min_error = float('inf')
+optimal_code = None
+optimal_measured_value = None
+num_steps = 2**{'fieldname': 'pll_vco_ctrl', 'length': 2, 'registers': [{'REG': '0xCF', 'POS': 0, 'RegisterName': 'OTP FIELDS 31', 'RegisterLength': 8, 'Name': 'pll_vco_ctrl[1:0]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x02', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get('length')         # trimming field is 2 bit
+
+for i in range(num_steps):
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCF, data=i, Mask=0x3, Default=0x2 # sweep trim code
+    # time.sleep(0.0001)                                                                   # wait 100us
+    measured_value = FREQMEASURE(signal="IODATA1", reference="GND",expected_value=target_value,error_spread=target_value*0.1)                     # Measure Frequency at "IODATA1"
+    error = abs(measured_value - target_value)/target_value                                      # Calculate the distance from the target 12.288MHz
+ 
+    # Check if the measured value is the nearest to the target   
+    if error < min_error:
+        min_error = error
+        optimal_code = hex(i)
+        optimal_measured_value = measured_value
+    
+    
+# Check for limits
+if lower_limit < optimal_measured_value < higher_limit:
+    print(f'............ {Test_Name} Passed ........')
+    # write the optimized code if the trim passed
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCF, data=optimal_code, Mask=0x3, Default=0x2
+else:
+    print(f'............ {Test_Name} Failed ........')
+    # if the trimh failed program detult zero
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCF, data=0x0, Mask=0x3, Default=0x2
+print(f"Optimal Code: {optimal_code}")
+print(f"Optimal measured value : {optimal_measured_value/1e6}MHz, Target vlaue : {target_value/1e6}MHz")
+print(f"Minimum Error: {min_error}%")
