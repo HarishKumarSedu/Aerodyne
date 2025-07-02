@@ -1,0 +1,45 @@
+# Processed on 2025-07-02 16:21:44
+from dfttools import *
+from time import sleep 
+import random
+Test_Name = '"VMID" buffer test'
+from Procedures import speakerOff
+
+print(f'............ {Test_Name} ........')
+
+'''
+"VMID" buffer test
+Step 1. Configure the device registers to enable testing.
+Step 2. Bring the DAC voltage reference to pin "IODATA1" through the analog test mux p and the local ground to pin "ADDR" through the analog test mux n.
+Step 3. Wait for the signal to stabilize and measure the differential voltage "IODATA1" wrt "ADDR".
+'''
+
+# Select register page
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 # page 1
+# Enable forcing and disable only
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x1, Mask=0x1, Default=0x0  # class D force enable
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x40, Default=0x0 # cld_pwm disable
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x20, Default=0x0 # cld_lpf disable
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x10, Default=0x0 # cld_dac disable
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x4, Default=0x0 # cld_dac disable
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x8, Default=0x0  # cld_dac disable
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x2, Default=0x0  # cld_driver disable
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x1, Mask=0x1, Default=0x0 # cld_bias enable
+
+
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x0, Mask=0x40, Default=0x0  # Enable vmid_buff force
+
+'''
+Wait for the time needed for vmid to charge. 
+Suppose Cmid=10uF
+Buffer output resistance is 40 Ohm. Time constant is 10uFx40Ohm=400us.
+Settling time is about 5tau=2ms
+''' 
+# Step 3
+sleep(0.002) #5tau
+expected_value = 1.85
+error_spread = expected_value*0.0054 #10mV error
+measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=expected_value, error_spread=error_spread)
+
+print(f'Measured DAC 0p9V voltage reference value at "IODATA1" wrt "ADDR": {measured_value}')
