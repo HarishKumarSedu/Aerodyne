@@ -1,0 +1,54 @@
+# Processed on 2025-07-02 16:15:51
+from dfttools import *
+from time import sleep
+import random
+from Procedures import Startup
+from Procedures import Global_enable
+
+Test_Name = 'UVLO_H2L'
+print(f'............ {Test_Name} ........')
+
+'''
+Enable the bandgap, bring UVLO comparator output to pin "IODATA0" 
+through digital test mux and 
+sweep "PVDD" from 3V to 1.5V and record the value 
+at which the compator toggles
+---------------------------------------------
+  1.UVLO H2L
+  2.Turn ON the part in active mode, temp=27°C, vddd=1.2V, ref_bg enabled;
+  3.Wait 50 us;
+  4.Observe the ana_ds_pvdd_uvlo signal at the digital MUX and sweep vddp from 3.7V to 0V;
+  5.Store the vddp value for which the ana_ds_pvdd_uvlo goes from 0V to "VDD"; it is the H2L threshold of the UVLO.
+'''
+# Enabling test page
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+#Enabling digital TMUX
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x1, Mask=0x7F, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x21, Mask=0x7F, Default=0x0
+
+HL_Th = 1.96  # assumed 1.96V threshold expected trigger
+error_spread = HL_Th*0.05 # 5% error spread
+force_voltage_low_limit = 0  # minimum voltage limit
+force_voltage_high_limit = 3.7  # max voltage limit
+force_voltage = force_voltage_high_limit
+
+while True:
+  # Add noise simulation
+  pvdd_forced_voltage = VFORCE(signal="PVDD", reference="GND", value=force_voltage,error_spread=error_spread)
+  # Check trigger condition
+  trigger = VTRIG_HL(signal="IODATA0", reference="GND", threshold=HL_Th, expected_value=force_voltage)
+
+  if trigger:
+    break
+  elif pvdd_forced_voltage <= force_voltage_low_limit:
+    print(f'..... Voltage low limit {force_voltage_low_limit}V crossed ........')
+    break
+
+  force_voltage -= 0.05  # increase voltage by 50mV
+  sleep(0.001)  # 1 ms delay
+  
+error = abs(pvdd_forced_voltage - HL_Th)/abs(HL_Th) * 100
+print(f"Optimal Measured(force sweeped) Value: {pvdd_forced_voltage:.4f} V (Target: {HL_Th} V)")
+print(f"Minimum Error: {error:.6f} %")
+
