@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 14:49:47
+# Processed on 2025-07-02 15:12:15
 Test_Name = 'Playback'
 # Reach the PLAYBACK state in the main FSM
 print(f'............ {Test_Name} ........')
@@ -9,4 +9,4 @@ from dfttools import *
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0 
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x4E, data=0x0, Mask=0x80, Default=0x59 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x4E, data=0x0, Mask=0x80, Default=0x89 
