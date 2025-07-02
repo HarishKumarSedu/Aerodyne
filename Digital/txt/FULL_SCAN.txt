@@ -1,0 +1,20 @@
+# Processed on 2025-07-02 16:19:03
+from dfttools import *
+from time import sleep
+
+Test_Name = 'FULL_SCAN_DIG_TOP'
+from Procedures import Startup
+print(f'............ {Test_Name} ........')
+# designers must go through the details and correct the procedure
+'''
+Procedure 
+    1.Startup (it includes enable of test page)
+    2.Start scan for stuck at/transition/iddq patterns
+'''
+
+# Switch to page 1
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+
+# Enable scan
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x05, data=0x0, Mask=0x2, Default=0x18
