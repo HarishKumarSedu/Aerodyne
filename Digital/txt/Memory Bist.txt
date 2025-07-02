@@ -1,0 +1,36 @@
+# Processed on 2025-07-02 16:18:45
+from dfttools import *
+from time import sleep
+
+Test_Name = 'MEMORY BIST'
+from Procedures import Startup
+print(f'............ {Test_Name} ........')
+# designers must go through the details and correct the procedure
+'''
+Procedure 
+    1.Startup (it includes enable of test page)
+    2.Global_en to turn on the island
+    2.Start of the bist
+    3.Check the result
+'''
+
+# Set {'fieldname': 'global_en', 'length': 1, 'registers': [{'REG': '0x0F', 'POS': 0, 'RegisterName': 'GLOBAL_EN_REG', 'RegisterLength': 8, 'Name': 'global_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '0000000Y', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]} to 1
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
+
+# Switch to page 1
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+
+# Start of bist
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x28, data=0x1, Mask=0x1, Default=0x0
+
+sleep (0.00002);
+
+# Read of the result
+BIST_RESULT_BIT=# ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
+BIST_END_BIT=# ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
+
+if ((BIST_END_BIT == 1) and (BIST_RESULT_BIT== 0)):
+  print(f'............ {Test_Name} Passed ........')
+
+
