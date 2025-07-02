@@ -1,0 +1,40 @@
+# Processed on 2025-07-02 15:30:20
+from dfttools import *
+Testname = 'VIS_GAIN_VSNS'
+print(f' {Testname}')
+
+'''
+The procedure is described hereafter:
+1. Force class-D output to have both SPKRP and SPKRN at VCM.
+2. Source a stated current (i.e. 100mA).
+3. Read I-sense output digital code.
+4. Sink a note current (i.e. -100mA).
+5. Read I-sense output digital code.
+6. GI=DELTA_I=(200mA)/DELTA_code.
+
+'''
+
+from time import sleep
+from Procedures import Startup
+from Procedures import Global_enable
+from Procedures import VI_SNS_turn_on
+print(f' ........ Source 500mA from SPKRP/SPKRM ........ ')
+source_current = 500e-3
+from Procedures import CLASSD_OUT_CURR_TRIM
+sleep(0.001)
+AFORCE(signal="OUTP",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
+AFORCE(signal="OUTN",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
+sleep(0.001)
+isns_gain_source_measured = # ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
+print(f' ........ Sink 500mA to SPKRP/SPKRM ........ ')
+AFORCE(signal="OUTP",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
+AFORCE(signal="OUTN",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
+sleep(0.001)
+isns_gain_sink_measured = # ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
+isns_gain_calculated = 2*0.5/(int(isns_gain_source_measured)-int(isns_gain_sink_measured))
+print(f'{Testname} value : {isns_gain_calculated} ')
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=hex(round(isns_gain_calculated)), Mask=0x3F, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBC, data=hex(round(isns_gain_calculated)), Mask=0xFF, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0  # set bridge switch (LSp off, MIDp off, CASp off, HSp off, LSn off, MIDn off, CASn off, HSn off)
+
+
