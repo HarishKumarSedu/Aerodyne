@@ -1,0 +1,26 @@
+# Processed on 2025-07-02 15:30:56
+from dfttools import *
+from time import sleep
+import random
+
+Test_Name = 'REF_BUF_OFF'
+from Procedures import Startup
+from Procedures import Global_enable
+print(f'............ {Test_Name} ........')
+
+#This test forces 1.2V to "ADDR" pin and measure the voltage at the buffer output at the "IODATA1" pin
+#The difference between the two voltages is the offset of the buffer 
+
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x80, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+
+force_value = 1.2 # forcing 1.2V on "ADDR" pin
+error_spread = force_value*0.05
+forced_voltage=VFORCE(signal="ADDR", reference="GND", value=force_value, error_spread=error_spread)
+measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=force_value, error_spread=error_spread)
+buffer_offset = abs(measured_value - forced_voltage)
+print(f"Measured buffer offset : {buffer_offset}V")
