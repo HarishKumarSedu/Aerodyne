@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 13:43:37
+# Processed on 2025-07-02 13:46:22
 Test_Name = 'VI_SNS_turn_on'
 print(f'............ {Test_Name} ........')
 from dfttools import *
@@ -6,4 +6,4 @@ from time import sleep
 # from Procedures import Global_enable
 # setting 3.072MHz clock from PLL
 BLCK_Set_1 = 3.072e6                          # 3.072MHz
-# ERROR executing I2C_WRITE: utils.i2c_wrappers.I2C_WRITE() argument after ** must be a mapping, not tuple      #dig_pll_freerun_en_vddd=0
+[i2c_write] device_addr=0x68, PageName=PAG0, register_addr=0x84, data=0x0, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=0
