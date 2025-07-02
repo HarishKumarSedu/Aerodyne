@@ -1,0 +1,20 @@
+# Processed on 2025-07-02 15:30:13
+from dfttools import *
+Testname = 'VIS_OFFSET_ISNS'
+print(f' {Testname}')
+
+'''
+Class D output staged are programmed to have both SPKRP and SPKRN at VCM. In this way, no current signal is applied (across R-sense) at the input of I-sense channel.
+Then output code (I-sns code) it is stored.
+
+'''
+from time import sleep
+from Procedures import Startup
+from Procedures import Global_enable
+from Procedures import CLASSD_OUT_VMID
+from Procedures import VI_SNS_turn_on
+sleep(0.1)
+isns_offset_measured = # ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0  # set bridge switch (LSp off, MIDp off, CASp off, HSp off, LSn off, MIDn off, CASn off, HSn off)
+print(f'{Testname} value : {isns_offset_measured} ')
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBA, data=hex(round(isns_offset_measured)), Mask=0x3F, Default=0x0
