@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 10:18:20
+# Processed on 2025-07-02 10:37:01
 from dfttools import *
 from time import sleep
 import random
@@ -19,13 +19,13 @@ target value is 2.25V; this leads to a reference voltage is 0.4V for the UVLO;
 6.Burn the OTP with the value of {'fieldname': 'otp_ds_ref_pvdd_uvlo_trm', 'length': 5, 'registers': [{'REG': '0xB3', 'POS': 0, 'RegisterName': 'OTP FIELDS 3', 'RegisterLength': 8, 'Name': 'otp_ds_ref_pvdd_uvlo_trm[4:0]', 'Mask': '0x1F', 'Length': 5, 'FieldMSB': 4, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x60', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}<4:0> found in step 4.
 '''
 #Enabling test page
-# ERROR parsing args for I2C_WRITE: no such group
+# ERROR parsing args for I2C_WRITE: closing parenthesis '}' does not match opening parenthesis '(' (<unknown>, line 1)
 #Enabling "PVDD" UVLO
-# ERROR parsing args for I2C_WRITE: no such group
+# ERROR parsing args for I2C_WRITE: closing parenthesis '}' does not match opening parenthesis '(' (<unknown>, line 1)
 
 #Enabling digital TMUX
-# ERROR parsing args for I2C_WRITE: no such group
-# ERROR parsing args for I2C_WRITE: no such group
+# ERROR parsing args for I2C_WRITE: closing parenthesis '}' does not match opening parenthesis '(' (<unknown>, line 1)
+# ERROR parsing args for I2C_WRITE: closing parenthesis '}' does not match opening parenthesis '(' (<unknown>, line 1)
 
 LH_Th = 2.25  # 2.25V threshold
 error_spread = LH_Th*0.1 # 10% error spread
@@ -39,7 +39,7 @@ force_voltage_high_limit = 3  # maximum voltage limit
 for Code in range(2^code_width):
     # TODO: Write trimming code to device via I2C
     # Example (uncomment and fill device_address and field_info):
-    # ERROR parsing args for I2C_WRITE: no such group)
+    # ERROR parsing args for I2C_WRITE: closing parenthesis '}' does not match opening parenthesis '(' (<unknown>, line 1))
 
     force_voltage = force_voltage_low_limit
     trigger = False
@@ -69,10 +69,10 @@ for Code in range(2^code_width):
 if force_voltage_low_limit < optimal_measured_value < force_voltage_high_limit:
     print(f'............ UVLO_Trim Test Passed ........')
     # TODO: Burn optimal trimming code to OTP via I2C
-    # ERROR parsing args for I2C_WRITE: no such group
+    # ERROR parsing args for I2C_WRITE: closing parenthesis '}' does not match opening parenthesis '(' (<unknown>, line 1)
 else:
     print(f'............ UVLO_Trim Test Failed ........')
-    # ERROR parsing args for I2C_WRITE: no such group
+    # ERROR parsing args for I2C_WRITE: closing parenthesis '}' does not match opening parenthesis '(' (<unknown>, line 1)
 
 print(f"Optimal Code: {optimal_code}")
 print(f"Optimal Measured Value: {optimal_measured_value:.4f} V (Target: {LH_Th} V)")
