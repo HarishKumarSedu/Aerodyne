@@ -1,0 +1,6 @@
+# Processed on 2025-07-02 14:33:28
+Test_Name = 'Global_enable'
+print(f'............ {Test_Name} ........')
+from dfttools import *
+
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
