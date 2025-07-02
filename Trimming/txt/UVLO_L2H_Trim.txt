@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 10:47:18
+# Processed on 2025-07-02 14:44:57
 from dfttools import *
 from time import sleep
 import random
@@ -19,14 +19,14 @@ target value is 2.25V; this leads to a reference voltage is 0.4V for the UVLO;
 6.Burn the OTP with the value of {'fieldname': 'otp_ds_ref_pvdd_uvlo_trm', 'length': 5, 'registers': [{'REG': '0xB3', 'POS': 0, 'RegisterName': 'OTP FIELDS 3', 'RegisterLength': 8, 'Name': 'otp_ds_ref_pvdd_uvlo_trm[4:0]', 'Mask': '0x1F', 'Length': 5, 'FieldMSB': 4, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x60', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}<4:0> found in step 4.
 '''
 #Enabling test page
-[i2c_write] device_addr=0x68, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x68, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x68, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x68, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
 #Enabling "PVDD" UVLO
-[i2c_write] device_addr=0x68, register_addr=0x1C, data=0x0, Mask=0x10, Default=0x0
+[i2c_write] device_addr=0x68, PageName=PAG1, register_addr=0x1C, data=0x0, Mask=0x10, Default=0x0
 
 #Enabling digital TMUX
-[i2c_write] device_addr=0x68, register_addr=0x03, data=0x1, Mask=0x7F, Default=0x0
-[i2c_write] device_addr=0x68, register_addr=0x04, data=0x21, Mask=0x7F, Default=0x0
+[i2c_write] device_addr=0x68, PageName=PAG1, register_addr=0x03, data=0x1, Mask=0x7F, Default=0x0
+[i2c_write] device_addr=0x68, PageName=PAG1, register_addr=0x04, data=0x21, Mask=0x7F, Default=0x0
 
 LH_Th = 2.25  # 2.25V threshold
 error_spread = LH_Th*0.1 # 10% error spread
@@ -40,7 +40,7 @@ force_voltage_high_limit = 3  # maximum voltage limit
 for Code in range(2^code_width):
     # TODO: Write trimming code to device via I2C
     # Example (uncomment and fill device_address and field_info):
-    [i2c_write] device_addr=0x68, register_addr=0xB3, data=Code, Mask=0x1F, Default=0x60
+    [i2c_write] device_addr=0x68, PageName=PAG1, register_addr=0xB3, data=Code, Mask=0x1F, Default=0x60
 
     force_voltage = force_voltage_low_limit
     trigger = False
@@ -70,10 +70,10 @@ for Code in range(2^code_width):
 if force_voltage_low_limit < optimal_measured_value < force_voltage_high_limit:
     print(f'............ UVLO_Trim Test Passed ........')
     # TODO: Burn optimal trimming code to OTP via I2C
-    [i2c_write] device_addr=0x68, register_addr=0xB3, data=optimal_code, Mask=0x1F, Default=0x60
+    [i2c_write] device_addr=0x68, PageName=PAG1, register_addr=0xB3, data=optimal_code, Mask=0x1F, Default=0x60
 else:
     print(f'............ UVLO_Trim Test Failed ........')
-    [i2c_write] device_addr=0x68, register_addr=0xB3, data=0x0, Mask=0x1F, Default=0x60
+    [i2c_write] device_addr=0x68, PageName=PAG1, register_addr=0xB3, data=0x0, Mask=0x1F, Default=0x60
 
 print(f"Optimal Code: {optimal_code}")
 print(f"Optimal Measured Value: {optimal_measured_value:.4f} V (Target: {LH_Th} V)")
