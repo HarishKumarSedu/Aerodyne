@@ -1,0 +1,45 @@
+# Processed on 2025-07-02 16:20:58
+from dfttools import *
+from time import sleep 
+import random
+Test_Name = 'noise floor_1kHz_-60dBFS_3L'
+
+print(f'............ {Test_Name} ........')
+
+'''
+1.Reach the playback state with 3L modulation
+2.Enable internal sinusoid generator to play -60dBFS at 1 kHz.
+3.Wait 1ms.
+4.Perform A-weighted SNR measurement, AWSNR, on the differential output voltage signal. 
+  ASWNR(dB)=20*log10(V_signal_RMS/V_noise_RMS) with A-weighting applied.
+  A 1kHz -60dBFS tone has a V_signal_RMS=(6V*0.001/1.414)=4.24mVRMS amplitude.
+5.Noise floor RMS value is expected to be 6uVRMS, so AWSNR is expected to be larger than 20*log10(4.24mV/6uV)=57dB.
+'''
+# 1.
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x95, data=0x1, Mask=0x3, Default=0x96 # 3L modulation
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x4E, data=0x0, Mask=0x80, Default=0x89 
+# 2.
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Page 1 in regmap
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0xA0, Mask=0xF0, Default=0x0  # -60dB sinus amplitude
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x2, Mask=0x7, Default=0x0  # 1kHz sinus wave
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x0, Mask=0x8, Default=0x0  # Enable internal sin generator
+# 3.
+sleep(0.0001) 
+# 4.
+minimum_AWSNR = 55
+error_percentage = 0.03
+expected_AWSNR = 57
+expected_vals = {'SNR': expected_AWSNR}
+error_spreads = {'SNR': expected_AWSNR*error_percentage}
+measured_Values = FFT(signal="OUTP",reference="OUTN",signal_type='Analog',expected_values=expected_vals,error_spreads=error_spreads) #,sample_number=?,sample_time=?,window='Hanning' do we need to specify them?
+measured_AWSNR = measured_Values.get('SNR') 
+# 5.
+if measured_AWSNR > minimum_AWSNR:
+  print(f'...... {Test_Name}..Passed SNR:{measured_AWSNR}dB ')
+else:
+  print(f'...... {Test_Name}..Failed SNR:{measured_AWSNR}dB ')
