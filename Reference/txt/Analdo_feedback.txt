@@ -1,0 +1,24 @@
+# Processed on 2025-07-02 16:16:29
+from dfttools import *
+from time import sleep
+import random
+
+Test_Name = 'Analdo feedback'
+from Procedures import Startup
+from Procedures import Global_enable
+print(f'............ {Test_Name} ........')
+
+# Enabling test page
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+# Enabling the analog TMUX
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x2, Mask=0xF, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
+
+target_value = 0.461 # 0.461V
+error_spread = target_value*0.05 # 5% of target value
+measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=error_spread)
+error = abs(measured_value - target_value)/abs(target_value) *100
+print(f"Optimal measured value : {measured_value}V, Target value : {target_value}V")
+print(f"Minimum Error: {error}%")
