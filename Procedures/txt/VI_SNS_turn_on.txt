@@ -1,0 +1,25 @@
+# Processed on 2025-07-02 10:55:31
+Test_Name = 'VI_SNS_turn_on'
+print(f'............ {Test_Name} ........')
+from dfttools import *
+from time import sleep
+from Procedures import Global_enable
+# setting 3.072MHz clock from PLL
+BLCK_Set_1 = 3.072e6                          # 3.072MHz
+[i2c_write] device_addr=0x38, register_addr=0x84, data=0x0, Mask=0xC0, Default=0x11      #dig_pll_freerun_en_vddd=0
+# ERROR executing I2C_WRITE: Unknown format code 'X' for object of type 'str'         #dig_pll_prediv_vddd<5:0>=6d 
+[i2c_write] device_addr=0x38, register_addr=0x82, data=0x18, Mask=0x3F, Default=0x12        #dig_pll_n<5:0>=24d 
+[i2c_write] device_addr=0x38, register_addr=0x83, data=0x10, Mask=0x1F, Default=0xA #rfu_pll_ldet_cnt<4:0>=16d
+FREQFORCE(signal="IOCLK0",reference="GND",value=BLCK_Set_1)                          #BCLK frequency=3.072MHz
+sleep(0.0001)                                                                    #wait 100us
+# VI sense turn on procedure
+# ERROR executing I2C_WRITE: I2C_WRITE() missing 3 required positional arguments: 'device_address', 'field_info', and 'write_value'
+# ERROR executing I2C_WRITE: I2C_WRITE() missing 3 required positional arguments: 'device_address', 'field_info', and 'write_value'
+# ERROR executing I2C_WRITE: I2C_WRITE() missing 3 required positional arguments: 'device_address', 'field_info', and 'write_value'
+# ERROR executing I2C_WRITE: I2C_WRITE() missing 3 required positional arguments: 'device_address', 'field_info', and 'write_value'
+# ERROR executing I2C_WRITE: I2C_WRITE() missing 3 required positional arguments: 'device_address', 'field_info', and 'write_value'
+# ERROR executing I2C_WRITE: I2C_WRITE() missing 3 required positional arguments: 'device_address', 'field_info', and 'write_value'
+# ERROR executing I2C_WRITE: I2C_WRITE() missing 3 required positional arguments: 'device_address', 'field_info', and 'write_value'
+# ERROR executing I2C_WRITE: I2C_WRITE() missing 3 required positional arguments: 'device_address', 'field_info', and 'write_value'
+# ERROR executing I2C_WRITE: I2C_WRITE() missing 3 required positional arguments: 'device_address', 'field_info', and 'write_value'
+# ERROR executing I2C_WRITE: I2C_WRITE() missing 3 required positional arguments: 'device_address', 'field_info', and 'write_value'
