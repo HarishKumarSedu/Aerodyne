@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 13:23:02
+# Processed on 2025-07-02 13:23:31
 Test_Name = 'VI_SNS_turn_on'
 print(f'............ {Test_Name} ........')
 from dfttools import *
@@ -6,4 +6,4 @@ from time import sleep
 # from Procedures import Global_enable
 # setting 3.072MHz clock from PLL
 BLCK_Set_1 = 3.072e6                          # 3.072MHz
-[i2c_write] device_addr=0x68, register_addr=0x84, data=0x6, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=0
+[i2c_write] device_addr=0x68, register_addr=0x84, data=0x10, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=0
