@@ -1,5 +1,5 @@
 from time import sleep
-import os 
+
 import sys
 # example code to install python pacakage
 # command = f"{sys.executable} -m pip uninstall dfttools -y"
