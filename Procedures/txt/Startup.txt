@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 14:31:31
+# Processed on 2025-07-02 14:32:42
 from time import sleep
 import os 
 import sys
@@ -19,12 +19,11 @@ VFORCE(signal="PVDD",reference="GND",value=3.7)
 sleep(0.001)
 
 # Switch to page 1
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x68, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x68, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
 # Unlock test page 
-# ERROR executing I2C_REG_WRITE: I2C_REG_WRITE() missing 1 required positional argument: 'PageNo'
-# ERROR executing I2C_REG_WRITE: I2C_REG_WRITE() missing 1 required positional argument: 'PageNo'
+[i2c_reg_write] device_addr=0x68, PageName=PAG1,register_addr=0x2F, data=0xAA, Mask=255
+[i2c_reg_write] device_addr=0x68, PageName=PAG1,register_addr=0x2F, data=0xBB, Mask=255
 # Switch to page 0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-
+[i2c_write] device_addr=0x68, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x68, PageName=PAG1, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
