@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 15:30:51
+# Processed on 2025-07-03 18:56:45
 from dfttools import *
 from time import sleep
 import random
@@ -7,8 +7,7 @@ Test_Name = 'Offset_cal_cld_5lvl_half_gain_vcm_comp_on'
 from Procedures import Startup
 from Procedures import Global_enable
 print(f'............ {Test_Name} ........')
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=255 # page 0
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x95, data=0x2, Mask=0x3, Default=0x96 #set 5lvl modulation
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA0, data=0x0, Mask=0x4, Default=0x0 # bit {'fieldname': 'ivfb_v_invert_en', 'length': 1, 'registers': [{'REG': '0xA0', 'POS': 2, 'RegisterName': 'Data invert Reg', 'RegisterLength': 8, 'Name': 'ivfb_v_invert_en', 'Mask': '0x4', 'Length': 1, 'FieldMSB': 2, 'FieldLSB': 2, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}=1
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x92, data=0x3, Mask=0x7, Default=0x3 #{'fieldname': 'spk_gain', 'length': 3, 'registers': [{'REG': '0x92', 'POS': 0, 'RegisterName': 'SPK setting reg 1', 'RegisterLength': 8, 'Name': 'spk_gain[2:0]', 'Mask': '0x7', 'Length': 3, 'FieldMSB': 2, 'FieldLSB': 0, 'Attribute': '000NNNNN', 'Default': '0x03', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}=3 (011)
