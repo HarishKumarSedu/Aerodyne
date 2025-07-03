@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:23:29
+# Processed on 2025-07-03 18:29:30
 from dfttools import *
 from time import sleep
 Test_Name = 'VIS_1V5_Meas'
@@ -20,8 +20,7 @@ from Procedures import VI_SNS_turn_on
 sleep(0.0005)  # 500 µs
 
 # Step 3: Route Reference to "ADDR" and "IODATA1"
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  # Change page in regmap
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1  # Change page in regmap
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x2, Default=0x0  # Enable test mux
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x1, Mask=0xF, Default=0x0  # Enable tests REF_1V5 and Reference "GND"
 
