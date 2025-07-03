@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 15:29:42
+# Processed on 2025-07-03 18:49:56
 from dfttools import *
 from time import sleep
 
@@ -15,7 +15,7 @@ Procedure
     4.Measure the temperature register after 8 average
     5.Target Code(Decimal)=-1.628904*(Temp+40)+674  At 27  Target is 674 Decimal
 '''
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1
 sleep(0.001)
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x10, Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x10, Mask=0x3F, Default=0x0
@@ -47,12 +47,10 @@ else:
 
 print(f'............ {Test_Name} Passed ........')
     # write the optimized code if the trim passed
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBF, data=hex(temp_core), Mask=0x30, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC1, data=hex(temp_core), Mask=0xFF, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=255 # page 0
 
 print(f"Optimal Code: {temp_core}")
 
