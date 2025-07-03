@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 15:30:56
+# Processed on 2025-07-03 18:58:28
 from dfttools import *
 from time import sleep
 import random
@@ -11,8 +11,7 @@ print(f'............ {Test_Name} ........')
 #This test forces 1.2V to "ADDR" pin and measure the voltage at the buffer output at the "IODATA1" pin
 #The difference between the two voltages is the offset of the buffer 
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x80, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
