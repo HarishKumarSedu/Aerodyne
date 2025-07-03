@@ -18,7 +18,7 @@ VFORCE(signal="PVDD",reference="GND",value=3.7)
 sleep(0.001)
 
 # Switch to page 1
-I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=0)
+I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1)
 # Unlock test page 
 I2C_REG_WRITE( device_address="0x38", register_address=0x2F, write_value=0xAA,PageNo=1)
 I2C_REG_WRITE( device_address="0x38", register_address=0x2F, write_value=0xBB,PageNo=1)
