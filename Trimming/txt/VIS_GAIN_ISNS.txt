@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 15:30:20
+# Processed on 2025-07-03 18:53:21
 from dfttools import *
 Testname = 'VIS_GAIN_VSNS'
 print(f' {Testname}')
@@ -36,5 +36,3 @@ print(f'{Testname} value : {isns_gain_calculated} ')
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=hex(round(isns_gain_calculated)), Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBC, data=hex(round(isns_gain_calculated)), Mask=0xFF, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0  # set bridge switch (LSp off, MIDp off, CASp off, HSp off, LSn off, MIDn off, CASn off, HSn off)
-
-
