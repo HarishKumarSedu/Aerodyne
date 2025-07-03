@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:16:23
+# Processed on 2025-07-03 18:27:19
 from dfttools import *
 from time import sleep
 import random
@@ -16,8 +16,7 @@ Bring out to the analog test point (rfu_ds_ref_test_en_vddd=13d).
 Target current is 500nA.
 '''
 # Enabling test page
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1
 # Enabling the analog TMUX
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0xD, Mask=0xF, Default=0x0
