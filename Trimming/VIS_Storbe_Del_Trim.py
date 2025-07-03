@@ -19,7 +19,7 @@ Procedure
 7. Store ds_vis_sar_strobedly_trim<3:0> - 1 in the OTP register. 
 '''
 
-I2C_WRITE(device_address="0x38",field_info={'fieldname': 'i2c_page_sel', 'length': 2, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
+I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1) # page 1
 I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_vis_sar_strobedly_trim', 'length': 4, 'registers': [{'REG': '0xB2', 'POS': 0, 'RegisterName': 'OTP FIELDS 2', 'RegisterLength': 8, 'Name': 'otp_ds_vis_sar_strobedly_trim[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x84', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0xF)
 I2C_WRITE(device_address="0x38",field_info={'fieldname': 'vis_sar_strobedly_trim_en', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 0, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'vis_sar_strobedly_trim_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
 
