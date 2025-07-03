@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 15:14:06
+# Processed on 2025-07-03 18:37:16
 from dfttools import *
 from time import sleep
 import random
@@ -20,8 +20,7 @@ Procedure
 7. Store ds_vis_sar_strobedly_trim<3:0> - 1 in the OTP register. 
 '''
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB2, data=0xF, Mask=0xF, Default=0x84
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x1, Default=0x0
 
