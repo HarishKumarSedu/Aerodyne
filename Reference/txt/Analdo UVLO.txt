@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:16:36
+# Processed on 2025-07-03 18:28:00
 from dfttools import *
 from time import sleep
 import random
@@ -14,8 +14,7 @@ through digital test mux and verify it is at the correct level
 '''
 
 # Enabling test page
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1
 #Enabling digital TMUX
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x21, Mask=0x7F, Default=0x0
