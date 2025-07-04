@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:22:48
+# Processed on 2025-07-04 16:01:10
 from dfttools import *
 from time import sleep 
 import random
@@ -17,7 +17,6 @@ Step 2. Measure it.
 
 # Step 1
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0 #enable "IODATA1"
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x3, Mask=0xF, Default=0x0 #bring out the VDDD/R current
 sleep(0.0001) 
