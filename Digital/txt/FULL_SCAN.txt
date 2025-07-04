@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:19:03
+# Processed on 2025-07-04 15:56:54
 from dfttools import *
 from time import sleep
 
@@ -14,7 +14,6 @@ Procedure
 
 # Switch to page 1
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
 
 # Enable scan
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x05, data=0x0, Mask=0x2, Default=0x18
