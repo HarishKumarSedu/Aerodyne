@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:18:04
+# Processed on 2025-07-04 15:55:42
 from dfttools import *
 from time import sleep
 
@@ -25,8 +25,7 @@ sleep(0.0001)                                                                   
 '''
 Bring out all the necessary signals 
 '''
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x1, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x1, Mask=0xF, Default=0x0      #enable VDD_VCO voltage test
 
