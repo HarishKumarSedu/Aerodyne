@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:19:23
+# Processed on 2025-07-04 15:57:22
 from dfttools import *
 from time import sleep
 import random
@@ -16,7 +16,6 @@ LPF Common Mode Voltage Test
 3. Measure the voltage at "IODATA1"
 '''
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x1, Mask=0xF, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x10, Default=0x0  # Enable current test mode
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
