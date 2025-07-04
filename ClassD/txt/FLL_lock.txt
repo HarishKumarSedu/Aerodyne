@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:22:19
+# Processed on 2025-07-04 16:00:52
 from dfttools import *
 from time import sleep 
 import random
@@ -17,7 +17,6 @@ Step 2. If the FLL is locked, doublecheck its frequency output frequency by brin
 
 # Step 1
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x6, Mask=0x7F, Default=0x0  # enable "IODATA0"
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x3, Mask=0x7F, Default=0x0 # bring out {'fieldname': 'fll_lock', 'length': 1, 'registers': [{'REG': '0x24', 'POS': 6, 'RegisterName': 'Sequencer status register 1', 'RegisterLength': 8, 'Name': 'fll_lock', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'PR0RRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}
 sleep(0.0001) 
@@ -27,8 +26,7 @@ fll_lock_vddd=VMEASURE(signal="IODATA0", reference="GND", expected_value=expecte
 
 if fll_lock_vddd>1:
   # Step 2
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x3, Mask=0x7F, Default=0x0 #enable "ADDR"
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 #bring out PWM frequency 
   sleep(0.0001) 
