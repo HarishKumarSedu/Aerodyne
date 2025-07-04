@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:20:48
+# Processed on 2025-07-04 15:59:13
 from dfttools import *
 from time import sleep 
 import random
@@ -14,15 +14,13 @@ print(f'............ {Test_Name} ........')
 5.Expected value is -80dB. Maximum value is -74dB.
 '''
 # 1.
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0 
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x95, data=0x1, Mask=0x3, Default=0x96 # 3L modulation
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0 
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x4E, data=0x0, Mask=0x80, Default=0x89 
 # 2.
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Page 1 in regmap
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Page 1 in regmap
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x10, Mask=0xF0, Default=0x0  # -6dB sinus amplitude
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x2, Mask=0x7, Default=0x0  # 1kHz sinus wave
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x0, Mask=0x8, Default=0x0  # Enable internal sin generator
