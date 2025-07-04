@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:20:43
+# Processed on 2025-07-04 15:59:00
 from dfttools import *
 from time import sleep 
 import random
@@ -15,8 +15,7 @@ Step 2. Bring the DAC common mode voltage to pin "IODATA1" through the analog te
 Step 3. Wait for the signal to stabilize and measure the differential voltage "IODATA1" wrt "ADDR".
 '''
 # Step 1
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x10, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0xE, Mask=0xF, Default=0x0  
 # Step 2
