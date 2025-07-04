@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:21:13
+# Processed on 2025-07-04 15:59:48
 from dfttools import *
 from time import sleep 
 from math import *
@@ -19,8 +19,7 @@ Step 4. Calculate the DC PSRR as 20*log10((|VOUT_5V - VOUT_2p5V|)/2.5)
 
 '''
 # Step 1
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1E, data=0x0, Mask=0x2, Default=0x0 
 error_percentage = 1e-4 # 1% use it only for the simulation purpose & same applicable to the expected value 
 # Step 2
