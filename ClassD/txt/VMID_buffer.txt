@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:21:44
+# Processed on 2025-07-04 16:00:25
 from dfttools import *
 from time import sleep 
 import random
@@ -15,8 +15,7 @@ Step 3. Wait for the signal to stabilize and measure the differential voltage "I
 '''
 
 # Select register page
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 # page 1
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 # page 1
 # Enable forcing and disable only
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x1, Mask=0x1, Default=0x0  # class D force enable
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x40, Default=0x0 # cld_pwm disable
