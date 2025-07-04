@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 16:17:56
+# Processed on 2025-07-04 15:54:34
 from dfttools import *
 from time import sleep
 
@@ -26,8 +26,7 @@ pll_error_spread_2 = pll_target_value_2*0.01  # 1% of target value
 FREQFORCE(signal="IOCLK0",reference="GND",value=BLCK_Set_1)                          #BCLK frequency=3.072MHz
 sleep(0.0001)                                                                    #wait 100us
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x12, Mask=0x7F, Default=0x0  #enable "ADDR" and "IODATA1" TMUX
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x17, Mask=0x7F, Default=0x0 #bring out the pll output on "IODATA1" and pll lock on "ADDR"
 lock_status=VMEASURE(signal="ADDR", reference="GND", expected_value=0.9, error_spread=0.5) #measure the lock signal on "ADDR" pin
