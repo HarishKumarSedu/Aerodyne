@@ -1,19 +1,19 @@
-# Processed on 2025-07-08 17:46:43
+# Processed on 2025-07-08 17:50:40
 from dfttools import *
 from time import sleep
 import random
 
 Test_Name = 'BG_1V2_Trim'
-from Procedures import Startup
-from Procedures import Global_enable
+# from Procedures import Startup
+# from Procedures import Global_enable
 print(f'............ {Test_Name} ........')
 
 # Enabling test page
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xff # page 1
 # Enabling analog TMUX
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x80, Mask=0x80, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x4, Mask=0xF, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x40, Mask=0x40, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
 '''
 Bring 1.2V bandgap reference voltage to "IODATA1" through the analog test mux and trim it to the closest value to 1.2V
@@ -62,7 +62,7 @@ if low_value < optimal_measured_value < high_value:
 else:
     print(f'............ {Test_Name} Failed ........')
     # if the trimh failed program default zero
-    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB1, data=0x0, Mask=0xF, Default=0x80
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB1, data=0x80, Mask=0xF, Default=0x80
 print(f"Optimal Code: {optimal_code}")
 print(f"Optimal measured value : {optimal_measured_value}V, Target value : {typical_value}V")
 
