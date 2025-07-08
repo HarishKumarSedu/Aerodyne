@@ -1,4 +1,4 @@
-# Processed on 2025-07-08 16:29:19
+# Processed on 2025-07-08 16:51:10
 from dfttools import *
 from time import sleep
 
@@ -27,6 +27,11 @@ Procedure
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x01, data=0x1F, Mask=0x1F, Default=0x0
 
 # Sink 2mA from "ADDR"/"IODATA1"/"IOCLK1"/"IODATA0"/"IOCLK0"/
+AFORCE(signal="ADDR",reference="GND",value=-0.002)
+AFORCE(signal="IODATA1",reference="GND",value=-0.002)
+AFORCE(signal="ADDR",reference="GND",value=-0.002)
+AFORCE(signal="IODATA0",reference="GND",value=-0.002)
+AFORCE(signal="ADDR",reference="GND",value=-0.002)
 
 # Measure "ADDR" voltgae
 VB0 = VMEASURE(signal="ADDR", reference="GND", expected_value=1.8,error_spread=0)
@@ -100,8 +105,4 @@ if Vpad_min <= VB3 <= Vpad_max:
   
 if Vpad_min <= VB4 <= Vpad_max:
   print(f'............ {Test_Name} VB4 VOL Passed ........')
-
-
-
-
 
