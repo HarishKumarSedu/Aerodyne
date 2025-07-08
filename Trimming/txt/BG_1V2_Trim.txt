@@ -1,11 +1,11 @@
-# Processed on 2025-07-08 17:42:08
+# Processed on 2025-07-08 17:46:43
 from dfttools import *
 from time import sleep
 import random
 
 Test_Name = 'BG_1V2_Trim'
-# from Procedures import Startup
-# from Procedures import Global_enable
+from Procedures import Startup
+from Procedures import Global_enable
 print(f'............ {Test_Name} ........')
 
 # Enabling test page
