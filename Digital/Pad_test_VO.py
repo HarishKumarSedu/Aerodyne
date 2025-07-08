@@ -26,6 +26,11 @@ I2C_REG_WRITE( device_address="0x38", register_address=0x00, write_value=0x09,Pa
 I2C_WRITE(device_address="0x38", field_info={'fieldname': 'io_tst_wr', 'length': 5, 'registers': [{'REG': '0x01', 'POS': 0, 'RegisterName': 'IO_TEST_SETTINGS_2', 'RegisterLength': 8, 'Name': 'io_tst_wr[4:0]', 'Mask': '0x1F', 'Length': 5, 'FieldMSB': 4, 'FieldLSB': 0, 'Attribute': '000NNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1F)
 
 # Sink 2mA from "ADDR"/"IODATA1"/"IOCLK1"/"IODATA0"/"IOCLK0"/
+AFORCE(signal="ADDR",reference="GND",value=-0.002)
+AFORCE(signal="IODATA1",reference="GND",value=-0.002)
+AFORCE(signal="ADDR",reference="GND",value=-0.002)
+AFORCE(signal="IODATA0",reference="GND",value=-0.002)
+AFORCE(signal="ADDR",reference="GND",value=-0.002)
 
 # Measure "ADDR" voltgae
 VB0 = VMEASURE(signal="ADDR", reference="GND", expected_value=1.8,error_spread=0)
@@ -99,8 +104,4 @@ if Vpad_min <= VB3 <= Vpad_max:
   
 if Vpad_min <= VB4 <= Vpad_max:
   print(f'............ {Test_Name} VB4 VOL Passed ........')
-
-
-
-
 
