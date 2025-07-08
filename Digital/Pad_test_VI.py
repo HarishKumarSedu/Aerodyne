@@ -22,7 +22,7 @@ I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel', 'lengt
 # Enable of read test mode
 I2C_REG_WRITE( device_address="0x38", register_address=0x00, write_value=0x08,PageNo=1)
 
-# Force all pads to 1
+# Force all pads to VDDIO
 VFORCE(signal="ADDR",reference="GND",value=1.8)
 VFORCE(signal="IODATA1",reference="GND",value=1.8)
 VFORCE(signal="IOCLK1",reference="GND",value=1.8)
@@ -36,16 +36,30 @@ if (HCODE0 == 0x1F) :
 
 #############################################
 
-# Force all pads to 0
-VFORCE(signal="ADDR",reference="GND",value=0)
-VFORCE(signal="IODATA1",reference="GND",value=0)
-VFORCE(signal="IOCLK1",reference="GND",value=0)
-VFORCE(signal="IODATA0",reference="GND",value=0)
-VFORCE(signal="IOCLK0",reference="GND",value=0)
+# Force all pads to 0.3 x VDDIO
+VFORCE(signal="ADDR",reference="GND",value=0.54)
+VFORCE(signal="IODATA1",reference="GND",value=0.54)
+VFORCE(signal="IOCLK1",reference="GND",value=0.54)
+VFORCE(signal="IODATA0",reference="GND",value=0.54)
+VFORCE(signal="IOCLK0",reference="GND",value=0.54)
 
 HCODE0=I2C_READ(device_address="0x38",field_info={'fieldname': 'io_tst_rd', 'length': 7, 'registers': [{'REG': '0x02', 'POS': 0, 'RegisterName': 'IO_TEST_SETTINGS_3', 'RegisterLength': 8, 'Name': 'io_tst_rd[6:0]', 'Mask': '0x7F', 'Length': 7, 'FieldMSB': 6, 'FieldLSB': 0, 'Attribute': '0RRRRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},expected_value=0x00)
 
 if (HCODE0 == 0x00) :
+  print(f'............ {Test_Name} Passed ........')
+
+#############################################
+
+# Force all pads to 0.7 x VDDIO
+VFORCE(signal="ADDR",reference="GND",value=1.26)
+VFORCE(signal="IODATA1",reference="GND",value=1.26)
+VFORCE(signal="IOCLK1",reference="GND",value=1.26)
+VFORCE(signal="IODATA0",reference="GND",value=1.26)
+VFORCE(signal="IOCLK0",reference="GND",value=1.26)
+
+HCODE0=I2C_READ(device_address="0x38",field_info={'fieldname': 'io_tst_rd', 'length': 7, 'registers': [{'REG': '0x02', 'POS': 0, 'RegisterName': 'IO_TEST_SETTINGS_3', 'RegisterLength': 8, 'Name': 'io_tst_rd[6:0]', 'Mask': '0x7F', 'Length': 7, 'FieldMSB': 6, 'FieldLSB': 0, 'Attribute': '0RRRRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},expected_value=0x1F)
+
+if (HCODE0 == 0x1F) :
   print(f'............ {Test_Name} Passed ........')
 
 
