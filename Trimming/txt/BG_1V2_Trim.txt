@@ -1,4 +1,4 @@
-# Processed on 2025-07-08 17:52:06
+# Processed on 2025-07-08 17:53:49
 from dfttools import *
 from time import sleep
 import random
@@ -62,7 +62,7 @@ if low_value < optimal_measured_value < high_value:
 else:
     print(f'............ {Test_Name} Failed ........')
     # if the trimh failed program default zero
-    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB1, data=0x80, Mask=0xF, Default=0x80
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB1, data=0x0, Mask=0xF, Default=0x80
 print(f"Optimal Code: {optimal_code}")
 print(f"Optimal measured value : {optimal_measured_value}V, Target value : {typical_value}V")
 
