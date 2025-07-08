@@ -28,9 +28,9 @@ I2C_WRITE(device_address="0x38", field_info={'fieldname': 'io_tst_wr', 'length':
 # Sink 2mA from "ADDR"/"IODATA1"/"IOCLK1"/"IODATA0"/"IOCLK0"/
 AFORCE(signal="ADDR",reference="GND",value=-0.002)
 AFORCE(signal="IODATA1",reference="GND",value=-0.002)
-AFORCE(signal="ADDR",reference="GND",value=-0.002)
+AFORCE(signal="IOCLK1",reference="GND",value=-0.002)
 AFORCE(signal="IODATA0",reference="GND",value=-0.002)
-AFORCE(signal="ADDR",reference="GND",value=-0.002)
+AFORCE(signal="IOCLK0",reference="GND",value=-0.002)
 
 # Measure "ADDR" voltgae
 VB0 = VMEASURE(signal="ADDR", reference="GND", expected_value=1.8,error_spread=0)
@@ -71,6 +71,11 @@ if Vpad_min <= VB4 <= Vpad_max:
 I2C_WRITE(device_address="0x38", field_info={'fieldname': 'io_tst_wr', 'length': 5, 'registers': [{'REG': '0x01', 'POS': 0, 'RegisterName': 'IO_TEST_SETTINGS_2', 'RegisterLength': 8, 'Name': 'io_tst_wr[4:0]', 'Mask': '0x1F', 'Length': 5, 'FieldMSB': 4, 'FieldLSB': 0, 'Attribute': '000NNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x00)
 
 # Source 2mA from "ADDR"/"IODATA1"/"IOCLK1"/"IODATA0"/"IOCLK0"/
+AFORCE(signal="ADDR",reference="GND",value=0.002)
+AFORCE(signal="IODATA1",reference="GND",value=0.002)
+AFORCE(signal="IOCLK1",reference="GND",value=0.002)
+AFORCE(signal="IODATA0",reference="GND",value=0.002)
+AFORCE(signal="IOCLK0",reference="GND",value=0.002)
 
 # Measure "ADDR" voltgae
 VB0 = VMEASURE(signal="ADDR", reference="GND", expected_value=0,error_spread=0)
