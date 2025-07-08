@@ -1,4 +1,4 @@
-# Processed on 2025-07-04 15:56:20
+# Processed on 2025-07-08 17:24:52
 from dfttools import *
 from time import sleep
 
@@ -35,12 +35,6 @@ Temp_max=expected_value+2
 
 HCODE0=# ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
 CODE0=int(HCODE0)
-
-
-
-
-
-
 
 if Temp_min <= CODE0 <= Temp_max:
   print(f'............ {Test_Name} Passed ........')
