@@ -1,4 +1,4 @@
-# Processed on 2025-07-08 16:42:04
+# Processed on 2025-07-08 16:45:09
 from dfttools import *
 from time import sleep
 
@@ -23,7 +23,7 @@ Procedure
 # Enable of read test mode
 [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0x00, data=0x8, Mask=255
 
-# Force all pads to 1
+# Force all pads to VDDIO
 VFORCE(signal="ADDR",reference="GND",value=1.8)
 VFORCE(signal="IODATA1",reference="GND",value=1.8)
 VFORCE(signal="IOCLK1",reference="GND",value=1.8)
@@ -37,16 +37,30 @@ if (HCODE0 == 0x1F) :
 
 #############################################
 
-# Force all pads to 0
-VFORCE(signal="ADDR",reference="GND",value=0)
-VFORCE(signal="IODATA1",reference="GND",value=0)
-VFORCE(signal="IOCLK1",reference="GND",value=0)
-VFORCE(signal="IODATA0",reference="GND",value=0)
-VFORCE(signal="IOCLK0",reference="GND",value=0)
+# Force all pads to 0.3 x VDDIO
+VFORCE(signal="ADDR",reference="GND",value=0.54)
+VFORCE(signal="IODATA1",reference="GND",value=0.54)
+VFORCE(signal="IOCLK1",reference="GND",value=0.54)
+VFORCE(signal="IODATA0",reference="GND",value=0.54)
+VFORCE(signal="IOCLK0",reference="GND",value=0.54)
 
 HCODE0=# ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
 
 if (HCODE0 == 0x00) :
+  print(f'............ {Test_Name} Passed ........')
+
+#############################################
+
+# Force all pads to 0.7 x VDDIO
+VFORCE(signal="ADDR",reference="GND",value=1.26)
+VFORCE(signal="IODATA1",reference="GND",value=1.26)
+VFORCE(signal="IOCLK1",reference="GND",value=1.26)
+VFORCE(signal="IODATA0",reference="GND",value=1.26)
+VFORCE(signal="IOCLK0",reference="GND",value=1.26)
+
+HCODE0=# ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
+
+if (HCODE0 == 0x1F) :
   print(f'............ {Test_Name} Passed ........')
 
 
