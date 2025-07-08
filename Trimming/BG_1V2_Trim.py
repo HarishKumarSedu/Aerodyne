@@ -3,7 +3,7 @@ from time import sleep
 import random
 
 Test_Name = 'BG_1V2_Trim'
-from Procedures import Startup
+# from Procedures import Startup
 # from Procedures import Global_enable
 print(f'............ {Test_Name} ........')
 
