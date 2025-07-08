@@ -35,12 +35,6 @@ Temp_max=expected_value+2
 HCODE0=I2C_READ(device_address="0x38",field_info={'fieldname': 'temp_meas', 'length': 10, 'registers': [{'REG': '0x21', 'POS': 0, 'RegisterName': 'TEMP measurement reg 1', 'RegisterLength': 8, 'Name': 'temp_meas[9:8]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': '000000RR', 'Default': '0x00', 'User': '00YYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x22', 'POS': 0, 'RegisterName': 'TEMP measurement reg 2', 'RegisterLength': 8, 'Name': 'temp_meas[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},expected_value=0x236)
 CODE0=int(HCODE0)
 
-
-
-
-
-
-
 if Temp_min <= CODE0 <= Temp_max:
   print(f'............ {Test_Name} Passed ........')
     # write the optimized code if the trim passed
