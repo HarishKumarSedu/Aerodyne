@@ -1,4 +1,4 @@
-# Processed on 2025-07-03 18:36:05
+# Processed on 2025-07-09 09:42:25
 from dfttools import *
 import time
 import random
@@ -21,7 +21,7 @@ higher_limit = 13.288e6
 Bring out on the digital test point the 
 PLL output (divided?) and measure the clock frequency 
 '''
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1  #Change page in regmap
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1  #Change page in regmap
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x8, Mask=0x7F, Default=0x0   #enable "IODATA1" TMUX
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x23, Mask=0x7F, Default=0x0 #bring out the pll output
 
