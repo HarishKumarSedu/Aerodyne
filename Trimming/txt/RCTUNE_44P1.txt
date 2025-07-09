@@ -1,4 +1,4 @@
-# Processed on 2025-07-02 15:31:18
+# Processed on 2025-07-09 10:38:56
 from dfttools import *
 from time import sleep
 
@@ -17,7 +17,7 @@ Procedure
 sleep(0.001)
 
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x0, Mask=0x8, Default=0xC
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x0, Mask=0x8, Default=0x21
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x8, Mask=0x8, Default=0x21
 
 sleep(0.001)
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x62, data=0x1, Mask=0x1, Default=0x0
