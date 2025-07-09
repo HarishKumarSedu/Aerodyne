@@ -1,4 +1,4 @@
-# Processed on 2025-07-03 18:25:04
+# Processed on 2025-07-09 09:43:26
 from dfttools import *
 from time import sleep
 import random
@@ -20,7 +20,7 @@ and record the value at which the compator toggles.
   5.Store the vddp value for which the ana_ds_pvdd_uvlo goes from "VDD" to 0V; it is the L2H threshold of the UVLO.
 '''
 # Enabling test page
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
 #Enabling digital TMUX
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x1, Mask=0x7F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x21, Mask=0x7F, Default=0x0
