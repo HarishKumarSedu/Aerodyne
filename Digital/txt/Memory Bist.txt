@@ -1,4 +1,4 @@
-# Processed on 2025-07-04 15:56:39
+# Processed on 2025-07-09 09:44:17
 from dfttools import *
 from time import sleep
 
@@ -26,8 +26,8 @@ Procedure
 sleep (0.00002);
 
 # Read of the result
-BIST_RESULT_BIT=# ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
-BIST_END_BIT=# ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
+BIST_RESULT_BIT=[i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0x28, Mask=0x4
+BIST_END_BIT=[i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0x28, Mask=0x8
 
 if ((BIST_END_BIT == 1) and (BIST_RESULT_BIT== 0)):
   print(f'............ {Test_Name} Passed ........')
