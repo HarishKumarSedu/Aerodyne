@@ -1,4 +1,4 @@
-# Processed on 2025-07-08 16:51:54
+# Processed on 2025-07-09 09:44:18
 from dfttools import *
 from time import sleep
 
@@ -21,7 +21,7 @@ Procedure
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
 
 # Enable of write test mode
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0x00, data=0x9, Mask=255
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0x00, data=0x9, Mask=0xFF
 
 # Set all pads to 1
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x01, data=0x1F, Mask=0x1F, Default=0x0
