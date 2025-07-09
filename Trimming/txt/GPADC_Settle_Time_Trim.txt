@@ -1,4 +1,4 @@
-# Processed on 2025-07-03 18:37:24
+# Processed on 2025-07-09 09:42:29
 from dfttools import *
 from time import sleep
 
@@ -21,16 +21,16 @@ Procedure
 sleep(0.001)
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x10, Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x10, Mask=0x3F, Default=0x0
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB4, data=0xF, Mask=0xF, Default=0x4
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x11, Mask=0x7F, Default=0x0
-[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=255 # page 0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x0, Mask=0x8, Default=0x21
+[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x8, Mask=0x8, Default=0x21
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x1
 sleep(0.001)
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x0, Mask=0x4, Default=0x0
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x4, Mask=0x4, Default=0x0
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
 
 # select the mux to bring out the ana_dd_gpadc_tb_delay_clock_dvdd signal on "IOCLK0"
 # the frequency measured is > of 9.09MHz.  
@@ -80,7 +80,6 @@ print(f"Optimal measured value : {optimal_measured_value}Hz, Target vlaue : {tar
 print(f"Minimum Error: {min_error}")
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x0, Mask=0x4, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x0, Mask=0x8, Default=0x21
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x0, Mask=0x1, Default=0x1
