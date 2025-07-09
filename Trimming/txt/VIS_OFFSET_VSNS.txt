@@ -1,4 +1,4 @@
-# Processed on 2025-07-03 18:51:35
+# Processed on 2025-07-09 10:37:50
 from dfttools import *
 Testname = 'VIS_OFFSET_VSNS'
 print(f' {Testname}')
@@ -14,6 +14,7 @@ from Procedures import Global_enable
 from Procedures import CLASSD_OUT_VMID
 from Procedures import VI_SNS_turn_on
 sleep(0.1)
-vsns_offset_measured = # ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
+vsns_offset_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
+[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
 print(f'{Testname} value : {vsns_offset_measured} ')
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB8, data=hex(round(vsns_offset_measured)), Mask=0x3F, Default=0x0
