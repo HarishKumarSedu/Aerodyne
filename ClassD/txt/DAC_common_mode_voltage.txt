@@ -1,4 +1,4 @@
-# Processed on 2025-07-04 15:59:00
+# Processed on 2025-07-09 09:44:50
 from dfttools import *
 from time import sleep 
 import random
@@ -16,11 +16,11 @@ Step 3. Wait for the signal to stabilize and measure the differential voltage "I
 '''
 # Step 1
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x10, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x10, Mask=0x10, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0xE, Mask=0xF, Default=0x0  
 # Step 2
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x2, Mask=0x2, Default=0x0
 # Step 3
 sleep(0.0001) 
 expected_value = 1.5  
