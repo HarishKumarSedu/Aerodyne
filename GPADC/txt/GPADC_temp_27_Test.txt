@@ -1,4 +1,4 @@
-# Processed on 2025-07-08 17:24:52
+# Processed on 2025-07-09 09:44:09
 from dfttools import *
 from time import sleep
 
@@ -20,10 +20,10 @@ sleep(0.001)
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x10, Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x10, Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0xC, Mask=0xC, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x0, Mask=0x20, Default=0x40
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x0, Mask=0x4, Default=0x40
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x20, Mask=0x20, Default=0x40
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x4, Mask=0x4, Default=0x40
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x1, Mask=0xF, Default=0x1
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x0, Mask=0x8, Default=0x21
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x8, Mask=0x8, Default=0x21
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x1
 
 sleep(0.001)
@@ -33,7 +33,8 @@ expected_value=round(-1.628904*(Temp_amb+40)+674)
 Temp_min=expected_value-2
 Temp_max=expected_value+2
 
-HCODE0=# ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
+HCODE0=[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x21, Mask=0x3
+[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x22, Mask=0xFF
 CODE0=int(HCODE0)
 
 if Temp_min <= CODE0 <= Temp_max:
