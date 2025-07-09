@@ -1,4 +1,4 @@
-# Processed on 2025-07-03 18:34:06
+# Processed on 2025-07-09 09:43:14
 from dfttools import *
 from time import sleep
 import random
@@ -9,11 +9,11 @@ from Procedures import Startup
 print(f'............ {Test_Name} ........')
 from Procedures import Playback
 # from Procedures import Internal_sin_1kHz_1W # set the internal sinusoidal generator at 1kHz 1W
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=255 # page 1  #Page 1 in regmap
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1  #Page 1 in regmap
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0xA0, Mask=0xF0, Default=0x0  # -60dB sine amplitude
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x2, Mask=0x7, Default=0x0  # 1kHz sine frequncy
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x0, Mask=0x8, Default=0x0  # internal sine enable
-[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=255  #Page 0 in regmap
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x8, Mask=0x8, Default=0x0  # internal sine enable
+[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF  #Page 0 in regmap
 from Procedures import VI_SNS_turn_on
 sleep (0.01)
 # Acquire via TDM V-sns stream, (fsyn 48KHz, BCLK 3 MHz, delay_mode=1)
