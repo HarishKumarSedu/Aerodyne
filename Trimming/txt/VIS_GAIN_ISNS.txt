@@ -1,4 +1,4 @@
-# Processed on 2025-07-03 18:53:21
+# Processed on 2025-07-09 10:38:08
 from dfttools import *
 Testname = 'VIS_GAIN_VSNS'
 print(f' {Testname}')
@@ -25,12 +25,14 @@ sleep(0.001)
 AFORCE(signal="OUTP",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
 AFORCE(signal="OUTN",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
 sleep(0.001)
-isns_gain_source_measured = # ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
+isns_gain_source_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
+[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
 print(f' ........ Sink 500mA to SPKRP/SPKRM ........ ')
 AFORCE(signal="OUTP",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
 AFORCE(signal="OUTN",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
 sleep(0.001)
-isns_gain_sink_measured = # ERROR executing I2C_READ: i2c_read() takes 3 positional arguments but 4 were given
+isns_gain_sink_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
+[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
 isns_gain_calculated = 2*0.5/(int(isns_gain_source_measured)-int(isns_gain_sink_measured))
 print(f'{Testname} value : {isns_gain_calculated} ')
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=hex(round(isns_gain_calculated)), Mask=0x3F, Default=0x0
