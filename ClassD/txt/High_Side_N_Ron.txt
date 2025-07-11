@@ -1,4 +1,4 @@
-# Processed on 2025-07-11 17:54:20
+# Processed on 2025-07-11 17:54:31
 from dfttools import *
 from time import sleep
 import random
@@ -46,7 +46,7 @@ AFORCE(signal="OUTN", reference="PGND", value=I_forced, error_spread=0.05)  # 50
 dV = VMEASURE(signal="PVDD", reference="OUTP", expected_value=0.062, error_spread=0.01) #pin 9
 LSN_ron = abs(dV / I_forced) - 0.025 # R = V/I
 
-print(f'Calculated highside P-Ron: {LSN_ron:.3f} Ohms')
+print(f'Calculated highside n-Ron: {LSN_ron:.3f} Ohms')
 print(f'[Expected ~100m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
 
 AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
