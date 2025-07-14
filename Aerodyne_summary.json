@@ -938,7 +938,7 @@
   {
     "slno": 79,
     "ipName": "Digital",
-    "testName": "Pad_Loopback",
+    "testName": "COMPRESSED_SCAN",
     "signalName": "",
     "signalType": "",
     "minLimit": "",
@@ -950,7 +950,7 @@
   {
     "slno": 80,
     "ipName": "Digital",
-    "testName": "COMPRESSED_SCAN",
+    "testName": "Pad_test_VO",
     "signalName": "",
     "signalType": "",
     "minLimit": "",
@@ -963,6 +963,18 @@
     "slno": 81,
     "ipName": "Digital",
     "testName": "FULL_SCAN",
+    "signalName": "",
+    "signalType": "",
+    "minLimit": "",
+    "typical": "",
+    "maxLimit": "",
+    "unit": "",
+    "testRequirements": ""
+  },
+  {
+    "slno": 82,
+    "ipName": "Digital",
+    "testName": "Pad_test_VI",
     "signalName": "",
     "signalType": "",
     "minLimit": "",
