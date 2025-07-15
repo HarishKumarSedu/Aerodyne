@@ -2,7 +2,7 @@ from dfttools import *
 from time import sleep
 import random
 
-Test_Name = 'high_Side_P_Ron'
+Test_Name = 'Vmid_Under_Voltage'
 from Procedures import speakerOff
 
 print(f'............ {Test_Name} ........')
