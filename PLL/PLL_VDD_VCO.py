@@ -1,7 +1,7 @@
 from dfttools import *
 from time import sleep
 
-Test_Name = 'PLL_VCO_Bias'
+Test_Name = 'PLL_VCO_Bias_VDD'
 from Procedures import Startup
 print(f'............ {Test_Name} ........')
 
