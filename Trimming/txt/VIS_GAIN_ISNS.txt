@@ -1,6 +1,6 @@
-# Processed on 2025-07-09 11:54:11
+# Processed on 2025-07-15 14:14:09
 from dfttools import *
-Testname = 'VIS_GAIN_VSNS'
+Testname = 'VIS_GAIN_ISNS'
 print(f' {Testname}')
 
 '''
