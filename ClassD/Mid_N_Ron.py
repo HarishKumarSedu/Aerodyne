@@ -2,7 +2,7 @@ from dfttools import *
 from time import sleep
 import random
 
-Test_Name = 'MID_P_Ron'
+Test_Name = 'MID_N_Ron'
 from Procedures import speakerOff
 
 print(f'............ {Test_Name} ........')
