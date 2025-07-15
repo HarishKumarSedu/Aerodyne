@@ -1,9 +1,9 @@
-# Processed on 2025-07-09 11:55:10
+# Processed on 2025-07-15 14:15:56
 from dfttools import *
 from time import sleep
 import random
 
-Test_Name = 'Self_Reg_LDO_1V2'
+Test_Name = 'Self_Reg_LDO_1V2_AON'
 from Procedures import Startup
 from Procedures import Global_enable
 print(f'............ {Test_Name} ........')
