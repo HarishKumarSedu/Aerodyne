@@ -1,5 +1,5 @@
 from dfttools import *
-Testname = 'VIS_GAIN_VSNS'
+Testname = 'VIS_GAIN_ISNS'
 print(f' {Testname}')
 
 '''
