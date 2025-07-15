@@ -1,7 +1,7 @@
 from dfttools import *
 from time import sleep
 import random
-Test_Name = 'V-sense THD'
+Test_Name = 'I-sense THD'
 from Procedures import Startup
 print(f'............ {Test_Name} ........')
 from Procedures import Playback
