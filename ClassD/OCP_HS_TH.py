@@ -2,7 +2,7 @@ from dfttools import *
 from time import sleep
 import random
 
-Test_Name = 'OCP_LS_TH'
+Test_Name = 'OCP_HS_TH'
 from Procedures import speakerOff
 
 print(f'............ {Test_Name} ........')
