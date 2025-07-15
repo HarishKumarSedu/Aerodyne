@@ -2,7 +2,7 @@ from dfttools import *
 from time import sleep
 import random
 
-Test_Name = 'Self_Reg_LDO_1V2'
+Test_Name = 'Self_Reg_LDO_1V2_AON'
 from Procedures import Startup
 from Procedures import Global_enable
 print(f'............ {Test_Name} ........')
