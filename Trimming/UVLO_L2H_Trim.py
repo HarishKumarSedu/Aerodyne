@@ -63,7 +63,9 @@ for Code in range(2^code_width):
         min_error = error
         optimal_code = hex(Code)
         optimal_measured_value = pvdd_forced_voltage
-
+      
+## Bing "PVDD" to the Normal Conditon "PVDD" = 3.7V
+VFORCE(signal="PVDD", reference="GND", value=3.7,error_spread=0)
 # Final check and reporting
 if force_voltage_low_limit < optimal_measured_value < force_voltage_high_limit:
     print(f'............ UVLO_Trim Test Passed ........')
