@@ -1,4 +1,4 @@
-# Processed on 2025-07-15 14:14:09
+# Processed on 2025-07-28 16:53:11
 from dfttools import *
 Testname = 'VIS_GAIN_ISNS'
 print(f' {Testname}')
@@ -38,3 +38,6 @@ print(f'{Testname} value : {isns_gain_calculated} ')
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=hex(round(isns_gain_calculated)), Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBC, data=hex(round(isns_gain_calculated)), Mask=0xFF, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0  # set bridge switch (LSp off, MIDp off, CASp off, HSp off, LSn off, MIDn off, CASn off, HSn off)
+# disconnect the current sources applying infinity current 
+AFORCE(signal="OUTP",reference="GND",value=float('Inf'), error_spread=source_current*0.01) # 1% error
+AFORCE(signal="OUTN",reference="GND",value=-float('Inf'), error_spread=source_current*0.01) # 1% error
