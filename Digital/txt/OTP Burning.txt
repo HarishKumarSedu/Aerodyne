@@ -1,4 +1,4 @@
-# Processed on 2025-07-31 14:30:00
+# Processed on 2025-07-31 14:30:34
 from dfttools import *
 from time import sleep
 
@@ -25,4 +25,4 @@ Procedure
 #################### I2C writings of OTP shadow registers #####################
 
 # Start of burn
-#[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xAE, data=0x2, Mask=0x2, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xAE, data=0x2, Mask=0x2, Default=0x0
