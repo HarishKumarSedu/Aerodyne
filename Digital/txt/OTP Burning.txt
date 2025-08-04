@@ -1,4 +1,4 @@
-# Processed on 2025-08-04 17:50:42
+# Processed on 2025-08-04 17:54:37
 from dfttools import *
 from time import sleep
 
@@ -8,9 +8,9 @@ print(f'............ {Test_Name} ........')
 # designers must go through the details and correct the procedure
 '''
 Procedure 
-    1. Startup (it includes enable of test page)
-    2. Global_en to turn on the island
-    3. Force VDDIO to 1.6V
+    1. Force VDDIO to 1.6V
+    2. Startup (it includes enable of test page)
+    3. Global_en to turn on the island 
     4. I2C writings of OTP shadow registers
     5. {'fieldname': 'otp_burn', 'length': 1, 'registers': [{'REG': '0xAE', 'POS': 1, 'RegisterName': 'OTP control reg 1', 'RegisterLength': 8, 'Name': 'otp_burn', 'Mask': '0x2', 'Length': 1, 'FieldMSB': 1, 'FieldLSB': 1, 'Attribute': 'R0000NNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]} setting
 '''
