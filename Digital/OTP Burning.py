@@ -9,7 +9,7 @@ print(f'............ {Test_Name} ........')
 Procedure 
     1. Startup (it includes enable of test page)
     2. Global_en to turn on the island
-    3. Set VDDIO to 1.6V
+    3. Force VDDIO to 1.6V
     4. I2C writings of OTP shadow registers
     5. {'fieldname': 'otp_burn', 'length': 1, 'registers': [{'REG': '0xAE', 'POS': 1, 'RegisterName': 'OTP control reg 1', 'RegisterLength': 8, 'Name': 'otp_burn', 'Mask': '0x2', 'Length': 1, 'FieldMSB': 1, 'FieldLSB': 1, 'Attribute': 'R0000NNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]} setting
 '''
