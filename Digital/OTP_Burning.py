@@ -1,7 +1,7 @@
 from dfttools import *
 from time import sleep
 
-Test_Name = 'OTP Burning'
+Test_Name = 'OTP_Burning'
 from Procedures import Startup
 print(f'............ {Test_Name} ........')
 # designers must go through the details and correct the procedure
