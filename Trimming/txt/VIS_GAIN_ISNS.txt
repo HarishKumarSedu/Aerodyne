@@ -1,4 +1,4 @@
-# Processed on 2025-08-05 16:29:12
+# Processed on 2025-08-05 16:29:56
 from dfttools import *
 Testname = 'VIS_GAIN_ISNS'
 print(f' {Testname}')
@@ -22,14 +22,14 @@ print(f' ........ Source 500mA from SPKRP/SPKRM ........ ')
 source_current = 500e-3
 from Procedures import CLASSD_OUT_CURR_TRIM
 sleep(0.001)
-AFORCE(signal="OUTP",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
-AFORCE(signal="OUTN",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
+AFORCE(signal="OUTP",reference="OUTN",value=source_current, error_spread=source_current*0.01) # 1% error
+# AFORCE(signal="OUTN",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
 sleep(0.001)
 isns_gain_source_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
 print(f' ........ Sink 500mA to SPKRP/SPKRM ........ ')
-AFORCE(signal="OUTP",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
-AFORCE(signal="OUTN",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
+AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) # 1% error
+# AFORCE(signal="OUTN",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
 sleep(0.001)
 isns_gain_sink_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
