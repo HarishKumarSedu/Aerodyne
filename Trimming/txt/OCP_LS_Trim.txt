@@ -1,4 +1,4 @@
-# Processed on 2025-08-05 16:33:54
+# Processed on 2025-08-05 16:35:23
 from dfttools import *
 from time import sleep
 import random
@@ -71,6 +71,6 @@ else:
           
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB6, data=code, Mask=0xF, Default=0x88
 
-AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
+AFORCE(signal="OUTP", reference="GND", value=float('inf'), error_spread=0.05)  # stop forcing
 
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 
