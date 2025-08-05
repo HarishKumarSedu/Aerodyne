@@ -46,7 +46,8 @@ sleep(0.0001)  # 100 µs
 i_force = 3/4
 max_step = 15
 th = 1.8/2
-AFORCE(signal="OUTP", reference="PGND", value=i_force, error_spread=0.01)  # 500mA ±5%
+# @ATE, "GND" in the following instruction is "PGND"
+AFORCE(signal="OUTP", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
 sleep(0.00005) #50us
 # mid_up = 0 #debug
 mid_up = VMEASURE(signal="IODATA1", reference="GND", expected_value=0.9, error_spread=0.5)
