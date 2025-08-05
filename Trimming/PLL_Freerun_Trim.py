@@ -42,7 +42,8 @@ for i in range(num_steps):
         min_error = error
         optimal_code = hex(i)
         optimal_measured_value = measured_value
-    
+      
+    time.sleep(0.3)
     
 # Check for limits
 if lower_limit < optimal_measured_value < higher_limit:
