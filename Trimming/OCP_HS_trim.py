@@ -44,7 +44,8 @@ sleep(0.0001)  # 100 µs
 i_force = - 3/4
 max_step = 15
 th = 1.8/2
-AFORCE(signal="OUTP", reference="PGND", value=i_force, error_spread=0.01)  # 500mA ±5%
+# @ATE "GND" = > "PGND"
+AFORCE(signal="OUTP", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
 sleep(0.00005) #50us
 # mid_up = 0 #debug
 mid_up = VMEASURE(signal="IODATA1", reference="GND", expected_value=0.9, error_spread=0.5)
@@ -57,8 +58,8 @@ else:
         # 3. breve attesa per stabilizzare il circuito
         sleep(50e-6)  # 50 µs
 
-        # 4. leggiamo di nuovo l’uscita del comparatore
-        mid_up = VMEASURE(signal="IOCLK1", reference="PGND",expected_value=0.9, error_spread=0.5)
+        # 4. leggiamo di nuovo l’uscita del comparatore # @ATE "GND" = > "PGND"
+        mid_up = VMEASURE(signal="IOCLK1", reference="GND",expected_value=0.9, error_spread=0.5)
 
         # 5. se abbiamo superato la soglia, abbiamo finito
         if mid_up > th:
@@ -66,7 +67,7 @@ else:
             break
           
         I2C_WRITE(device_address="0x38", field_info={'fieldname': 'otp_ds_dvr_ocp_ref_hs_trim', 'length': 4, 'registers': [{'REG': '0xB6', 'POS': 4, 'RegisterName': 'OTP FIELDS 6', 'RegisterLength': 8, 'Name': 'otp_ds_dvr_ocp_ref_hs_trim[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x88', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=code)
-
-AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
+# @ATE "GND" = > "PGND"
+AFORCE(signal="OUTP", reference="GND", value=float('inf'), error_spread=0.05)  # stop forcing
 
 I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_dvr_force_sel', 'length': 8, 'registers': [{'REG': '0x9C', 'POS': 0, 'RegisterName': 'CLD analog setting reg 6', 'RegisterLength': 8, 'Name': 'cld_dvr_force_sel[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x0) 
