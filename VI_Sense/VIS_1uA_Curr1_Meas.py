@@ -29,7 +29,7 @@ I2C_WRITE("0x38", field_info={'fieldname': 'test_sel', 'length': 4, 'registers':
 # Step 4: Current Measurement
 expected_curr = 1.0e-6    # 1.0 uA target
 curr_error = 0.1e-6       # ±0.1 uA tolerance
-imeas = AMEASURE(signal='"ADDR"', reference='"GND"', expected_value=expected_curr, error_spread=curr_error)
+imeas = AMEASURE(signal="ADDR", reference="GND", expected_value=expected_curr, error_spread=curr_error)
 print(f'Measured Current: {imeas*1e6:.3f} uA [Target: {expected_curr*1e6:.1f}uA ±{curr_error*1e6:.1f}uA]')
 # Pass/Fail Criteria
 if abs(imeas - expected_curr) <= curr_error:
