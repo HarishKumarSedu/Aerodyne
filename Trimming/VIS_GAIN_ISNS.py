@@ -21,13 +21,13 @@ print(f' ........ Source 500mA from SPKRP/SPKRM ........ ')
 source_current = 500e-3
 from Procedures import CLASSD_OUT_CURR_TRIM
 sleep(0.001)
-AFORCE(signal="OUTP",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
-AFORCE(signal="OUTN",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
+AFORCE(signal="OUTP",reference="OUTN",value=source_current, error_spread=source_current*0.01) # 1% error
+# AFORCE(signal="OUTN",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
 sleep(0.001)
 isns_gain_source_measured = I2C_READ("0x38", field_info={'fieldname': 'i_sense', 'length': 16, 'registers': [{'REG': '0x6B', 'POS': 0, 'RegisterName': 'I SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'i_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6C', 'POS': 0, 'RegisterName': 'I SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'i_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]}, expected_value=0xFE)
 print(f' ........ Sink 500mA to SPKRP/SPKRM ........ ')
-AFORCE(signal="OUTP",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
-AFORCE(signal="OUTN",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
+AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) # 1% error
+# AFORCE(signal="OUTN",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
 sleep(0.001)
 isns_gain_sink_measured = I2C_READ("0x38", field_info={'fieldname': 'i_sense', 'length': 16, 'registers': [{'REG': '0x6B', 'POS': 0, 'RegisterName': 'I SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'i_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6C', 'POS': 0, 'RegisterName': 'I SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'i_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]}, expected_value=0x01)
 isns_gain_calculated = 2*0.5/(int(isns_gain_source_measured)-int(isns_gain_sink_measured))
