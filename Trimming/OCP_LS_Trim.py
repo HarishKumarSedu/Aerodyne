@@ -61,7 +61,7 @@ else:
         sleep(50e-6)  # 50 µs
 
         # 4. leggiamo di nuovo l’uscita del comparatore
-        mid_up = VMEASURE(signal="IOCLK1", reference="PGND",expected_value=0.9, error_spread=0.5)
+        mid_up = VMEASURE(signal="IOCLK1", reference="GND",expected_value=0.9, error_spread=0.5)
 
         # 5. se abbiamo superato la soglia, abbiamo finito
         if mid_up > th:
