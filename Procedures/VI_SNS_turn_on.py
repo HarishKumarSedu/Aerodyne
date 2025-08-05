@@ -3,6 +3,7 @@ print(f'............ {Test_Name} ........')
 from dfttools import *
 from time import sleep
 from Procedures import Global_enable
+
 # setting 3.072MHz clock from PLL
 BLCK_Set_1 = 3.072e6                          # 3.072MHz
 I2C_WRITE(device_address="0x38",field_info={'fieldname': 'pll_mode', 'length': 2, 'registers': [{'REG': '0x84', 'POS': 6, 'RegisterName': 'PLL_REG_5', 'RegisterLength': 8, 'Name': 'pll_mode[1:0]', 'Mask': '0xC0', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x17', 'User': '000YYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=hex(2))      #dig_pll_freerun_en_vddd=0
