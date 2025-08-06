@@ -1,4 +1,4 @@
-# Processed on 2025-08-05 15:30:26
+# Processed on 2025-08-06 09:49:55
 from dfttools import *
 from time import sleep
 
@@ -22,10 +22,8 @@ Procedure
 
 # Enable clock for otp fsm
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x2, Mask=0x2, Default=0x0
-
 #################### I2C writings of OTP shadow registers #####################
 
 #################### I2C writings of OTP shadow registers #####################
-
 # Start of burn
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xAE, data=0x2, Mask=0x2, Default=0x0
