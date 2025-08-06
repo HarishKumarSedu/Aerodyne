@@ -1,4 +1,4 @@
-# Processed on 2025-07-15 14:31:20
+# Processed on 2025-08-06 11:50:59
 from time import sleep
 import os 
 import sys
@@ -11,7 +11,6 @@ import sys
 Test_Name = 'Startup'
 print(f'............ {Test_Name} ........')
 from dfttools import *
-
 VFORCE(signal="VDD",reference="GND",value=1.8)
 VFORCE(signal="RESETB",reference="GND",value=1.8)
 VFORCE(signal="PVDD",reference="GND",value=3.7)
