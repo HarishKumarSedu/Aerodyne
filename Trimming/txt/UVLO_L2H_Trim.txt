@@ -1,4 +1,4 @@
-# Processed on 2025-07-28 17:16:25
+# Processed on 2025-08-06 10:05:36
 from dfttools import *
 from time import sleep
 import random
@@ -12,6 +12,7 @@ print(f'............ {Test_Name} ........')
 1.Turn ON the part in active mode, temp=27°C, vddp=3.7V, vdd=1.8V, vddd=1.2V, enable ref_analdo, enable ref_pvdd_uvlo,
 {'fieldname': 'otp_ds_ref_pvdd_uvlo_trm', 'length': 5, 'registers': [{'REG': '0xB3', 'POS': 0, 'RegisterName': 'OTP FIELDS 3', 'RegisterLength': 8, 'Name': 'otp_ds_ref_pvdd_uvlo_trm[4:0]', 'Mask': '0x1F', 'Length': 5, 'FieldMSB': 4, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x60', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}<4:0> = 0d;
 2.Wait 50us;
+
 3.Bring out to the analog test point (rfu_ds_ref_test_en_vddd=1d) the UVLO reference voltage;
 4.Sweep vddp from 0V to 3.7V and observe the ana_ds_pvdd_uvlo signal at the digital MUX; ana_ds_pvdd_uvlo goes from "VDD" to 0V when a certain value of vddp is reached: 
 target value is 2.25V; this leads to a reference voltage is 0.4V for the UVLO;
