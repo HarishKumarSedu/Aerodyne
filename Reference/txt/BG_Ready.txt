@@ -1,0 +1,28 @@
+# Processed on 2025-08-06 12:11:20
+from dfttools import *
+from time import sleep
+import random
+from Procedures import Startup
+from Procedures import Global_enable
+
+Test_Name = 'BG Ready'
+print(f'............ {Test_Name} ........')
+
+'''
+Enable the bandgap, bring BG ready signal to pin "IOCLK1" 
+through digital test mux and verify its logic value is correct
+'''
+
+# Enabling test page
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+#Enabling digital TMUX
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x21, Mask=0x7F, Default=0x0
+
+target_value = 1.2 # 1.2V
+error_spread = target_value*0.04 # 4% of target value
+measured_value = VMEASURE(signal="IOCLK1", reference="GND", expected_value=target_value,error_spread=error_spread)
+error = abs(measured_value - target_value)/abs(target_value) *100
+print(f"Optimal measured value : {measured_value}V, Target value : {target_value}V")
+print(f"Minimum Error: {error}%")
+
