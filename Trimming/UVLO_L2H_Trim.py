@@ -2,7 +2,7 @@ from dfttools import *
 from time import sleep
 import random
 from Procedures import Startup
-
+from Procedures import Global_enable
 
 Test_Name = 'UVLO_L2H_Trim_0v4'
 print(f'............ {Test_Name} ........')
