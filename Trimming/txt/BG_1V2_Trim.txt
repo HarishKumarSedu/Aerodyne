@@ -1,4 +1,4 @@
-# Processed on 2025-08-05 11:41:39
+# Processed on 2025-08-07 10:55:17
 from dfttools import *
 from time import sleep
 import random
@@ -53,7 +53,7 @@ for i in range(num_steps):
         min_error = error
         optimal_code = hex(i)
         optimal_measured_value = measured_value
-    sleep(0.1) # 1ms
+    sleep(1) # 1ms
 # Check for limits
 if low_value < optimal_measured_value < high_value:
     print(f'............ {Test_Name} Passed ........')
