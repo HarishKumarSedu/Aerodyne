@@ -51,7 +51,7 @@ for i in range(num_steps):
         min_error = error
         optimal_code = hex(i)
         optimal_measured_value = measured_value
-    sleep(0.1) # 1ms
+    sleep(1) # 1ms
 # Check for limits
 if low_value < optimal_measured_value < high_value:
     print(f'............ {Test_Name} Passed ........')
