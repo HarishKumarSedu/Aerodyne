@@ -1,7 +1,7 @@
 Test_Name = 'Global_enable'
 print(f'............ {Test_Name} ........')
 from dfttools import *
-
+I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1)
 I2C_WRITE(device_address="0x38", field_info={'fieldname': 'global_en', 'length': 1, 'registers': [{'REG': '0x0F', 'POS': 0, 'RegisterName': 'GLOBAL_EN_REG', 'RegisterLength': 8, 'Name': 'global_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '0000000Y', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x1)
 I2C_WRITE(device_address="0x38", field_info={'fieldname': 'force_otp_clk_on', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 1, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'force_otp_clk_on', 'Mask': '0x2', 'Length': 1, 'FieldMSB': 1, 'FieldLSB': 1, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1)
 I2C_WRITE(device_address="0x38", field_info={'fieldname': 'otp_burnt', 'length': 1, 'registers': [{'REG': '0xCF', 'POS': 7, 'RegisterName': 'OTP FIELDS 31', 'RegisterLength': 8, 'Name': 'otp_burnt', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'NNNNNNNN', 'Default': '0x02', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1)
