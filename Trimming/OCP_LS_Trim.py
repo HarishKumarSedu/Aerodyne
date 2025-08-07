@@ -3,7 +3,8 @@ from time import sleep
 import random
 
 Test_Name = 'OCP_LS_TRIM'
-from Procedures import speakerOff
+from Procedures import Startup
+from Procedures import Global_enable
 
 print(f'............ {Test_Name} ........')
 
