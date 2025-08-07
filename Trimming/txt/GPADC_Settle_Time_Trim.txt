@@ -1,9 +1,10 @@
-# Processed on 2025-07-09 11:53:45
+# Processed on 2025-08-07 12:31:09
 from dfttools import *
 from time import sleep
 
 Test_Name = 'GPADC_Settle_Time_Trim'
 from Procedures import Startup
+from Procedures import Global_enable
 print(f'............ {Test_Name} ........')
 # designers must go through the details and correct the procedure
 '''
@@ -17,7 +18,8 @@ Procedure
     6.Decrease the bus value ds_gpadc_del_comp_vddd<3:0> till the frequency measured is > of 9.09MHz.  
     7.Store the ds_gpadc_del_comp_vddd<3:0> -1  in the OTP register 
 '''
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
+# Enabling test page
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
 sleep(0.001)
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x10, Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x10, Mask=0x3F, Default=0x0
