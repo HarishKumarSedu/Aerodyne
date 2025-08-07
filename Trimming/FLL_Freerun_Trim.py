@@ -4,6 +4,7 @@ import random
 
 Test_Name = 'FLL_Freerun_Trim'
 from Procedures import Startup
+from Procedures import Global_enable
 from Procedures import Playback
 print(f'............ {Test_Name} ........')
 
@@ -60,7 +61,7 @@ for i in range(num_steps):
         min_error = error
         optimal_code = hex(i)
         optimal_measured_value = measured_value
-    sleep(0.05)
+    sleep(0.1)
 # Check for limits
 if lower_limit < optimal_measured_value < higher_limit:
     print(f'............ {Test_Name} Passed ........')
