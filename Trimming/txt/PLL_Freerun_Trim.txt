@@ -1,4 +1,4 @@
-# Processed on 2025-08-07 11:47:35
+# Processed on 2025-08-07 11:55:22
 from dfttools import *
 import time
 import random
@@ -11,7 +11,7 @@ print(f'............ {Test_Name} ........')
 target_value = 12.288e6          # 12.288MHz
 lower_limit = 11.288e6 
 higher_limit = 13.288e6 
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1  #Change page in regmap
+[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 1  #Change page in regmap
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0xC0, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=1
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x81, data=0x6, Mask=0x3F, Default=0x6         #dig_pll_prediv_vddd<5:0>=6d 
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x82, data=0x12, Mask=0x3F, Default=0x18        #dig_pll_n<5:0>=24d 
