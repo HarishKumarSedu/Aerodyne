@@ -1,4 +1,4 @@
-# Processed on 2025-08-08 14:25:23
+# Processed on 2025-08-08 14:31:38
 from dfttools import *
 from time import sleep
 import random
@@ -20,11 +20,14 @@ target value is 2.25V; this leads to a reference voltage is 0.4V for the UVLO;
 6.Burn the OTP with the value of {'fieldname': 'otp_ds_ref_pvdd_uvlo_trm', 'length': 5, 'registers': [{'REG': '0xB3', 'POS': 0, 'RegisterName': 'OTP FIELDS 3', 'RegisterLength': 8, 'Name': 'otp_ds_ref_pvdd_uvlo_trm[4:0]', 'Mask': '0x1F', 'Length': 5, 'FieldMSB': 4, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x60', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}<4:0> found in step 4.
 '''
 #Enabling test page
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+# [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
 #Enabling "PVDD" UVLO
 # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1C, data=0x10, Mask=0x10, Default=0x0
 # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x10, Mask=0x10, Default=0x0
+[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x08, data=0x4, Mask=0x4, Default=0x0
 
+[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
 #Enabling digital TMUX
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x1, Mask=0x7F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x21, Mask=0x7F, Default=0x0
