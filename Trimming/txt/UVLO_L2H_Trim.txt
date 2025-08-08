@@ -1,4 +1,4 @@
-# Processed on 2025-08-07 10:20:38
+# Processed on 2025-08-08 11:18:15
 from dfttools import *
 from time import sleep
 import random
@@ -37,7 +37,7 @@ optimal_measured_value = None
 force_voltage_low_limit = 0  # minimum voltage limit
 force_voltage_high_limit = 3  # maximum voltage limit
 
-for Code in range(2^code_width):
+for Code in range(2**code_width):
     # TODO: Write trimming code to device via I2C
     # Example (uncomment and fill device_address and field_info):
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB3, data=hex(Code), Mask=0x1F, Default=0x60
