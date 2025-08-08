@@ -21,7 +21,7 @@ target value is 2.25V; this leads to a reference voltage is 0.4V for the UVLO;
 #Enabling test page
 I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1) # page 1
 #Enabling "PVDD" UVLO
-# I2C_WRITE(device_address="0x38", field_info={'fieldname': 'ref_force', 'length': 1, 'registers': [{'REG': '0x1C', 'POS': 4, 'RegisterName': 'FORCE_REGISTERS_5', 'RegisterLength': 8, 'Name': 'ref_force', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': '000NNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1)
+I2C_WRITE(device_address="0x38", field_info={'fieldname': 'ref_force', 'length': 1, 'registers': [{'REG': '0x1C', 'POS': 4, 'RegisterName': 'FORCE_REGISTERS_5', 'RegisterLength': 8, 'Name': 'ref_force', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': '000NNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1)
 I2C_WRITE(device_address="0x38", field_info={'fieldname': 'pvdd_uvlo_en_m', 'length': 1, 'registers': [{'REG': '0x1D', 'POS': 4, 'RegisterName': 'FORCE_REGISTERS_6', 'RegisterLength': 8, 'Name': 'pvdd_uvlo_en_m', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': 'N0NNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1)
 
 #Enabling digital TMUX
