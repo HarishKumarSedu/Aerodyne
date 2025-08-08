@@ -47,7 +47,7 @@ for Code in range(2**code_width):
         # Add noise simulation
         pvdd_forced_voltage = VFORCE(signal="PVDD", reference="GND", value=force_voltage,error_spread=error_spread)
         # Check trigger condition
-        trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=LH_Th, expected_value=pvdd_forced_voltage)
+        trigger = VTRIG_HL(signal="IODATA0", reference="GND", threshold=LH_Th, expected_value=pvdd_forced_voltage)
 
         if trigger:
             break
