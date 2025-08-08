@@ -36,7 +36,7 @@ optimal_measured_value = None
 force_voltage_low_limit = 0  # minimum voltage limit
 force_voltage_high_limit = 3  # maximum voltage limit
 
-for Code in range(2^code_width):
+for Code in range(2**code_width):
     # TODO: Write trimming code to device via I2C
     # Example (uncomment and fill device_address and field_info):
     I2C_WRITE(device_address="0x38", field_info={'fieldname': 'otp_ds_ref_pvdd_uvlo_trm', 'length': 5, 'registers': [{'REG': '0xB3', 'POS': 0, 'RegisterName': 'OTP FIELDS 3', 'RegisterLength': 8, 'Name': 'otp_ds_ref_pvdd_uvlo_trm[4:0]', 'Mask': '0x1F', 'Length': 5, 'FieldMSB': 4, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x60', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=hex(Code))
