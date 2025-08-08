@@ -33,7 +33,9 @@ optimal_measured_value = None
 num_steps = 2**{'fieldname': 'pll_vco_ctrl', 'length': 2, 'registers': [{'REG': '0xCF', 'POS': 0, 'RegisterName': 'OTP FIELDS 31', 'RegisterLength': 8, 'Name': 'pll_vco_ctrl[1:0]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x02', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get('length')         # trimming field is 2 bit
 
 for i in range(num_steps):
+  
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'pll_vco_ctrl', 'length': 2, 'registers': [{'REG': '0xCF', 'POS': 0, 'RegisterName': 'OTP FIELDS 31', 'RegisterLength': 8, 'Name': 'pll_vco_ctrl[1:0]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x02', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=i) # sweep trim code
+    I2C_WRITE(device_address="0x38",field_info={'fieldname': 'signature1', 'length': 8, 'registers': [{'REG': '0xD1', 'POS': 0, 'RegisterName': 'OTP FIELDS 33', 'RegisterLength': 8, 'Name': 'signature1[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=i) # sweep trim code
     # time.sleep(0.0001)                                                                   # wait 100us
     measured_value = FREQMEASURE(signal="IODATA1", reference="GND",expected_value=target_value,error_spread=target_value*0.1)                     # Measure Frequency at "IODATA1"
     error = abs(measured_value - target_value)/target_value                                      # Calculate the distance from the target 12.288MHz
