@@ -1,4 +1,4 @@
-# Processed on 2025-08-07 11:55:22
+# Processed on 2025-08-08 11:01:01
 from dfttools import *
 import time
 import random
@@ -34,7 +34,9 @@ optimal_measured_value = None
 num_steps = 2**{'fieldname': 'pll_vco_ctrl', 'length': 2, 'registers': [{'REG': '0xCF', 'POS': 0, 'RegisterName': 'OTP FIELDS 31', 'RegisterLength': 8, 'Name': 'pll_vco_ctrl[1:0]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x02', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get('length')         # trimming field is 2 bit
 
 for i in range(num_steps):
+  
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCF, data=i, Mask=0x3, Default=0x2 # sweep trim code
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xD1, data=i, Mask=0xFF, Default=0x0 # sweep trim code
     # time.sleep(0.0001)                                                                   # wait 100us
     measured_value = FREQMEASURE(signal="IODATA1", reference="GND",expected_value=target_value,error_spread=target_value*0.1)                     # Measure Frequency at "IODATA1"
     error = abs(measured_value - target_value)/target_value                                      # Calculate the distance from the target 12.288MHz
