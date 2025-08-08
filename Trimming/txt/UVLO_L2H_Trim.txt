@@ -1,4 +1,4 @@
-# Processed on 2025-08-08 15:02:34
+# Processed on 2025-08-08 15:11:15
 from dfttools import *
 from time import sleep
 import random
@@ -27,7 +27,7 @@ target value is 2.25V; this leads to a reference voltage is 0.4V for the UVLO;
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x22, data=0x4, Mask=0x7F, Default=0x0
 
 #Enabling digital TMUX
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x1, Mask=0x7F, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x21, Mask=0x7F, Default=0x0
 
 LH_Th = 2.25  # 2.25V threshold
