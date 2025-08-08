@@ -1,4 +1,4 @@
-# Processed on 2025-08-08 16:56:38
+# Processed on 2025-08-08 17:42:32
 from dfttools import *
 from time import sleep
 import random
@@ -14,7 +14,7 @@ print(f'............ {Test_Name} ........')
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x80, Mask=0x80, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x2, Mask=0xF, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x40, Mask=0x40, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
 
 target_value = 0.461 # 0.461V
 error_spread = target_value*0.05 # 5% of target value
