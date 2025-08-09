@@ -1,4 +1,4 @@
-# Processed on 2025-08-08 11:01:01
+# Processed on 2025-08-09 16:07:18
 from dfttools import *
 import time
 import random
@@ -54,10 +54,12 @@ if lower_limit < optimal_measured_value < higher_limit:
     print(f'............ {Test_Name} Passed ........')
     # write the optimized code if the trim passed
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCF, data=optimal_code, Mask=0x3, Default=0x2
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xD1, data=optimal_code, Mask=0xFF, Default=0x0 # sweep trim code
 else:
     print(f'............ {Test_Name} Failed ........')
     # if the trimh failed program detult zero
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCF, data=0x0, Mask=0x3, Default=0x2
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xD1, data=optimal_code, Mask=0xFF, Default=0x0 # sweep trim code
 print(f"Optimal Code: {optimal_code}")
 print(f"Optimal measured value : {optimal_measured_value/1e6}MHz, Target vlaue : {target_value/1e6}MHz")
 print(f"Minimum Error: {min_error}%")
