@@ -29,6 +29,7 @@ ana_dd_fllvco_classdck1_vddd and measure the clock frequency'''
 I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1) # page 1
 I2C_WRITE(device_address="0x38",field_info=	{'fieldname': 'dig_test_en', 'length': 7, 'registers': [{'REG': '0x03', 'POS': 0, 'RegisterName': 'DIGITAL_TEST_SETTINGS_1', 'RegisterLength': 8, 'Name': 'dig_test_en[6:0]', 'Mask': '0x7F', 'Length': 7, 'FieldMSB': 6, 'FieldLSB': 0, 'Attribute': '0NNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x10) #enable "ADDR"
 I2C_WRITE(device_address="0x38",field_info=	{'fieldname': 'dig_test_sel', 'length': 7, 'registers': [{'REG': '0x04', 'POS': 0, 'RegisterName': 'DIGITAL_TEST_SETTINGS_2', 'RegisterLength': 8, 'Name': 'dig_test_sel[6:0]', 'Mask': '0x7F', 'Length': 7, 'FieldMSB': 6, 'FieldLSB': 0, 'Attribute': '0NNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0) #select the test for ana_dd_fllvco_classdck1
+I2C_WRITE(device_address="0x38",field_info=	{'fieldname': 'signature1', 'length': 8, 'registers': [{'REG': '0xD1', 'POS': 0, 'RegisterName': 'OTP FIELDS 33', 'RegisterLength': 8, 'Name': 'signature1[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
 # Bring out the singla through "ADDR"/ write test mux
 
 
@@ -51,6 +52,7 @@ num_steps = 2**6 # trimming field is 6 bit
 for i in range(num_steps):
     # sweep trimg code
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_fll_vco_trm_5l', 'length': 6, 'registers': [{'REG': '0xB7', 'POS': 0, 'RegisterName': 'OTP FIELDS 7', 'RegisterLength': 8, 'Name': 'otp_ds_fll_vco_trm_5l[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x22', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=hex(i))
+    I2C_WRITE(device_address="0x38",field_info=	{'fieldname': 'signature1', 'length': 8, 'registers': [{'REG': '0xD1', 'POS': 0, 'RegisterName': 'OTP FIELDS 33', 'RegisterLength': 8, 'Name': 'signature1[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=i)
     # Generate monotonic values with step size
     expected_value = lower_limit + i * step_size 
     # Add white noise to the expected value
