@@ -1,4 +1,4 @@
-# Processed on 2025-08-10 13:24:40
+# Processed on 2025-08-11 09:58:28
 from time import sleep
 import os 
 import sys
@@ -24,3 +24,4 @@ sleep(0.2)
 [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0x2F, data=0xBB, Mask=0xFF
 # Switch to page 0
 [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF
+
