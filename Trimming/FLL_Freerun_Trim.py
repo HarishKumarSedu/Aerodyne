@@ -17,6 +17,7 @@ rfu_ds_cld_fll_vco_amp_vddd<2:0>=4d
 dig_ds_cld_fll_fd_fset_vddd<8:0>=170d
 '''
 I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1) # page 1
+I2C_WRITE(device_address="0x38",field_info=	{'fieldname': 'cld_fll_en_m', 'length': 1, 'registers': [{'REG': '0x18', 'POS': 4, 'RegisterName': 'Force registers 1', 'RegisterLength': 8, 'Name': 'cld_fll_en_m', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': '00NNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
 I2C_WRITE(device_address="0x38",field_info=	{'fieldname': 'cld_fll_force', 'length': 1, 'registers': [{'REG': '0x18', 'POS': 2, 'RegisterName': 'Force registers 1', 'RegisterLength': 8, 'Name': 'cld_fll_force', 'Mask': '0x4', 'Length': 1, 'FieldMSB': 2, 'FieldLSB': 2, 'Attribute': '00NNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
 I2C_WRITE(device_address="0x38",field_info={'fieldname': 'cld_fll_freerun_dis_m', 'length': 1, 'registers': [{'REG': '0x18', 'POS': 5, 'RegisterName': 'Force registers 1', 'RegisterLength': 8, 'Name': 'cld_fll_freerun_dis_m', 'Mask': '0x20', 'Length': 1, 'FieldMSB': 5, 'FieldLSB': 5, 'Attribute': '00NNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
 I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x00,PageNo=0) # page 0
