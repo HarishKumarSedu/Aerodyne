@@ -1,4 +1,4 @@
-# Processed on 2025-08-09 17:17:47
+# Processed on 2025-08-11 13:08:09
 from dfttools import *
 from time import sleep
 import random
@@ -30,7 +30,6 @@ ana_dd_fllvco_classdck1_vddd and measure the clock frequency'''
 [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x10, Mask=0x7F, Default=0x0 #enable "ADDR"
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 #select the test for ana_dd_fllvco_classdck1
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xD1, data=0x0, Mask=0xFF, Default=0x0
 # Bring out the singla through "ADDR"/ write test mux
 
 
