@@ -23,6 +23,7 @@ def offset():
   measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=force_value, error_spread=error_spread)
   buffer_offset = abs(measured_value - forced_voltage)
   print(f"Measured buffer offset : {buffer_offset}V")
+  forced_voltage=VFORCE(signal="ADDR", reference="GND", value=float('Inf'), error_spread=error_spread)
   return buffer_offset
 
 print(offset())
