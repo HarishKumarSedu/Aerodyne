@@ -6,8 +6,10 @@ def selfreg_LDO_0v6():
 
 
     Test_Name = 'Selfreg_LDO_0v6_Trim'
-    from Procedures import Startup
-    from Procedures import Global_enable
+    from Procedures.Startup import startup
+    from Procedures.Global_enable import global_enable
+    startup()
+    global_enable()
     from Trimming.REF_BUF_OFF import offset
     print(f'............ {Test_Name} ........')
 
