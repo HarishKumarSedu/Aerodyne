@@ -1,11 +1,12 @@
 from dfttools import *
 from time import sleep
 import random
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
 
 def uvlo_l2h():
-    from Procedures import Startup
-    from Procedures import Global_enable
-
+    startup()
+    global_enable()
     Test_Name = 'UVLO_L2H_Trim_0v4'
     print(f'............ {Test_Name} ........')
 
