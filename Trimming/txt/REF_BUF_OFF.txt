@@ -1,4 +1,4 @@
-# Processed on 2025-08-12 14:25:22
+# Processed on 2025-08-12 17:17:36
 from dfttools import *
 from time import sleep
 import random
@@ -26,5 +26,5 @@ def offset():
   print(f"Measured buffer offset : {buffer_offset}V")
   forced_voltage=VFORCE(signal="ADDR", reference="GND", value=float('Inf'), error_spread=error_spread)
   return buffer_offset
-
-print(offset())
+if __name__ == '__main__':
+  print(offset())
