@@ -7,10 +7,10 @@ def bg_1v2():
     Test_Name = 'BG_1V2_Trim'
     from Procedures.Startup import startup
     from Procedures.Global_enable import global_enable
-    startup()
-    global_enable()
     from Trimming.REF_BUF_OFF import offset 
     print(f'............ {Test_Name} ........')
+    startup()
+    global_enable()
 
     # Enabling test page
     I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1) # page 1
