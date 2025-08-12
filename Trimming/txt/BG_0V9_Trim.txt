@@ -1,4 +1,4 @@
-# Processed on 2025-08-12 17:30:57
+# Processed on 2025-08-12 17:32:23
 from dfttools import *
 from time import sleep
 import random
@@ -69,7 +69,7 @@ def bg_0v9():
     print(f"Optimal Code: {optimal_code}")
     print(f"Optimal measured value : {optimal_measured_value}V, Target value : {typical_value}V")
     print(f"Minimum Error: {min_error}%")
-    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
     return optimal_code,optimal_measured_value,min_error
 
