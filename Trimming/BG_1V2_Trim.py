@@ -2,10 +2,13 @@ from dfttools import *
 from time import sleep
 import random
 
+
 def bg_1v2():
     Test_Name = 'BG_1V2_Trim'
-    from Procedures import Startup
-    from Procedures import Global_enable
+    from Procedures.Startup import startup
+    from Procedures.Global_enable import global_enable
+    startup()
+    global_enable()
     from Trimming.REF_BUF_OFF import offset 
     print(f'............ {Test_Name} ........')
 
