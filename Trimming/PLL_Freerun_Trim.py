@@ -5,8 +5,10 @@ import random
 def pll_freerun():
 
     Test_Name = 'PLL_Freerun_Trim'
-    from Procedures import Startup
-    from Procedures import Global_enable
+    from Procedures.Startup import startup
+    from Procedures.Global_enable import global_enable
+    startup()
+    global_enable()
     print(f'............ {Test_Name} ........')
 
     target_value = 12.288e6          # 12.288MHz
