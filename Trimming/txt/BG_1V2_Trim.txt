@@ -1,4 +1,4 @@
-# Processed on 2025-08-12 17:09:13
+# Processed on 2025-08-12 17:30:31
 from dfttools import *
 from time import sleep
 import random
@@ -68,6 +68,8 @@ def bg_1v2():
         print(f'............ {Test_Name} Failed ........')
         # if the trimh failed program default zero
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB1, data=0x0, Mask=0xF, Default=0x80
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x40, Mask=0x40, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
     print(f"Optimal Code: {optimal_code}")
     print(f"Optimal measured value : {optimal_measured_value}V, Target value : {typical_value}V")
 
