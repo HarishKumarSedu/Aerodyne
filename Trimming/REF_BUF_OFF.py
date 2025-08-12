@@ -25,5 +25,5 @@ def offset():
   print(f"Measured buffer offset : {buffer_offset}V")
   forced_voltage=VFORCE(signal="ADDR", reference="GND", value=float('Inf'), error_spread=error_spread)
   return buffer_offset
-
-print(offset())
+if __name__ == '__main__':
+  print(offset())
