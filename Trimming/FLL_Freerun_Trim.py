@@ -5,9 +5,12 @@ import random
 def fll_freerun():
 
     Test_Name = 'FLL_Freerun_Trim'
-    from Procedures import Startup
-    from Procedures import Global_enable
-    from Procedures import Playback
+    from Procedures.Startup import startup
+    from Procedures.Global_enable import global_enable
+    from Procedures.Playback import playback
+    startup()
+    global_enable()
+    playback()
     print(f'............ {Test_Name} ........')
 
     '''
