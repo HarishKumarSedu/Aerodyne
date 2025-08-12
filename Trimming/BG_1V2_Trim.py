@@ -5,6 +5,7 @@ import random
 Test_Name = 'BG_1V2_Trim'
 from Procedures import Startup
 from Procedures import Global_enable
+from Trimming.REF_BUF_OFF import offset 
 print(f'............ {Test_Name} ........')
 
 # Enabling test page
@@ -25,7 +26,7 @@ typical_value = 1.2
 low_value = typical_value - typical_value*percentage
 high_value = typical_value + typical_value*percentage
 
-buffer_offset = 10e-3 # 10mV
+buffer_offset = offset() # 10mV
 # Step size (LSB size)
 step_size = 7.57e-3 # 7.57mV
 
