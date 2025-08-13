@@ -6,10 +6,8 @@ def selfreg_LDO_0v6():
 
 
     Test_Name = 'Selfreg_LDO_0v6_Trim'
-    from Procedures.Startup import startup
-    from Procedures.Global_enable import global_enable
-    startup()
-    global_enable()
+    from Procedures import Startup
+    from Procedures import Global_enable
     from Trimming.REF_BUF_OFF import offset
     print(f'............ {Test_Name} ........')
 
@@ -66,6 +64,8 @@ def selfreg_LDO_0v6():
         print(f'............ {Test_Name} Failed ........')
         # if the trimh failed program detult zero
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_ref_self_ref_trm_0v4', 'length': 4, 'registers': [{'REG': '0xCD', 'POS': 0, 'RegisterName': 'OTP FIELDS 29', 'RegisterLength': 8, 'Name': 'otp_ds_ref_self_ref_trm_0v4[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0)
+    I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 7, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'ref_test_en', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
+    I2C_WRITE(device_address="0x38",field_info={'fieldname': 'atp_p_en', 'length': 1, 'registers': [{'REG': '0x17', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_EN2', 'RegisterLength': 8, 'Name': 'atp_p_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000NNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
     print(f"Optimal Code: {optimal_code}")
     print(f"Optimal measured value : {optimal_measured_value}V, Target value : {typical_value}V")
     print(f"Minimum Error: {min_error}%")
