@@ -1,4 +1,4 @@
-# Processed on 2025-08-12 16:19:19
+# Processed on 2025-08-14 15:44:37
 from dfttools import *
 from time import sleep
 import random
@@ -24,6 +24,10 @@ def uvlo_l2h():
     '''
     #Enabling test page
     [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x0, Mask=0x80, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x20, Mask=0x20, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x10, Mask=0x10, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1C, data=0x10, Mask=0x10, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x22, data=0x4, Mask=0x7F, Default=0x0
 
     #Enabling digital TMUX
@@ -78,7 +82,11 @@ def uvlo_l2h():
     else:
         print(f'............ UVLO_Trim Test Failed ........')
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB3, data=0x0, Mask=0x1F, Default=0x60
-
+    [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x80, Mask=0x80, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x20, Mask=0x20, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x10, Mask=0x10, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1C, data=0x0, Mask=0x10, Default=0x0
     print(f"Optimal Code: {optimal_code}")
     print(f"Optimal Measured Value: {optimal_measured_value:.4f} V (Target: {LH_Th} V)")
     print(f"Minimum Error: {min_error:.6f} %")
