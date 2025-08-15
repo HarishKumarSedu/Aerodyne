@@ -1,4 +1,4 @@
-# Processed on 2025-08-13 10:40:21
+# Processed on 2025-08-15 14:10:19
 from dfttools import *
 from time import sleep
 import random
@@ -63,6 +63,7 @@ def selfreg_LDO_0v6():
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCD, data=optimal_code, Mask=0xF, Default=0x0
     else:
         print(f'............ {Test_Name} Failed ........')
+        raise RuntimeError(f'............ {Test_Name} Failed ........')
         # if the trimh failed program detult zero
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCD, data=0x0, Mask=0xF, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
