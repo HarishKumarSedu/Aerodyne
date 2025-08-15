@@ -1,4 +1,4 @@
-# Processed on 2025-08-15 14:07:00
+# Processed on 2025-08-15 14:08:18
 from dfttools import *
 from time import sleep
 import random
@@ -65,6 +65,7 @@ def bg_0v6():
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB0, data=optimal_code, Mask=0xF, Default=0x0
     else:
         print(f'............ {Test_Name} Failed ........')
+        raise RuntimeError(f'............ {Test_Name} Failed ........')
         # if the trimh failed program detult zero
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB0, data=0x0, Mask=0xF, Default=0x0
     ########## Disable Bits ###########3
