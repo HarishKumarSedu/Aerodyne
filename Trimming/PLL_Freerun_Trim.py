@@ -1,12 +1,12 @@
 from dfttools import *
 from time import sleep
 import random
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
 
 def pll_freerun():
 
     Test_Name = 'PLL_Freerun_Trim'
-    from Procedures.Startup import startup
-    from Procedures.Global_enable import global_enable
     startup()
     global_enable()
     print(f'............ {Test_Name} ........')
