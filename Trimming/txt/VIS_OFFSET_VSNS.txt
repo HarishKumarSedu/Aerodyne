@@ -1,7 +1,6 @@
-# Processed on 2025-07-09 11:54:05
+# Processed on 2025-08-15 14:38:20
 from dfttools import *
-Testname = 'VIS_OFFSET_VSNS'
-print(f' {Testname}')
+
 
 '''
 Class D output staged are programmed to have both SPKRP and SPKRN at VCM. In this way, no current signal is applied (across R-sense) at the input of I-sense channel.
@@ -9,12 +8,24 @@ Then output code (I-sns code) it is stored.
 
 '''
 from time import sleep
-from Procedures import Startup
-from Procedures import Global_enable
-from Procedures import CLASSD_OUT_VMID
-from Procedures import VI_SNS_turn_on
-sleep(0.1)
-vsns_offset_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.CLASSD_OUT_VMID import classd_out_vmid
+from Procedures.VI_SNS_turn_on import vi_sns_turn_on
+
+def vis_offset_vsns():
+  Testname = 'VIS_OFFSET_VSNS'
+  print(f' {Testname}')
+  # execute the necessary procedures in order 
+  startup()
+  global_enable()
+  classd_out_vmid()
+  
+  sleep(0.1)
+  vsns_offset_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
-print(f'{Testname} value : {vsns_offset_measured} ')
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB8, data=hex(round(vsns_offset_measured)), Mask=0x3F, Default=0x0
+  print(f'{Testname} value : {vsns_offset_measured} ')
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB8, data=hex(round(vsns_offset_measured)), Mask=0x3F, Default=0x0
+
+if __name__ == '__main__':
+  vis_offset_vsns()
