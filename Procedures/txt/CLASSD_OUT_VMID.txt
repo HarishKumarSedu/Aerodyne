@@ -1,33 +1,37 @@
-# Processed on 2025-08-11 09:58:56
+# Processed on 2025-08-15 14:23:02
 Test_Name = 'CLASSD_OUT_VMID'
 print(f'............ {Test_Name} ........')
 from dfttools import *
 from time import sleep
-#[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF
+def classd_out_vmid():
+  #[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF
 
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x1, Mask=0x1, Default=0x0  # class D force enable
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x1, Mask=0x1, Default=0x0  # class D force enable
 
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x1, Mask=0x1, Default=0x0 # cld_bias enable
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x10, Default=0x0 # cld_dac disable
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x40, Default=0x0 # cld_pwm disable
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x20, Default=0x0 # cld_lpf disable
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x4, Default=0x0 # cld_dac disable
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x8, Default=0x0  # cld_dac disable
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x1, Mask=0x1, Default=0x0 # cld_bias enable
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x10, Default=0x0 # cld_dac disable
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x40, Default=0x0 # cld_pwm disable
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x20, Default=0x0 # cld_lpf disable
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x4, Default=0x0 # cld_dac disable
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x8, Default=0x0  # cld_dac disable
 
-[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0  # select all switch off
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81  # force the switch in the selected position above
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x10, Mask=0x10, Default=0x86  # bypass of the internal feedback conditioning 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x20, Mask=0x20, Default=0x86  # bypass partitioning conditioning 
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x4, Mask=0x4, Default=0x0  # force internal feedback selection
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x4, Default=0x0  # seclect external feedback
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x10, Mask=0x10, Default=0x0  # force partitioning bit
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x10, Mask=0x10, Default=0x0  # force full switch on
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x2, Mask=0x2, Default=0x0   # cld_driver enable
-[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
-sleep(0.0001)  # 100 µs
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0  # set bridge switch (LSp off, MIDp on, CASp on, HSp off, LSn off, MIDn on, CASn on, HSn off)
-# Wait for device stabilization
-sleep(0.0001)  # 100 µs
+  [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0  # select all switch off
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81  # force the switch in the selected position above
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x10, Mask=0x10, Default=0x86  # bypass of the internal feedback conditioning 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x20, Mask=0x20, Default=0x86  # bypass partitioning conditioning 
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x4, Mask=0x4, Default=0x0  # force internal feedback selection
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x4, Default=0x0  # seclect external feedback
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x10, Mask=0x10, Default=0x0  # force partitioning bit
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x10, Mask=0x10, Default=0x0  # force full switch on
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x2, Mask=0x2, Default=0x0   # cld_driver enable
+  [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
+  sleep(0.0001)  # 100 µs
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0  # set bridge switch (LSp off, MIDp on, CASp on, HSp off, LSn off, MIDn on, CASn on, HSn off)
+  # Wait for device stabilization
+  sleep(0.0001)  # 100 µs
+
+if __name__ == '__main__':
+  classd_out_vmid()
