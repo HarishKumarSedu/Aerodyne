@@ -1,13 +1,13 @@
 from dfttools import *
 from time import sleep
 import random
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
 
 def fll_freerun():
 
     Test_Name = 'FLL_Freerun_Trim'
-    from Procedures.Startup import startup
-    from Procedures.Global_enable import global_enable
-    from Procedures.Playback import playback
     startup()
     global_enable()
     playback()
