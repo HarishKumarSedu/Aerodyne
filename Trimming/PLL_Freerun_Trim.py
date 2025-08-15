@@ -60,6 +60,7 @@ def pll_freerun():
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'signature1', 'length': 8, 'registers': [{'REG': '0xD1', 'POS': 0, 'RegisterName': 'OTP FIELDS 33', 'RegisterLength': 8, 'Name': 'signature1[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=optimal_code) # sweep trim code
     else:
         print(f'............ {Test_Name} Failed ........')
+        raise RuntimeError(f'............ {Test_Name} Failed ........')
         # if the trimh failed program detult zero
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'pll_vco_ctrl', 'length': 2, 'registers': [{'REG': '0xCF', 'POS': 0, 'RegisterName': 'OTP FIELDS 31', 'RegisterLength': 8, 'Name': 'pll_vco_ctrl[1:0]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x02', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'signature1', 'length': 8, 'registers': [{'REG': '0xD1', 'POS': 0, 'RegisterName': 'OTP FIELDS 33', 'RegisterLength': 8, 'Name': 'signature1[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=optimal_code) # sweep trim code
