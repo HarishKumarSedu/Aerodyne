@@ -1,9 +1,9 @@
-# Processed on 2025-08-15 14:23:02
+# Processed on 2025-08-15 14:27:09
 Test_Name = 'CLASSD_OUT_VMID'
-print(f'............ {Test_Name} ........')
 from dfttools import *
 from time import sleep
 def classd_out_vmid():
+  print(f'............ {Test_Name} ........')
   #[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
   [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF
 
