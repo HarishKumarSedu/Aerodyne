@@ -1,4 +1,11 @@
-# Processed on 2025-08-15 11:08:34
+# Processed on 2025-08-15 11:13:07
 from dfttools import *
 from Procedures.Startup import startup 
 from Procedures.Global_enable import global_enable
+# from Digital.OTP_Burning import otp_burning
+def device_customization():
+  startup()
+  globleable_enable()
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCB, data=0x2, Mask=0x2, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB4, data=0x80, Mask=0x80, Default=0x4
