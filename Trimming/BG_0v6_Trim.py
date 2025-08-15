@@ -64,6 +64,7 @@ def bg_0v6():
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_ref_bg_trm_0v6', 'length': 4, 'registers': [{'REG': '0xB0', 'POS': 0, 'RegisterName': 'OTP FIELDS 0', 'RegisterLength': 8, 'Name': 'otp_ds_ref_bg_trm_0v6[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=optimal_code)
     else:
         print(f'............ {Test_Name} Failed ........')
+        raise RuntimeError(f'............ {Test_Name} Failed ........')
         # if the trimh failed program detult zero
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_ref_bg_trm_0v6', 'length': 4, 'registers': [{'REG': '0xB0', 'POS': 0, 'RegisterName': 'OTP FIELDS 0', 'RegisterLength': 8, 'Name': 'otp_ds_ref_bg_trm_0v6[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0)
     ########## Disable Bits ###########3
