@@ -1,4 +1,4 @@
-# Processed on 2025-08-15 14:04:01
+# Processed on 2025-08-15 14:04:42
 from dfttools import *
 from time import sleep
 import random
@@ -61,6 +61,7 @@ def pll_freerun():
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xD1, data=optimal_code, Mask=0xFF, Default=0x0 # sweep trim code
     else:
         print(f'............ {Test_Name} Failed ........')
+        raise RuntimeError(f'............ {Test_Name} Failed ........')
         # if the trimh failed program detult zero
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCF, data=0x0, Mask=0x3, Default=0x2
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xD1, data=optimal_code, Mask=0xFF, Default=0x0 # sweep trim code
