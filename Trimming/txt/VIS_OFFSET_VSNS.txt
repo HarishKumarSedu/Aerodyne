@@ -1,4 +1,4 @@
-# Processed on 2025-08-15 14:38:20
+# Processed on 2025-08-15 14:48:02
 from dfttools import *
 
 
@@ -20,7 +20,7 @@ def vis_offset_vsns():
   startup()
   global_enable()
   classd_out_vmid()
-  
+  vi_sns_turn_on()
   sleep(0.1)
   vsns_offset_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
