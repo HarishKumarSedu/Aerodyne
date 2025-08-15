@@ -1,4 +1,4 @@
-# Processed on 2025-08-12 17:31:54
+# Processed on 2025-08-15 14:09:23
 from dfttools import *
 from time import sleep
 import random
@@ -67,6 +67,7 @@ def bg_1v2():
     else:
         print(f'............ {Test_Name} Failed ........')
         # if the trimh failed program default zero
+        raise RuntimeError(f'............ {Test_Name} Failed ........')
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB1, data=0x0, Mask=0xF, Default=0x80
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
