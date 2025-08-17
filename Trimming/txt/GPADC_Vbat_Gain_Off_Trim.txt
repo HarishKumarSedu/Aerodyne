@@ -1,85 +1,91 @@
-# Processed on 2025-08-07 14:06:42
+# Processed on 2025-08-17 14:47:38
 from dfttools import *
 from time import sleep
 
-Test_Name = 'GPADC_Vbat_Gain__Off_Trim'
-from Procedures import Startup
-from Procedures import Global_enable
-print(f'............ {Test_Name} ........')
-# designers must go through the details and correct the procedure
-'''
-Procedure 
-    before to start the bandgap has to be trimmed
-    1.Enable the SAR ADC with extenal clock
-    2.Force VBAT at 2.8 V
-    3.Measure VBAT and save the result in Variable VB0
-    4.Measure the Vbat register after 8 average save in the Variable CODE0
-    5.Force Vbat at 4.8 V
-    6.Measure VBAT and save the result in Variable VB1
-    7.Measure the Vbat register after 8 average save in the Variable CODE1
-    8.Define m=(VB1-VB0)/(CODE1-CODE0)
-    9.Dedine mid=5.3763441E-03
-    10.Define vbat_off=VB0/m-CODE0
-    11.Define Gaincorr=m/mid
-    12.Define Vbat_gain_corr= (m/mid-1)*1024
-    
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+def gpadc_vbat_gain_off_trim():
+    Test_Name = 'GPADC_Vbat_Gain__Off_Trim'
+    print(f'............ {Test_Name} ........')
+    startup()
+    global_enable()
+    # designers must go through the details and correct the procedure
+    '''
+    Procedure 
+        before to start the bandgap has to be trimmed
+        1.Enable the SAR ADC with extenal clock
+        2.Force VBAT at 2.8 V
+        3.Measure VBAT and save the result in Variable VB0
+        4.Measure the Vbat register after 8 average save in the Variable CODE0
+        5.Force Vbat at 4.8 V
+        6.Measure VBAT and save the result in Variable VB1
+        7.Measure the Vbat register after 8 average save in the Variable CODE1
+        8.Define m=(VB1-VB0)/(CODE1-CODE0)
+        9.Dedine mid=5.3763441E-03
+        10.Define vbat_off=VB0/m-CODE0
+        11.Define Gaincorr=m/mid
+        12.Define Vbat_gain_corr= (m/mid-1)*1024
 
-'''
-[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
-sleep(0.001)
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x10, Mask=0x3F, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x10, Mask=0x3F, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x3, Mask=0x3, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x0, Mask=0xF, Default=0x1
-# [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x8, Mask=0x8, Default=0x21
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x1
-pvdd_forced_voltage = VFORCE(signal="PVDD", reference="GND", value=2.8,error_spread=0)
-sleep(0.01)
-VB0 = VMEASURE(signal="PVDD", reference="GND", expected_value=2.8,error_spread=0)
-sleep(0.001)
-mid=5.3763441E-03
 
-HCODE0=[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x23, Mask=0x3
+    '''
+    [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
+    sleep(0.001)
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x10, Mask=0x3F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x10, Mask=0x3F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x3, Mask=0x3, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x0, Mask=0xF, Default=0x1
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x8, Mask=0x8, Default=0x21
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x1
+    pvdd_forced_voltage = VFORCE(signal="PVDD", reference="GND", value=2.8,error_spread=0)
+    sleep(0.01)
+    VB0 = VMEASURE(signal="PVDD", reference="GND", expected_value=2.8,error_spread=0)
+    sleep(0.001)
+    mid=5.3763441E-03
+
+    HCODE0=[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x23, Mask=0x3
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x24, Mask=0xFF
-CODE0=int(HCODE0)
-pvdd_forced_voltage = VFORCE(signal="PVDD", reference="GND", value=4.8,error_spread=0)
-sleep(0.01)
-VB1 = VMEASURE(signal="PVDD", reference="GND", expected_value=4.8,error_spread=0)
-sleep(0.001)
+    CODE0=int(HCODE0)
+    pvdd_forced_voltage = VFORCE(signal="PVDD", reference="GND", value=4.8,error_spread=0)
+    sleep(0.01)
+    VB1 = VMEASURE(signal="PVDD", reference="GND", expected_value=4.8,error_spread=0)
+    sleep(0.001)
 
 
-HCODE1=[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x23, Mask=0x3
+    HCODE1=[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x23, Mask=0x3
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x24, Mask=0xFF
-CODE1=int(HCODE1)
+    CODE1=int(HCODE1)
 
-mreal=(VB1-VB0)/(CODE1-CODE0)
-vbat_off=round((VB0/mreal))-CODE0
+    mreal=(VB1-VB0)/(CODE1-CODE0)
+    vbat_off=round((VB0/mreal))-CODE0
 
 
-if vbat_off <0:  
-    otp_vbat_off=256+vbat_off
-else:
-    otp_vbat_off=vbat_off
-vbat_gain=(mreal/mid-1)*1024
-if vbat_gain <0:  
-    otp_vbat_gain=256+round(vbat_gain)
-else:
-    otp_vbat_gain=round(vbat_gain)
+    if vbat_off <0:  
+        otp_vbat_off=256+vbat_off
+    else:
+        otp_vbat_off=vbat_off
+    vbat_gain=(mreal/mid-1)*1024
+    if vbat_gain <0:  
+        otp_vbat_gain=256+round(vbat_gain)
+    else:
+        otp_vbat_gain=round(vbat_gain)
 
-print(f'............ {Test_Name} Passed ........')
-    # write the optimized code if the trim passed
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC2, data=hex(otp_vbat_gain), Mask=0xFF, Default=0x0
-[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
+    print(f'............ {Test_Name} Passed ........')
+        # write the optimized code if the trim passed
+    [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC2, data=hex(otp_vbat_gain), Mask=0xFF, Default=0x0
+    [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
 
-print(f"Optimal Code: {otp_vbat_off}")
-print(f"Optimal Code: {otp_vbat_gain}")
+    print(f"Optimal Code: {otp_vbat_off}")
+    print(f"Optimal Code: {otp_vbat_gain}")
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x0, Mask=0x1, Default=0x1
-sleep(0.001)
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0
-# [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x0, Mask=0x8, Default=0x21
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x0, Mask=0x3F, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x0, Mask=0x3F, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x0, Mask=0x3, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x1, Mask=0xF, Default=0x1
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x0, Mask=0x1, Default=0x1
+    sleep(0.001)
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x0, Mask=0x8, Default=0x21
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x0, Mask=0x3F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x0, Mask=0x3F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x0, Mask=0x3, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x1, Mask=0xF, Default=0x1
+
+if __name__ == '__main__':
+    gpadc_vbat_gain_off_trim()
