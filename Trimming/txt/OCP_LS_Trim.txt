@@ -1,77 +1,82 @@
-# Processed on 2025-08-07 14:24:28
+# Processed on 2025-08-17 18:36:50
 from dfttools import *
 from time import sleep
 import random
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
 
-Test_Name = 'OCP_LS_TRIM'
-from Procedures import Startup
-from Procedures import Global_enable
+def ocp_ls_trim():
+  Test_Name = 'OCP_LS_TRIM'
 
-print(f'............ {Test_Name} ........')
+  print(f'............ {Test_Name} ........')
+  startup()
+  global_enable()
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x1, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x1, Mask=0xF, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x10, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x40, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x20, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x4, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x8, Default=0x0  
+  [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0  
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81  
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x4, Mask=0x4, Default=0x0  
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x10, Mask=0x10, Default=0x86  
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x4, Mask=0x4, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x4, Default=0x0  
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x20, Mask=0x20, Default=0x86  
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x10, Mask=0x10, Default=0x0  
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x10, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x2, Mask=0x2, Default=0x0  
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x4, Mask=0x7F, Default=0x0 # FSYN ana_ds_mid_up
 
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x1, Mask=0x1, Default=0x0 
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x1, Mask=0xF, Default=0x0 
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x10, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x40, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x20, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x4, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x8, Default=0x0  
-[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0  
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81  
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x4, Mask=0x4, Default=0x0  
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x10, Mask=0x10, Default=0x86  
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x4, Mask=0x4, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x4, Default=0x0  
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x20, Mask=0x20, Default=0x86  
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x10, Mask=0x10, Default=0x0  
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x10, Default=0x0 
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x2, Mask=0x2, Default=0x0  
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x4, Mask=0x7F, Default=0x0 # FSYN ana_ds_mid_up
 
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB6, data=0xF, Mask=0xF, Default=0x88 #lower threshold to 750mV
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x1, Mask=0x1, Default=0x0 # turn on ocp
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x1, Mask=0x1, Default=0x0
 
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB6, data=0xF, Mask=0xF, Default=0x88 #lower threshold to 750mV
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x1, Mask=0x1, Default=0x0 # turn on ocp
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x1, Mask=0x1, Default=0x0
+  [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x10, Mask=0xFF, Default=0x0 
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
 
-[i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x10, Mask=0xFF, Default=0x0 
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+  # Wait for device stabilization
+  sleep(0.0001)  # 100 µs
+  i_force = 3/4
+  max_step = 15
+  th = 1.8/2
+  # @ATE, "GND" in the following instruction is "PGND"
+  AFORCE(signal="OUTP", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
+  sleep(0.00005) #50us
+  # mid_up = 0 #debug
+  mid_up = VMEASURE(signal="IODATA1", reference="GND", expected_value=0.9, error_spread=0.5)
 
-# Wait for device stabilization
-sleep(0.0001)  # 100 µs
-i_force = 3/4
-max_step = 15
-th = 1.8/2
-# @ATE, "GND" in the following instruction is "PGND"
-AFORCE(signal="OUTP", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
-sleep(0.00005) #50us
-# mid_up = 0 #debug
-mid_up = VMEASURE(signal="IODATA1", reference="GND", expected_value=0.9, error_spread=0.5)
+  if mid_up > th:
+      print("Errore: all’avvio il comparatore è già alto")
+  else:
+      for code in reversed(range(15)):
 
-if mid_up > th:
-    print("Errore: all’avvio il comparatore è già alto")
-else:
-    for code in reversed(range(15)):
+          # 3. breve attesa per stabilizzare il circuito
+          sleep(50e-6)  # 50 µs
 
-        # 3. breve attesa per stabilizzare il circuito
-        sleep(50e-6)  # 50 µs
+          # 4. leggiamo di nuovo l’uscita del comparatore
+          mid_up = VMEASURE(signal="IOCLK1", reference="GND",expected_value=0.9, error_spread=0.5)
 
-        # 4. leggiamo di nuovo l’uscita del comparatore
-        mid_up = VMEASURE(signal="IOCLK1", reference="GND",expected_value=0.9, error_spread=0.5)
+          # 5. se abbiamo superato la soglia, abbiamo finito
+          if mid_up > th:
+              print(f"trim code = {code:.3f} ")
+              break
+            
+          [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB6, data=code, Mask=0xF, Default=0x88
 
-        # 5. se abbiamo superato la soglia, abbiamo finito
-        if mid_up > th:
-            print(f"trim code = {code:.3f} ")
-            break
-          
-        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB6, data=code, Mask=0xF, Default=0x88
+  AFORCE(signal="OUTP", reference="GND", value=float('inf'), error_spread=0.05)  # stop forcing
 
-AFORCE(signal="OUTP", reference="GND", value=float('inf'), error_spread=0.05)  # stop forcing
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 
+if __name__ == '__main__':
+  ocp_ls_trim()
