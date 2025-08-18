@@ -1,4 +1,4 @@
-# Processed on 2025-08-18 13:27:55
+# Processed on 2025-08-18 14:48:01
 Test_Name = 'VI_SNS_turn_on'
 from dfttools import *
 from time import sleep
@@ -8,6 +8,7 @@ def vi_sns_turn_on():
   global_enable()
     # setting 3.072MHz clock from PLL
   BLCK_Set_1 = 3.072e6                          # 3.072MHz
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0x80, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x81, data=0x6, Mask=0x3F, Default=0x6         #dig_pll_prediv_vddd<5:0>=6d 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x82, data=0x18, Mask=0x3F, Default=0x18        #dig_pll_n<5:0>=24d 
@@ -16,11 +17,14 @@ def vi_sns_turn_on():
   sleep(0.0001)                                                                    #wait 100us
   # VI sense turn on procedure
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA7, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0B, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0B, data=0x0, Mask=0x2, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0B, data=0x0, Mask=0x4, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0B, data=0x0, Mask=0x8, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA7, data=0x2, Mask=0x2, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0C, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0C, data=0x0, Mask=0x2, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0C, data=0x0, Mask=0x4, Default=0x0
