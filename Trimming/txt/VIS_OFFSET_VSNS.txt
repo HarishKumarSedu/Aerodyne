@@ -1,4 +1,4 @@
-# Processed on 2025-08-18 18:42:32
+# Processed on 2025-08-18 18:45:42
 from dfttools import *
 
 
@@ -30,7 +30,7 @@ def vis_offset_vsns():
   sleep(0.1)
   vsns_offset_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
-  vsns_offset_measured= vsns_offset_measured - (1 << 16)  if (vsns_offset_measured & (1 << (16 - 1))) != 0 else vsns_offset_measured
+  vsns_offset_measured= (0x10000 - vsns_offset_measured)  if vsns_offset_measured > 0x1000 else vsns_offset_measured
   print(f'{Testname} value : {vsns_offset_measured} ')
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB8, data=hex(round(vsns_offset_measured)), Mask=0x3F, Default=0x0
 
