@@ -3,4 +3,4 @@
 Command;Check;Page;SAD;ADD;DATA;MSB;LSB;Comment
 RD-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 69; DATA: 00;;COM: Mask: 0xFF;;
 RD-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 6A; DATA: 00;;COM: Mask: 0xFF;;
-WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: B8; DATA: 00; MSB: 5; LSB: 0;COM: Mask: 0x3F;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: B8; DATA: 00; MSB: 5; LSB: 0;COM: Mask: 0x3F;;
