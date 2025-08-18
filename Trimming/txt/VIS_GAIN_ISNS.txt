@@ -1,41 +1,49 @@
-# Processed on 2025-08-05 16:29:56
+# Processed on 2025-08-18 09:59:44
 from dfttools import *
-Testname = 'VIS_GAIN_ISNS'
-print(f' {Testname}')
-
-'''
-The procedure is described hereafter:
-1. Force class-D output to have both SPKRP and SPKRN at VCM.
-2. Source a stated current (i.e. 100mA).
-3. Read I-sense output digital code.
-4. Sink a note current (i.e. -100mA).
-5. Read I-sense output digital code.
-6. GI=DELTA_I=(200mA)/DELTA_code.
-
-'''
-
 from time import sleep
-from Procedures import Startup
-from Procedures import Global_enable
-from Procedures import VI_SNS_turn_on
-print(f' ........ Source 500mA from SPKRP/SPKRM ........ ')
-source_current = 500e-3
-from Procedures import CLASSD_OUT_CURR_TRIM
-sleep(0.001)
-AFORCE(signal="OUTP",reference="OUTN",value=source_current, error_spread=source_current*0.01) # 1% error
-# AFORCE(signal="OUTN",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
-sleep(0.001)
-isns_gain_source_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.VI_SNS_turn_on import vi_sns_turn_on
+from Procedures.CLASSD_OUT_CURR_TRIM import classd_out_curr_trim
+
+def vis_gain_isns():
+  Testname = 'VIS_GAIN_ISNS'
+  print(f' {Testname}')
+
+  '''
+  The procedure is described hereafter:
+  1. Force class-D output to have both SPKRP and SPKRN at VCM.
+  2. Source a stated current (i.e. 100mA).
+  3. Read I-sense output digital code.
+  4. Sink a note current (i.e. -100mA).
+  5. Read I-sense output digital code.
+  6. GI=DELTA_I=(200mA)/DELTA_code.
+
+  '''
+  startup()
+  global_enable()
+  vi_sns_turn_on()
+  classd_out_curr_trim()
+
+  print(f' ........ Source 500mA from SPKRP/SPKRM ........ ')
+  source_current = 500e-3
+  sleep(0.001)
+  AFORCE(signal="OUTP",reference="OUTN",value=source_current, error_spread=source_current*0.01) # 1% error
+  # AFORCE(signal="OUTN",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
+  sleep(0.001)
+  isns_gain_source_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
-print(f' ........ Sink 500mA to SPKRP/SPKRM ........ ')
-AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) # 1% error
-# AFORCE(signal="OUTN",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
-sleep(0.001)
-isns_gain_sink_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
+  print(f' ........ Sink 500mA to SPKRP/SPKRM ........ ')
+  AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) # 1% error
+  # AFORCE(signal="OUTN",reference="GND",value=source_current, error_spread=source_current*0.01) # 1% error
+  sleep(0.001)
+  isns_gain_sink_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
-isns_gain_calculated = 2*0.5/(int(isns_gain_source_measured)-int(isns_gain_sink_measured))
-print(f'{Testname} value : {isns_gain_calculated} ')
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=hex(round(isns_gain_calculated)), Mask=0x3F, Default=0x0
+  isns_gain_calculated = 2*0.5/(int(isns_gain_source_measured)-int(isns_gain_sink_measured))
+  print(f'{Testname} value : {isns_gain_calculated} ')
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=hex(round(isns_gain_calculated)), Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBC, data=hex(round(isns_gain_calculated)), Mask=0xFF, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0  # set bridge switch (LSp off, MIDp off, CASp off, HSp off, LSn off, MIDn off, CASn off, HSn off)
-# disconnect the current sources applying infinity current 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0  # set bridge switch (LSp off, MIDp off, CASp off, HSp off, LSn off, MIDn off, CASn off, HSn off)
+  # disconnect the current sources applying infinity current 
+if __name__ == '__main__':
+  vis_gain_isns()
