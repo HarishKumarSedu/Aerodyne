@@ -2,8 +2,6 @@ from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
-from Procedures.VI_SNS_turn_on import vi_sns_turn_on
-from Procedures.CLASSD_OUT_POS import classd_out_pos
 
 def offset_cal_cld_5lvl_vcm_comp_on():
   Test_Name = 'Offset_cal_cld_5lvl_vcm_comp_on'
