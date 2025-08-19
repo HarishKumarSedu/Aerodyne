@@ -1,11 +1,10 @@
-# Processed on 2025-08-19 15:48:20
+# Processed on 2025-08-19 17:12:42
 Test_Name = 'VI_SNS_turn_on'
 from dfttools import *
 from time import sleep
 from Procedures.Global_enable import global_enable
 def vi_sns_turn_on():
   print(f'............ {Test_Name} ........')
-  global_enable()
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA6, data=0x0, Mask=0x4, Default=0xC
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA6, data=0x0, Mask=0x8, Default=0xC
