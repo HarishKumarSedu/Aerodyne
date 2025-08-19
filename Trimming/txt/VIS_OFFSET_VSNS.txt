@@ -1,4 +1,4 @@
-# Processed on 2025-08-19 15:04:39
+# Processed on 2025-08-19 15:28:21
 from dfttools import *
 
 
@@ -11,6 +11,8 @@ from time import sleep
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
 from Procedures.Playback import playback
+from Procedures.VI_SNS_turn_on import vi_sns_turn_on
+from Procedures.VI_SNS_turn_off import vi_sns_turn_off
 
 def vis_offset_vsns():
   Testname = 'VIS_OFFSET_VSNS'
@@ -27,10 +29,7 @@ def vis_offset_vsns():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x40, Mask=0x40, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA6, data=0x0, Mask=0x4, Default=0xC
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA6, data=0x0, Mask=0x8, Default=0xC
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA7, data=0x1, Mask=0x1, Default=0x0
+  vi_sns_turn_on()
   
   sleep(0.1)
   vsns_offset_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
@@ -41,6 +40,7 @@ def vis_offset_vsns():
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x0, Mask=0x10, Default=0x81
+  vi_sns_turn_off()
 
 if __name__ == '__main__':
   vis_offset_vsns()
