@@ -5,7 +5,7 @@
     "testName": "UVLO_L2H_Trim",
     "stage": "Verified",
     "signalName": "",
-    "signalType": "AC",
+    "signalType": "DC",
     "minLimit": "0",
     "typical": "1f",
     "maxLimit": "0",
