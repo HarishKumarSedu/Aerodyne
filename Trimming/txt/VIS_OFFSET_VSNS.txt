@@ -1,4 +1,4 @@
-# Processed on 2025-08-19 15:28:21
+# Processed on 2025-08-19 15:31:02
 from dfttools import *
 
 
@@ -28,7 +28,7 @@ def vis_offset_vsns():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x40, Mask=0x40, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x40, Mask=0x40, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0 # tun on CAS_ouup, N_outp, CAS_ouun, N_outn
   vi_sns_turn_on()
   
   sleep(0.1)
@@ -38,7 +38,7 @@ def vis_offset_vsns():
   print(f'{Testname} value : {hex(vsns_offset_measured)} ')
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB8, data=hex(vsns_offset_measured), Mask=0x3F, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 # bridge HiZ
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x0, Mask=0x10, Default=0x81
   vi_sns_turn_off()
 
