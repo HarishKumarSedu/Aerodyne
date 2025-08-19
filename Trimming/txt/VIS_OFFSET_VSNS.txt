@@ -1,4 +1,4 @@
-# Processed on 2025-08-19 10:23:12
+# Processed on 2025-08-19 15:04:39
 from dfttools import *
 
 
@@ -28,6 +28,10 @@ def vis_offset_vsns():
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA6, data=0x0, Mask=0x4, Default=0xC
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA6, data=0x0, Mask=0x8, Default=0xC
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA7, data=0x1, Mask=0x1, Default=0x0
+  
   sleep(0.1)
   vsns_offset_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
