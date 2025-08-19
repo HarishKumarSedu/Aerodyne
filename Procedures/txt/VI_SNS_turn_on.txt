@@ -1,4 +1,4 @@
-# Processed on 2025-08-18 14:48:01
+# Processed on 2025-08-19 10:56:10
 Test_Name = 'VI_SNS_turn_on'
 from dfttools import *
 from time import sleep
@@ -7,7 +7,7 @@ def vi_sns_turn_on():
   print(f'............ {Test_Name} ........')
   global_enable()
     # setting 3.072MHz clock from PLL
-  BLCK_Set_1 = 3.072e6                          # 3.072MHz
+  BLCK_Set_1 = 3.072e6                      # 3.072MHz
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0x80, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x81, data=0x6, Mask=0x3F, Default=0x6         #dig_pll_prediv_vddd<5:0>=6d 
