@@ -1,225 +1,132 @@
 {
   "Trimming": [
-    [
-      "",
-      "",
-      "1",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "Parameters",
-      "",
-      ""
-    ],
-    [
-      "slno",
-      "",
-      1,
-      "",
-      ""
-    ],
-    [
-      "priority",
-      "",
-      "High",
-      "",
-      ""
-    ],
-    [
-      "ipName",
-      "",
-      "Trimming",
-      "",
-      ""
-    ],
-    [
-      "testName",
-      "",
-      "UVLO_L2H_Trim",
-      "",
-      ""
-    ],
-    [
-      "stage",
-      "",
-      "Verified",
-      "",
-      ""
-    ],
-    [
-      "signalName",
-      "",
-      "",
-      "",
-      ""
-    ],
-    [
-      "signalType",
-      "",
-      "DC",
-      "",
-      ""
-    ],
-    [
-      "minLimit",
-      "",
-      "0",
-      "",
-      ""
-    ],
-    [
-      "typical",
-      "",
-      "1f",
-      "",
-      ""
-    ],
-    [
-      "maxLimit",
-      "",
-      "0",
-      "",
-      ""
-    ],
-    [
-      "unit",
-      "",
-      "bits",
-      "",
-      ""
-    ],
-    [
-      "testRequirements",
-      "",
-      "rfwf",
-      "",
-      ""
-    ],
-    [],
-    [
-      "Pin Requirements"
-    ],
-    [
-      "Pin Number",
-      "Name",
-      "Value",
-      "Unit",
-      "Pin requirements"
-    ],
-    [
-      1,
-      "IOCLK2",
-      "",
-      "",
-      ""
-    ],
-    [
-      2,
-      "IODATA2",
-      "",
-      "",
-      ""
-    ],
-    [
-      3,
-      "IODATA0",
-      "",
-      "",
-      ""
-    ],
-    [
-      4,
-      "IODATA1",
-      "",
-      "",
-      ""
-    ],
-    [
-      5,
-      "VDD",
-      1.8,
-      "V",
-      ""
-    ],
-    [
-      6,
-      "RESETB",
-      1.8,
-      "V",
-      ""
-    ],
-    [
-      7,
-      "VMID",
-      "",
-      "",
-      ""
-    ],
-    [
-      8,
-      "IOCLK0",
-      "",
-      "",
-      ""
-    ],
-    [
-      9,
-      "PVDD",
-      "2.3",
-      "V",
-      ""
-    ],
-    [
-      10,
-      "PVDD",
-      "2.3",
-      "V",
-      ""
-    ],
-    [
-      11,
-      "ADDR",
-      "",
-      "",
-      ""
-    ],
-    [
-      12,
-      "GND",
-      "",
-      "",
-      ""
-    ],
-    [
-      13,
-      "PGND",
-      "",
-      "",
-      ""
-    ],
-    [
-      14,
-      "OUTP",
-      "",
-      "",
-      ""
-    ],
-    [
-      15,
-      "OUTN",
-      "",
-      "",
-      ""
-    ],
-    [
-      16,
-      "IOCLK1",
-      "",
-      "",
-      ""
-    ]
+    {
+      "slno": 1,
+      "ipName": "Trimming",
+      "testName": "UVLO_L2H_Trim",
+      "stage": "Verified",
+      "signalName": "",
+      "signalType": "DC",
+      "minLimit": "0",
+      "typical": "1f",
+      "maxLimit": "0",
+      "unit": "bits",
+      "testRequirements": "rfwf",
+      "priority": "High",
+      "pinmapdata": [
+        {
+          "pinno": 1,
+          "pinname": "IOCLK2",
+          "value": "",
+          "unit": "",
+          "requirements": ""
+        },
+        {
+          "pinno": 2,
+          "pinname": "IODATA2",
+          "value": "",
+          "unit": "",
+          "requirements": ""
+        },
+        {
+          "pinno": 3,
+          "pinname": "IODATA0",
+          "value": "",
+          "unit": "",
+          "requirements": ""
+        },
+        {
+          "pinno": 4,
+          "pinname": "IODATA1",
+          "value": "",
+          "unit": "",
+          "requirements": ""
+        },
+        {
+          "pinno": 5,
+          "pinname": "VDD",
+          "value": 1.8,
+          "unit": "V",
+          "requirements": ""
+        },
+        {
+          "pinno": 6,
+          "pinname": "RESETB",
+          "value": 1.8,
+          "unit": "V",
+          "requirements": ""
+        },
+        {
+          "pinno": 7,
+          "pinname": "VMID",
+          "value": "",
+          "unit": "",
+          "requirements": ""
+        },
+        {
+          "pinno": 8,
+          "pinname": "IOCLK0",
+          "value": "",
+          "unit": "",
+          "requirements": ""
+        },
+        {
+          "pinno": 9,
+          "pinname": "PVDD",
+          "value": "2.3",
+          "unit": "V",
+          "requirements": ""
+        },
+        {
+          "pinno": 10,
+          "pinname": "PVDD",
+          "value": "2.3",
+          "unit": "V",
+          "requirements": ""
+        },
+        {
+          "pinno": 11,
+          "pinname": "ADDR",
+          "value": "",
+          "unit": "",
+          "requirements": ""
+        },
+        {
+          "pinno": 12,
+          "pinname": "GND",
+          "value": "",
+          "unit": "",
+          "requirements": ""
+        },
+        {
+          "pinno": 13,
+          "pinname": "PGND",
+          "value": "",
+          "unit": "",
+          "requirements": ""
+        },
+        {
+          "pinno": 14,
+          "pinname": "OUTP",
+          "value": "",
+          "unit": "",
+          "requirements": ""
+        },
+        {
+          "pinno": 15,
+          "pinname": "OUTN",
+          "value": "",
+          "unit": "",
+          "requirements": ""
+        },
+        {
+          "pinno": 16,
+          "pinname": "IOCLK1",
+          "value": "",
+          "unit": "",
+          "requirements": ""
+        }
+      ]
+    }
   ]
 }
