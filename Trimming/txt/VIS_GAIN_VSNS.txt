@@ -1,4 +1,4 @@
-# Processed on 2025-08-19 16:29:58
+# Processed on 2025-08-19 17:00:39
 from dfttools import *
 
 
@@ -32,7 +32,7 @@ def vis_gain_vsns():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x40, Mask=0x40, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x40, Mask=0x40, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0xA5, Mask=0xFF, Default=0x0 # tun on P_ouup, MID_outp, N_outn, CAS_outn
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x5A, Mask=0xFF, Default=0x0 # tun on P_ouup, MID_outp, N_outn, CAS_outn
   vi_sns_turn_on()
   sleep(0.001)
   vsns_gain_high_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
@@ -40,7 +40,7 @@ def vis_gain_vsns():
   sleep(0.001)
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 # bridge HiZ
   sleep(0.001)
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x5A, Mask=0xFF, Default=0x0 # tun on P_ouup, MID_outp, N_outn, CAS_outn
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0xA5, Mask=0xFF, Default=0x0 # tun on P_ouup, MID_outp, N_outn, CAS_outn
   sleep(0.001)
   vsns_gain_low_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
