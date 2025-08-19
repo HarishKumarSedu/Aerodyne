@@ -1,0 +1,33 @@
+# Processed on 2025-08-19 15:25:41
+Test_Name = 'VI_SNS_turn_off'
+from dfttools import *
+def vi_sns_turn_off():
+  print(f'............ {Test_Name} ........')
+   # setting 3.072MHz clock from PLL
+  # BLCK_Set_1 = 3.072e6                      # 3.072MHz
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0x80, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=0
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x81, data=0x6, Mask=0x3F, Default=0x6         #dig_pll_prediv_vddd<5:0>=6d 
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x82, data=0x18, Mask=0x3F, Default=0x18        #dig_pll_n<5:0>=24d 
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x83, data=0x10, Mask=0x1F, Default=0x10 #rfu_pll_ldet_cnt<4:0>=16d
+  # FREQFORCE(signal="IOCLK0",reference="GND",value=BLCK_Set_1)                          #BCLK frequency=3.072MHz
+  # sleep(0.0001)                                                                    #wait 100us
+  # # VI sense turn on procedure
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA7, data=0x1, Mask=0x1, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0B, data=0x1, Mask=0x1, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0B, data=0x0, Mask=0x2, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0B, data=0x0, Mask=0x4, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0B, data=0x0, Mask=0x8, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA7, data=0x2, Mask=0x2, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0C, data=0x1, Mask=0x1, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0C, data=0x0, Mask=0x2, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0C, data=0x0, Mask=0x4, Default=0x0
+  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0C, data=0x0, Mask=0x8, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA7, data=0x0, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA7, data=0x0, Mask=0x2, Default=0x0
+if __name__ == '__main__':
+  vi_sns_turn_off()
