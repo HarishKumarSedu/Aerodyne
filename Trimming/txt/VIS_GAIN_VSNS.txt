@@ -1,4 +1,4 @@
-# Processed on 2025-08-20 12:55:05
+# Processed on 2025-08-20 12:58:22
 from dfttools import *
 
 
@@ -38,6 +38,8 @@ def vis_gain_vsns():
   sleep(0.001)
   vsns_gain_high_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
+  vsns_gain_high_measured = vsns_gain_high_measured - 0x1000 if vsns_gain_high_measured > 0x1000 else vsns_gain_high_measured
+  print(f'vsns_gain_high_measured : {hex(vsns_gain_high_measured)}')
   sleep(0.001)
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 # bridge HiZ
   sleep(0.001)
@@ -45,7 +47,8 @@ def vis_gain_vsns():
   sleep(0.001)
   vsns_gain_low_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
-  
+  vsns_gain_low_measured = vsns_gain_low_measured - 0x1000 if vsns_gain_low_measured > 0x1000 else vsns_gain_low_measured
+  print(f'vsns_gain_high_measured : {hex(vsns_gain_high_measured)}')
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0  # set bridge switch (LSp off, MIDp off, CASp off, HSp off, LSn off, MIDn off, CASn off, HSn off)
   sleep(0.001)
   vi_sns_turn_off()
