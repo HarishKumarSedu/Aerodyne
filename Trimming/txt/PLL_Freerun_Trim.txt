@@ -1,4 +1,4 @@
-# Processed on 2025-08-19 14:30:10
+# Processed on 2025-08-20 12:33:15
 from dfttools import *
 from time import sleep
 import random
@@ -66,6 +66,8 @@ def pll_freerun():
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCF, data=0x0, Mask=0x3, Default=0x2
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xD1, data=optimal_code, Mask=0xFF, Default=0x0 # sweep trim code
     ######### After Trimming reset the pll mode ############################
+    [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 1  #Change page in regmap
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0x0, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=1
     [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 1  #Change page in regmap
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0x0, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=1
     print(f"Optimal Code: {optimal_code}")
