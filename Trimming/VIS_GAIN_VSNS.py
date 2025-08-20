@@ -51,7 +51,7 @@ def vis_gain_vsns():
   vi_sns_turn_off()
   
   # VDDP_3P7 = VMEASURE(signal="PVDD", reference="GND", expected_value=3.7,error_spread=0)
-  vsns_gain_calculated = 2*pvdd_value/(int(vsns_gain_high_measured)-int(vsns_gain_low_measured)) #assuming VDDP=3.7V, otherwise value has to be updated 
+  vsns_gain_calculated = 2*pvdd_value/(vsns_gain_high_measured - vsns_gain_low_measured) #assuming VDDP=3.7V, otherwise value has to be updated 
   print(f'{Testname} value : {vsns_gain_calculated} ')
   I2C_WRITE("0x38", field_info={'fieldname': 'otp_vsense_gain', 'length': 14, 'registers': [{'REG': '0xB9', 'POS': 0, 'RegisterName': 'OTP FIELDS 9', 'RegisterLength': 8, 'Name': 'otp_vsense_gain[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xCC', 'POS': 0, 'RegisterName': 'OTP FIELDS 28', 'RegisterLength': 8, 'Name': 'otp_vsense_gain[13:8]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 13, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=hex(round(vsns_gain_calculated)) )
   VFORCE ("PVDD","GND",3.7,3.7)
