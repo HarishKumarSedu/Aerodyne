@@ -1,4 +1,4 @@
-# Processed on 2025-08-26 13:28:31
+# Processed on 2025-08-26 16:24:10
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -27,6 +27,12 @@ def offset_cal_cld_half_gain_3lvl():
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA0, data=0x4, Mask=0x4, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x17, data=0x0, Mask=0x1, Default=0x35 #  {'fieldname': 'input_cm_en', 'length': 1, 'registers': [{'REG': '0x17', 'POS': 0, 'RegisterName': 'Input cm settings 1', 'RegisterLength': 8, 'Name': 'input_cm_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': 'NNNNNN0N', 'Default': '0x35', 'User': 'YYYYY0YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}=0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x92, data=0x3, Mask=0x7, Default=0x3 #{'fieldname': 'spk_gain', 'length': 3, 'registers': [{'REG': '0x92', 'POS': 0, 'RegisterName': 'SPK setting reg 1', 'RegisterLength': 8, 'Name': 'spk_gain[2:0]', 'Mask': '0x7', 'Length': 3, 'FieldMSB': 2, 'FieldLSB': 0, 'Attribute': '000NNNNN', 'Default': '0x03', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}=5 (101)
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC8, data=0x0, Mask=0xFF, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCB, data=0x0, Mask=0x10, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCA, data=0x0, Mask=0xFF, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCB, data=0x0, Mask=0x4, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   # {'fieldname': 'cal_start', 'length': 1, 'registers': [{'REG': '0x79', 'POS': 0, 'RegisterName': 'CAL reg 4', 'RegisterLength': 8, 'Name': 'cal_start', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '00RR000P', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]} >/ Push button 
   [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0x79, data=0x1, Mask=0xFF
   sleep(0.2)
