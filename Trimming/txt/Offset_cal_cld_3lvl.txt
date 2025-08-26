@@ -1,4 +1,4 @@
-# Processed on 2025-08-25 17:40:17
+# Processed on 2025-08-26 11:07:05
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -26,7 +26,8 @@ def offset_cal_cld_3lvl():
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA0, data=0x8, Mask=0x8, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x17, data=0x0, Mask=0x1, Default=0x35 #  {'fieldname': 'input_cm_en', 'length': 1, 'registers': [{'REG': '0x17', 'POS': 0, 'RegisterName': 'Input cm settings 1', 'RegisterLength': 8, 'Name': 'input_cm_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': 'NNNNNN0N', 'Default': '0x35', 'User': 'YYYYY0YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}=0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x92, data=0x5, Mask=0x7, Default=0x3 #{'fieldname': 'spk_gain', 'length': 3, 'registers': [{'REG': '0x92', 'POS': 0, 'RegisterName': 'SPK setting reg 1', 'RegisterLength': 8, 'Name': 'spk_gain[2:0]', 'Mask': '0x7', 'Length': 3, 'FieldMSB': 2, 'FieldLSB': 0, 'Attribute': '000NNNNN', 'Default': '0x03', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}=5 (101)
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x79, data=0x1, Mask=0x1, Default=0x0 
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x79, data=0x1, Mask=0x1, Default=0x0 
+  # ERROR executing I2C_REG_WRITE: I2C_REG_WRITE() missing 1 required positional argument: 'PageNo'
   sleep(0.2)
   #*********
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
