@@ -1,4 +1,4 @@
-# Processed on 2025-08-25 16:13:24
+# Processed on 2025-08-26 16:53:26
 from dfttools import *
 
 
@@ -61,7 +61,7 @@ def vis_gain_vsns():
   Scale_Down = (64/2**20)
   vsns_gain_calculated = int((((vsns_gain_high_measured + vsns_gain_low_measured)/5 *LSB  -1 )*Scale_Factor) /Scale_Down) #assuming VDDP=3.7V, otherwise value has to be updated 
   # vsns_gain_calculated = 0x3e67  #assuming VDDP=3.7V, otherwise value has to be updated 
-  vsns_gain_calculated = vsns_gain_calculated if  vsns_gain_calculated & 0x2000 else 0x4000 -  vsns_gain_calculated
+  vsns_gain_calculated = 0x4000+vsns_gain_calculated if  vsns_gain_calculated & 0x2000 else 0x4000 -  vsns_gain_calculated
   print(f'{Testname} value : {hex(vsns_gain_calculated)} ')
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB9, data=hex(vsns_gain_calculated), Mask=0xFF, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCC, data=hex(vsns_gain_calculated), Mask=0x3F, Default=0x0
