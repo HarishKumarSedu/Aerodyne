@@ -25,8 +25,6 @@ WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 76; DATA: 1; MSB: 3; LSB: 3;COM: Mask: 
 WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 78; DATA: 2; MSB: 3; LSB: 2;COM: Mask: 0xC;;
 WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 78; DATA: 7; MSB: 6; LSB: 4;COM: Mask: 0x70;;
 WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 79; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: FE; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 2B; DATA: 2; MSB: 3; LSB: 2;COM: Mask: 0xC;;
 RD-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 2B; DATA: 0; MSB: 3; LSB: 2;COM: Mask: 0xC;;
 RD-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: C7; DATA: 00;;COM: Mask: 0xFF;;
 RD-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: CB; DATA: 0; MSB: 5; LSB: 5;COM: Mask: 0x20;;
