@@ -30,3 +30,5 @@ RD-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: C7; DATA: 00;;COM: Mask: 0xFF;;
 RD-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: CB; DATA: 0; MSB: 5; LSB: 5;COM: Mask: 0x20;;
 RD-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: C9; DATA: 00;;COM: Mask: 0xFF;;
 RD-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: CB; DATA: 0; MSB: 3; LSB: 3;COM: Mask: 0x8;;
+RD-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: FF; DATA: 00; MSB: 7; LSB: 3;COM: Mask: 0xF8;;
+RD-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: FF; DATA: 00; MSB: 7; LSB: 3;COM: Mask: 0xF8;;
