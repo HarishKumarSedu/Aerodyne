@@ -1,4 +1,4 @@
-# Processed on 2025-08-26 13:10:55
+# Processed on 2025-08-26 13:20:02
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -31,6 +31,11 @@ def offset_cal_cld_half_gain_3lvl():
   [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0x79, data=0x1, Mask=0xFF
   sleep(0.2)
   #*********
+  cal_offs_end_value = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x79, Mask=0x10
+  cal_offs_result_value = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x79, Mask=0x20
+  print(f'cal_offs_end_value : {hex(cal_offs_end_value)} , cal_offs_result_value :{hex(cal_offs_result_value)} ')
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0
   v2 = VMEASURE("OUTP","OUTN",0,0)
