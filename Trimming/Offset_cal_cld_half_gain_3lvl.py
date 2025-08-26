@@ -6,6 +6,7 @@ from Procedures.Playback import playback
 
 def offset_cal_cld_half_gain_3lvl():
   Test_Name = 'offset_cal_cld_half_gain_3lvl'
+  print(f'............ {Test_Name} ........')
   startup()
   global_enable()
   playback()
