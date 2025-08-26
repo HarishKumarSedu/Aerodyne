@@ -1,14 +1,21 @@
 
 
 Command;Check;Page;SAD;ADD;DATA;MSB;LSB;Comment
-WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: FE; DATA: 00;;COM: Mask: 0xFF;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 95; DATA: 2; MSB: 1; LSB: 0;COM: Mask: 0x3;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: A0; DATA: 1; MSB: 2; LSB: 2;COM: Mask: 0x4;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 92; DATA: 5; MSB: 2; LSB: 0;COM: Mask: 0x7;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 17; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: FE; DATA: 0; MSB: 0; LSB: 0;COM: Mask: 0x1;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 9F; DATA: 0; MSB: 0; LSB: 0;COM: Mask: 0x1;;
 WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 76; DATA: 0; MSB: 1; LSB: 1;COM: Mask: 0x2;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: A6; DATA: 0; MSB: 2; LSB: 2;COM: Mask: 0x4;;
 WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 76; DATA: F; MSB: 7; LSB: 4;COM: Mask: 0xF0;;
 WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 76; DATA: 1; MSB: 3; LSB: 3;COM: Mask: 0x8;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 78; DATA: 2; MSB: 3; LSB: 2;COM: Mask: 0xC;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 76; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 77; DATA: 0; MSB: 6; LSB: 4;COM: Mask: 0x70;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 77; DATA: 0; MSB: 2; LSB: 0;COM: Mask: 0x7;;
 WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 78; DATA: 7; MSB: 6; LSB: 4;COM: Mask: 0x70;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 79; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 78; DATA: 3; MSB: 3; LSB: 2;COM: Mask: 0xC;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 78; DATA: 3; MSB: 1; LSB: 0;COM: Mask: 0x3;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: A0; DATA: 1; MSB: 2; LSB: 2;COM: Mask: 0x4;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 17; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 92; DATA: 5; MSB: 2; LSB: 0;COM: Mask: 0x7;;
+WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 79; DATA: 01;;COM: Mask: 0xFF;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: FE; DATA: 0; MSB: 0; LSB: 0;COM: Mask: 0x1;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 9F; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
