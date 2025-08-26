@@ -1,4 +1,4 @@
-# Processed on 2025-08-26 14:26:46
+# Processed on 2025-08-26 14:49:57
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -12,7 +12,7 @@ def offset_cal_cld_3lvl():
   global_enable()
   playback()
   v1 = VMEASURE("OUTP","OUTN",0,0)
-  print(f'"OUTP" - "OUTN" befoer calibration {v1}')
+  print(f'"OUTP" - "OUTN" before calibration {v1}')
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x76, data=0x0, Mask=0x2, Default=0x82
@@ -55,8 +55,6 @@ def offset_cal_cld_3lvl():
   #FOR EXTERNAL FEEDBACK IS STORED IN REGISTER "C7" AND HIS RELATIVE SIGN IS STORED IN REGISTER "CB" IN THE BIT 5
   #FOR INTERNAL FEEDBACK IS STORED IN REGISTER "C9" AND HIS RELATIVE SIGN IS STORED IN REGISTER "CB" IN THE BIT 3
   #SANITY CHECK, THESE RESULTS SHOULD BE DIFFERENT FROM 0
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x2B, data=0x8, Mask=0xC, Default=0x2
   ext_offset_comp = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x2B, Mask=0xC
   ext_offset_comp = [i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0xC7, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0xCB, Mask=0x20
