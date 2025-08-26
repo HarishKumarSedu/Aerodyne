@@ -1,4 +1,4 @@
-# Processed on 2025-08-26 13:15:32
+# Processed on 2025-08-26 13:17:16
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -31,6 +31,9 @@ def offset_cal_cld_5lvl_vcm_comp_on():
   [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0x79, data=0x1, Mask=0xFF
   sleep(0.2)
   #*********
+  cal_offs_end_value = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x79, Mask=0x10
+  cal_offs_result_value = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x79, Mask=0x20
+  print(f'cal_offs_end_value : {hex(cal_offs_end_value)} , cal_offs_result_value :{hex(cal_offs_result_value)} ')
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0
   v2 = VMEASURE("OUTP","OUTN",0,0)
@@ -47,6 +50,6 @@ def offset_cal_cld_5lvl_vcm_comp_on():
 [i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0xCB, Mask=0x80
   int_offset_comp = [i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0xC9, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0xCB, Mask=0x8
-  print(f'ext_offset_comp : {ext_offset_comp}, int_offset_comp : {int_offset_comp}')
+  print(f'ext_offset_comp : {hex(ext_offset_comp)}, int_offset_comp : {hex(int_offset_comp)}')
 if __name__ == '__main__':
   offset_cal_cld_5lvl_vcm_comp_on()
