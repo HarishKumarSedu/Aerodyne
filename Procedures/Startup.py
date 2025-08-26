@@ -24,4 +24,6 @@ def startup():
   I2C_REG_WRITE( device_address="0x38", register_address=0x2F, write_value=0xBB,PageNo=1)
   # Switch to page 0
   I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x00,PageNo=0)
+  I2C_WRITE(device_address="0x38",field_info={'fieldname': 'iopad0_hyst', 'length': 1, 'registers': [{'REG': '0x38', 'POS': 0, 'RegisterName': 'IOPAD0 pad config', 'RegisterLength': 8, 'Name': 'iopad0_hyst', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': 'NNNN000N', 'Default': '0x00', 'User': '00YYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0x1)
+  I2C_WRITE(device_address="0x38",field_info={'fieldname': 'prechg_step_time', 'length': 2, 'registers': [{'REG': '0x2D', 'POS': 2, 'RegisterName': 'Sequencer settings 2', 'RegisterLength': 8, 'Name': 'prechg_step_time[1:0]', 'Mask': '0xC', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x50', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0x2)
 
