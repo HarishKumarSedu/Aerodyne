@@ -1,4 +1,4 @@
-# Processed on 2025-08-26 16:25:17
+# Processed on 2025-08-26 16:26:37
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -7,6 +7,7 @@ from Procedures.Playback import playback
 
 def offset_cal_cld_5lvl_half_gain_vcm_comp_on():
   Test_Name = 'offset_cal_cld_5lvl_half_gain_vcm_comp_on'
+  print(f'............ {Test_Name} ........')
   startup()
   global_enable()
   playback()
