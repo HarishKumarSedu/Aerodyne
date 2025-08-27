@@ -1,4 +1,4 @@
-# Processed on 2025-08-27 12:07:15
+# Processed on 2025-08-27 12:07:46
 from dfttools import *
 from time import sleep
 
@@ -16,6 +16,7 @@ Procedure
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
 sleep(0.001)
 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x0, Mask=0x1, Default=0x0 # {'fieldname': 'spk_en', 'length': 1, 'registers': [{'REG': '0x9F', 'POS': 0, 'RegisterName': 'Enables settings 5', 'RegisterLength': 8, 'Name': 'spk_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000S', 'Default': '0x00', 'User': '0000000Y', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]} off
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x8, Mask=0x8, Default=0xC
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x0, Mask=0x8, Default=0x21 #use internal trimmed PLL signal
 
