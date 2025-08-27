@@ -1,37 +1,31 @@
-# Processed on 2025-08-27 10:36:57
+# Processed on 2025-08-27 12:07:15
 from dfttools import *
 from time import sleep
 
-from Procedures.Startup import startup
-
-def rctune_48k():
-  Test_Name = 'RCTUNE_48K'
-  print(f'............ {Test_Name} ........')
-  # designers must go through the details and correct the procedure
-  '''
-  Procedure 
+Test_Name = 'RCTUNE_48K'
+from Procedures import Startup
+print(f'............ {Test_Name} ........')
+# designers must go through the details and correct the procedure
+'''
+Procedure 
     before to start the bandgap has to be trimmed
     1.Set 48KHz Family
     2.Run rctune procedure
 
-  '''
-  startup()
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
-  sleep(0.001)
+'''
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
+sleep(0.001)
 
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x8, Mask=0x8, Default=0xC
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x8, Mask=0x8, Default=0x21
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x8, Mask=0x8, Default=0xC
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x0, Mask=0x8, Default=0x21 #use internal trimmed PLL signal
 
-  sleep(0.001)
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x62, data=0x1, Mask=0x1, Default=0x0
-  sleep(0.001)
+sleep(0.001)
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x62, data=0x1, Mask=0x1, Default=0x0
+sleep(0.001) # wait at least 100us
 
 
-  print(f"Procedure finish")
+print(f"Procedure finish")
 
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x0, Mask=0x8, Default=0xC
-  sleep(0.001)
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0
-
-if __name__ == '__main__':
-  rctune_48k()
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x0, Mask=0x8, Default=0xC
+sleep(0.001)
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0
