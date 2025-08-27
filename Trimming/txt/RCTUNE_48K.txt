@@ -1,31 +1,37 @@
-# Processed on 2025-08-18 13:30:00
+# Processed on 2025-08-27 10:36:57
 from dfttools import *
 from time import sleep
 
-Test_Name = 'RCTUNE_48K'
-from Procedures import Startup
-print(f'............ {Test_Name} ........')
-# designers must go through the details and correct the procedure
-'''
-Procedure 
+from Procedures.Startup import startup
+
+def rctune_48k():
+  Test_Name = 'RCTUNE_48K'
+  print(f'............ {Test_Name} ........')
+  # designers must go through the details and correct the procedure
+  '''
+  Procedure 
     before to start the bandgap has to be trimmed
     1.Set 48KHz Family
     2.Run rctune procedure
 
-'''
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
-sleep(0.001)
+  '''
+  startup()
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
+  sleep(0.001)
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x8, Mask=0x8, Default=0xC
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x8, Mask=0x8, Default=0x21
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x8, Mask=0x8, Default=0xC
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x8, Mask=0x8, Default=0x21
 
-sleep(0.001)
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x62, data=0x1, Mask=0x1, Default=0x0
-sleep(0.001)
+  sleep(0.001)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x62, data=0x1, Mask=0x1, Default=0x0
+  sleep(0.001)
 
 
-print(f"Procedure finish")
+  print(f"Procedure finish")
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x0, Mask=0x8, Default=0xC
-sleep(0.001)
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x0, Mask=0x8, Default=0xC
+  sleep(0.001)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0
+
+if __name__ == '__main__':
+  rctune_48k()
