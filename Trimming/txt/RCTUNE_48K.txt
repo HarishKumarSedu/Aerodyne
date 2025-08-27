@@ -1,4 +1,4 @@
-# Processed on 2025-08-27 12:07:46
+# Processed on 2025-08-27 12:14:48
 from dfttools import *
 from time import sleep
 
@@ -13,6 +13,7 @@ Procedure
     2.Run rctune procedure
 
 '''
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
 sleep(0.001)
 
@@ -22,9 +23,9 @@ sleep(0.001)
 
 sleep(0.001)
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x62, data=0x1, Mask=0x1, Default=0x0
-sleep(0.001) # wait at least 100us
+sleep(0.1) # wait at least 100us
 
-
+[i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0xB2, Mask=0xF0
 print(f"Procedure finish")
 
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x0, Mask=0x8, Default=0xC
