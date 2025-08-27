@@ -1,4 +1,4 @@
-# Processed on 2025-08-19 14:30:58
+# Processed on 2025-08-27 11:40:09
 from dfttools import *
 from time import sleep
 import random
@@ -34,7 +34,7 @@ def selfreg_LDO_0v6():
     step_size = 7.57e-3 # 7.57mV
 
     # Number of steps width of the field / bits
-    num_steps = 2^4  # 4-bit
+    num_bits = 4  # 4-bit
 
     # Standard deviation for white noise
     noise_std_dev = 0.025
@@ -43,8 +43,8 @@ def selfreg_LDO_0v6():
     min_error = float('inf')
     optimal_code = None
     optimal_measured_value = None
-
-    for i in range(num_steps):
+    # 4bit :> sweep 8 to 15, 0 t0 7
+    for i in list(list(range(2**num_bits//2, 2**num_bits))+list(range(0,2**num_bits//2))):
         # sweep trimg code
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCD, data=hex(i), Mask=0xF, Default=0x0
         expected_value = low_value + i * step_size 
