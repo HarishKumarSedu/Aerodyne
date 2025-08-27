@@ -1,4 +1,4 @@
-# Processed on 2025-08-19 14:12:08
+# Processed on 2025-08-27 14:09:20
 from dfttools import *
 from time import sleep
 import random
@@ -42,8 +42,10 @@ def uvlo_l2h():
     optimal_measured_value = None
     force_voltage_low_limit = 2  # minimum voltage limit can be 1.5V
     force_voltage_high_limit = 2.5  # maximum voltage limit can go upto 3.7V 
-
-    for Code in range(2**code_width):
+    part1 = list(range(18, -1, -1))      # 18 down to 0
+    part2 = list(range(31, 18, -1))      # 31 down to 19
+    decimal_list = part1 + part2
+    for Code in decimal_list:
         # TODO: Write trimming code to device via I2C
         # Example (uncomment and fill device_address and field_info):
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB3, data=hex(Code), Mask=0x1F, Default=0x60
