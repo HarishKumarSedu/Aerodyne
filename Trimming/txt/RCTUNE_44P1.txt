@@ -1,31 +1,39 @@
-# Processed on 2025-08-27 12:08:34
+# Processed on 2025-08-27 12:21:31
 from dfttools import *
 from time import sleep
 
-Test_Name = 'RCTUNE_44P1'
-from Procedures import Startup
-print(f'............ {Test_Name} ........')
-# designers must go through the details and correct the procedure
-'''
-Procedure 
+from Procedures.Startup import startup
+def ructune_44p1():
+  Test_Name = 'RCTUNE_44P1'
+  print(f'............ {Test_Name} ........')
+  startup()
+  # designers must go through the details and correct the procedure
+  '''
+  Procedure 
     before to start the bandgap has to be trimmed
     1.Set 44.1KHz Family
     2.Run rctune procedure
 
-'''
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
-sleep(0.001)
+  '''
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
+  sleep(0.001)
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x0, Mask=0x1, Default=0x0 # {'fieldname': 'spk_en', 'length': 1, 'registers': [{'REG': '0x9F', 'POS': 0, 'RegisterName': 'Enables settings 5', 'RegisterLength': 8, 'Name': 'spk_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000S', 'Default': '0x00', 'User': '0000000Y', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]} off
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x0, Mask=0x8, Default=0xC
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x0, Mask=0x8, Default=0x21 #use internal trimmed PLL signal
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x0, Mask=0x1, Default=0x0 # {'fieldname': 'spk_en', 'length': 1, 'registers': [{'REG': '0x9F', 'POS': 0, 'RegisterName': 'Enables settings 5', 'RegisterLength': 8, 'Name': 'spk_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000S', 'Default': '0x00', 'User': '0000000Y', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]} off
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x0, Mask=0x8, Default=0xC
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x0, Mask=0x8, Default=0x21 #use internal trimmed PLL signal
 
-sleep(0.001)
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x62, data=0x1, Mask=0x1, Default=0x0
-sleep(0.001)
+  sleep(0.001)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x62, data=0x1, Mask=0x1, Default=0x0
+
+  sleep(0.1) # wait at least 100us
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  rctune_44 = [i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0xB1, Mask=0xF0
+  print(f"Procedure finish")
+  print(f"{Test_Name} :> Code {hex(rctune_44)}")
 
 
-print(f"Procedure finish")
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x0, Mask=0x8, Default=0xC
+  sleep(0.001)
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x60, data=0x0, Mask=0x8, Default=0xC
-sleep(0.001)
+if __name__ == '__main__':
+  ructune_44p1()
