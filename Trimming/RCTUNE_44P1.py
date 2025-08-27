@@ -2,7 +2,7 @@ from dfttools import *
 from time import sleep
 
 from Procedures.Startup import startup
-def ructune_44p1():
+def rctune_44p1():
   Test_Name = 'RCTUNE_44P1'
   print(f'............ {Test_Name} ........')
   startup()
@@ -35,4 +35,4 @@ def ructune_44p1():
   sleep(0.001)
 
 if __name__ == '__main__':
-  ructune_44p1()
+  rctune_44p1()
