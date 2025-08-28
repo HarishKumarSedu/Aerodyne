@@ -1,9 +1,10 @@
-# Processed on 2025-08-27 15:50:34
+# Processed on 2025-08-28 09:34:21
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
 from Procedures.VI_SNS_turn_on import vi_sns_turn_on
+from Procedures.VI_SNS_turn_off import vi_sns_turn_off
 
 from time import sleep
 def vis_gain_v2i():
@@ -32,8 +33,9 @@ def vis_gain_v2i():
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0  # set bridge switch (LSp off, MIDp off, CASp off, HSp off, LSn off, MIDn off, CASn off, HSn off)
   # read the isense value before trimming 
-  i_sense_before_trim = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
+  i_sense_code_before_trim = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
+  print(f'i_sense_code_before_trim : {hex(i_sense_code_before_trim)}')
   sleep(0.1)
   # Put the Bridege in High Impedence 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0
@@ -59,9 +61,22 @@ def vis_gain_v2i():
   print(f'isns_gain_low_measured : {hex(isns_gain_low_measured)}')
   
   LSB_expander = 64/2**20 # expand to know how many lsb's
-  v2i_gain = int(((vsns_gain_high_measured+vsns_gain_low_measured) / (isns_gain_high_measured + isns_gain_low_measured) ) / LSB_expander )  
-  v2i_gain_code = 0x10000+v2i_gain if  v2i_gain & 0x800 else 0x10000 -  v2i_gain
-  
-  
+  v2i_gain = int(((vsns_gain_high_measured+vsns_gain_low_measured) / (isns_gain_high_measured + isns_gain_low_measured) ) / LSB_expander ) & 0xFFF # convert it to the 12bit value
+  v2i_gain_code = 0x1000 - v2i_gain  if (v2i_gain & 0x800) else v2i_gain
+  # write the v2i_gain_code 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBF, data=v2i_gain_code, Mask=0xF, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC0, data=v2i_gain_code, Mask=0xFF, Default=0x0
+  # read corrected isense value 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+  i_sense_code_after_trim = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
+[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
+  print(f'i_sense_code_after_trim : {hex(i_sense_code_after_trim)}')
+  # turn off the power supply on Outp Vs Outn
+  VFORCE ("OUTP","OUTN",float('Inf'),0)
+  # turn off the driver 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x0, Mask=0x10, Default=0x81
+  # turn off vi sense block 
+  vi_sns_turn_off()
 if __name__ == '__main__':
   vis_gain_v2i()
