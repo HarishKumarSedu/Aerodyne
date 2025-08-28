@@ -1,4 +1,4 @@
-# Processed on 2025-08-28 15:06:58
+# Processed on 2025-08-28 15:10:21
 from dfttools import *
 from time import sleep
 import random
@@ -23,12 +23,13 @@ def ocp_hs_trim():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x40, Mask=0x40, Default=0x0  
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x40, Mask=0x40, Default=0x0  
   
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x5, Mask=0xFF, Default=0x0  # Turn on Cascode N, low side N mos trun on 
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x20, Mask=0x20, Default=0x86  
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x10, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x10, Mask=0x10, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x20, Mask=0x20, Default=0x86  
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x5, Mask=0xFF, Default=0x0  # Trun p and mid N
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x4, Mask=0x7F, Default=0x0 # FSYN ana_ds_mid_up
 
@@ -53,6 +54,7 @@ def ocp_hs_trim():
 
           # 3. breve attesa per stabilizzare il circuito
           sleep(50e-6)  # 50 µs
+          [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB6, data=code, Mask=0xF0, Default=0x88
 
           # 4. leggiamo di nuovo l’uscita del comparatore # @ATE "GND" = > "PGND"
           mid_up = VMEASURE(signal="IOCLK1", reference="GND",expected_value=0.9, error_spread=0.5)
@@ -62,7 +64,6 @@ def ocp_hs_trim():
               print(f"trim code = {code:.3f} ")
               break
           
-          [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB6, data=code, Mask=0xF0, Default=0x88
     # @ATE "GND" = > "PGND"
   AFORCE(signal="OUTP", reference="GND", value=float('inf'), error_spread=0.05)  # stop forcing
 
