@@ -33,7 +33,7 @@ def bg_0v9():
     step_size = 7.57e-3 # 7.57mV
 
     # Number of steps width of the field / bits
-    num_steps = 2^4  # 4-bit
+    num_bits = 4  # 4-bit
 
     # Standard deviation for white noise
     noise_std_dev = 0.025
@@ -42,8 +42,8 @@ def bg_0v9():
     min_error = float('inf')
     optimal_code = None
     optimal_measured_value = None
-
-    for i in range(num_steps):
+    # 4bit :> sweep 8 to 15, 0 t0 7
+    for i in list(list(range(2**num_bits//2, 2**num_bits))+list(range(0,2**num_bits//2))):
         # sweep trimg code
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_ref_bg_trm_0v9', 'length': 4, 'registers': [{'REG': '0xB0', 'POS': 4, 'RegisterName': 'OTP FIELDS 0', 'RegisterLength': 8, 'Name': 'otp_ds_ref_bg_trm_0v9[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=hex(i))
         # Generate monotonic values with step size
@@ -59,7 +59,7 @@ def bg_0v9():
     # Check for limits
     if low_value < optimal_measured_value < high_value:
         print(f'............ {Test_Name} Passed ........')
-        raise RuntimeError(f'............ {Test_Name} Failed ........')
+        # raise RuntimeError(f'............ {Test_Name} Failed ........')
         # write the optimized code if the trim passed
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_ref_bg_trm_0v9', 'length': 4, 'registers': [{'REG': '0xB0', 'POS': 4, 'RegisterName': 'OTP FIELDS 0', 'RegisterLength': 8, 'Name': 'otp_ds_ref_bg_trm_0v9[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=optimal_code)
     else:
