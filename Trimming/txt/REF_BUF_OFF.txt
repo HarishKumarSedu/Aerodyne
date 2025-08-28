@@ -1,9 +1,9 @@
-# Processed on 2025-08-19 14:31:13
+# Processed on 2025-08-28 11:46:09
 from dfttools import *
 from time import sleep
 import random
 
-def offset():
+def offset(target=1.2):
   Test_Name = 'REF_BUF_OFF'
   from Procedures import Startup
   from Procedures import Global_enable
@@ -18,7 +18,7 @@ def offset():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x2, Mask=0x2, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
 
-  force_value = 1.2 # forcing 1.2V on "ADDR" pin
+  force_value = target # forcing as default 1.2V on "ADDR" pin
   error_spread = force_value*0.05
   forced_voltage=VFORCE(signal="ADDR", reference="GND", value=force_value, error_spread=error_spread)
   measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=force_value, error_spread=error_spread)
