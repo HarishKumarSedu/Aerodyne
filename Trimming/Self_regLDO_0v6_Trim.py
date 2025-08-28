@@ -28,7 +28,7 @@ def selfreg_LDO_0v6():
     low_value = typical_value - typical_value*percentage
     high_value = typical_value + typical_value*percentage
 
-    buffer_offset = offset() # 10mV
+    buffer_offset = offset(typical_value) # 10mV
     # Step size
     step_size = 7.57e-3 # 7.57mV
 
