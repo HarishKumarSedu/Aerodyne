@@ -33,7 +33,7 @@ def ocp_ls_trim():
   # Wait for device stabilization
   sleep(0.1)  # 100 µs
   i_force = 3/4
-  max_step = 15
+  bit_width = 4 # width of the field 
   th = 1.8/2
   # @ATE, "GND" in the following instruction is "PGND"
   AFORCE(signal="OUTP", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
@@ -44,10 +44,11 @@ def ocp_ls_trim():
   if mid_up > th:
       print("Errore: all’avvio il comparatore è già alto")
   else:
-      for code in reversed(range(15)):
+    # sweep code from 0xF to 0x8, then 0x0 to 0x7
+      for code in list(list(range(2**bit_width,2**bit_width//2,-1))+list(range(0,2**bit_width//2,1))) : 
 
           # 3. breve attesa per stabilizzare il circuito
-          sleep(50e-6)  # 50 µs
+          sleep(0.1)  # 50 µs
           I2C_WRITE(device_address="0x38", field_info={'fieldname': 'otp_ds_dvr_ocp_ref_ls_trim', 'length': 4, 'registers': [{'REG': '0xB6', 'POS': 0, 'RegisterName': 'OTP FIELDS 6', 'RegisterLength': 8, 'Name': 'otp_ds_dvr_ocp_ref_ls_trim[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x88', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=code)
           # 4. leggiamo di nuovo l’uscita del comparatore
           mid_up = VMEASURE(signal="IOCLK1", reference="GND",expected_value=0.9, error_spread=0.5)
