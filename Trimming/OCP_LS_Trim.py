@@ -55,7 +55,7 @@ def ocp_ls_trim():
 
           # 5. se abbiamo superato la soglia, abbiamo finito
           if mid_up > th:
-              print(f"trim code = {code:.3f} ")
+              print(f"trim code = {hex(code)} ")
               break
 
   AFORCE(signal="OUTP", reference="GND", value=float('inf'), error_spread=0.05)  # stop forcing
