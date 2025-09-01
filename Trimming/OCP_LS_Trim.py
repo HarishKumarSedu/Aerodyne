@@ -45,7 +45,7 @@ def ocp_ls_trim():
       print("Errore: all’avvio il comparatore è già alto")
   else:
     # sweep code from 0xF to 0x8, then 0x0 to 0x7
-      for code in list(list(range(2**bit_width,2**bit_width//2,-1))+list(range(0,2**bit_width//2,1))) : 
+      for code in list(list(range(2**bit_width -1,2**bit_width//2 -1,-1))+list(range(0,2**bit_width//2,1))) : 
 
           # 3. breve attesa per stabilizzare il circuito
           sleep(0.1)  # 50 µs
