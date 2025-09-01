@@ -1,4 +1,4 @@
-# Processed on 2025-09-01 15:38:43
+# Processed on 2025-09-01 15:40:25
 from dfttools import *
 from time import sleep
 import random
@@ -60,7 +60,7 @@ def ocp_ls_trim():
               break
 
   AFORCE(signal="OUTP", reference="GND", value=float('inf'), error_spread=0.05)  # stop forcing
-
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x0, Mask=0x10, Default=0x81  
 
