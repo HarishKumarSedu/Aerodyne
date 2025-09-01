@@ -1,4 +1,4 @@
-# Processed on 2025-09-01 12:10:43
+# Processed on 2025-09-01 12:16:52
 from dfttools import *
 from time import sleep
 import random
@@ -31,7 +31,7 @@ def ocp_hs_trim():
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x5, Mask=0xFF, Default=0x0  # Trun p and mid N
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x4, Mask=0x7F, Default=0x0 # FSYN ana_ds_mid_up
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x5, Mask=0x7F, Default=0x0 # FSYN 
 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB6, data=0xF0, Mask=0xF0, Default=0x88 #lower threshold to 750mV
 
