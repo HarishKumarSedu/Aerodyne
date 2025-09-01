@@ -1,4 +1,4 @@
-# Processed on 2025-08-28 14:35:04
+# Processed on 2025-09-01 12:12:35
 from dfttools import *
 from time import sleep
 import random
@@ -29,10 +29,7 @@ def ocp_ls_trim():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x10, Mask=0x10, Default=0x0
   
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB6, data=0xF, Mask=0xF, Default=0x88 #lower threshold to 750mV
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x1, Mask=0x1, Default=0x0 # turn on ocp
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x1, Mask=0x1, Default=0x0
 
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 # page 1
 
   # Wait for device stabilization
   sleep(0.1)  # 100 µs
