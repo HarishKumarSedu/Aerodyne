@@ -36,7 +36,7 @@ def ocp_hs_trim():
 
 
   # Wait for device stabilization
-  sleep(0.0001)  # 100 µs
+  sleep(0.1)  # 100 µs
   i_force = - 3/4
   max_step = 15
   th = 1.8/2
