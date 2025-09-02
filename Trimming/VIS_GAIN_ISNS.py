@@ -2,8 +2,8 @@ from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
 from Procedures.VI_SNS_turn_on import vi_sns_turn_on
-from Procedures.CLASSD_OUT_CURR_TRIM import classd_out_curr_trim
 
 def vis_gain_isns():
   Testname = 'VIS_GAIN_ISNS'
@@ -21,12 +21,15 @@ def vis_gain_isns():
   '''
   startup()
   global_enable()
+  playback()
   vi_sns_turn_on()
-  classd_out_curr_trim()
 
   print(f' ........ Source 500mA from SPKRP/SPKRM ........ ')
+  
   source_current = 500e-3
   sleep(0.001)
+  I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_dvr_force_sel', 'length': 8, 'registers': [{'REG': '0x9C', 'POS': 0, 'RegisterName': 'CLD analog setting reg 6', 'RegisterLength': 8, 'Name': 'cld_dvr_force_sel[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x66)  # select all switch off
+  I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_drv_force', 'length': 1, 'registers': [{'REG': '0x9B', 'POS': 4, 'RegisterName': 'CLD analog setting reg 5', 'RegisterLength': 8, 'Name': 'cld_drv_force', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': 'NNNNNNNN', 'Default': '0x81', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x1)  # force the switch in the selected position above
   AFORCE(signal="OUTP",reference="OUTN",value=source_current, error_spread=source_current*0.01) # 1% error
   # AFORCE(signal="OUTN",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
   sleep(0.001)
