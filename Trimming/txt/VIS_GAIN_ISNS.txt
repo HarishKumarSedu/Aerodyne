@@ -1,10 +1,10 @@
-# Processed on 2025-08-18 13:29:39
+# Processed on 2025-09-02 16:43:12
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
 from Procedures.VI_SNS_turn_on import vi_sns_turn_on
-from Procedures.CLASSD_OUT_CURR_TRIM import classd_out_curr_trim
 
 def vis_gain_isns():
   Testname = 'VIS_GAIN_ISNS'
@@ -22,12 +22,15 @@ def vis_gain_isns():
   '''
   startup()
   global_enable()
+  playback()
   vi_sns_turn_on()
-  classd_out_curr_trim()
 
   print(f' ........ Source 500mA from SPKRP/SPKRM ........ ')
+  
   source_current = 500e-3
   sleep(0.001)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0  # select all switch off
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81  # force the switch in the selected position above
   AFORCE(signal="OUTP",reference="OUTN",value=source_current, error_spread=source_current*0.01) # 1% error
   # AFORCE(signal="OUTN",reference="GND",value=-source_current, error_spread=source_current*0.01) # 1% error
   sleep(0.001)
