@@ -1,29 +1,34 @@
-# Processed on 2025-08-11 10:11:34
+# Processed on 2025-09-03 11:45:26
 from dfttools import *
 from time import sleep
 import random
 
 Test_Name = 'Self_Reg_LDO_1V2'
-from Procedures import Startup
-from Procedures import Global_enable
-print(f'............ {Test_Name} ........')
-
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+def self_reg_ldo_1V2():
+  print(f'............ {Test_Name} ........')
+  startup()
+  global_enable()
+  '''
+  Turn ON the part in active mode, temp=27°C, vddp=3.7V, vddio=1.8 and the AnaLDO enaled.
+  Wait 400 us.
+  Bring out to the analog test point (rfu_ds_ref_test_en_vddd=11d)
+  Target voltage is 1.2V
 '''
-Turn ON the part in active mode, temp=27°C, vddp=3.7V, vddio=1.8 and the AnaLDO enaled.
-Wait 400 us.
-Bring out to the analog test point (rfu_ds_ref_test_en_vddd=11d)
-Target voltage is 1.2V
-'''
-# Enabling test page
-[i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
-# Enabling the analog TMUX
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x80, Mask=0x80, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0xC, Mask=0xF, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+  # Enabling test page
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+  # Enabling the analog TMUX
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x80, Mask=0x80, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0xC, Mask=0xF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+  
+  target_value = 1.2 # 1.2V
+  error_spread = target_value*0.05 # 5% of target value
+  measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=error_spread)
+  error = abs(measured_value - target_value)/abs(target_value) *100
+  print(f"Optimal measured value : {measured_value}V, Target value : {target_value}V")
+  print(f"Minimum Error: {error}%")
 
-target_value = 1.2 # 1.2V
-error_spread = target_value*0.05 # 5% of target value
-measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=error_spread)
-error = abs(measured_value - target_value)/abs(target_value) *100
-print(f"Optimal measured value : {measured_value}V, Target value : {target_value}V")
-print(f"Minimum Error: {error}%")
+if __name__ == '__main__':
+  self_reg_ldo_1V2()
