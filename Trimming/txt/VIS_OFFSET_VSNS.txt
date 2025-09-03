@@ -1,4 +1,4 @@
-# Processed on 2025-08-27 10:37:25
+# Processed on 2025-09-03 11:15:14
 from dfttools import *
 
 
@@ -45,13 +45,13 @@ def vis_offset_vsns():
   # convert from the two's complement
   vsns_offset_measured= (0x10000 - vsns_offset_measured)>>3 &0x3F  if vsns_offset_measured & 0x8000 else 0x40 - (vsns_offset_measured >> 3)&0x3f
   print(f'{Testname} value : {hex(vsns_offset_measured)} ')
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB8, data=hex(vsns_offset_measured), Mask=0x3F, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-  # put the birdge in the HiZ
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB8, data=hex(vsns_offset_measured), Mask=0x3F, Default=0x0
+  # put the birdge in the HiZ
   # turn the Vmid buffer Vmid = Vddp/2
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x40, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x0, Mask=0x40, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 # bridge HiZ
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x0, Mask=0x10, Default=0x81
   vi_sns_turn_off()
