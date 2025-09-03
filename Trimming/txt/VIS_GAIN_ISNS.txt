@@ -1,4 +1,4 @@
-# Processed on 2025-09-03 10:18:01
+# Processed on 2025-09-03 10:18:49
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -55,10 +55,10 @@ def vis_gain_isns():
   Scale_Down = (64/2**20) # weight of the isense
   isns_gain_calculated = int((((isns_current_source_measured + isns_current_sink_measured)/(surce_current_measured - surce_sink_measured ) *LSB  -1 )*Scale_Factor) /Scale_Down) & 0xFFF # convert it to 12bit 
   # Change the sign of the gain code 
-  isns_gain_calculated = 0x4000+isns_gain_calculated if  isns_gain_calculated & 0x2000 else 0x4000 -  isns_gain_calculated
-  print(f'{Testname} value : {isns_gain_calculated} ')
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=hex(round(isns_gain_calculated)), Mask=0x3F, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBC, data=hex(round(isns_gain_calculated)), Mask=0xFF, Default=0x0
+  isns_gain_code = 0x4000+isns_gain_calculated if  isns_gain_calculated & 0x2000 else 0x4000 -  isns_gain_calculated
+  print(f'{Testname} Gain Code  : {hex(isns_gain_code)} ')
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=isns_gain_code, Mask=0x3F, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBC, data=isns_gain_code, Mask=0xFF, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0  # set bridge switch (LSp off, MIDp off, CASp off, HSp off, LSn off, MIDn off, CASn off, HSn off)
   # disconnect the current sources applying infinity current 
 if __name__ == '__main__':
