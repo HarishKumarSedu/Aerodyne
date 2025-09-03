@@ -1,4 +1,4 @@
-# Processed on 2025-09-03 11:41:11
+# Processed on 2025-09-03 11:48:35
 from dfttools import *
 from time import sleep
 import random
@@ -26,6 +26,9 @@ def bg_0v4():
   error = abs(measured_value - target_value)/abs(target_value) *100
   print(f"Optimal measured value : {measured_value}V, Target value : {target_value}V")
   print(f"Minimum Error: {error}%")
-
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
 if __name__ == '__main__':
   bg_0v4()
