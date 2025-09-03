@@ -1,4 +1,4 @@
-# Processed on 2025-08-18 13:29:23
+# Processed on 2025-09-03 17:08:42
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -22,7 +22,6 @@ def gpadctemp_off_trim():
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x10, Mask=0x3F, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0xC, Mask=0xC, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x1, Mask=0xF, Default=0x1
-    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x8, Mask=0x8, Default=0x21
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x1
     sleep(0.003)
     #[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
@@ -39,8 +38,7 @@ def gpadctemp_off_trim():
     error_spread = target_value*0.05 # 5% of target value
     temp_read=[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x21, Mask=0x3
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x22, Mask=0xFF
-    temp_dec=int(temp_read)
-    temp_corr=target_value-temp_dec
+    temp_corr=target_value-temp_read
     if temp_corr <0:  
         temp_core=256+temp_corr
     else:
