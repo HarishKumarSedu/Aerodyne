@@ -7,7 +7,8 @@ from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
 def bg_current():
   print(f'............ {Test_Name} ........')
-
+  startup()
+  global_enable()
   '''
 -----------------------------------------------
   1.BG 0.8uA
