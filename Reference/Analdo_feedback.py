@@ -2,7 +2,7 @@ from dfttools import *
 from time import sleep
 import random
 
-Test_Name = 'Analdo feedback'
+Test_Name = 'Analdo_feedback'
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
 def analdo_feedback():
