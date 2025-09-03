@@ -49,7 +49,7 @@ def vis_gain_isns():
   LSB = (20/2**15) # lsb of the 16 bit isense value 
   Scale_Factor = (3/20) # full adapter 
   Scale_Down = (64/2**20) # weight of the isense
-  isns_gain_calculated = int((((isns_current_source_measured + isns_current_sink_measured)/(surce_current_measured - surce_sink_measured ) *LSB  -1 )*Scale_Factor) /Scale_Down) & 0xFFF # convert it to 12bit 
+  isns_gain_calculated = int((((isns_current_source_measured + isns_current_sink_measured)/(surce_current_measured - surce_sink_measured ) *LSB  -1 )*Scale_Factor) /Scale_Down) 
   # Change the sign of the gain code 
   isns_gain_code = 0x4000+isns_gain_calculated if  isns_gain_calculated & 0x2000 else 0x4000 -  isns_gain_calculated
   print(f'{Testname} Gain Code  : {hex(isns_gain_code)} ')
