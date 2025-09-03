@@ -47,11 +47,11 @@ def gpadc_vbat_gain_off_trim():
     CODE1=I2C_READ(device_address="0x38",field_info={'fieldname': 'vbat_meas', 'length': 10, 'registers': [{'REG': '0x23', 'POS': 0, 'RegisterName': 'VBAT measurement reg 1', 'RegisterLength': 8, 'Name': 'vbat_meas[9:8]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': '000000RR', 'Default': '0x00', 'User': '00YYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x24', 'POS': 0, 'RegisterName': 'VBAT measurement reg 2', 'RegisterLength': 8, 'Name': 'vbat_meas[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},expected_value=0x380)
 
     mreal=(VB1-VB0)/(CODE1-CODE0)
-    vbat_off=round((VB0/mreal)-CODE0)
+    vbat_off=int((VB0/mreal)-CODE0)
 
-
-    if vbat_off & 0x200:  
-        otp_vbat_off=0x400 - vbat_off
+    # check if the offset is negative trim otherwise just passby
+    if vbat_off < 0:  
+        otp_vbat_off=0x400 + vbat_off
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'i2c_page_sel_1', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel_1', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=1)
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_sar_offs', 'length': 10, 'registers': [{'REG': '0xBF', 'POS': 4, 'RegisterName': 'OTP FIELDS 15 - TRACEABILITY 3', 'RegisterLength': 8, 'Name': 'otp_sar_offs[9:8]', 'Mask': '0x30', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xC1', 'POS': 0, 'RegisterName': 'OTP FIELDS 17 - TRACEABILITY 5', 'RegisterLength': 8, 'Name': 'otp_sar_offs[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=otp_vbat_off)
         print(f"Optimal Code: {otp_vbat_off}")
@@ -59,7 +59,7 @@ def gpadc_vbat_gain_off_trim():
     #     otp_vbat_off=vbat_off
           print('!!!!!!!!!!!!!! Offset Can not be Trimmed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     vbat_gain=int((mreal/mid-1)*1024)
-    otp_vbat_gain = 0x100 - vbat_gain if vbat_gain & 0x80 else vbat_gain
+    otp_vbat_gain = 0x100 + vbat_gain if vbat_gain & 0x80 else 0x100 - vbat_gain
 
     print(f'............ {Test_Name} Passed ........')
         # write the optimized code if the trim passed
