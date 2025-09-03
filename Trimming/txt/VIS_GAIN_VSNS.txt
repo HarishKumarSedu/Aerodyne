@@ -1,4 +1,4 @@
-# Processed on 2025-08-27 10:37:36
+# Processed on 2025-09-03 11:01:03
 from dfttools import *
 
 
@@ -31,24 +31,22 @@ def vis_gain_vsns():
   vi_sns_turn_on()
   pvdd_value = VFORCE ("PVDD","GND",3.7,3.7)
   sleep(0.1)
-  VFORCE("OUTP","OUTN",2.5,0)
+  outp_ount_pV = VFORCE("OUTP","OUTN",2.5,0.01)
   sleep(1)
-  vsns_gain_high_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
+  vsns_high_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
-  vsns_gain_high_measured =  0x10000 - vsns_gain_high_measured if vsns_gain_high_measured > 0x1000 else vsns_gain_high_measured
-  print(f'vsns_gain_high_measured : {hex(vsns_gain_high_measured)}')
-  VFORCE ("OUTP","OUTN",-2.5,0)
+  vsns_high_code =  0x10000 - vsns_high_code if vsns_high_code & 0x8000 else vsns_high_code
+  print(f'vsns_high_code : {hex(vsns_high_code)}')
+  outp_ount_nV = VFORCE ("OUTP","OUTN",-2.5,0.01)
   sleep(1)
-  vsns_gain_low_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
+  vsns_low_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
-  vsns_gain_low_measured = 0x10000 - vsns_gain_low_measured   if vsns_gain_low_measured > 0x1000 else vsns_gain_low_measured
-  print(f'vsns_gain_low_measured : {hex(vsns_gain_low_measured)}')
-  
-  vi_sns_turn_off()
+  vsns_low_code = 0x10000 - vsns_low_code   if vsns_low_code & 0x8000 else vsns_low_code
+  print(f'vsns_low_code : {hex(vsns_low_code)}')
   
   '''
-    1. (vsns_gain_high_measured + vsns_gain_low_measured)/5 => delta (code) / delta (outp,outn) {@outp,outn =>2.5V}
-      a. vsns_gain_high_measured,vsns_gain_low_measured are twos complemented if the the code is negative 
+    1. (vsns_high_code + vsns_low_code)/5 => delta (code) / delta (outp,outn) {@outp,outn =>2.5V}
+      a. vsns_high_code,vsns_low_code are twos complemented if the the code is negative 
       
     2. LSB = (5.5/2**15) {@ 16bit signed vsens value so the total steps => 2**15@referece 5.5V}
     3. delta (code) / delta (outp,outn) x LSB -1 => Residual of the gain 
@@ -59,15 +57,34 @@ def vis_gain_vsns():
   LSB = (5.5/2**15)
   Scale_Factor = (5/5.5)
   Scale_Down = (64/2**20)
-  vsns_gain_calculated = int((((vsns_gain_high_measured + vsns_gain_low_measured)/5 *LSB  -1 )*Scale_Factor) /Scale_Down) #assuming VDDP=3.7V, otherwise value has to be updated 
+  vsns_gain_calculated = int((((vsns_high_code + vsns_low_code)/(outp_ount_pV - outp_ount_nV) *LSB  -1 )*Scale_Factor) /Scale_Down) #assuming VDDP=3.7V, otherwise value has to be updated 
   # vsns_gain_calculated = 0x3e67  #assuming VDDP=3.7V, otherwise value has to be updated 
-  vsns_gain_calculated = 0x4000+vsns_gain_calculated if  vsns_gain_calculated & 0x2000 else 0x4000 -  vsns_gain_calculated
-  print(f'{Testname} value : {hex(vsns_gain_calculated)} ')
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB9, data=hex(vsns_gain_calculated), Mask=0xFF, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCC, data=hex(vsns_gain_calculated), Mask=0x3F, Default=0x0
+  vsns_gain_code = 0x4000+vsns_gain_calculated if  vsns_gain_calculated & 0x2000 else 0x4000 -  vsns_gain_calculated
+  print(f'{Testname} value : {hex(vsns_gain_code)} ')
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB9, data=hex(vsns_gain_code), Mask=0xFF, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCC, data=hex(vsns_gain_code), Mask=0x3F, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+  ########### Validate the Vsns Gain ###############
+  outp_ount_pV = VFORCE("OUTP","OUTN",2.5,0.1)
+  sleep(1)
+  vsns_high_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
+[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
+  sign = "-" if vsns_high_code & 0x8000 else "+"
+  vsns_high_code =  0x10000 - vsns_high_code if vsns_high_code & 0x8000 else vsns_high_code
+  high_voltage = vsns_high_code * LSB * Scale_Factor
+  print(f' Outp Vs Ount : {outp_ount_pV}V, vns voltage {sign}{high_voltage}V')
+  outp_ount_nV = VFORCE("OUTP","OUTN",2.5,0.1)
+  sleep(1)
+  vsns_low_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
+[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
+  sign = "-" if vsns_high_code & 0x8000 else "+"
+  vsns_high_code =  0x10000 - vsns_low_code if vsns_low_code & 0x8000 else vsns_low_code
+  high_voltage = vsns_low_code * LSB * Scale_Factor
+  print(f' Outp Vs Ount : {outp_ount_pV}V, vns voltage {sign}{high_voltage}V')
+  ##################################################
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x0, Mask=0x10, Default=0x81
   VFORCE("OUTP","OUTN",float('Inf'),0)
+  vi_sns_turn_off()
 
 if __name__ == '__main__':
   vis_gain_vsns()
