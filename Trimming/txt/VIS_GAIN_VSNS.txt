@@ -1,4 +1,4 @@
-# Processed on 2025-09-03 11:03:00
+# Processed on 2025-09-03 11:03:29
 from dfttools import *
 
 
@@ -73,7 +73,7 @@ def vis_gain_vsns():
   vsns_high_code =  0x10000 - vsns_high_code if vsns_high_code & 0x8000 else vsns_high_code
   high_voltage = vsns_high_code * LSB * Scale_Factor
   print(f' Outp Vs Ount : {outp_ount_pV}V, vns voltage {sign}{high_voltage}V')
-  outp_ount_nV = VFORCE("OUTP","OUTN",2.5,0.1)
+  outp_ount_nV = VFORCE("OUTP","OUTN",-2.5,0.1)
   sleep(1)
   vsns_low_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
