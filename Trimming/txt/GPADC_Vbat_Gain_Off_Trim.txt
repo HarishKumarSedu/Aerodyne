@@ -1,4 +1,4 @@
-# Processed on 2025-09-03 16:39:54
+# Processed on 2025-09-03 16:45:09
 from dfttools import *
 from time import sleep
 
@@ -50,11 +50,11 @@ def gpadc_vbat_gain_off_trim():
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x24, Mask=0xFF
 
     mreal=(VB1-VB0)/(CODE1-CODE0)
-    vbat_off=round((VB0/mreal))-CODE0
+    vbat_off=round((VB0/mreal)-CODE0)
 
 
-    if vbat_off <0:  
-        otp_vbat_off=256+vbat_off
+    if vbat_off & 0x200:  
+        otp_vbat_off=0x400 - vbat_off
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBF, data=otp_vbat_off, Mask=0x30, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC1, data=otp_vbat_off, Mask=0xFF, Default=0x0
@@ -62,11 +62,8 @@ def gpadc_vbat_gain_off_trim():
     else:
     #     otp_vbat_off=vbat_off
           print('!!!!!!!!!!!!!! Offset Can not be Trimmed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    vbat_gain=(mreal/mid-1)*1024
-    if vbat_gain <0:  
-        otp_vbat_gain=256+round(vbat_gain)
-    else:
-        otp_vbat_gain=round(vbat_gain)
+    vbat_gain=int((mreal/mid-1)*1024)
+    otp_vbat_gain = 0x100 - vbat_gain if vbat_gain & 0x80 else vbat_gain
 
     print(f'............ {Test_Name} Passed ........')
         # write the optimized code if the trim passed
