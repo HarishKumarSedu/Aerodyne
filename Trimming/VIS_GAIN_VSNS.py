@@ -71,10 +71,10 @@ def vis_gain_vsns():
   outp_ount_nV = VFORCE("OUTP","OUTN",2.5,0.1)
   sleep(1)
   vsns_low_code = I2C_READ("0x38", field_info={'fieldname': 'v_sense', 'length': 16, 'registers': [{'REG': '0x69', 'POS': 0, 'RegisterName': 'V SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'v_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6A', 'POS': 0, 'RegisterName': 'V SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'v_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]}, expected_value=0xc5d8)
-  sign = "-" if vsns_high_code & 0x8000 else "+"
-  vsns_high_code =  0x10000 - vsns_low_code if vsns_low_code & 0x8000 else vsns_low_code
-  high_voltage = vsns_low_code * LSB * Scale_Factor
-  print(f' Outp Vs Ount : {outp_ount_pV}V, vns voltage {sign}{high_voltage}V')
+  sign = "-" if vsns_low_code & 0x8000 else "+"
+  vsns_low_code =  0x10000 - vsns_low_code if vsns_low_code & 0x8000 else vsns_low_code
+  vsns_low_voltage = vsns_low_code * LSB * Scale_Factor
+  print(f' Outp Vs Ount : {outp_ount_pV}V, vns voltage {sign}{vsns_low_voltage}V')
   ##################################################
   I2C_WRITE("0x38", field_info={'fieldname': 'cld_drv_force', 'length': 1, 'registers': [{'REG': '0x9B', 'POS': 4, 'RegisterName': 'CLD analog setting reg 5', 'RegisterLength': 8, 'Name': 'cld_drv_force', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': 'NNNNNNNN', 'Default': '0x81', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0)
   VFORCE("OUTP","OUTN",float('Inf'),0)
