@@ -1,4 +1,4 @@
-# Processed on 2025-09-03 11:04:32
+# Processed on 2025-09-03 11:38:42
 from dfttools import *
 
 
@@ -72,7 +72,7 @@ def vis_gain_vsns():
   sign = "-" if vsns_high_code & 0x8000 else "+"
   vsns_high_code =  0x10000 - vsns_high_code if vsns_high_code & 0x8000 else vsns_high_code
   high_voltage = vsns_high_code * LSB * Scale_Factor
-  print(f' Outp Vs Ount : {outp_ount_pV}V, vns voltage {sign}{high_voltage}V')
+  print(f' Outp Vs Ount : {outp_ount_pV}V, vns voltage {sign}{high_voltage} V')
   outp_ount_nV = VFORCE("OUTP","OUTN",-2.5,0.1)
   sleep(1)
   vsns_low_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
@@ -80,7 +80,7 @@ def vis_gain_vsns():
   sign = "-" if vsns_low_code & 0x8000 else "+"
   vsns_low_code =  0x10000 - vsns_low_code if vsns_low_code & 0x8000 else vsns_low_code
   vsns_low_voltage = vsns_low_code * LSB * Scale_Factor
-  print(f' Outp Vs Ount : {outp_ount_pV}V, vns voltage {sign}{vsns_low_voltage}V')
+  print(f' Outp Vs Ount : {outp_ount_pV}V, vns voltage {sign}{vsns_low_voltage} V')
   ##################################################
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x0, Mask=0x10, Default=0x81
   VFORCE("OUTP","OUTN",float('Inf'),0)
