@@ -36,12 +36,11 @@ def ocp_ls_trim():
   bit_width = 4 # width of the field 
   th = 1.8/2
   # @ATE, "GND" in the following instruction is "PGND"
+  trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=1.8) # digital signal trigger level is 1.8 
   AFORCE(signal="OUTP", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
   sleep(0.00005) #50us
-  # mid_up = 0 #debug
-  mid_up = VMEASURE(signal="IODATA1", reference="GND", expected_value=0.9, error_spread=0.5)
 
-  if mid_up > th:
+  if trigger:
       print("Errore: all’avvio il comparatore è già alto")
   else:
     # sweep code from 0xF to 0x8, then 0x0 to 0x7
@@ -51,10 +50,10 @@ def ocp_ls_trim():
           sleep(0.1)  # 50 µs
           I2C_WRITE(device_address="0x38", field_info={'fieldname': 'otp_ds_dvr_ocp_ref_ls_trim', 'length': 4, 'registers': [{'REG': '0xB6', 'POS': 0, 'RegisterName': 'OTP FIELDS 6', 'RegisterLength': 8, 'Name': 'otp_ds_dvr_ocp_ref_ls_trim[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x88', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=code)
           # 4. leggiamo di nuovo l’uscita del comparatore
-          mid_up = VMEASURE(signal="IOCLK1", reference="GND",expected_value=0.9, error_spread=0.5)
+          trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=1.8) # digital signal trigger level is 1.8 
 
           # 5. se abbiamo superato la soglia, abbiamo finito
-          if mid_up > th:
+          if trigger:
               print(f"trim code = {hex(code)} ")
               break
 
