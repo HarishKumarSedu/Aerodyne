@@ -1,4 +1,4 @@
-# Processed on 2025-09-03 10:45:27
+# Processed on 2025-09-03 10:48:01
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -80,7 +80,7 @@ def vis_gain_isns():
   sign = "-" if isns_current_sink_code & 0x8000 else "+"
   isns_current_sink_code = (0x10000 - isns_current_sink_code) if isns_current_sink_code & 0x8000 else isns_current_sink_code
   isense_current = isns_current_sink_code * LSB * Scale_Factor
-  print(f'sink_current_measured : {sink_current_measured}A , isense_current : {sign}{isense_current}A ')
+  print(f'sink_current_measured : {sink_current_measured}A , isense_current : {sign}{isense_current} A ')
   ####################################################################
   
   # Put the Bridge in the HiZ  
