@@ -1,36 +1,36 @@
-# Processed on 2025-07-09 11:55:29
+# Processed on 2025-09-03 12:12:25
 from dfttools import *
 from time import sleep
-
-Test_Name = 'PLL_VCO_Bias_Current'
 from Procedures import Startup
-print(f'............ {Test_Name} ........')
 
-pll_vco_current_target_value = 0.5e-6 # 0.5uA
-BLCK_Set = 3.072e6 # 3.072MHz
-pll_vco_current_error_spread = pll_vco_current_target_value*0.01 # 1% of target value
+def pll_vco_bias_current():
+    Test_Name = 'PLL_VCO_Bias_Current'
+    print(f'............ {Test_Name.lower()} ........')
+    pll_vco_current_target_value = 0.5e-6  # 0.5uA
+    BLCK_Set = 3.072e6                     # 3.072MHz
+    pll_vco_current_error_spread = pll_vco_current_target_value * 0.01  # 1% of target value
+    '''
+      3.Bring out on the analog test point the PLL VCO biasing current. Measure it with an amperemeter connected to ground
+      4.Target value is around 0.5uA (typ)
+    '''
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0x80, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x81, data=0x6, Mask=0x3F, Default=0x6         #dig_pll_prediv_vddd<5:0>=6d 
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x82, data=0x12, Mask=0x3F, Default=0x18        #dig_pll_n<5:0>=24d 
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x83, data=0xA, Mask=0x1F, Default=0x10 #rfu_pll_ldet_cnt<4:0>=16d
+    FREQFORCE(signal="IOCLK0",reference="GND",value=BLCK_Set)                            #BCLK frequency=3.072MHz
+    sleep(0.0001)                                                                    #wait 100us
+    '''
+    Bring out all the necessary signals 
+    '''
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x1, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0      #enable pll vco current test
+    pll_measured_bias_current = AMEASURE(signal="IODATA1", reference="GND", 
+                                        expected_value=pll_vco_current_target_value,
+                                        error_spread=pll_vco_current_error_spread)       #measure with amperometer shorted to ground
+    error = abs(pll_measured_bias_current - pll_vco_current_target_value) / abs(pll_vco_current_target_value) * 100
+    print(f"Measured current value : {pll_measured_bias_current / 1e-6}uA, Target vlaue : {pll_vco_current_target_value / 1e-6}uA")
+    print(f"Percentage Error: {error}%")
 
-'''
-  
-  3.Bring out on the analog test point the PLL VCO biasing current. Measure it with an amperemeter connected to ground
-  4.Target value is around 0.5uA (typ)
-'''
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0x80, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x81, data=0x6, Mask=0x3F, Default=0x6         #dig_pll_prediv_vddd<5:0>=6d 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x82, data=0x12, Mask=0x3F, Default=0x18        #dig_pll_n<5:0>=24d 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x83, data=0xA, Mask=0x1F, Default=0x10 #rfu_pll_ldet_cnt<4:0>=16d
-FREQFORCE(signal="IOCLK0",reference="GND",value=BLCK_Set)                            #BCLK frequency=3.072MHz
-sleep(0.0001)                                                                    #wait 100us
-
-'''
-Bring out all the necessary signals 
-'''
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x1, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0      #enable pll vco current test
-
-
-pll_measured_bias_current = AMEASURE(signal="IODATA1", reference="GND", expected_value=pll_vco_current_target_value,error_spread=pll_vco_current_error_spread) #measure with amperometer shorted to ground
-error = abs(pll_measured_bias_current - pll_vco_current_target_value)/abs(pll_vco_current_target_value) *100
-print(f"Measured current value : {pll_measured_bias_current/ 1e-6}uA, Target vlaue : {pll_vco_current_target_value/ 1e-6}uA")
-print(f"Percentage Error: {error}%")
+if __name__ == "__main__":
+    pll_vco_bias_current()
