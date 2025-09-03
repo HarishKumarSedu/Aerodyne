@@ -1,10 +1,11 @@
 from dfttools import *
 from time import sleep
-from Procedures import Startup
+from Procedures.Startup import startup
 
 def pll_vco_bias_current():
     Test_Name = 'PLL_VCO_Bias_Current'
     print(f'............ {Test_Name.lower()} ........')
+    startup()
     pll_vco_current_target_value = 0.5e-6  # 0.5uA
     BLCK_Set = 3.072e6                     # 3.072MHz
     pll_vco_current_error_spread = pll_vco_current_target_value * 0.01  # 1% of target value
