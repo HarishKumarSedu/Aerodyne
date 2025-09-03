@@ -1,4 +1,4 @@
-# Processed on 2025-09-03 11:59:52
+# Processed on 2025-09-03 12:00:33
 from dfttools import *
 from time import sleep
 import random
@@ -19,7 +19,7 @@ def analdo_uvlo():
   # Enabling test page
   [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
   #Enabling digital TMUX
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x1, Mask=0x7F, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x21, Mask=0x7F, Default=0x0
 
   target_value = 1.2 # 1.2V
