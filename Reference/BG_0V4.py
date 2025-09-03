@@ -24,3 +24,6 @@ def bg_0v4():
   error = abs(measured_value - target_value)/abs(target_value) *100
   print(f"Optimal measured value : {measured_value}V, Target value : {target_value}V")
   print(f"Minimum Error: {error}%")
+
+if __name__ == '__main__':
+  bg_0v4()
