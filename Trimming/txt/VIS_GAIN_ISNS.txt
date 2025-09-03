@@ -1,4 +1,4 @@
-# Processed on 2025-09-03 10:36:54
+# Processed on 2025-09-03 10:45:27
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -62,14 +62,25 @@ def vis_gain_isns():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=isns_gain_code, Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBC, data=isns_gain_code, Mask=0xFF, Default=0x0
-  ################### Validation of the Isense Gain ###############3
+  ################### Validation of the Isense Gain ###############
   source_current_measured = AFORCE(signal="OUTP",reference="OUTN",value=source_current, error_spread=source_current*0.01) # 1% error
   sleep(0.1)
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   isns_current_source_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
+  sign = "-" if isns_current_source_code & 0x8000 else "+"
+  isns_current_source_code = (0x10000 - isns_current_source_code) if isns_current_source_code & 0x8000 else isns_current_source_code
   isense_current = isns_current_source_code * LSB * Scale_Factor
-  print(f'source_current_measured : {source_current_measured}A , isense_current : {isense_current}A ')
+  print(f'source_current_measured : {source_current_measured}A , isense_current : {sign}{isense_current} A ')
+  sink_current_measured = AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) # 1% error
+  sleep(0.1)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+  isns_current_sink_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
+[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
+  sign = "-" if isns_current_sink_code & 0x8000 else "+"
+  isns_current_sink_code = (0x10000 - isns_current_sink_code) if isns_current_sink_code & 0x8000 else isns_current_sink_code
+  isense_current = isns_current_sink_code * LSB * Scale_Factor
+  print(f'sink_current_measured : {sink_current_measured}A , isense_current : {sign}{isense_current}A ')
   ####################################################################
   
   # Put the Bridge in the HiZ  
