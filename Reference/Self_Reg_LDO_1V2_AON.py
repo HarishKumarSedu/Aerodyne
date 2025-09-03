@@ -3,9 +3,11 @@ from time import sleep
 import random
 
 Test_Name = 'Self_Reg_LDO_1V2_AON'
-from Procedures import Startup
-from Procedures import Global_enable
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
 def self_reg_ldo_1v2_aon():
+  startup()
+  global_enable()
   print(f'............ {Test_Name} ........')
 
   '''
