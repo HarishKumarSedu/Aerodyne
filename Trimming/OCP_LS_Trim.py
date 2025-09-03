@@ -36,7 +36,7 @@ def ocp_ls_trim():
   bit_width = 4 # width of the field 
   th = 1.8/2
   # @ATE, "GND" in the following instruction is "PGND"
-  trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=1.8) # digital signal trigger level is 1.8 
+  trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=1.8,expected_value=0) # digital signal trigger level is 1.8 
   AFORCE(signal="OUTP", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
   sleep(0.00005) #50us
 
@@ -50,7 +50,7 @@ def ocp_ls_trim():
           sleep(0.1)  # 50 µs
           I2C_WRITE(device_address="0x38", field_info={'fieldname': 'otp_ds_dvr_ocp_ref_ls_trim', 'length': 4, 'registers': [{'REG': '0xB6', 'POS': 0, 'RegisterName': 'OTP FIELDS 6', 'RegisterLength': 8, 'Name': 'otp_ds_dvr_ocp_ref_ls_trim[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x88', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=code)
           # 4. leggiamo di nuovo l’uscita del comparatore
-          trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=1.8) # digital signal trigger level is 1.8 
+          trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=1.8,expected_value=0) # digital signal trigger level is 1.8 
 
           # 5. se abbiamo superato la soglia, abbiamo finito
           if trigger:
