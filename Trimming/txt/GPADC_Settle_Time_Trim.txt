@@ -1,4 +1,4 @@
-# Processed on 2025-09-03 15:26:50
+# Processed on 2025-09-04 10:43:11
 from dfttools import *
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
@@ -80,13 +80,14 @@ def gpadc_settle_time_trim():
     print(f"Optimal Code: {optimal_code}")
     print(f"Optimal measured value : {optimal_measured_value}Hz, Target vlaue : {target_value}Hz")
     print(f"Minimum Error: {min_error}")
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x10, Mask=0x3F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x10, Mask=0x3F, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x0, Mask=0x4, Default=0x0
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x0, Mask=0x8, Default=0x21
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x0, Mask=0x1, Default=0x1
-    sleep(0.001)
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0
 
 
 if __name__ == '__main__':
