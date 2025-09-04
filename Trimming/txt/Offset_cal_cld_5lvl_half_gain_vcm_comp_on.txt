@@ -1,4 +1,4 @@
-# Processed on 2025-08-27 10:38:12
+# Processed on 2025-09-04 10:06:01
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -58,7 +58,14 @@ def offset_cal_cld_5lvl_half_gain_vcm_comp_on():
   int_offset_comp = [i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0xCA, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0xCB, Mask=0x4
   print(f'{Test_Name} :> ext_offset_comp : {hex(ext_offset_comp)}, int_offset_comp : {hex(int_offset_comp)}')
-  
+  if ext_offset_comp < 7 :
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC6, data=0x7, Mask=0xFF, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCB, data=0x40, Mask=0x40, Default=0x0
+  elif int_offset_comp < 7:
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCA, data=0x7, Mask=0xFF, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCB, data=0x4, Mask=0x4, Default=0x0
+  else:
+    pass
 
 if __name__ == '__main__':
   offset_cal_cld_5lvl_half_gain_vcm_comp_on()
