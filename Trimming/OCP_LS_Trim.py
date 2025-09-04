@@ -37,6 +37,7 @@ def ocp_ls_trim():
   th = 1.8/2
   # @ATE, "GND" in the following instruction is "PGND"
   trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=1.8,expected_value=0) # digital signal trigger level is 1.8 
+  sleep(0.5)
   AFORCE(signal="OUTP", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
   sleep(0.00005) #50us
   # if the trigger is already high for the highest code #750mA threshold end the test, chip can not be trimmed 
