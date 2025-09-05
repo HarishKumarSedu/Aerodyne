@@ -1,4 +1,4 @@
-# Processed on 2025-09-05 16:41:31
+# Processed on 2025-09-05 16:42:51
 from dfttools import *
 from time import sleep
 import random
@@ -18,21 +18,9 @@ def ocp_hs_trim():
   playback() 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x92, data=0x5, Mask=0x7, Default=0x3  
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0  
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81  
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x40, Mask=0x40, Default=0x0  
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x40, Mask=0x40, Default=0x0  
-  
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x10, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x10, Mask=0x10, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x20, Mask=0x20, Default=0x86  
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x5, Mask=0xFF, Default=0x0  # Trun p and mid N
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x5, Mask=0x7F, Default=0x0 # FSYN 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x5, Mask=0x7F, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0  
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x80, Mask=0x80, Default=0x0  
