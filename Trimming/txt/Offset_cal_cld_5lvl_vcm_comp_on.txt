@@ -1,4 +1,4 @@
-# Processed on 2025-09-04 10:02:32
+# Processed on 2025-09-05 09:47:24
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -61,7 +61,7 @@ def offset_cal_cld_5lvl_vcm_comp_on():
   if ext_offset_comp < 7 :
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC5, data=0x7, Mask=0xFF, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCB, data=0x80, Mask=0x80, Default=0x0
-  elif int_offset_comp < 7:
+  if int_offset_comp < 7:
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC9, data=0x7, Mask=0xFF, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCB, data=0x8, Mask=0x8, Default=0x0
   else:
