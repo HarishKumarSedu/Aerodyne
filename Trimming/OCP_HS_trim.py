@@ -31,6 +31,7 @@ def ocp_hs_trim():
   i_force = - 3/4
   max_step = 15
   th = 1.8/2
+  bit_width=4
   # @ATE "GND" = > "PGND"
   AFORCE(signal="OUTN", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
   trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=1.8,expected_value=0) # digital signal trigger level is 1.8 
@@ -39,7 +40,7 @@ def ocp_hs_trim():
   if trigger:
       print("Errore: all’avvio il comparatore è già alto")
   else:
-      for code in reversed(range(15)):
+      for code in list(list(range(2**bit_width -1 ,2**bit_width//2 -1,-1))+list(range(0,2**bit_width//2,1))):
 
           # 3. breve attesa per stabilizzare il circuito
           sleep(50e-6)  # 50 µs
