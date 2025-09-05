@@ -32,7 +32,7 @@ def ocp_hs_trim():
   max_step = 15
   th = 1.8/2
   # @ATE "GND" = > "PGND"
-  AFORCE(signal="OUTP", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
+  AFORCE(signal="OUTN", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
   trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=1.8,expected_value=0) # digital signal trigger level is 1.8 
   sleep(0.5)
 
@@ -54,7 +54,7 @@ def ocp_hs_trim():
               break
           
     # @ATE "GND" = > "PGND"
-  AFORCE(signal="OUTP", reference="GND", value=float('inf'), error_spread=0.05)  # stop forcing
+  AFORCE(signal="OUTN", reference="GND", value=i_force, error_spread=0.01)  # stop forcing
 
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_dvr_force_sel', 'length': 8, 'registers': [{'REG': '0x9C', 'POS': 0, 'RegisterName': 'CLD analog setting reg 6', 'RegisterLength': 8, 'Name': 'cld_dvr_force_sel[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x0) 
 
