@@ -1,4 +1,4 @@
-# Processed on 2025-09-04 10:04:59
+# Processed on 2025-09-05 09:47:38
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -63,7 +63,7 @@ def offset_cal_cld_half_gain_3lvl():
   if ext_offset_comp < 7 :
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC8, data=0x7, Mask=0xFF, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCB, data=0x10, Mask=0x10, Default=0x0
-  elif int_offset_comp < 7:
+  if int_offset_comp < 7:
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCA, data=0x7, Mask=0xFF, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCB, data=0x4, Mask=0x4, Default=0x0
   else:
