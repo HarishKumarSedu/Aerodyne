@@ -40,6 +40,7 @@ def ocp_hs_trim():
   if trigger:
       print("Errore: all’avvio il comparatore è già alto")
   else:
+    # Code --> 0xF to 0x8 , 0x00 t0 0x7
       for code in list(list(range(2**bit_width -1 ,2**bit_width//2 -1,-1))+list(range(0,2**bit_width//2,1))):
 
           # 3. breve attesa per stabilizzare il circuito
