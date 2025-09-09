@@ -34,23 +34,23 @@ at which the compator toggles
   force_voltage = force_voltage_low_limit
 
   while True:
-    # Add noise simulation
-    pvdd_forced_voltage = VFORCE(signal="PVDD", reference="GND", value=force_voltage,error_spread=error_spread)
-    # Check trigger condition
-    trigger = VTRIG_HL(signal="IODATA0", reference="GND", threshold=HL_Th, expected_value=force_voltage)
+      # Add noise simulation
+      pvdd_forced_voltage = VFORCE(signal="PVDD", reference="GND", value=force_voltage,error_spread=error_spread)
+      # Check trigger condition
+      trigger = VTRIG_HL(signal="IODATA0", reference="GND", threshold=HL_Th, expected_value=force_voltage)
 
-    if trigger:
-      break
-    elif pvdd_forced_voltage <= force_voltage_high_limit:
-      print(f'..... Voltage high limit {force_voltage_high_limit}V crossed ........')
-      break
+      if trigger:
+        break
+      elif pvdd_forced_voltage <= force_voltage_high_limit:
+        print(f'..... Voltage high limit {force_voltage_high_limit}V crossed ........')
+        break
 
-    force_voltage += 0.05  # increase voltage by 50mV
-    sleep(0.001)  # 1 ms delay
+      force_voltage += 0.05  # increase voltage by 50mV
+      sleep(0.001)  # 1 ms delay
   
-    error = abs(pvdd_forced_voltage - HL_Th)/abs(HL_Th) * 100
-    print(f"Optimal Measured(force sweeped) Value: {pvdd_forced_voltage:.4f} V (Target: {HL_Th} V)")
-    print(f"Minimum Error: {error:.6f} %")
+  error = abs(pvdd_forced_voltage - HL_Th)/abs(HL_Th) * 100
+  print(f"Optimal Measured(force sweeped) Value: {pvdd_forced_voltage:.4f} V (Target: {HL_Th} V)")
+  print(f"Minimum Error: {error:.6f} %")
 
 if __name__ == '__main__':
   uvlo_h2l_test()
