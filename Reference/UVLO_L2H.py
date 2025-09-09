@@ -41,7 +41,7 @@ and record the value at which the compator toggles.
     if trigger:
       break
     elif pvdd_forced_voltage < force_voltage_low_limit:
-      print(f'..... Voltage max limit {force_voltage_high_limit}V crossed ........')
+      print(f'..... Voltage min limit {force_voltage_low_limit}V crossed ........')
       break
 
     force_voltage -= 0.005  #  voltage by 5mV step
