@@ -1,4 +1,4 @@
-# Processed on 2025-09-08 09:37:52
+# Processed on 2025-09-09 16:00:12
 from dfttools import *
 from time import sleep
 import random
@@ -58,9 +58,16 @@ def ocp_hs_trim():
               break
           
     # @ATE "GND" = > "PGND"
-  AFORCE(signal="OUTN", reference="GND", value=i_force, error_spread=0.01)  # stop forcing
+  AFORCE(signal="OUTN", reference="GND", value=float('Inf'), error_spread=0.01)  # stop forcing
 
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x0, Mask=0x1, Default=0x0  
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0  
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x80, Default=0x0
 
 if __name__ == '__main__':
   ocp_hs_trim()
