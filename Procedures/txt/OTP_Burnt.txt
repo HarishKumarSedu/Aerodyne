@@ -1,8 +1,9 @@
-# Processed on 2025-09-09 10:01:56
+# Processed on 2025-09-09 10:02:47
 from dfttools import *
 def Otp_Burnt():
   Test_Name = 'Otp_Burnt'
   print(f'............ {Test_Name} ........')
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x2, Mask=0x2, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCF, data=0x80, Mask=0x80, Default=0x2
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xD1, data=0x1, Mask=0xFF, Default=0x0
