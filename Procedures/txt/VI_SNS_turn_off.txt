@@ -1,4 +1,4 @@
-# Processed on 2025-08-19 15:25:41
+# Processed on 2025-09-09 09:59:49
 Test_Name = 'VI_SNS_turn_off'
 from dfttools import *
 def vi_sns_turn_off():
@@ -26,7 +26,7 @@ def vi_sns_turn_off():
   # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0C, data=0x0, Mask=0x2, Default=0x0
   # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0C, data=0x0, Mask=0x4, Default=0x0
   # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x0C, data=0x0, Mask=0x8, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA7, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA7, data=0x0, Mask=0x2, Default=0x0
 if __name__ == '__main__':
