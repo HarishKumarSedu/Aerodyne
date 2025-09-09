@@ -6,7 +6,8 @@ from Procedures.Global_enable import global_enable
 def uvlo_l2h_test():
   Test_Name = 'UVLO_L2H'
   print(f'............ {Test_Name} ........')
-
+  startup()
+  global_enable()
   '''
 Bring UVLO comparator output to pin "IODATA0" 
 through digital test mux and sweep "PVDD" from 1.5V to 3V 
