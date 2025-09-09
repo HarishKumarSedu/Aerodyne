@@ -1,4 +1,4 @@
-# Processed on 2025-09-09 16:01:20
+# Processed on 2025-09-09 16:02:08
 from dfttools import *
 from time import sleep
 import random
@@ -52,7 +52,7 @@ def ocp_ls_trim():
           sleep(0.1)  # 50 µs
           [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB6, data=code, Mask=0xF, Default=0x88
           # 4. leggiamo di nuovo l’uscita del comparatore
-          trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=1.8,expected_value=0.9) # digital signal trigger level is 1.8 
+          trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=1.8,expected_value=0) # digital signal trigger level is 1.8 
 
           # 5. se abbiamo superato la soglia, abbiamo finito
           if trigger:
