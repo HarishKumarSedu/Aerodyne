@@ -6,11 +6,14 @@ def selfreg_LDO_0v6():
 
 
     Test_Name = 'Selfreg_LDO_0v6_Trim'
-    from Procedures import Startup
-    from Procedures import Global_enable
+    from Procedures.Startup import startup
+    from Procedures.Global_enable import global_enable
     from Trimming.REF_BUF_OFF import offset
     print(f'............ {Test_Name} ........')
-
+    startup()
+    global_enable()
+    typical_value = 0.6
+    buffer_offset = offset(typical_value) # 10mV
     # Enabling test page
     I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1) # page 1
 
@@ -24,11 +27,11 @@ def selfreg_LDO_0v6():
 
     # Initial value
     percentage = 1e-2 # 1% difference
-    typical_value = 0.6
+    
     low_value = typical_value - typical_value*percentage
     high_value = typical_value + typical_value*percentage
 
-    buffer_offset = offset(typical_value) # 10mV
+    
     # Step size
     step_size = 7.57e-3 # 7.57mV
 
