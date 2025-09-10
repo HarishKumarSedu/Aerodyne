@@ -11,7 +11,8 @@ def bg_1v2():
     print(f'............ {Test_Name} ........')
     startup()
     global_enable()
-
+    typical_value = 1.2
+    buffer_offset = offset(typical_value) # 10mV
     # Enabling test page
     I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1) # page 1
     # Enabling analog TMUX
@@ -25,12 +26,10 @@ def bg_1v2():
 
     # Initial value 
     percentage = 1e-2 # 1% deviation
-
-    typical_value = 1.2
     low_value = typical_value - typical_value*percentage
     high_value = typical_value + typical_value*percentage
 
-    buffer_offset = offset(typical_value) # 10mV
+    
     # Step size (LSB size)
     step_size = 7.57e-3 # 7.57mV
 
