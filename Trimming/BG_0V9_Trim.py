@@ -6,9 +6,11 @@ def bg_0v9():
     Test_Name = 'BG_0v9_Trim'
     from Procedures.Startup import startup
     from Procedures.Global_enable import global_enable
+    from Trimming.REF_BUF_OFF import offset
     startup()
     global_enable()
-    from Trimming.REF_BUF_OFF import offset
+    typical_value = 0.9
+    buffer_offset = offset(typical_value) # 10mV
     print(f'............ {Test_Name} ........')
 
     # Enabling test page
@@ -24,11 +26,10 @@ def bg_0v9():
 
     # Initial value
     percentage = 1e-2 # 10% difference
-    typical_value = 0.9
+    
     low_value = typical_value - typical_value*percentage
     high_value = typical_value + typical_value*percentage
 
-    buffer_offset = offset(typical_value) # 10mV
     # Step size
     step_size = 7.57e-3 # 7.57mV
 
