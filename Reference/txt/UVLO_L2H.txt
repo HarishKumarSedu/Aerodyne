@@ -1,4 +1,4 @@
-# Processed on 2025-09-10 11:22:18
+# Processed on 2025-09-10 11:24:00
 from dfttools import *
 from time import sleep
 import random
@@ -55,7 +55,8 @@ and record the value at which the compator toggles.
   error = abs(pvdd_forced_voltage - LH_Th)/abs(LH_Th) * 100
   print(f"Optimal Measured(force sweeped) Value: {pvdd_forced_voltage:.4f} V (Target: {LH_Th} V)")
   print(f"Minimum Error: {error:.6f} %")
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x80, Mask=0x80, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x20, Mask=0x20, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x10, Mask=0x10, Default=0x0
