@@ -1,4 +1,4 @@
-# Processed on 2025-09-11 12:56:38
+# Processed on 2025-09-11 12:58:17
 from dfttools import *
 from time import sleep
 import random
@@ -82,6 +82,12 @@ def vis_storbe_del_trim():
     print(f"Optimal Code: {optimal_code}")
     print(f"Optimal measured value : {optimal_measured_value}Hz, Target vlaue : {target_value}Hz")
     print(f"Minimum Error: {min_error}")
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+    sleep(0.001)
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x1, Default=0x0
 
 
 if __name__ == '__main__':
