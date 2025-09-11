@@ -1,4 +1,4 @@
-# Processed on 2025-09-11 13:24:19
+# Processed on 2025-09-11 13:25:24
 from dfttools import *
 
 
@@ -24,7 +24,8 @@ def vis_gain_vsns():
   # import general procedures and & classd_out_pos
   startup()
   global_enable()
-  pvdd_value = VFORCE("PVDD","OUTN",2.5,0.01)
+  pvdd_value = VFORCE("PVDD","GND",2.5,0.01)
+  print(pvdd_value)
   playback()
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
