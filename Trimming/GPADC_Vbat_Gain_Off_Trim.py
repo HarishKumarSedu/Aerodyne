@@ -58,6 +58,7 @@ def gpadc_vbat_gain_off_trim():
     #     otp_vbat_off=vbat_off
           print('!!!!!!!!!!!!!! Offset Can not be Trimmed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     vbat_gain=int((mreal/mid-1)*1024)
+    # complement the value 
     otp_vbat_gain = 0x100 + vbat_gain if vbat_gain & 0x80 else 0x100 - vbat_gain
 
     print(f'............ {Test_Name} Passed ........')
