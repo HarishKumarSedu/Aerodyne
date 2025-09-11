@@ -1,4 +1,4 @@
-# Processed on 2025-09-03 11:38:42
+# Processed on 2025-09-11 13:24:19
 from dfttools import *
 
 
@@ -24,21 +24,22 @@ def vis_gain_vsns():
   # import general procedures and & classd_out_pos
   startup()
   global_enable()
+  pvdd_value = VFORCE("PVDD","OUTN",2.5,0.01)
   playback()
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 # bridge HiZ
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0xFF, Mask=0xFF, Default=0x0 # turn on outp side / saturate the dac in postive side 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x80, Mask=0x80, Default=0x0 # enable the dac 
   vi_sns_turn_on()
-  pvdd_value = VFORCE ("PVDD","GND",3.7,3.7)
-  sleep(0.1)
-  outp_ount_pV = VFORCE("OUTP","OUTN",2.5,0.01)
-  sleep(1)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   vsns_high_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
   vsns_high_code =  0x10000 - vsns_high_code if vsns_high_code & 0x8000 else vsns_high_code
   print(f'vsns_high_code : {hex(vsns_high_code)}')
-  outp_ount_nV = VFORCE ("OUTP","OUTN",-2.5,0.01)
-  sleep(1)
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   vsns_low_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
   vsns_low_code = 0x10000 - vsns_low_code   if vsns_low_code & 0x8000 else vsns_low_code
@@ -57,33 +58,35 @@ def vis_gain_vsns():
   LSB = (5.5/2**15)
   Scale_Factor = (5/5.5)
   Scale_Down = (64/2**20)
-  vsns_gain_calculated = int((((vsns_high_code + vsns_low_code)/(outp_ount_pV - outp_ount_nV) *LSB  -1 )*Scale_Factor) /Scale_Down) #assuming VDDP=3.7V, otherwise value has to be updated 
+  vsns_gain_calculated = int((((vsns_high_code + vsns_low_code)/ (2*pvdd_value *LSB ) -1 )*Scale_Factor) /Scale_Down) #assuming VDDP=3.7V, otherwise value has to be updated 
   # vsns_gain_calculated = 0x3e67  #assuming VDDP=3.7V, otherwise value has to be updated 
   vsns_gain_code = 0x4000+vsns_gain_calculated if  vsns_gain_calculated & 0x2000 else 0x4000 -  vsns_gain_calculated
   print(f'{Testname} value : {hex(vsns_gain_code)} ')
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB9, data=hex(vsns_gain_code), Mask=0xFF, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCC, data=hex(vsns_gain_code), Mask=0x3F, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   ########### Validate the Vsns Gain ###############
-  outp_ount_pV = VFORCE("OUTP","OUTN",2.5,0.1)
-  sleep(1)
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0xFF, Mask=0xFF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   vsns_high_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
   sign = "-" if vsns_high_code & 0x8000 else "+"
   vsns_high_code =  0x10000 - vsns_high_code if vsns_high_code & 0x8000 else vsns_high_code
   high_voltage = vsns_high_code * LSB * Scale_Factor
-  print(f' Outp Vs Ount : {outp_ount_pV}V, vns voltage {sign}{high_voltage} V')
-  outp_ount_nV = VFORCE("OUTP","OUTN",-2.5,0.1)
-  sleep(1)
+  print(f' Outp Vs Ount : {pvdd_value}V, vns voltage {sign}{high_voltage} V')
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   vsns_low_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
   sign = "-" if vsns_low_code & 0x8000 else "+"
   vsns_low_code =  0x10000 - vsns_low_code if vsns_low_code & 0x8000 else vsns_low_code
   vsns_low_voltage = vsns_low_code * LSB * Scale_Factor
-  print(f' Outp Vs Ount : {outp_ount_pV}V, vns voltage {sign}{vsns_low_voltage} V')
+  print(f' Outp Vs Ount : -{pvdd_value}V, vns voltage {sign}{vsns_low_voltage} V')
   ##################################################
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x0, Mask=0x10, Default=0x81
-  VFORCE("OUTP","OUTN",float('Inf'),0)
+  VFORCE("PVDD","GND",3.7,0.01)
   vi_sns_turn_off()
 
 if __name__ == '__main__':
