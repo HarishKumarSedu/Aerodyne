@@ -1,4 +1,4 @@
-# Processed on 2025-09-09 18:00:18
+# Processed on 2025-09-11 12:56:38
 from dfttools import *
 from time import sleep
 import random
@@ -41,7 +41,7 @@ def vis_storbe_del_trim():
     # # ERROR parsing args for I2C_WRITE: invalid syntax (<unknown>, line 1)
 
     limit_percentage = 0.1 # assuming 
-    target_value = 3.846e6 # 3.846MHz
+    target_value = 4.2e6 # 4.2MHz
     # higher and lower limits taken about +/- 10% of the target value 
     lower_limit = target_value-target_value*limit_percentage
     higher_limit = target_value+target_value*limit_percentage
