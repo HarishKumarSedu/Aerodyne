@@ -1,4 +1,4 @@
-# Processed on 2025-08-19 14:30:31
+# Processed on 2025-09-11 13:01:58
 from dfttools import *
 from time import sleep
 import random
@@ -78,11 +78,15 @@ def fll_freerun():
     else:
         print(f'............ {Test_Name} Failed ........')
         # if the trimh failed program detult zero
-        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB7, data=0x0, Mask=0x3F, Default=0x22
+        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB7, data=0x22, Mask=0x3F, Default=0x22
     print(f"Optimal Code: {optimal_code}")
     print(f"Optimal measured value : {optimal_measured_value}Hz, Target value : {target_value}Hz")
     print(f"Minimum Error: {min_error}%")
-
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x0, Mask=0x10, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x0, Mask=0x4, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0 #enable "ADDR"
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 #select the test for ana_dd_fllvco_classdck1
     return optimal_code,optimal_measured_value,min_error
 
 if __name__ == '__main__':
