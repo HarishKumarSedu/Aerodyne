@@ -1,4 +1,4 @@
-# Processed on 2025-09-04 17:10:15
+# Processed on 2025-09-11 13:12:06
 from dfttools import *
 from time import sleep
 
@@ -62,6 +62,7 @@ def gpadc_vbat_gain_off_trim():
     #     otp_vbat_off=vbat_off
           print('!!!!!!!!!!!!!! Offset Can not be Trimmed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     vbat_gain=int((mreal/mid-1)*1024)
+    # complement the value 
     otp_vbat_gain = 0x100 + vbat_gain if vbat_gain & 0x80 else 0x100 - vbat_gain
 
     print(f'............ {Test_Name} Passed ........')
