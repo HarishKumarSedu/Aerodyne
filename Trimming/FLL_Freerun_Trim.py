@@ -77,11 +77,15 @@ def fll_freerun():
     else:
         print(f'............ {Test_Name} Failed ........')
         # if the trimh failed program detult zero
-        I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_fll_vco_trm_5l', 'length': 6, 'registers': [{'REG': '0xB7', 'POS': 0, 'RegisterName': 'OTP FIELDS 7', 'RegisterLength': 8, 'Name': 'otp_ds_fll_vco_trm_5l[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x22', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
+        I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_fll_vco_trm_5l', 'length': 6, 'registers': [{'REG': '0xB7', 'POS': 0, 'RegisterName': 'OTP FIELDS 7', 'RegisterLength': 8, 'Name': 'otp_ds_fll_vco_trm_5l[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x22', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x22)
     print(f"Optimal Code: {optimal_code}")
     print(f"Optimal measured value : {optimal_measured_value}Hz, Target value : {target_value}Hz")
     print(f"Minimum Error: {min_error}%")
-
+    I2C_WRITE(device_address="0x38",field_info=	{'fieldname': 'i2c_page_sel_1', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel_1', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
+    I2C_WRITE(device_address="0x38",field_info=	{'fieldname': 'cld_fll_en_m', 'length': 1, 'registers': [{'REG': '0x18', 'POS': 4, 'RegisterName': 'Force registers 1', 'RegisterLength': 8, 'Name': 'cld_fll_en_m', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': '00NNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
+    I2C_WRITE(device_address="0x38",field_info=	{'fieldname': 'cld_fll_force', 'length': 1, 'registers': [{'REG': '0x18', 'POS': 2, 'RegisterName': 'Force registers 1', 'RegisterLength': 8, 'Name': 'cld_fll_force', 'Mask': '0x4', 'Length': 1, 'FieldMSB': 2, 'FieldLSB': 2, 'Attribute': '00NNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
+    I2C_WRITE(device_address="0x38",field_info=	{'fieldname': 'dig_test_en', 'length': 7, 'registers': [{'REG': '0x03', 'POS': 0, 'RegisterName': 'DIGITAL_TEST_SETTINGS_1', 'RegisterLength': 8, 'Name': 'dig_test_en[6:0]', 'Mask': '0x7F', 'Length': 7, 'FieldMSB': 6, 'FieldLSB': 0, 'Attribute': '0NNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0) #enable "ADDR"
+    I2C_WRITE(device_address="0x38",field_info=	{'fieldname': 'dig_test_sel', 'length': 7, 'registers': [{'REG': '0x04', 'POS': 0, 'RegisterName': 'DIGITAL_TEST_SETTINGS_2', 'RegisterLength': 8, 'Name': 'dig_test_sel[6:0]', 'Mask': '0x7F', 'Length': 7, 'FieldMSB': 6, 'FieldLSB': 0, 'Attribute': '0NNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0) #select the test for ana_dd_fllvco_classdck1
     return optimal_code,optimal_measured_value,min_error
 
 if __name__ == '__main__':
