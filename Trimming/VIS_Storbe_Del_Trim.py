@@ -40,7 +40,7 @@ def vis_storbe_del_trim():
     # I2C_WRITE(device_address="0x38",field_info=,write_value=)
 
     limit_percentage = 0.1 # assuming 
-    target_value = 3.846e6 # 3.846MHz
+    target_value = 4.2e6 # 4.2MHz
     # higher and lower limits taken about +/- 10% of the target value 
     lower_limit = target_value-target_value*limit_percentage
     higher_limit = target_value+target_value*limit_percentage
