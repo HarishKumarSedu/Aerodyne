@@ -1,4 +1,4 @@
-# Processed on 2025-09-11 13:26:05
+# Processed on 2025-09-11 13:27:32
 from dfttools import *
 
 
@@ -58,7 +58,7 @@ def vis_gain_vsns():
   LSB = (5.5/2**15)
   Scale_Factor = (5/5.5)
   Scale_Down = (64/2**20)
-  vsns_gain_calculated = int((((vsns_high_code + vsns_low_code)/ 2*pvdd_value *LSB  -1 )*Scale_Factor) /Scale_Down) #assuming VDDP=3.7V, otherwise value has to be updated 
+  vsns_gain_calculated = -int((((vsns_high_code + vsns_low_code)/ 2*pvdd_value *LSB  -1 )*Scale_Factor) /Scale_Down) #assuming VDDP=3.7V, otherwise value has to be updated 
   # vsns_gain_calculated = 0x3e67  #assuming VDDP=3.7V, otherwise value has to be updated 
   vsns_gain_code = 0x4000+vsns_gain_calculated if  vsns_gain_calculated & 0x2000 else 0x4000 -  vsns_gain_calculated
   print(f'{Testname} value : {hex(vsns_gain_code)} ')
