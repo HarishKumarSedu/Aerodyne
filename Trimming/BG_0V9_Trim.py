@@ -56,7 +56,7 @@ def bg_0v9():
             min_error = error
             optimal_code = hex(i)
             optimal_measured_value = measured_value
-        sleep(1)
+        sleep(0.01)
     # Check for limits
     if low_value < optimal_measured_value < high_value:
         print(f'............ {Test_Name} Passed ........')
