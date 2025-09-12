@@ -1,4 +1,4 @@
-# Processed on 2025-09-12 11:46:15
+# Processed on 2025-09-12 11:49:00
 Test_Name = 'VI_SNS_turn_on'
 from dfttools import *
 from time import sleep
