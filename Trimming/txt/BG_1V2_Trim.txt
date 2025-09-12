@@ -1,4 +1,4 @@
-# Processed on 2025-09-12 10:45:29
+# Processed on 2025-09-12 10:56:49
 from dfttools import *
 from time import sleep
 import random
@@ -6,15 +6,14 @@ import random
 
 def bg_1v2():
     Test_Name = 'BG_1V2_Trim'
-    # from Procedures.Startup import startup
-    # from Procedures.Global_enable import global_enable
-    # from Trimming.REF_BUF_OFF import offset 
+    from Procedures.Startup import startup
+    from Procedures.Global_enable import global_enable
+    from Trimming.REF_BUF_OFF import offset 
     print(f'............ {Test_Name} ........')
-    # startup()
-    # global_enable()
+    startup()
+    global_enable()
     typical_value = 1.2
-    # buffer_offset = offset(typical_value) # 10mV
-    buffer_offset = 0.1
+    buffer_offset = offset(typical_value) # 10mV
     # Enabling test page
     [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
     # Enabling analog TMUX
