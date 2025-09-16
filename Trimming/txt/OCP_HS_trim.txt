@@ -1,28 +1,25 @@
-# Processed on 2025-09-16 09:55:36
+# Processed on 2025-09-16 10:38:47
 from dfttools import *
 from time import sleep
 import random
 
 Test_Name = 'OCP_HS_TRIM'
-from Procedures.Startup import startup
-from Procedures.Global_enable import global_enable
-from Procedures.Playback import playback
 
 
 def ocp_hs_trim():
   Test_Name = 'OCP_HS_TRIM'
 
   print(f'............ {Test_Name} ........')
-  startup()
-  global_enable()
-  playback() 
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
+
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x92, data=0x5, Mask=0x7, Default=0x3  
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x5, Mask=0x7F, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x1, Mask=0xFF, Default=0x0  
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0  
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x80, Mask=0x80, Default=0x0  
 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB6, data=0xF0, Mask=0xF0, Default=0x88 #lower threshold to 750mV
@@ -60,9 +57,11 @@ def ocp_hs_trim():
     # @ATE "GND" = > "PGND"
   AFORCE(signal="OUTN", reference="GND", value=float('Inf'), error_spread=0.01)  # stop forcing
 
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x0, Mask=0x1, Default=0x0  
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
