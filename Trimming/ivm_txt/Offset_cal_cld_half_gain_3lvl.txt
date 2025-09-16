@@ -35,6 +35,6 @@ RD-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CB; DATA: 0; MSB: 4; LSB: 4;COM: Mask: 
 RD-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: CA; DATA: 00;;COM: Mask: 0xFF;;
 RD-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CB; DATA: 0; MSB: 2; LSB: 2;COM: Mask: 0x4;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: C8; DATA: 07;;COM: Mask: 0xFF;;
-WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CB; DATA: 1; MSB: 4; LSB: 4;COM: Mask: 0x10;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CB; DATA: 0; MSB: 4; LSB: 4;COM: Mask: 0x10;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: CA; DATA: 07;;COM: Mask: 0xFF;;
-WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CB; DATA: 1; MSB: 2; LSB: 2;COM: Mask: 0x4;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CB; DATA: 0; MSB: 2; LSB: 2;COM: Mask: 0x4;;
