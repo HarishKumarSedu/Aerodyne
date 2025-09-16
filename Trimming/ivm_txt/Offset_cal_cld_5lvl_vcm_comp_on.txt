@@ -33,6 +33,6 @@ RD-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CB; DATA: 0; MSB: 7; LSB: 7;COM: Mask: 
 RD-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: C9; DATA: 00;;COM: Mask: 0xFF;;
 RD-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CB; DATA: 0; MSB: 3; LSB: 3;COM: Mask: 0x8;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: C5; DATA: 07;;COM: Mask: 0xFF;;
-WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CB; DATA: 1; MSB: 7; LSB: 7;COM: Mask: 0x80;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CB; DATA: 0; MSB: 7; LSB: 7;COM: Mask: 0x80;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: C9; DATA: 07;;COM: Mask: 0xFF;;
-WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CB; DATA: 1; MSB: 3; LSB: 3;COM: Mask: 0x8;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CB; DATA: 0; MSB: 3; LSB: 3;COM: Mask: 0x8;;
