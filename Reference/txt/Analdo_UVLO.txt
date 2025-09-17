@@ -1,4 +1,4 @@
-# Processed on 2025-09-12 16:06:59
+# Processed on 2025-09-17 17:19:24
 from dfttools import *
 from time import sleep
 import random
@@ -22,7 +22,7 @@ def analdo_uvlo():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x1, Mask=0x7F, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x21, Mask=0x7F, Default=0x0
 
-  target_value = 1.2 # 1.2V
+  target_value = 1.8 # 1.8V
   error_spread = target_value*0.04 # 4% of target value
   measured_value = VMEASURE(signal="IOCLK0", reference="GND", expected_value=target_value,error_spread=error_spread)
   error = abs(measured_value - target_value)/abs(target_value) *100
