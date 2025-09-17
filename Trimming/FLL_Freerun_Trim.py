@@ -57,7 +57,6 @@ def fll_freerun():
     for i in range(num_steps):
         # sweep trimg code
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_fll_vco_trm_5l', 'length': 6, 'registers': [{'REG': '0xB7', 'POS': 0, 'RegisterName': 'OTP FIELDS 7', 'RegisterLength': 8, 'Name': 'otp_ds_fll_vco_trm_5l[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x22', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=hex(i))
-        I2C_WRITE(device_address="0x38",field_info=	{'fieldname': 'signature1', 'length': 8, 'registers': [{'REG': '0xD1', 'POS': 0, 'RegisterName': 'OTP FIELDS 33', 'RegisterLength': 8, 'Name': 'signature1[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=i)
         # Generate monotonic values with step size
         expected_value = lower_limit + i * step_size 
         # Add white noise to the expected value
