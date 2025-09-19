@@ -34,7 +34,7 @@ def gpadc_settle_time_trim():
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'gpadc_del_comp_en', 'length': 1, 'registers': [{'REG': '0xD6', 'POS': 2, 'RegisterName': 'SAR ADC settings ', 'RegisterLength': 8, 'Name': 'gpadc_del_comp_en', 'Mask': '0x4', 'Length': 1, 'FieldMSB': 2, 'FieldLSB': 2, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0x1)
     I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1) # page 1
 
-    # select the mux to bring out the ana_dd_gpadc_tb_delay_clock_dvdd signal on "IOCLK0"
+    # select the mux to bring out the ana_dd_gpadc_tb_delay_clock_dvdd signal on "IOCLK1"
     # the frequency measured is > of 9.09MHz.  
     # desingers needs to correct the assumptions
     limit_percentage = 0.1 # assuming 
