@@ -1,4 +1,4 @@
-# Processed on 2025-09-12 11:58:47
+# Processed on 2025-09-19 14:51:22
 from dfttools import *
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
@@ -35,7 +35,7 @@ def gpadc_settle_time_trim():
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x4, Mask=0x4, Default=0x0
     [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
 
-    # select the mux to bring out the ana_dd_gpadc_tb_delay_clock_dvdd signal on "IOCLK0"
+    # select the mux to bring out the ana_dd_gpadc_tb_delay_clock_dvdd signal on "IOCLK1"
     # the frequency measured is > of 9.09MHz.  
     # desingers needs to correct the assumptions
     limit_percentage = 0.1 # assuming 
