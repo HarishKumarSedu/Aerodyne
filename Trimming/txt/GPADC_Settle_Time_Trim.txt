@@ -1,4 +1,4 @@
-# Processed on 2025-09-19 14:51:22
+# Processed on 2025-09-19 15:09:35
 from dfttools import *
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
@@ -27,7 +27,7 @@ def gpadc_settle_time_trim():
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x10, Mask=0x3F, Default=0x0
     [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB4, data=0xF, Mask=0xF, Default=0x4
-    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x3, Mask=0x7F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x4, Mask=0x7F, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x11, Mask=0x7F, Default=0x0
     [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x1
