@@ -1,4 +1,4 @@
-# Processed on 2025-09-22 11:12:36
+# Processed on 2025-09-24 17:24:47
 from dfttools import *
 from time import sleep
 
@@ -33,7 +33,6 @@ def gpadc_vbat_gain_off_trim():
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x0, Mask=0x3F, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x20, Mask=0x3F, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x3, Mask=0x3, Default=0x0
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x0, Mask=0xF, Default=0x1 
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x1
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x1, Mask=0x1, Default=0x0
     VB0 = VFORCE(signal="PVDD", reference="GND", value=2.8,error_spread=0)
