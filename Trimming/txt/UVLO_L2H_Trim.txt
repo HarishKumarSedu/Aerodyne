@@ -1,4 +1,4 @@
-# Processed on 2025-09-18 14:47:31
+# Processed on 2025-09-27 16:20:30
 from dfttools import *
 from time import sleep
 import random
@@ -10,6 +10,7 @@ def uvlo_l2h():
     global_enable()
     Test_Name = 'UVLO_L2H_Trim_0v4'
     print(f'............ {Test_Name} ........')
+    {'fieldname': 'cld_driver_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 2, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'cld_driver_test_en', 'Mask': '0x4', 'Length': 1, 'FieldMSB': 2, 'FieldLSB': 2, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}
 
     '''
     1.Turn ON the part in active mode, temp=27°C, vddp=3.7V, vdd=1.8V, vddd=1.2V, enable ref_analdo, enable ref_pvdd_uvlo,
