@@ -1,9 +1,6 @@
-# Processed on 2025-09-29 21:06:38
+# Processed on 2025-09-29 21:10:46
 from dfttools import *
 from time import sleep
-Test_Name = 'VIS_1V6_Ref_Meas'
-print(f'............ {Test_Name} ........')
-
 '''
 VIS 1.5V Reference Measurement
 -------------------------------------------------
@@ -14,12 +11,15 @@ VIS 1.5V Reference Measurement
 '''
 
 from Procedures.Startup import startup
+from Procedures.Playback import playback
 from Procedures.VI_SNS_turn_on import vi_sns_turn_on
+from Procedures.VI_SNS_turn_off import vi_sns_turn_off
 
 def vis_1v6_ref_meas():
   Test_Name = 'VIS_1V6_Ref_Meas'
   print(f'............ {Test_Name} ........')
   startup()
+  playback()
   vi_sns_turn_on()
   # Step 2: Settling Time
   sleep(0.0005)  # 500 µs
