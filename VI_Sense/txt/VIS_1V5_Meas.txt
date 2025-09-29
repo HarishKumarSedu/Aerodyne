@@ -1,4 +1,4 @@
-# Processed on 2025-09-29 20:52:54
+# Processed on 2025-09-29 21:02:40
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -37,6 +37,7 @@ def vis_1v5_meas():
     else:
         print(f"FAIL: Voltage error {abs(vref1V5 - expected_dc1) * 1000:.1f}mV exceeds limit")
     vi_sns_turn_off()
+    VMEASURE(signal="ADDR", reference="GND", expected_value=expected_dc1, error_spread=dc1_error) # trun of the "ADDR" swtich with multimeter 
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x2, Default=0x0  # Enable test mux
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0  
 if __name__ == "__main__":
