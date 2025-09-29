@@ -1,15 +1,13 @@
 from dfttools import *
 from time import sleep
-
-Test_Name = 'VIS_2uA_Curr1_Meas'
-from Procedures import Startup
-
-print(f'............ {Test_Name} ........')
-
+from Procedures.Startup import startup
+from Procedures.VI_SNS_turn_on import vi_sns_turn_on
 
 def vis_2ua_curr1_meas():
     Test_Name = 'VIS_2uA_Curr1_Meas'
-    print(f'............ {Test_Name.lower()} ........')
+    print(f'............ {Test_Name} ........')
+    startup()
+    vi_sns_turn_on()
     '''
     VIS 2uA Current Source Measurement
     -------------------------------------------------
