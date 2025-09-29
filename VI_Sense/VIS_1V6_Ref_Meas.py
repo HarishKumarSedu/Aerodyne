@@ -16,6 +16,8 @@ from Procedures.Startup import startup
 from Procedures.VI_SNS_turn_on import vi_sns_turn_on
 
 def vis_1v6_ref_meas():
+  Test_Name = 'VIS_1V6_Ref_Meas'
+  print(f'............ {Test_Name} ........')
   startup()
   vi_sns_turn_on()
   # Step 2: Settling Time
@@ -37,4 +39,5 @@ def vis_1v6_ref_meas():
       print("PASS: Voltage within ±5mV specification")
   else:
       print(f"FAIL: Voltage error {abs(vref1V5-expected_dc1)*1000:.1f}mV exceeds limit")
-    
+if __name__ == '__main__':
+  vis_1v6_ref_meas()
