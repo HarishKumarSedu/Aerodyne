@@ -3,6 +3,8 @@ from time import sleep
 import random
 
 from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
 from Procedures.VI_SNS_turn_on import vi_sns_turn_on
 
 def vis_storbe_del_trim():
@@ -10,6 +12,8 @@ def vis_storbe_del_trim():
     print(f'............ {Test_Name} ........')
     ##################### call Procedures ################
     startup()
+    global_enable()
+    playback()
     vi_sns_turn_on()
     ######################################################
     '''
