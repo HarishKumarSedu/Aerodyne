@@ -1,0 +1,13 @@
+
+
+Command;Check;Page;SAD;ADD;DATA;MSB;LSB;Comment
+WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: FE; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 18; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 19; DATA: 0; MSB: 6; LSB: 6;COM: Mask: 0x40;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 19; DATA: 0; MSB: 5; LSB: 5;COM: Mask: 0x20;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 19; DATA: 0; MSB: 4; LSB: 4;COM: Mask: 0x10;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 19; DATA: 0; MSB: 2; LSB: 2;COM: Mask: 0x4;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 19; DATA: 0; MSB: 3; LSB: 3;COM: Mask: 0x8;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 19; DATA: 0; MSB: 1; LSB: 1;COM: Mask: 0x2;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 19; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 1A; DATA: 1; MSB: 6; LSB: 6;COM: Mask: 0x40;;
