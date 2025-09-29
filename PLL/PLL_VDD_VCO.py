@@ -30,6 +30,6 @@ def pll_vdd_bias_vdd():
     error = abs(pll_measured_vddvco_voltage - pll_vddvco_target_value) / abs(pll_vddvco_target_value) * 100
     print(f"Measured VDDVCO value : {pll_measured_vddvco_voltage} V, Target value : {pll_vddvco_target_value}uA")
     print(f"Percentage Error: {error}%")
-
+    VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open path 
 if __name__ == "__main__":
     pll_vdd_bias_vdd()
