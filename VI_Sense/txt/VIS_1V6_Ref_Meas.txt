@@ -1,4 +1,4 @@
-# Processed on 2025-09-29 21:10:46
+# Processed on 2025-09-29 21:21:52
 from dfttools import *
 from time import sleep
 '''
@@ -42,5 +42,6 @@ def vis_1v6_ref_meas():
       print(f"FAIL: Voltage error {abs(vref1V5-expected_dc1)*1000:.1f}mV exceeds limit")
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x2, Default=0x0  # disable analog test mux
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0  
+  vi_sns_turn_off()
 if __name__ == '__main__':
   vis_1v6_ref_meas()
