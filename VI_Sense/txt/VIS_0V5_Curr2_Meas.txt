@@ -1,4 +1,4 @@
-# Processed on 2025-09-29 20:46:22
+# Processed on 2025-09-29 20:52:10
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -33,6 +33,8 @@ def vis_2ua_curr1_meas():
         print("PASS: Current within ±0.05uA specification")
     else:
         print(f"FAIL: Current error {abs(imeas - expected_curr) * 1e6:.1f}uA exceeds limit")
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x2, Default=0x0  # Enable test mux
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0  
 
 if __name__ == "__main__":
     vis_2ua_curr1_meas()
