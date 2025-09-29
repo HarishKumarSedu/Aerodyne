@@ -32,6 +32,7 @@ def pll_vco_bias_current():
     error = abs(pll_measured_bias_current - pll_vco_current_target_value) / abs(pll_vco_current_target_value) * 100
     print(f"Measured current value : {pll_measured_bias_current / 1e-6}uA, Target vlaue : {pll_vco_current_target_value / 1e-6}uA")
     print(f"Percentage Error: {error}%")
+    AMEASURE(signal="IODATA1", reference="GND",expected_value=float('Inf'))
 
 if __name__ == "__main__":
     pll_vco_bias_current()
