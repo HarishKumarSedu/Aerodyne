@@ -25,10 +25,10 @@ def pll_vdd_bias_vdd():
     I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=hex(1))  #Change page in regmap
     I2C_WRITE(device_address="0x38", field_info={'fieldname': 'pll_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'pll_test_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=hex(1))   #enable ANA_TESTMUX1
     I2C_WRITE(device_address="0x38", field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=hex(1))      #enable VDD_VCO voltage test
-    pll_measured_vddvco_voltage = AMEASURE(signal="IODATA1", reference="GND", expected_value=pll_vddvco_target_value,
+    pll_measured_vddvco_voltage = VMEASURE(signal="IODATA1", reference="GND", expected_value=pll_vddvco_target_value,
                                           error_spread=pll_vddvco_error_spread)        #measure with amperometer shorted to ground
     error = abs(pll_measured_vddvco_voltage - pll_vddvco_target_value) / abs(pll_vddvco_target_value) * 100
-    print(f"Measured VDDVCO value : {pll_measured_vddvco_voltage}uA, Target value : {pll_vddvco_target_value}uA")
+    print(f"Measured VDDVCO value : {pll_measured_vddvco_voltage} V, Target value : {pll_vddvco_target_value}uA")
     print(f"Percentage Error: {error}%")
 
 if __name__ == "__main__":
