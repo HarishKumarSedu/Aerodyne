@@ -1,4 +1,4 @@
-# Processed on 2025-09-30 17:12:26
+# Processed on 2025-09-30 17:17:52
 from dfttools import *
 from time import sleep 
 from math import *
@@ -11,7 +11,6 @@ from Procedures.Playback import playback
 def dc_vddp_pssr():
 
   Test_Name = 'DC_VDDP_PSRR' 
-
   print(f'............ {Test_Name} ........')
   startup()
   global_enable()
@@ -45,6 +44,7 @@ def dc_vddp_pssr():
     print(f'{Test_Name} ..... Passed... Measured :>  {measured_value_db} dB')
   else:
     print(f'{Test_Name} ..... Failed... Measured :>  {measured_value_db} dB')
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1E, data=0x0, Mask=0x2, Default=0x0 
   VMEASURE(signal="OUTP", reference="OUTN",expected_value = float('Inf'))
 
 if __name__ == '__main__':
