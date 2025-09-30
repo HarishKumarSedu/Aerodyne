@@ -1,4 +1,4 @@
-# Processed on 2025-07-09 11:55:48
+# Processed on 2025-09-30 11:31:49
 from dfttools import *
 from time import sleep
 
@@ -21,3 +21,6 @@ Procedure
 
 # Start scan
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x05, data=0x2, Mask=0x2, Default=0x18
+
+# Force "VDD" = 1.2V
+VFORCE("VDD",1.2)
