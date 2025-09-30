@@ -1,29 +1,43 @@
-# Processed on 2025-07-09 11:56:24
+# Processed on 2025-09-30 15:18:34
 from dfttools import *
 from time import sleep 
 import random
-Test_Name = 'DAC_LSB_Current'
-from Procedures import Startup
-from Procedures import Playback
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
 
-print(f'............ {Test_Name} ........')
+def dac_lsb_current():
 
-'''
+  Test_Name = 'DAC_LSB_Current'
+  print(f'............ {Test_Name} ........')
+  startup()
+  global_enable()
+  playback()
+  '''
 DAC LSB Current Test
 Step 1. Configure the device registers to enable testing.
 Step 2. Bring the DAC test current to pin "IODATA1" through the analog test mux.
 Step 3. Wait for the signal to stabilize and measure the current at "IODATA1".
-'''
+  '''
 # Step 1
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x10, Mask=0x10, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0xC, Mask=0xF, Default=0x0  
-# Step 2
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
-# Step 3
-sleep(0.0001) 
-expected_value = 590e-9  
-error_spread = expected_value*0.05 
-measured_value = AMEASURE(signal="IODATA1", reference="GND", expected_value=expected_value, error_spread=error_spread)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x10, Mask=0x10, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0xC, Mask=0xF, Default=0x0  
+  # Step 2
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+  # Step 3
+  sleep(0.0001) 
+  expected_value = 590e-9  
+  error_spread = expected_value*0.05 
+  measured_value = AMEASURE(signal="IODATA1", reference="GND", expected_value=expected_value, error_spread=error_spread)
 
-print(f'Measured DAC current value at "IODATA1" wrt "GND": {measured_value}')
+  print(f'Measured DAC current value at "IODATA1" wrt "GND": {measured_value}')
+  # Step 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x10, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0  
+  # Step 2
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
+  AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
+
+if __name__ == '__main__':
+  dac_lsb_current()
