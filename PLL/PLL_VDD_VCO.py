@@ -30,7 +30,7 @@ def pll_vdd_bias_vdd():
     pll_measured_vddvco_voltage = VMEASURE(signal="IODATA1", reference="GND", expected_value=pll_vddvco_target_value,
                                           error_spread=pll_vddvco_error_spread)        #measure with amperometer shorted to ground
     error = abs(pll_measured_vddvco_voltage - pll_vddvco_target_value) / abs(pll_vddvco_target_value) * 100
-    print(f"Measured VDDVCO value : {pll_measured_vddvco_voltage} V, Target value : {pll_vddvco_target_value}uA")
+    print(f"Measured VDDVCO value : {pll_measured_vddvco_voltage} V, Target value : {pll_vddvco_target_value} V")
     print(f"Percentage Error: {error}%")
     I2C_WRITE(device_address="0x38", field_info={'fieldname': 'pll_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'pll_test_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0)   #enable ANA_TESTMUX1
     I2C_WRITE(device_address="0x38", field_info={'fieldname': 'atp_p_en', 'length': 1, 'registers': [{'REG': '0x17', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_EN2', 'RegisterLength': 8, 'Name': 'atp_p_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000NNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0)   #enable "IODATA1"
