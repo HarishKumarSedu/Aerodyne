@@ -32,10 +32,10 @@ def vis_1v6_ref_meas():
   # Step 4: DC Voltage Measurement
   expected_dc1 = 1.6       # Target voltage on "ADDR"
   dc1_error = 0.005        # ±5mV tolerance
-  vref1V5 = VMEASURE(signal="ADDR", reference="GND", expected_value=expected_dc1, error_spread=dc1_error)
+  vref1V5 = VMEASURE(signal="IODATA1", reference="GND", expected_value=expected_dc1, error_spread=dc1_error)
   print(f'DC Reference Voltage: {vref1V5:.5f} V [Target: {expected_dc1:.2f}V ±{dc1_error*1000:.0f}mV]')
   # Pass/Fail Criteria
-  VMEASURE(signal="ADDR", reference="GND", expected_value=float('Inf')) # open the path 
+  VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open the path 
   if abs(vref1V5 - expected_dc1) <= dc1_error:
       print("PASS: Voltage within ±5mV specification")
   else:
