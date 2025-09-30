@@ -10,7 +10,6 @@ from Procedures.Playback import playback
 def dc_vddp_pssr():
 
   Test_Name = 'DC_VDDP_PSRR' 
-
   print(f'............ {Test_Name} ........')
   startup()
   global_enable()
@@ -44,6 +43,7 @@ def dc_vddp_pssr():
     print(f'{Test_Name} ..... Passed... Measured :>  {measured_value_db} dB')
   else:
     print(f'{Test_Name} ..... Failed... Measured :>  {measured_value_db} dB')
+  I2C_WRITE(device_address="0x38", field_info={'fieldname': 'force_dac_zero', 'length': 1, 'registers': [{'REG': '0x1E', 'POS': 1, 'RegisterName': 'Force registers 7', 'RegisterLength': 8, 'Name': 'force_dac_zero', 'Mask': '0x2', 'Length': 1, 'FieldMSB': 1, 'FieldLSB': 1, 'Attribute': '000NNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0) 
   VMEASURE(signal="OUTP", reference="OUTN",expected_value = float('Inf'))
 
 if __name__ == '__main__':
