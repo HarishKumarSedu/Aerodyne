@@ -1,7 +1,8 @@
-# Processed on 2025-09-29 21:22:33
+# Processed on 2025-09-30 11:32:30
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
 from Procedures.Playback import playback
 from Procedures.VI_SNS_turn_on import vi_sns_turn_on
 from Procedures.VI_SNS_turn_off import vi_sns_turn_off
@@ -18,13 +19,15 @@ def vis_1v5_meas():
     4. Measure 0V reference ground at "IODATA1" test point
     '''
     startup()
+    global_enable()
     playback()
     vi_sns_turn_on()
     # Step 2: Settling Time
     sleep(0.0005)  # 500 µs
-    # Step 3: Route Reference to "ADDR" and "IODATA1"
-    [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF  # Change page in regmap
+    # Step 3: Route Reference to "IODATA1" to "ADDR"
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  # Change page in regmap
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x2, Mask=0x2, Default=0x0  # Enable test mux
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0  
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x1, Mask=0xF, Default=0x0  # Enable tests REF_1V5 and Reference "GND"
     # Step 4: DC Voltage Measurement
     expected_dc1 = 1.5       # Target voltage on "ADDR"
@@ -37,6 +40,7 @@ def vis_1v5_meas():
     else:
         print(f"FAIL: Voltage error {abs(vref1V5 - expected_dc1) * 1000:.1f}mV exceeds limit")
     VMEASURE(signal="ADDR", reference="GND", expected_value=float('Inf')) # trun of the "ADDR" swtich with multimeter 
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0 
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x2, Default=0x0  # Enable test mux
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0  
     vi_sns_turn_off()
