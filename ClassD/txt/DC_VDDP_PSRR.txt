@@ -1,4 +1,4 @@
-# Processed on 2025-09-30 17:17:52
+# Processed on 2025-09-30 17:36:38
 from dfttools import *
 from time import sleep 
 from math import *
@@ -44,6 +44,7 @@ def dc_vddp_pssr():
     print(f'{Test_Name} ..... Passed... Measured :>  {measured_value_db} dB')
   else:
     print(f'{Test_Name} ..... Failed... Measured :>  {measured_value_db} dB')
+  VFORCE(signal="PVDD", reference="GND", value=3.7) # normal operating condition
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1E, data=0x0, Mask=0x2, Default=0x0 
   VMEASURE(signal="OUTP", reference="OUTN",expected_value = float('Inf'))
 
