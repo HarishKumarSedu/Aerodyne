@@ -1,11 +1,12 @@
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
-
+from Procedures.Global_enable import global_enable
 def pll_vdd_bias_vdd():
     Test_Name = 'PLL_VCO_Bias_VDD'
     print(f'............ {Test_Name.lower()} ........')
     startup()
+    global_enable()
     pll_vddvco_target_value = 0.68  # 680mV target VDD_VCO
     BLCK_Set = 3.072e6              # 3.072MHz
     pll_vddvco_error_spread = pll_vddvco_target_value * 0.01  # 1% of target value
