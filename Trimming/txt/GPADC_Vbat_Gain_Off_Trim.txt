@@ -1,4 +1,4 @@
-# Processed on 2025-09-24 17:24:47
+# Processed on 2025-09-30 10:46:48
 from dfttools import *
 from time import sleep
 
@@ -28,6 +28,7 @@ def gpadc_vbat_gain_off_trim():
 
 
     '''
+    FREQFORCE(signal="IOCLK0",reference="GND",value=3.072e6)   # force clock 
     [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
     sleep(0.001)
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x0, Mask=0x3F, Default=0x0
@@ -80,6 +81,7 @@ def gpadc_vbat_gain_off_trim():
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x0, Mask=0x3F, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x0, Mask=0x3, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x1, Mask=0xF, Default=0x1
+    FREQFORCE(signal="IOCLK0",reference="GND",value=float('Inf')) # disable the clock at the end of the test 
 
 if __name__ == '__main__':
     gpadc_vbat_gain_off_trim()
