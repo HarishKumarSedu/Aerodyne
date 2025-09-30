@@ -1,30 +1,48 @@
-# Processed on 2025-07-09 11:56:26
+# Processed on 2025-09-30 15:21:58
 from dfttools import *
 from time import sleep 
 import random
-Test_Name = 'DAC common mode voltage'
-from Procedures import Startup
-from Procedures import Playback
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
 
-print(f'............ {Test_Name} ........')
+def dac_vcm():
 
-'''
+  Test_Name = 'DAC common mode voltage'
+
+  print(f'............ {Test_Name} ........')
+  startup()
+  global_enable()
+  playback()
+
+  '''
 DAC common mode voltage test
 Step 1. Configure the device registers to enable testing.
 Step 2. Bring the DAC common mode voltage to pin "IODATA1" through the analog test mux p and the local ground to pin "ADDR" through the analog test mux n.
 Step 3. Wait for the signal to stabilize and measure the differential voltage "IODATA1" wrt "ADDR".
-'''
-# Step 1
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x10, Mask=0x10, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0xE, Mask=0xF, Default=0x0  
-# Step 2
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x2, Mask=0x2, Default=0x0
-# Step 3
-sleep(0.0001) 
-expected_value = 1.5  
-error_spread = expected_value*0.01 
-measured_value = VMEASURE(signal="IODATA1", reference="ADDR", expected_value=expected_value, error_spread=error_spread)
+  '''
+  # Step 1
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x10, Mask=0x10, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0xE, Mask=0xF, Default=0x0  
+  # Step 2
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x2, Mask=0x2, Default=0x0
+  # Step 3
+  sleep(0.0001) 
+  expected_value = 1.5  
+  error_spread = expected_value*0.01 
+  measured_value = VMEASURE(signal="IODATA1", reference="ADDR", expected_value=expected_value, error_spread=error_spread)
 
-print(f'Measured DAC common mode voltage value at "IODATA1" wrt "ADDR": {measured_value}')
+  print(f'Measured DAC common mode voltage value at "IODATA1" wrt "ADDR": {measured_value}')
+  VMEASURE(signal="IODATA1", reference="ADDR", expected_value=float('Inf'), error_spread=error_spread)
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x10, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0  
+  # Step 2
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
+
+if __name__ == '__main__':
+  dac_vcm()
+  
+  
