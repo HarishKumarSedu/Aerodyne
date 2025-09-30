@@ -3,6 +3,7 @@ from time import sleep
 import random
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
 
 def lpf_bias_current():
     Test_Name = 'LPF_BIAS_Current'
@@ -11,6 +12,7 @@ def lpf_bias_current():
     print(f'............ {Test_Name} ........')
     startup()
     global_enable()
+    playback()
     '''
     LPF Bias Current Test
     -------------------------------------------------
