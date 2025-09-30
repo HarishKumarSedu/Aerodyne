@@ -10,6 +10,7 @@ VIS 1.5V Reference Measurement
 '''
 
 from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
 from Procedures.Playback import playback
 from Procedures.VI_SNS_turn_on import vi_sns_turn_on
 from Procedures.VI_SNS_turn_off import vi_sns_turn_off
@@ -18,6 +19,7 @@ def vis_1v6_ref_meas():
   Test_Name = 'VIS_1V6_Ref_Meas'
   print(f'............ {Test_Name} ........')
   startup()
+  global_enable()
   playback()
   vi_sns_turn_on()
   # Step 2: Settling Time
