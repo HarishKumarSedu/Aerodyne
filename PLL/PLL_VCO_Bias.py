@@ -1,12 +1,14 @@
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
 
 def pll_vco_bias_current():
     Test_Name = 'PLL_VCO_Bias_Current'
     {'fieldname': 'cld_pwm_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 5, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'cld_pwm_test_en', 'Mask': '0x20', 'Length': 1, 'FieldMSB': 5, 'FieldLSB': 5, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}
     print(f'............ {Test_Name.lower()} ........')
     startup()
+    global_enable()
     pll_vco_current_target_value = 0.5e-6  # 0.5uA
     BLCK_Set = 3.072e6                     # 3.072MHz
     pll_vco_current_error_spread = pll_vco_current_target_value * 0.01  # 1% of target value
