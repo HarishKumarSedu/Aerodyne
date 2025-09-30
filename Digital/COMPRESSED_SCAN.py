@@ -20,3 +20,6 @@ I2C_WRITE(device_address="0x38", field_info={'fieldname': 'scanx_enh', 'length':
 
 # Start scan
 I2C_WRITE(device_address="0x38", field_info={'fieldname': 'scan_enh', 'length': 1, 'registers': [{'REG': '0x05', 'POS': 1, 'RegisterName': 'SCAN Test', 'RegisterLength': 8, 'Name': 'scan_enh', 'Mask': '0x2', 'Length': 1, 'FieldMSB': 1, 'FieldLSB': 1, 'Attribute': '000000NN', 'Default': '0x18', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'A', 'PageName': 'PAG1'}]}, write_value=0x1)
+
+# Force "VDD" = 1.2V
+VFORCE("VDD",1.2)
