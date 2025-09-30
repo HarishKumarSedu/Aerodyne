@@ -1,4 +1,4 @@
-# Processed on 2025-09-30 12:43:06
+# Processed on 2025-09-30 13:03:41
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -31,7 +31,7 @@ def pll_vdd_bias_vdd():
     pll_measured_vddvco_voltage = VMEASURE(signal="IODATA1", reference="GND", expected_value=pll_vddvco_target_value,
                                           error_spread=pll_vddvco_error_spread)        #measure with amperometer shorted to ground
     error = abs(pll_measured_vddvco_voltage - pll_vddvco_target_value) / abs(pll_vddvco_target_value) * 100
-    print(f"Measured VDDVCO value : {pll_measured_vddvco_voltage} V, Target value : {pll_vddvco_target_value}uA")
+    print(f"Measured VDDVCO value : {pll_measured_vddvco_voltage} V, Target value : {pll_vddvco_target_value} V")
     print(f"Percentage Error: {error}%")
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0   #enable "IODATA1"
