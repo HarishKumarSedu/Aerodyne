@@ -1,4 +1,4 @@
-# Processed on 2025-09-29 20:10:02
+# Processed on 2025-09-30 12:36:40
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -26,6 +26,7 @@ def pll_vco_bias_current():
     '''
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x1, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0   #test pin "IODATA1"
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0      #enable pll vco current test
     pll_measured_bias_current = AMEASURE(signal="IODATA1", reference="GND", 
                                         expected_value=pll_vco_current_target_value,
@@ -34,6 +35,9 @@ def pll_vco_bias_current():
     print(f"Measured current value : {pll_measured_bias_current / 1e-6}uA, Target vlaue : {pll_vco_current_target_value / 1e-6}uA")
     print(f"Percentage Error: {error}%")
     AMEASURE(signal="IODATA1", reference="GND",expected_value=float('Inf'))
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x1, Default=0x0   #diable ANA_TESTMUX1
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0   #test pin "IODATA1"
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0      #disable pll vco current test
 
 if __name__ == "__main__":
     pll_vco_bias_current()
