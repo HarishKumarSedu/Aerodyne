@@ -1,6 +1,7 @@
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
 from Procedures.Playback import playback
 from Procedures.VI_SNS_turn_on import vi_sns_turn_on
 from Procedures.VI_SNS_turn_off import vi_sns_turn_off
@@ -9,6 +10,7 @@ def vis_2ua_curr1_meas():
     Test_Name = 'VIS_2uA_Curr1_Meas'
     print(f'............ {Test_Name} ........')
     startup()
+    global_enable()
     playback()
     vi_sns_turn_on()
     '''
