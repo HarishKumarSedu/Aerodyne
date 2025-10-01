@@ -27,7 +27,7 @@ def fll_lock_check():
   expected_value = 1.2
   error_spread = expected_value*0.2 
   fll_lock_vddd=VMEASURE(signal="IODATA0", reference="GND", expected_value=expected_value, error_spread=error_spread)
-
+  VMEASURE(signal="IODATA0", reference="GND", expected_value=float('Inf')) # remote path once measure is done 
   if fll_lock_vddd>1:
     # Step 2
     I2C_WRITE(device_address="0x38", field_info={'fieldname': 'dig_test_en', 'length': 7, 'registers': [{'REG': '0x03', 'POS': 0, 'RegisterName': 'DIGITAL_TEST_SETTINGS_1', 'RegisterLength': 8, 'Name': 'dig_test_en[6:0]', 'Mask': '0x7F', 'Length': 7, 'FieldMSB': 6, 'FieldLSB': 0, 'Attribute': '0NNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},  write_value=0x10) #enable "ADDR"
