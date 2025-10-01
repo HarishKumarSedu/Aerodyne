@@ -1,4 +1,4 @@
-# Processed on 2025-10-01 11:10:53
+# Processed on 2025-10-01 11:15:59
 from dfttools import *
 from time import sleep 
 import random
@@ -30,6 +30,9 @@ def fll_vddp_r_current():
   measured_value=VMEASURE(signal="IODATA1", reference="GND", expected_value=expected_value, error_spread=error_spread)
 
   print(f'FLL VDDP/R current is: {measured_value}')
+  VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0 #enable "IODATA1"
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0 #bring out the VDDD/R current
 
 if __name__ == '__main__':
   fll_vddp_r_current()
