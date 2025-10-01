@@ -1,4 +1,4 @@
-# Processed on 2025-10-01 10:14:07
+# Processed on 2025-10-01 10:22:25
 from dfttools import *
 from time import sleep
 import random
@@ -21,6 +21,7 @@ def vdddrive_uvlo_ref():
 
   meas = VMEASURE(signal="IODATA0", reference="ADDR", expected_value=0.4, error_spread=0.05)
   print(f"vdd_drive uvlo ref = {meas:.3f} ")
+  VMEASURE(signal="IODATA0", reference="ADDR", expected_value=float('Inf'))
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 1
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0 # disable atp
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
