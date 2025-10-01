@@ -1,68 +1,58 @@
-# Processed on 2025-07-09 11:56:44
+# Processed on 2025-10-01 12:04:54
 from dfttools import *
 from time import sleep
 import random
 
-Test_Name = 'OCP_LS_TH'
-from Procedures import speakerOff
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
 
-print(f'............ {Test_Name} ........')
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x1, Mask=0x1, Default=0x0 
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x1, Mask=0xF, Default=0x0 
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x10, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x40, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x20, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x4, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x8, Default=0x0  
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0  
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81  
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x4, Mask=0x4, Default=0x0  
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x10, Mask=0x10, Default=0x86  
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x4, Mask=0x4, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x4, Default=0x0  
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9A, data=0x20, Mask=0x20, Default=0x86  
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x10, Mask=0x10, Default=0x0  
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x10, Default=0x0 
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x2, Mask=0x2, Default=0x0  
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x4, Mask=0x7F, Default=0x0 # FSYN ana_ds_mid_up
+def ocp_ls_trim():
+  Test_Name = 'OCP_LS_TH'
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x1, Mask=0x1, Default=0x0 # turn on ocp
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x1, Mask=0x1, Default=0x0
+  print(f'............ {Test_Name} ........')
+  startup()
+  global_enable()
+  playback() 
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x10, Mask=0xFF, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x92, data=0x5, Mask=0x7, Default=0x3  
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x5, Mask=0x7F, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0  
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x80, Mask=0x80, Default=0x0  
 
-# Wait for device stabilization
-sleep(0.0001)  # 100 µs
-i_start = 0.5
-i_step = 0.05
-#AFORCE(signal="OUTP", reference="PGND", value=i_force, error_spread=0.01)  # 500mA ±5%
-sleep(0.00005) #50us
-# mid_up = 0 #debug
-ICODE=int([i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x05, Mask=0x2)
+  # Wait for device stabilization
+  sleep(0.0001)  # 100 µs
+  i_start = 0.5
+  i_step = 0.05
+  i_end = 0.85
+  i_force = i_start
+  AFORCE(signal="OUTP", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
+  sleep(0.00005) #50us
+  # mid_up = 0 #debug
+  ocp_status=[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x05, Mask=0x2
 
-if ICODE > 0:
-    print("Errore: all’avvio il comparatore è già alto")
-else:
-    for code in range(15):
-      
-        AFORCE(signal="OUTP", reference="PGND", value=i_start + i_step*code , error_spread=0.05) 
-        sleep(50e-6)  # 50 µs
-        AFORCE(signal="OUTP", reference="PGND", value=float('inf') , error_spread=0.05)
-        print(f"current = {code*i_step + i_start :.3f} ")
-        ICODE=int([i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x05, Mask=0x2)
+  if ocp_status :
+      print("Errore: all’avvio il comparatore è già alto")
+  else:
+      while i_force < i_end:
+          AFORCE(signal="OUTP", reference="GND", value=i_start + i_step*code , error_spread=0.05) 
+          sleep(50e-6)  # 50 µs
+          print(f"current = {code*i_step + i_start :.3f} ")
+          ocp_status =[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x05, Mask=0x2
         
-        if ICODE > 0.5:
-            print(f"Threshold = {code*i_step + i_start :.3f} ")
-            break
+          if ocp_status :
+              print(f"Triggered @ = {i_force}A ")
+              break
+          i_force += i_step
           
-AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
-
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 
+  AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x80, Default=0x0  
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0  
