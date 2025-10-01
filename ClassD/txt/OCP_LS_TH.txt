@@ -1,4 +1,4 @@
-# Processed on 2025-10-01 12:08:09
+# Processed on 2025-10-01 12:12:50
 from dfttools import *
 from time import sleep
 import random
@@ -8,7 +8,7 @@ from Procedures.Global_enable import global_enable
 from Procedures.Playback import playback
 
 
-def ocp_ls_trim():
+def ocp_ls_th():
   Test_Name = 'OCP_LS_TH'
 
   print(f'............ {Test_Name} ........')
@@ -29,7 +29,8 @@ def ocp_ls_trim():
   sleep(0.0001)  # 100 µs
   i_start = 0.5
   i_step = 0.05
-  AFORCE(signal="OUTP", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
+  i_end = 0.85
+  AFORCE(signal="OUTP", reference="GND", value=i_start, error_spread=0.01)  # 500mA ±5%
   sleep(0.00005) #50us
   # mid_up = 0 #debug
   ocp_status=[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x05, Mask=0x2
@@ -38,15 +39,19 @@ def ocp_ls_trim():
       print("Errore: all’avvio il comparatore è già alto")
   else:
       for code in range(15):
-      
-          AFORCE(signal="OUTP", reference="GND", value=i_start + i_step*code , error_spread=0.05) 
+          i_force = code*i_step + i_start
+          AFORCE(signal="OUTP", reference="GND", value=i_force , error_spread=0.05) 
           sleep(50e-6)  # 50 µs
-          print(f"current = {code*i_step + i_start :.3f} ")
+          print(f"current = {i_force :.3f} ")
           ocp_status =[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x05, Mask=0x2
         
           if ocp_status:
-              print(f"Threshold = {code*i_step + i_start :.3f} ")
+              print(f"Threshold = {i_force :.3f} ")
               break
+          elif i_force > i_end :
+              print(f"Threshold corssed {i_end : .3f}A ")
+              break
+            
           
   AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
@@ -54,3 +59,6 @@ def ocp_ls_trim():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x80, Default=0x0  
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0  
+
+if __name__ == '__main__':
+  ocp_ls_th()
