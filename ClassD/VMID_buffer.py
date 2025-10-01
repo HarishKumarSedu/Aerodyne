@@ -34,7 +34,7 @@ def vmid_buffer():
   sleep(0.002) #5tau
   expected_value = 1.85
   error_spread = expected_value*0.0054 #10mV error
-  measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=expected_value, error_spread=error_spread)
+  measured_value = VMEASURE(signal="IODATA1", reference="ADDR", expected_value=expected_value, error_spread=error_spread)
 
   print(f'Measured DAC 0p9V voltage reference value at "IODATA1" wrt "ADDR": {measured_value}')
 
