@@ -51,7 +51,7 @@ def vmid_over_voltage():
   VFORCE(signal="VMID", reference="PGND", value=v_force, error_spread=0.01)  # 500mA ±5%
   sleep(0.00005) #50us
   # mid_up = 0 #debug
-  trigger = VTRIG_HL(signal="IODATA0", reference="GND", threshold=1.8, expected_value=1)
+  trigger = VTRIG_LH(signal="IODATA0", reference="GND", threshold=1.8, expected_value=1)
 
   if trigger:
       print("Errore: all’avvio il comparatore è già alto")
@@ -68,7 +68,7 @@ def vmid_over_voltage():
           sleep(50e-6)  # 50 µs
 
           # 4. leggiamo di nuovo l’uscita del comparatore
-          trigger = VTRIG_HL(signal="IOCLK1", reference="GND", threshold=1.8, expected_value=1)
+          trigger = VTRIG_LH(signal="IOCLK1", reference="GND", threshold=1.8, expected_value=1)
 
           # 5. se abbiamo superato la soglia, abbiamo finito
           if trigger:
