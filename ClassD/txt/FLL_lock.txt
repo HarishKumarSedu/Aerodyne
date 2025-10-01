@@ -1,4 +1,4 @@
-# Processed on 2025-10-01 12:18:29
+# Processed on 2025-10-01 12:20:34
 from dfttools import *
 from time import sleep 
 import random
@@ -28,7 +28,7 @@ def fll_lock_check():
   expected_value = 1.2
   error_spread = expected_value*0.2 
   fll_lock_vddd=VMEASURE(signal="IODATA0", reference="GND", expected_value=expected_value, error_spread=error_spread)
-
+  VMEASURE(signal="IODATA0", reference="GND", expected_value=float('Inf')) # remote path once measure is done 
   if fll_lock_vddd>1:
     # Step 2
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x10, Mask=0x7F, Default=0x0 #enable "ADDR"
