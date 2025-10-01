@@ -1,40 +1,48 @@
-# Processed on 2025-07-09 11:56:48
+# Processed on 2025-10-01 11:52:27
 from dfttools import *
 from time import sleep 
 import random
-Test_Name = 'FFL_lock_condition_check'
-from Procedures import Startup
-from Procedures import Playback
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
 
-print(f'............ {Test_Name} ........')
+def fll_lock_check():
+  Test_Name = 'FFL_lock_condition_check'
+  print(f'............ {Test_Name} ........')
+  startup()
+  global_enable()
+  playback()
 
-'''
-FFL_lock_condition_check
-The FLL is trimmed, "IOCLK0" has 3.072MHz clock.
-Step 1. Bring out on "IODATA0" the lock control signal
-Step 2. If the FLL is locked, doublecheck its frequency output frequency by bringing out on "ADDR" the PWM clock output.
-'''
+  '''
+  FFL_lock_condition_check
+  The FLL is trimmed, "IOCLK0" has 3.072MHz clock.
+  Step 1. Bring out on "IODATA0" the lock control signal
+  Step 2. If the FLL is locked, doublecheck its frequency output frequency by bringing out on "ADDR" the PWM clock output.
+  '''
 
-# Step 1
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x6, Mask=0x7F, Default=0x0  # enable "IODATA0"
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x3, Mask=0x7F, Default=0x0 # bring out {'fieldname': 'fll_lock', 'length': 1, 'registers': [{'REG': '0x24', 'POS': 6, 'RegisterName': 'Sequencer status register 1', 'RegisterLength': 8, 'Name': 'fll_lock', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'PR0RRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}
-sleep(0.0001) 
-expected_value = 1.2
-error_spread = expected_value*0.2 
-fll_lock_vddd=VMEASURE(signal="IODATA0", reference="GND", expected_value=expected_value, error_spread=error_spread)
-
-if fll_lock_vddd>1:
-  # Step 2
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x3, Mask=0x7F, Default=0x0 #enable "ADDR"
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 #bring out PWM frequency 
+  # Step 1
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x6, Mask=0x7F, Default=0x0  # enable "IODATA0"
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x3, Mask=0x7F, Default=0x0 # bring out {'fieldname': 'fll_lock', 'length': 1, 'registers': [{'REG': '0x24', 'POS': 6, 'RegisterName': 'Sequencer status register 1', 'RegisterLength': 8, 'Name': 'fll_lock', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'PR0RRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}
   sleep(0.0001) 
-  expected_value = 289129 
-  error_spread = expected_value*0.003 #1kHz precision
-  PWM_freq = FREQMEASURE(signal="ADDR", reference="GND",expected_value=expected_value, error_spread=error_spread)
-  print(f'FLL is locked, the PWM frequency at "ADDR" is: {PWM_freq}')
-else:
-  print(f'FLL is not locked')
+  expected_value = 1.2
+  error_spread = expected_value*0.2 
+  fll_lock_vddd=VMEASURE(signal="IODATA0", reference="GND", expected_value=expected_value, error_spread=error_spread)
+
+  if fll_lock_vddd>1:
+    # Step 2
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x3, Mask=0x7F, Default=0x0 #enable "ADDR"
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 #bring out PWM frequency 
+    sleep(0.0001) 
+    expected_value = 289129 
+    error_spread = expected_value*0.003 #1kHz precision
+    PWM_freq = FREQMEASURE(signal="ADDR", reference="GND",expected_value=expected_value, error_spread=error_spread)
+    print(f'FLL is locked, the PWM frequency at "ADDR" is: {PWM_freq}')
+  else:
+    print(f'FLL is not locked')
+
+if __name__ == '__main__':
+  fll_lock_check()
 
 
