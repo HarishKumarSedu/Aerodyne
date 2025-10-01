@@ -1,4 +1,4 @@
-# Processed on 2025-10-01 12:04:54
+# Processed on 2025-10-01 12:08:09
 from dfttools import *
 from time import sleep
 import random
@@ -29,8 +29,6 @@ def ocp_ls_trim():
   sleep(0.0001)  # 100 µs
   i_start = 0.5
   i_step = 0.05
-  i_end = 0.85
-  i_force = i_start
   AFORCE(signal="OUTP", reference="GND", value=i_force, error_spread=0.01)  # 500mA ±5%
   sleep(0.00005) #50us
   # mid_up = 0 #debug
@@ -39,16 +37,16 @@ def ocp_ls_trim():
   if ocp_status :
       print("Errore: all’avvio il comparatore è già alto")
   else:
-      while i_force < i_end:
+      for code in range(15):
+      
           AFORCE(signal="OUTP", reference="GND", value=i_start + i_step*code , error_spread=0.05) 
           sleep(50e-6)  # 50 µs
           print(f"current = {code*i_step + i_start :.3f} ")
           ocp_status =[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x05, Mask=0x2
         
-          if ocp_status :
-              print(f"Triggered @ = {i_force}A ")
+          if ocp_status:
+              print(f"Threshold = {code*i_step + i_start :.3f} ")
               break
-          i_force += i_step
           
   AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
