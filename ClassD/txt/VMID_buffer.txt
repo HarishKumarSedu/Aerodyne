@@ -1,44 +1,49 @@
-# Processed on 2025-07-09 11:56:42
+# Processed on 2025-10-01 10:18:10
 from dfttools import *
 from time import sleep 
 import random
-Test_Name = '"VMID" buffer test'
-from Procedures import speakerOff
-
-print(f'............ {Test_Name} ........')
-
 '''
 "VMID" buffer test
 Step 1. Configure the device registers to enable testing.
 Step 2. Bring the DAC voltage reference to pin "IODATA1" through the analog test mux p and the local ground to pin "ADDR" through the analog test mux n.
 Step 3. Wait for the signal to stabilize and measure the differential voltage "IODATA1" wrt "ADDR".
 '''
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
 
-# Select register page
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 # page 1
-# Enable forcing and disable only
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x1, Mask=0x1, Default=0x0  # class D force enable
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x40, Default=0x0 # cld_pwm disable
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x20, Default=0x0 # cld_lpf disable
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x10, Default=0x0 # cld_dac disable
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x4, Default=0x0 # cld_dac disable
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x8, Default=0x0  # cld_dac disable
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x0, Mask=0x2, Default=0x0  # cld_driver disable
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x19, data=0x1, Mask=0x1, Default=0x0 # cld_bias enable
+def vmid_buffer():
+  Test_Name = '"VMID" buffer test'
+  print(f'............ {Test_Name} ........')
+  startup()
+  global_enable()
+  playback()
 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0 # enable atp
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x2, Mask=0x2, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x6, Mask=0xF, Default=0x0  # {'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x4, Mask=0x4, Default=0x0  # test enable for driver
 
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x40, Mask=0x40, Default=0x0  # Enable vmid_buff force
+  '''
+  Wait for the time needed for vmid to charge. 
+  Suppose Cmid=10uF
+  Buffer output resistance is 40 Ohm. Time constant is 10uFx40Ohm=400us.
+  Settling time is about 5tau=2ms
+  ''' 
+  # Step 3
+  sleep(0.002) #5tau
+  expected_value = 1.85
+  error_spread = expected_value*0.0054 #10mV error
+  measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=expected_value, error_spread=error_spread)
 
-'''
-Wait for the time needed for vmid to charge. 
-Suppose Cmid=10uF
-Buffer output resistance is 40 Ohm. Time constant is 10uFx40Ohm=400us.
-Settling time is about 5tau=2ms
-''' 
-# Step 3
-sleep(0.002) #5tau
-expected_value = 1.85
-error_spread = expected_value*0.0054 #10mV error
-measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=expected_value, error_spread=error_spread)
+  print(f'Measured DAC 0p9V voltage reference value at "IODATA1" wrt "ADDR": {measured_value}')
 
-print(f'Measured DAC 0p9V voltage reference value at "IODATA1" wrt "ADDR": {measured_value}')
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0 # disable atp
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x4, Default=0x0  # test disable for driver
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0  # {'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}
+
+if __name__ == '__main__':
+  vmid_buffer()
