@@ -1,4 +1,4 @@
-# Processed on 2025-09-29 15:12:17
+# Processed on 2025-10-01 09:50:46
 from dfttools import *
 from time import sleep
 import random
@@ -89,7 +89,6 @@ def vis_storbe_del_trim():
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
     sleep(0.001)
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x1, Default=0x0
 
