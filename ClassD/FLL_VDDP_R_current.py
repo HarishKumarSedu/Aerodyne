@@ -15,6 +15,7 @@ def fll_vddp_r_current():
   '''
   FLL_VDDP_R_current
   The FLL is trimmed, "IOCLK0" has 3.072MHz clock.
+  this is a n2p current measure from 
   Step 1. Bring out on "IODATA1" VDDP/R current of the FLL
   Step 2. Measure it.
   '''
@@ -27,9 +28,9 @@ def fll_vddp_r_current():
   sleep(0.0001) 
   expected_value = 0.000001 #3.6/(3*1200000)->(vddp/3R)
   error_spread = expected_value*0.2
-  measured_value=AMEASURE(signal="IODATA1", reference="GND", expected_value=expected_value, error_spread=error_spread)
+  measured_value=AMEASURE(signal="VDD", reference="IODATA1", expected_value=expected_value, error_spread=error_spread)
 
-  print(f'FLL VDDP/R current is: {measured_value}')
+  print(f'FLL VDDP/R current expected_value {expected_value} is: {measured_value}')
   VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_pwm_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 5, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'cld_pwm_test_en', 'Mask': '0x20', 'Length': 1, 'FieldMSB': 5, 'FieldLSB': 5, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0) 
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'atp_p_en', 'length': 1, 'registers': [{'REG': '0x17', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_EN2', 'RegisterLength': 8, 'Name': 'atp_p_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000NNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0) #enable "IODATA1"
