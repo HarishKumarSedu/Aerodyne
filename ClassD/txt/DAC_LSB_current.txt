@@ -1,4 +1,4 @@
-# Processed on 2025-10-02 17:24:32
+# Processed on 2025-10-02 17:24:44
 from dfttools import *
 from time import sleep 
 import random
@@ -32,7 +32,7 @@ This is a n2p current measure between "VDD" to "IODATA1"
   error_spread = expected_value*0.05 
   measured_value = AMEASURE(signal="VDD", reference="IODATA1", expected_value=expected_value, error_spread=error_spread)
 
-  print(f'Measured DAC current value at "IODATA1" wrt "GND": {measured_value}')
+  print(f'Measured DAC current value at "IODATA1" wrt "VDD": {measured_value}')
   # Step 1
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x10, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0  
