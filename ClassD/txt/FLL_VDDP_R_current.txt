@@ -1,4 +1,4 @@
-# Processed on 2025-10-02 17:10:46
+# Processed on 2025-10-02 17:32:00
 from dfttools import *
 from time import sleep 
 import random
@@ -27,7 +27,7 @@ def fll_vddp_r_current():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x20, Mask=0x20, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x3, Mask=0xF, Default=0x0 #bring out the VDDD/R current
   sleep(0.0001) 
-  expected_value = 0.000001 #3.6/(3*1200000)->(vddp/3R)
+  expected_value = 1e-6 #3.6/(3*1200000)->(vddp/3R)
   error_spread = expected_value*0.2
   measured_value=AMEASURE(signal="VDD", reference="IODATA1", expected_value=expected_value, error_spread=error_spread)
 
