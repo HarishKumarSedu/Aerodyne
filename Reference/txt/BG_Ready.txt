@@ -1,4 +1,4 @@
-# Processed on 2025-10-02 16:42:43
+# Processed on 2025-10-02 16:44:41
 from dfttools import *
 from time import sleep
 import random
@@ -22,7 +22,7 @@ Enable the bandgap, bring BG ready signal to pin "IOCLK1"
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x4, Mask=0x7F, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x21, Mask=0x7F, Default=0x0
 
-  target_value = 1.2 # 1.2V
+  target_value = 1.8 # 1.8V
   error_spread = target_value*0.04 # 4% of target value
   measured_value = VMEASURE(signal="IOCLK1", reference="GND", expected_value=target_value,error_spread=error_spread)
   error = abs(measured_value - target_value)/abs(target_value) *100
