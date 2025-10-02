@@ -1,4 +1,4 @@
-# Processed on 2025-10-02 17:47:15
+# Processed on 2025-10-02 17:48:47
 from dfttools import *
 from time import sleep
 import random
@@ -7,27 +7,31 @@ Test_Name = 'MID_N_Ron'
 from Procedures.Ron_CLD_Setup import ron_cld_setup
 from Procedures.Ron_CLD_Unset import ron_cld_unset
 
-print(f'............ {Test_Name} ........')
+def mid_n_ron():
+  print(f'............ {Test_Name} ........')
 
-#[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
-ron_cld_setup()
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0xE0, Mask=0xFF, Default=0x0  # set bridge switch (LSp on, MIDp on, CASp on, HSp off, LSn off, MIDn off, CASn off, HSn off)
+  #[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
+  ron_cld_setup()
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0xE0, Mask=0xFF, Default=0x0  # set bridge switch (LSp on, MIDp on, CASp on, HSp off, LSn off, MIDn off, CASn off, HSn off)
 
-# Wait for device stabilization
-sleep(0.0001)  # 100 µs
+  # Wait for device stabilization
+  sleep(0.0001)  # 100 µs
 
-I_forced= 0.5 #Apply with ramp
+  I_forced= 0.5 #Apply with ramp
 
-# Step 3: Force 500mA current into "OUTP" pin
-AFORCE(signal="VMID", reference="PGND", value=I_forced, error_spread=0.05)  # 500mA ±5%
+  # Step 3: Force 500mA current into "OUTP" pin
+  AFORCE(signal="VMID", reference="PGND", value=I_forced, error_spread=0.05)  # 500mA ±5%
 
-dV = VMEASURE(signal="OUTN", reference="VMID", expected_value=0.065, error_spread=0.01)
-LSN_ron = dV / I_forced  # R = V/I
+  dV = VMEASURE(signal="OUTN", reference="VMID", expected_value=0.065, error_spread=0.01)
+  LSN_ron = dV / I_forced  # R = V/I
 
-print(f'Calculated Mid N-Ron: {LSN_ron:.3f} Ohms')
-print(f'[Expected ~135m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
+  print(f'Calculated Mid N-Ron: {LSN_ron:.3f} Ohms')
+  print(f'[Expected ~135m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
 
-AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
-ron_cld_unset()
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 
+  AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
+  ron_cld_unset()
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 
+
+if __name__ == '__main__':
+  mid_n_ron()
