@@ -3,5 +3,5 @@
 Command;Check;Page;SAD;ADD;DATA;MSB;LSB;Comment
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: FE; DATA: 01;;COM: Mask: 0xFF;;
 WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 22; DATA: 04; MSB: 6; LSB: 0;COM: Mask: 0x7F;;
-WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 03; DATA: 02; MSB: 6; LSB: 0;COM: Mask: 0x7F;;
+WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 03; DATA: 04; MSB: 6; LSB: 0;COM: Mask: 0x7F;;
 WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 04; DATA: 21; MSB: 6; LSB: 0;COM: Mask: 0x7F;;
