@@ -1,4 +1,4 @@
-# Processed on 2025-10-03 10:16:33
+# Processed on 2025-10-03 10:17:32
 from dfttools import *
 from time import sleep
 import random
@@ -31,6 +31,7 @@ def ana_reference_th():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
   
   for ref_test_name, ref_test in test_blk.items():
+    measured_value = 0 # default 
     # if the test is voltage measure select multimeter / if there is no unit default is ''
     if ref_test.get('unit','') == 'V':
       [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=ref_test.get('test_selection_code', 1), Mask=0xF, Default=0x0 # test selection 
@@ -39,12 +40,7 @@ def ana_reference_th():
       target_value = ref_test.get('target',0) # default is 0
       measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
       VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
-      # update the measured value 
-      ref_test.update(
-        {
-          "measured_value" : measured_value
-        }
-      )
+
     # current measurements 
     if ref_test.get('unit','') == 'A':
       [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=ref_test.get('test_selection_code', 1), Mask=0xF, Default=0x0 # test selection 
@@ -53,12 +49,12 @@ def ana_reference_th():
       target_value = ref_test.get('target',0) # default is 0
       measured_value = AMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
       AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
-      # update the measured value 
-      ref_test.update(
-        {
-          "measured_value" : measured_value
-        }
-      )
+    # update the measured value 
+    ref_test.update(
+      {
+        "measured_value" : measured_value
+      }
+    )
 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
