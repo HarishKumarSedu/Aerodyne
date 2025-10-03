@@ -1,4 +1,4 @@
-# Processed on 2025-10-03 10:01:30
+# Processed on 2025-10-03 10:11:08
 from dfttools import *
 from time import sleep
 import random
@@ -11,36 +11,59 @@ def ana_reference_th():
   print(f'............ {Test_Name} ........')
   startup()
   global_enable()
-  target_value = 0.4 # 0.4V
+  error_percentage = 0.05 # 5%
   # buffer_offset = offset(target_value) # 10mV
   test_blk = {
-    "as_vref_0v4_pvdd_uvlo" : { "test_selection" : 1, "target" : 0.4, "unit" : "V" },
-    "feedback_res" :          { "test_selection" : 2, "target" : 0.4, "unit" : "V" },
-    "as_bg_vref_1v2_gndref" : { "test_selection" : 4, "target" : 1.2, "unit" : "V" },
-    "as_bg_vref_0v9_gndref" : { "test_selection" : 5, "target" : 0.9, "unit" : "V" },
-    "as_bg_vref_0v6_gndref" : { "test_selection" : 6, "target" : 0.6, "unit" : "V" },
-    "as_bg_vref_0v4_gndref" : { "test_selection" : 7, "target" : 0.4, "unit" : "V" },
-    "as_ivbgr_1u_p2n_mirror2" : { "test_selection" : 8, "target" : 0.8e-6, "unit" : "A" },
-    "ref_0v6"               : { "test_selection" : 9, "target" : 0.6, "unit" : "V" },
+    "as_vref_0v4_pvdd_uvlo" : { "test_selection_code" : 1, "target" : 0.4, "unit" : "V" },
+    "feedback_res" :          { "test_selection_code" : 2, "target" : 0.4, "unit" : "V" },
+    "as_bg_vref_1v2_gndref" : { "test_selection_code" : 4, "target" : 1.2, "unit" : "V" },
+    "as_bg_vref_0v9_gndref" : { "test_selection_code" : 5, "target" : 0.9, "unit" : "V" },
+    "as_bg_vref_0v6_gndref" : { "test_selection_code" : 6, "target" : 0.6, "unit" : "V" },
+    "as_bg_vref_0v4_gndref" : { "test_selection_code" : 7, "target" : 0.4, "unit" : "V" },
+    "as_ivbgr_1u_p2n_mirror2" : { "test_selection_code" : 8, "target" : 0.8e-6, "unit" : "A" },
+    "ref_0v6"               : { "test_selection_code" : 9, "target" : 0.6, "unit" : "V" },
   }
   # Enabling test page
   [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
   # Enabling the analog TMUX
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x80, Mask=0x80, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+  
   for ref_test_name, ref_test in test_blk.items():
-    print(ref_test)
-  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x7, Mask=0xF, Default=0x0
-  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x40, Mask=0x40, Default=0x0
+    # if the test is voltage measure select multimeter / if there is no unit default is ''
+    if ref_test.get('unit','') == 'V':
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=ref_test.get('test_selection_code', 1), Mask=0xF, Default=0x0 # test selection 
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x40, Mask=0x40, Default=0x0
+      sleep(0.1)
+      target_value = ref_test.get('target',0) # default is 0
+      measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
+      VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
+      # update the measured value 
+      ref_test.update(
+        {
+          "measured_value" : measured_value
+        }
+      )
+    if ref_test.get('unit','') == 'A':
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=ref_test.get('test_selection_code', 1), Mask=0xF, Default=0x0 # test selection 
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
+      sleep(0.1)
+      target_value = ref_test.get('target',0) # default is 0
+      measured_value = AMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
+      AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
+      # update the measured value 
+      ref_test.update(
+        {
+          "measured_value" : measured_value
+        }
+      )
 
-  # error_spread = target_value*0.04 # 4% of target value
-  # measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=error_spread)
-  # error = abs(measured_value - target_value)/abs(target_value) *100
-  # print(f"Optimal measured value : {measured_value}V, Target value : {target_value}V")
-  # print(f"Minimum Error: {error}%")
-  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
-  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
-  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
-  # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
+
+  return test_blk
 if __name__ == '__main__':
-  ana_reference_th()
+  ref_test_results = ana_reference_th()
+  print(ref_test_results)
