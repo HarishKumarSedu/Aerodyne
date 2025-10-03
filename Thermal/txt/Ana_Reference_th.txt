@@ -1,4 +1,4 @@
-# Processed on 2025-10-03 10:00:44
+# Processed on 2025-10-03 10:01:30
 from dfttools import *
 from time import sleep
 import random
@@ -28,7 +28,7 @@ def ana_reference_th():
   # Enabling the analog TMUX
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x80, Mask=0x80, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
-  for ref_test in test_blk:
+  for ref_test_name, ref_test in test_blk.items():
     print(ref_test)
   # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x7, Mask=0xF, Default=0x0
   # [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x40, Mask=0x40, Default=0x0
