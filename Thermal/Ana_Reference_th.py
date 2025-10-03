@@ -13,13 +13,13 @@ def ana_reference_th():
   error_percentage = 0.05 # 5%
   # buffer_offset = offset(target_value) # 10mV
   test_blk = {
-    "as_vref_0v4_pvdd_uvlo" : { "test_selection_code" : 1, "target" : 0.4, "unit" : "V" },
-    "feedback_res" :          { "test_selection_code" : 2, "target" : 0.4, "unit" : "V" },
-    "as_bg_vref_1v2_gndref" : { "test_selection_code" : 4, "target" : 1.2, "unit" : "V" },
-    "as_bg_vref_0v9_gndref" : { "test_selection_code" : 5, "target" : 0.9, "unit" : "V" },
-    "as_bg_vref_0v6_gndref" : { "test_selection_code" : 6, "target" : 0.6, "unit" : "V" },
-    "as_bg_vref_0v4_gndref" : { "test_selection_code" : 7, "target" : 0.4, "unit" : "V" },
-    "ref_0v6"               : { "test_selection_code" : 9, "target" : 0.6, "unit" : "V" },
+    "as_vref_0v4_pvdd_uvlo" :   { "test_selection_code" : 1, "target" : 0.4, "unit" : "V" },
+    "feedback_res" :            { "test_selection_code" : 2, "target" : 0.4, "unit" : "V" },
+    "as_bg_vref_1v2_gndref" :   { "test_selection_code" : 4, "target" : 1.2, "unit" : "V" },
+    "as_bg_vref_0v9_gndref" :   { "test_selection_code" : 5, "target" : 0.9, "unit" : "V" },
+    "as_bg_vref_0v6_gndref" :   { "test_selection_code" : 6, "target" : 0.6, "unit" : "V" },
+    "as_bg_vref_0v4_gndref" :   { "test_selection_code" : 7, "target" : 0.4, "unit" : "V" },
+    "ref_0v6"               :   { "test_selection_code" : 9, "target" : 0.6, "unit" : "V" },
     "as_ivbgr_1u_p2n_mirror2" : { "test_selection_code" : 8, "target" : 0.8e-6, "unit" : "A" },
     "as_ictat_500n_p2n_spare_testing_vdd" : { "test_selection_code" : 13, "target" : 0.5e-6, "unit" : "A" },
   }
