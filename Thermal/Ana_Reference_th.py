@@ -20,6 +20,8 @@ def ana_reference_th():
     "as_bg_vref_0v6_gndref" :   { "test_selection_code" : 6, "target" : 0.6, "unit" : "V" },
     "as_bg_vref_0v4_gndref" :   { "test_selection_code" : 7, "target" : 0.4, "unit" : "V" },
     "ref_0v6"               :   { "test_selection_code" : 9, "target" : 0.6, "unit" : "V" },
+    "vddd_aon_f"            :   { "test_selection_code" : 11, "target" : 1.2, "unit" : "V" },
+    "vddd1v2"               :   { "test_selection_code" : 12, "target" : 1.2, "unit" : "V" },
     "as_ivbgr_1u_p2n_mirror2" : { "test_selection_code" : 8, "target" : 0.8e-6, "unit" : "A" },
     "as_ictat_500n_p2n_spare_testing_vdd" : { "test_selection_code" : 13, "target" : 0.5e-6, "unit" : "A" },
   }
