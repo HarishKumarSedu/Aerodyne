@@ -1,4 +1,4 @@
-# Processed on 2025-10-03 10:43:37
+# Processed on 2025-10-03 10:44:12
 from dfttools import *
 from time import sleep
 import random
@@ -60,5 +60,5 @@ def ana_pll_th():
 
   return test_blk
 if __name__ == '__main__':
-  ref_test_results = ana_pll_th()
-  print(ana_pll_th)
+  rana_pll_thresults = ana_pll_th()
+  print(rana_pll_thresults)
