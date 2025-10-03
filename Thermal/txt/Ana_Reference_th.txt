@@ -1,4 +1,4 @@
-# Processed on 2025-10-03 10:29:45
+# Processed on 2025-10-03 10:36:42
 from dfttools import *
 from time import sleep
 import random
@@ -40,7 +40,7 @@ def ana_reference_th():
       [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x40, Mask=0x40, Default=0x0
       sleep(0.01)
       target_value = ref_test.get('target',0) # default is 0
-      error_percentage = ref_test.get('target',0) # default is 0
+      error_percentage = ref_test.get('error_percentage',0) # default is 0
       measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
       VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
 
