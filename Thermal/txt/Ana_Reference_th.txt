@@ -1,4 +1,4 @@
-# Processed on 2025-10-03 10:14:50
+# Processed on 2025-10-03 10:15:23
 from dfttools import *
 from time import sleep
 import random
@@ -45,6 +45,7 @@ def ana_reference_th():
           "measured_value" : measured_value
         }
       )
+    # current measurements 
     if ref_test.get('unit','') == 'A':
       [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=ref_test.get('test_selection_code', 1), Mask=0xF, Default=0x0 # test selection 
       [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
