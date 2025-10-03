@@ -1,0 +1,64 @@
+# Processed on 2025-10-03 10:43:37
+from dfttools import *
+from time import sleep
+import random
+
+Test_Name = 'ana_reference_th'
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+def ana_pll_th():
+  print(f'............ {Test_Name} ........')
+  startup()
+  global_enable()
+  test_blk = {
+    "pll_vco_v2i_core_current" : { "test_selection_code" : 0, "target" : 0.5e-6, "unit" : "A"  , "error_percentage": 1e-2},
+    "VDD_VCO"                  : { "test_selection_code" : 1, "target" : 0.68, "unit" : "V"  , "error_percentage": 1e-2},
+  }
+  BLCK_Set = 3.072e6  
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0x80, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x81, data=0x6, Mask=0x3F, Default=0x6         #dig_pll_prediv_vddd<5:0>=6d 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x82, data=0x12, Mask=0x3F, Default=0x18        #dig_pll_n<5:0>=24d 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x83, data=0xA, Mask=0x1F, Default=0x10 #rfu_pll_ldet_cnt<4:0>=16d
+  FREQFORCE(signal="IOCLK0",reference="GND",value=BLCK_Set)                            #BCLK frequency=3.072MHz
+  # Enabling test page
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+  
+  for ref_test_name, ref_test in test_blk.items():
+    measured_value = 0 # default 
+    # if the test is voltage measure select multimeter / if there is no unit default is ''
+    if ref_test.get('unit','') == 'V':
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=ref_test.get('test_selection_code', 1), Mask=0xF, Default=0x0 # test selection 
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x1, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
+      sleep(0.01)
+      target_value = ref_test.get('target',0) # default is 0
+      error_percentage = ref_test.get('error_percentage',0) # default is 0
+      measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
+      VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
+
+    # current measurements 
+    if ref_test.get('unit','') == 'A':
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=ref_test.get('test_selection_code', 1), Mask=0xF, Default=0x0 # test selection 
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x1, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
+      sleep(0.1)
+      target_value = ref_test.get('target',0) # default is 0
+      error_percentage = ref_test.get('error_percentage',0) # default is 0
+      measured_value = AMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
+      AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
+    # update the measured value 
+    ref_test.update(
+      {
+        "measured_value" : measured_value
+      }
+    )
+
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0   #enable "IODATA1"
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0      #enable VDD_VCO voltage test
+
+  return test_blk
+if __name__ == '__main__':
+  ref_test_results = ana_pll_th()
+  print(ana_pll_th)
