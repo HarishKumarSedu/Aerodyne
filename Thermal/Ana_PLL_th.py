@@ -59,5 +59,5 @@ def ana_pll_th():
 
   return test_blk
 if __name__ == '__main__':
-  ref_test_results = ana_pll_th()
-  print(ana_pll_th)
+  rana_pll_thresults = ana_pll_th()
+  print(rana_pll_thresults)
