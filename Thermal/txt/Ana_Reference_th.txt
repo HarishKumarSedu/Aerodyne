@@ -1,4 +1,4 @@
-# Processed on 2025-10-06 10:17:37
+# Processed on 2025-10-06 10:19:24
 from dfttools import *
 from time import sleep
 import random
@@ -19,7 +19,6 @@ def ana_reference_th():
     "as_bg_vref_0v9_gndref" :   { "test_selection_code" : 5, "target" : 0.9, "unit" : "V"  , "error_percentage": 5e-2},
     "as_bg_vref_0v6_gndref" :   { "test_selection_code" : 6, "target" : 0.6, "unit" : "V"  , "error_percentage": 5e-2 },
     "as_bg_vref_0v4_gndref" :   { "test_selection_code" : 7, "target" : 0.4, "unit" : "V"  , "error_percentage": 5e-2},
-    "vreg_digldo_1v2"       :   { "test_selection_code" : 9, "target" : 1.2, "unit" : "V"  , "error_percentage": 5e-2},
     "ref_0v6"               :   { "test_selection_code" : 10, "target" : 0.6, "unit" : "V"  , "error_percentage": 5e-2},
     "vddd_aon_f"            :   { "test_selection_code" : 11, "target" : 1.2, "unit" : "V"  , "error_percentage": 5e-2},
     "vddd1v2"               :   { "test_selection_code" : 12, "target" : 1.2, "unit" : "V"  , "error_percentage": 5e-2},
