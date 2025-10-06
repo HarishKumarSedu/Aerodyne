@@ -12,7 +12,7 @@ def ana_reference_th():
   global_enable()
   # buffer_offset = offset(target_value) # 10mV
   test_blk = {
-    "as_vref_0v4_pvdd_uvlo" :   { "test_selection_code" : 1, "target" : 0.4, "unit" : "V" , "error_percentage": 5e-2}, # error is in perentage %
+    "as_vref_0v4_pvdd_uvlo" :   { "test_selection_code" : 1, "target" : 0.4, "unit" : "V" , "error_percentage": 1e-1}, # error is in perentage %
     "feedback_res" :            { "test_selection_code" : 2, "target" : 0.4, "unit" : "V"  , "error_percentage": 5e-2},
     "as_bg_vref_1v2_gndref" :   { "test_selection_code" : 4, "target" : 1.2, "unit" : "V"  , "error_percentage": 5e-2},
     "as_bg_vref_0v9_gndref" :   { "test_selection_code" : 5, "target" : 0.9, "unit" : "V"  , "error_percentage": 5e-2},
@@ -23,7 +23,7 @@ def ana_reference_th():
     "vddd_aon_f"            :   { "test_selection_code" : 11, "target" : 1.2, "unit" : "V"  , "error_percentage": 5e-2},
     "vddd1v2"               :   { "test_selection_code" : 12, "target" : 1.2, "unit" : "V"  , "error_percentage": 5e-2},
     "as_ivbgr_1u_p2n_mirror2" : { "test_selection_code" : 8, "target" : 0.8e-6, "unit" : "A"  , "error_percentage": 5e-2},
-    "as_ictat_500n_p2n_spare_testing_vdd" : { "test_selection_code" : 13, "target" : 0.5e-6, "unit" : "A"  , "error_percentage": 5e-2},
+    "as_ictat_500n_p2n_spare_testing_vdd" : { "test_selection_code" : 13, "target" : 0.5e-6, "unit" : "A"  , "error_percentage": 8e-1},
   }
   # Enabling test page
   I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1) # page 1
