@@ -1,10 +1,10 @@
-# Processed on 2025-10-06 09:41:42
+# Processed on 2025-10-06 09:44:28
 from dfttools import *
 from time import sleep
 import random
 
 Test_Name = 'Low_Side_P_Ron'
-from Procedures.Ron_CLD_Setup import ron_cld_setup
+from Procedures.Ron_CLD import ron_cld_setup,ron_cld_unset
 
 print(f'............ {Test_Name} ........')
 #[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
@@ -27,6 +27,6 @@ print(f'[Expected ~30m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}
 
 AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
 
-# Ron_CLD_Unset()
+ron_cld_unset()
 
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 # select all switch off
