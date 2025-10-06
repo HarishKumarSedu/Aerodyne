@@ -3,8 +3,7 @@ from time import sleep
 import random
 
 Test_Name = 'MID_N_Ron'
-from Procedures.Ron_CLD_Setup import ron_cld_setup
-from Procedures.Ron_CLD_Unset import ron_cld_unset
+from Procedures.Ron_CLD import ron_cld_setup,ron_cld_unset
 
 def mid_n_ron():
   print(f'............ {Test_Name} ........')
