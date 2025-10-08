@@ -1,0 +1,58 @@
+# Processed on 2025-10-08 15:59:11
+from dfttools import *
+from time import sleep
+import random
+
+Test_Name = 'ana_reference_th'
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
+def ana_cld_driver_th():
+  print(f'............ {Test_Name} ........')
+  startup()
+  global_enable()
+  pvdd_value = 3.7 # pvdd = 3.7V
+  VFORCE(signal="PVDD",reference="GND",value=pvdd_value)
+  test_blk = {
+    "1p8V/4"        : { "test_selection_code" : 3, "target" : 450e-3, "unit" : "V"  , "error_percentage": 5e-2},
+    "vdd_float"     : { "test_selection_code" : 4, "target" : 600e-3, "unit" : "V"  , "error_percentage": 5e-2},
+    "ref_uvlo_0.4V" : { "test_selection_code" : 5, "target" : 0.4, "unit" : "V"  , "error_percentage": 5e-2},
+    "sns_vmid"      : { "test_selection_code" : 6, "target" : pvdd_value/2, "unit" : "V"  , "error_percentage": 5e-2},
+  }
+  BLCK_Set = 3.072e6  
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x4, Mask=0x4, Default=0x0  # Enable current test mode
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x2, Mask=0x2, Default=0x0
+  FREQFORCE(signal="IOCLK0",reference="GND",value=BLCK_Set)                            #BCLK frequency=3.072MHz
+  # Enabling test page
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+  
+  for driver_test_name, driver_test in test_blk.items():
+    measured_value = 0 # default 
+    # if the test is voltage measure select multimeter / if there is no unit default is ''
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=driver_test.get('test_selection_code', 1), Mask=0xF, Default=0x0
+    sleep(0.01)
+    target_value = driver_test.get('target',0) # default is 0
+    error_percentage = driver_test.get('error_percentage',0) # default is 0
+    measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
+    VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
+
+    # update the measured value 
+    driver_test.update(
+      {
+        "measured_value" : measured_value
+      }
+    )
+
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x4, Default=0x0  # Enable current test mode
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
+
+  return test_blk
+if __name__ == '__main__':
+  ana_cld_driver_th_results = ana_cld_driver_th()
+  print(ana_cld_driver_th_results)
