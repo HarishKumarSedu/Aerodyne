@@ -10,6 +10,7 @@ def ana_cld_dac_lpf_th():
   print(f'............ {Test_Name} ........')
   startup()
   global_enable()
+  playback()
   test_blk = {
     "as_ibias_test_500n_p2n_vdda"    : { "test_selection_code" : 0, "target" : 500e-9, "unit" : "A"  , "error_percentage": 5e-2},
     "as_dac_iLSB_copy_590nA_n2p"     : { "test_selection_code" : 12, "target" : 590e-9, "unit" : "A"  , "error_percentage": 5e-2},
