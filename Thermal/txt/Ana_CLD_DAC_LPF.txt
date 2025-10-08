@@ -1,0 +1,74 @@
+# Processed on 2025-10-08 15:42:08
+from dfttools import *
+from time import sleep
+import random
+
+Test_Name = 'ana_reference_th'
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
+def ana_cld_dac_lpf_th():
+  print(f'............ {Test_Name} ........')
+  startup()
+  global_enable()
+  test_blk = {
+    "as_ibias_test_500n_p2n_vdda"    : { "test_selection_code" : 0, "target" : 500e-9, "unit" : "A"  , "error_percentage": 5e-2},
+    "as_dac_iLSB_copy_590nA_n2p"     : { "test_selection_code" : 12, "target" : 590e-9, "unit" : "A"  , "error_percentage": 5e-2},
+    "lpf_vcm"                        : { "test_selection_code" : 1, "target" : 1.5, "unit" : "V"  , "error_percentage": 5e-2},
+    "ad_dac_outc"                    : { "test_selection_code" : 10, "target" : 1.85, "unit" : "V"  , "error_percentage": 5e-2},
+  }
+  BLCK_Set = 3.072e6  
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x10, Mask=0x10, Default=0x0  # Enable current test mode
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x2, Mask=0x2, Default=0x0
+  FREQFORCE(signal="IOCLK0",reference="GND",value=BLCK_Set)                            #BCLK frequency=3.072MHz
+  # Enabling test page
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+  
+  for lpf_test_name, lpf_test in test_blk.items():
+    measured_value = 0 # default 
+    # if the test is voltage measure select multimeter / if there is no unit default is ''
+    if lpf_test.get('unit','') == 'V':
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=lpf_test.get('test_selection_code', 1), Mask=0xF, Default=0x0
+      sleep(0.01)
+      target_value = lpf_test.get('target',0) # default is 0
+      error_percentage = lpf_test.get('error_percentage',0) # default is 0
+      measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
+      VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
+
+    # current measurements 
+    if lpf_test_name == 'as_ibias_test_500n_p2n_vdda':
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=lpf_test.get('test_selection_code', 1), Mask=0xF, Default=0x0 # test selection 
+      sleep(0.1)
+      target_value = lpf_test.get('target',0) # default is 0
+      error_percentage = lpf_test.get('error_percentage',0) # default is 0
+      measured_value = AMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
+      AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
+    if lpf_test_name == 'as_dac_iLSB_copy_590nA_n2p':
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=lpf_test.get('test_selection_code', 1), Mask=0xF, Default=0x0 # test selection 
+      sleep(0.1)
+      target_value = lpf_test.get('target',0) # default is 0
+      error_percentage = lpf_test.get('error_percentage',0) # default is 0
+      measured_value = AMEASURE(signal="VDD", reference="IODATA1", expected_value=target_value,error_spread=target_value*error_percentage)
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
+      AMEASURE(signal="VDD", reference="IODATA1", expected_value=float('Inf')) # open switch 
+    # update the measured value 
+    lpf_test.update(
+      {
+        "measured_value" : measured_value
+      }
+    )
+
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x10, Default=0x0  # Enable current test mode
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
+
+  return test_blk
+if __name__ == '__main__':
+  ana_cld_dac_lpf_th_thresults = ana_cld_dac_lpf_th()
+  print(ana_cld_dac_lpf_th_thresults)
