@@ -1,4 +1,4 @@
-# Processed on 2025-10-08 16:07:50
+# Processed on 2025-10-08 16:15:19
 from dfttools import *
 from time import sleep
 import random
@@ -41,7 +41,7 @@ def ana_cld_pwm_th():
       VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
 
     # current measurements 
-    if pwm_test.get('unit','') == 'A':
+    if pwm_test_name == "Ibias_n":
       [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=pwm_test.get('test_selection_code', 1), Mask=0xF, Default=0x0 # test selection 
       sleep(0.1)
       target_value = pwm_test.get('target',0) # default is 0
@@ -49,6 +49,15 @@ def ana_cld_pwm_th():
       measured_value = AMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
       [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
       AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
+    # current measurements 
+    if pwm_test_name == "Iramp_copy":
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=pwm_test.get('test_selection_code', 1), Mask=0xF, Default=0x0 # test selection 
+      sleep(0.1)
+      target_value = pwm_test.get('target',0) # default is 0
+      error_percentage = pwm_test.get('error_percentage',0) # default is 0
+      measured_value = AMEASURE(signal="VDD", reference="IODATA1", expected_value=target_value,error_spread=target_value*error_percentage)
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
+      AMEASURE(signal="VDD", reference="IODATA1", expected_value=float('Inf')) # open switch 
 
 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x20, Default=0x0  # Enable current test mode
