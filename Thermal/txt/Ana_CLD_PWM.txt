@@ -1,0 +1,62 @@
+# Processed on 2025-10-08 16:07:50
+from dfttools import *
+from time import sleep
+import random
+
+Test_Name = 'ana_reference_th'
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
+def ana_cld_pwm_th():
+  print(f'............ {Test_Name} ........')
+  startup()
+  global_enable()
+  playback()
+  test_blk = {
+    "Ibias_n"    : { "test_selection_code" : 0, "target" : 1e-6, "unit" : "A"  , "error_percentage": 2e-2},
+    "vhi"        : { "test_selection_code" : 1, "target" : 0.75, "unit" : "A"  , "error_percentage": 2e-2},
+    "vlow"       : { "test_selection_code" : 2, "target" : 0, "unit" : "V"  , "error_percentage": 2e-2},
+    "Iramp_copy" : { "test_selection_code" : 3, "target" : 1.5e-6, "unit" : "V"  , "error_percentage": 2e-2},
+  }
+  BLCK_Set = 3.072e6  
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x20, Mask=0x20, Default=0x0  # Enable current test mode
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x2, Mask=0x2, Default=0x0
+  FREQFORCE(signal="IOCLK0",reference="GND",value=BLCK_Set)                            #BCLK frequency=3.072MHz
+  # Enabling test page
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+  
+  for pwm_test_name, pwm_test in test_blk.items():
+    measured_value = 0 # default 
+    # if the test is voltage measure select multimeter / if there is no unit default is ''
+    if pwm_test.get('unit','') == 'V':
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=pwm_test.get('test_selection_code', 1), Mask=0xF, Default=0x0
+      sleep(0.01)
+      target_value = pwm_test.get('target',0) # default is 0
+      error_percentage = pwm_test.get('error_percentage',0) # default is 0
+      measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
+      VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
+
+    # current measurements 
+    if pwm_test.get('unit','') == 'A':
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=pwm_test.get('test_selection_code', 1), Mask=0xF, Default=0x0 # test selection 
+      sleep(0.1)
+      target_value = pwm_test.get('target',0) # default is 0
+      error_percentage = pwm_test.get('error_percentage',0) # default is 0
+      measured_value = AMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=target_value*error_percentage)
+      [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
+      AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # open switch 
+
+
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x20, Default=0x0  # Enable current test mode
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
+
+  return test_blk
+if __name__ == '__main__':
+  ana_cld_pwm_th_thresults = ana_cld_pwm_th()
+  print(ana_cld_pwm_th_thresults)
