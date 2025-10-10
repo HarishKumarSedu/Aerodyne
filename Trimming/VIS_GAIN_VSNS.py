@@ -55,6 +55,7 @@ def vis_gain_vsns():
   Scale_Down = (64/2**20)
   vsns_gain_calculated = int((((vsns_high_code + vsns_low_code)/ 2*pvdd_value *LSB  -1 )*Scale_Factor) /Scale_Down) #assuming VDDP=3.7V, otherwise value has to be updated 
   # vsns_gain_calculated = 0x3e67  #assuming VDDP=3.7V, otherwise value has to be updated 
+  print(f'{Testname} value : {hex(vsns_gain_calculated)} ')
   vsns_gain_code = 0x4000+vsns_gain_calculated if  vsns_gain_calculated & 0x2000 else 0x4000 -  vsns_gain_calculated
   print(f'{Testname} value : {hex(vsns_gain_code)} ')
   I2C_WRITE("0x38", field_info={'fieldname': 'otp_vsense_gain', 'length': 14, 'registers': [{'REG': '0xB9', 'POS': 0, 'RegisterName': 'OTP FIELDS 9', 'RegisterLength': 8, 'Name': 'otp_vsense_gain[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xCC', 'POS': 0, 'RegisterName': 'OTP FIELDS 28', 'RegisterLength': 8, 'Name': 'otp_vsense_gain[13:8]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 13, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=hex(vsns_gain_code) )
