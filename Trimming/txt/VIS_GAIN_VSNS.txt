@@ -1,4 +1,4 @@
-# Processed on 2025-09-12 12:00:19
+# Processed on 2025-10-10 10:37:09
 from dfttools import *
 
 
@@ -27,7 +27,7 @@ def vis_gain_vsns():
   pvdd_value = VFORCE("PVDD","GND",2.5,0.01)
   playback()
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0xFF, Mask=0xFF, Default=0x0 # turn on outp side / saturate the dac in postive side 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x80, Mask=0x80, Default=0x0 # enable the dac 
   vi_sns_turn_on()
@@ -37,7 +37,7 @@ def vis_gain_vsns():
   vsns_high_code =  0x10000 - vsns_high_code if vsns_high_code & 0x8000 else vsns_high_code
   print(f'vsns_high_code : {hex(vsns_high_code)}')
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   vsns_low_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
@@ -66,7 +66,7 @@ def vis_gain_vsns():
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCC, data=hex(vsns_gain_code), Mask=0x3F, Default=0x0
   ########### Validate the Vsns Gain ###############
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0xFF, Mask=0xFF, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   vsns_high_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
@@ -76,7 +76,7 @@ def vis_gain_vsns():
   high_voltage = vsns_high_code * LSB * Scale_Factor
   print(f' Outp Vs Ount : {pvdd_value}V, vns voltage {sign}{high_voltage} V')
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   vsns_low_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
