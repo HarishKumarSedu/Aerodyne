@@ -13,9 +13,9 @@ def ana_cld_pwm_th():
   playback()
   test_blk = {
     "Ibias_n"    : { "test_selection_code" : 0, "target" : 1e-6, "unit" : "A"  , "error_percentage": 2e-2},
-    "vhi"        : { "test_selection_code" : 1, "target" : 0.75, "unit" : "A"  , "error_percentage": 2e-2},
+    "vhi"        : { "test_selection_code" : 1, "target" : 0.75, "unit" : "V"  , "error_percentage": 2e-2},
     "vlow"       : { "test_selection_code" : 2, "target" : 0, "unit" : "V"  , "error_percentage": 2e-2},
-    "Iramp_copy" : { "test_selection_code" : 3, "target" : 1.5e-6, "unit" : "V"  , "error_percentage": 2e-2},
+    "Iramp_copy" : { "test_selection_code" : 3, "target" : 1.5e-6, "unit" : "A"  , "error_percentage": 2e-2},
   }
   BLCK_Set = 3.072e6  
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=1)
@@ -58,7 +58,11 @@ def ana_cld_pwm_th():
       I2C_WRITE(device_address="0x38", field_info={'fieldname': 'pll_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'pll_test_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0)   #enable ANA_TESTMUX1
       AMEASURE(signal="VDD", reference="IODATA1", expected_value=float('Inf')) # open switch 
 
-
+    pwm_test.update(
+      {
+        "measured_value" : measured_value
+      }
+    )
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_pwm_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 5, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'cld_pwm_test_en', 'Mask': '0x20', 'Length': 1, 'FieldMSB': 5, 'FieldLSB': 5, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0)  # Enable current test mode
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x00)
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'atp_p_en', 'length': 1, 'registers': [{'REG': '0x17', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_EN2', 'RegisterLength': 8, 'Name': 'atp_p_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000NNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0)
