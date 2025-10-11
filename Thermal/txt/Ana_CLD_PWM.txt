@@ -1,4 +1,4 @@
-# Processed on 2025-10-08 16:15:19
+# Processed on 2025-10-11 10:53:06
 from dfttools import *
 from time import sleep
 import random
@@ -14,9 +14,9 @@ def ana_cld_pwm_th():
   playback()
   test_blk = {
     "Ibias_n"    : { "test_selection_code" : 0, "target" : 1e-6, "unit" : "A"  , "error_percentage": 2e-2},
-    "vhi"        : { "test_selection_code" : 1, "target" : 0.75, "unit" : "A"  , "error_percentage": 2e-2},
+    "vhi"        : { "test_selection_code" : 1, "target" : 0.75, "unit" : "V"  , "error_percentage": 2e-2},
     "vlow"       : { "test_selection_code" : 2, "target" : 0, "unit" : "V"  , "error_percentage": 2e-2},
-    "Iramp_copy" : { "test_selection_code" : 3, "target" : 1.5e-6, "unit" : "V"  , "error_percentage": 2e-2},
+    "Iramp_copy" : { "test_selection_code" : 3, "target" : 1.5e-6, "unit" : "A"  , "error_percentage": 2e-2},
   }
   BLCK_Set = 3.072e6  
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
@@ -59,7 +59,11 @@ def ana_cld_pwm_th():
       [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x1, Default=0x0   #enable ANA_TESTMUX1
       AMEASURE(signal="VDD", reference="IODATA1", expected_value=float('Inf')) # open switch 
 
-
+    pwm_test.update(
+      {
+        "measured_value" : measured_value
+      }
+    )
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x20, Default=0x0  # Enable current test mode
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
