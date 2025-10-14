@@ -5,7 +5,7 @@ from Procedures.Global_enable import global_enable
 
 def pll_vco_bias_current():
     Test_Name = 'PLL_VCO_Bias_Current'
-    {'fieldname': 'cld_pwm_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 5, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'cld_pwm_test_en', 'Mask': '0x20', 'Length': 1, 'FieldMSB': 5, 'FieldLSB': 5, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}
+
     print(f'............ {Test_Name.lower()} ........')
     startup()
     global_enable()
