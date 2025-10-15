@@ -13,11 +13,11 @@ def vis_gain_isns():
   '''
   The procedure is described hereafter:
   1. Force class-D output to have both SPKRP and SPKRN at VCM.
-  2. Source a stated current (i.e. 100mA).
+  2. Source a stated current (i.e. 500mA).
   3. Read I-sense output digital code.
-  4. Sink a note current (i.e. -100mA).
+  4. Sink a note current (i.e. -500mA).
   5. Read I-sense output digital code.
-  6. GI=DELTA_I=(200mA)/DELTA_code.
+  6. GI=
 
   '''
   startup()
