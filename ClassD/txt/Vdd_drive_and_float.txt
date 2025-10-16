@@ -1,4 +1,4 @@
-# Processed on 2025-10-01 10:22:58
+# Processed on 2025-10-16 10:54:22
 from dfttools import *
 from time import sleep
 import random
@@ -21,9 +21,9 @@ def vdd_drive_and_float():
   meas = VMEASURE(signal="ADDR", reference="GND", expected_value=0.6, error_spread=0.05)
   print(f"vdd_drive = {meas:.3f} ")
   VMEASURE(signal="ADDR", reference="GND", expected_value=float('Inf'))
-  meas = VMEASURE(signal="IODATA0", reference="GND", expected_value=0.6, error_spread=0.05)
+  meas = VMEASURE(signal="IODATA1", reference="GND", expected_value=0.6, error_spread=0.05)
   print(f"vdd_float = {meas:.3f} ")
-  VMEASURE(signal="IODATA0", reference="GND", expected_value=float('Inf'))
+  VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 1
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0 # disable atp
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
