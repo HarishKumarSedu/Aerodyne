@@ -1,4 +1,4 @@
-# Processed on 2025-10-15 14:37:21
+# Processed on 2025-10-16 18:50:00
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -57,7 +57,7 @@ def vis_gain_isns():
   Scale_Down = (64/2**20) # weight of the isense
   isns_gain_calculated = int((((isns_current_source_code + isns_current_sink_code)/(source_current_measured - sink_current_measured ) *LSB  -1 )*Scale_Factor) /Scale_Down) 
   # Change the sign of the gain code 
-  isns_gain_code = 0x4000+isns_gain_calculated if  isns_gain_calculated & 0x2000 else 0x4000 -  isns_gain_calculated
+  isns_gain_code = 0x4000-isns_gain_calculated if  isns_gain_calculated & 0x2000 else isns_gain_calculated
   print(f'{Testname} Gain Code  : {hex(isns_gain_code)} ')
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=isns_gain_code, Mask=0x3F, Default=0x0
