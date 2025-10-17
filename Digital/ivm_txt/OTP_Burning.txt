@@ -3,6 +3,6 @@
 Command;Check;Page;SAD;ADD;DATA;MSB;LSB;Comment
 WR-bit; CHECK: O; PAGE: 0; SAD: 39; ADD: FE; DATA: 0; MSB: 0; LSB: 0;COM: Mask: 0x1;;
 WR-bit; CHECK: O; PAGE: 0; SAD: 39; ADD: 0F; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
-WR-bit; CHECK: O; PAGE: 1; SAD: 39; ADD: FE; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
+WR-bit; CHECK: O; PAGE: 0; SAD: 39; ADD: FE; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
 WR-bit; CHECK: O; PAGE: 1; SAD: 39; ADD: 10; DATA: 1; MSB: 1; LSB: 1;COM: Mask: 0x2;;
 WR-bit; CHECK: O; PAGE: 1; SAD: 39; ADD: AE; DATA: 1; MSB: 1; LSB: 1;COM: Mask: 0x2;;
