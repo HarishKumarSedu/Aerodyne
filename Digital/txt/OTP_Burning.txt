@@ -1,4 +1,4 @@
-# Processed on 2025-09-30 16:12:06
+# Processed on 2025-10-17 16:27:05
 from dfttools import *
 from time import sleep
 
@@ -25,7 +25,7 @@ Procedure
   [i2c_write] device_addr=0x39, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
 
   # Switch to page 1
-  [i2c_write] device_addr=0x39, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x39, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
 
   # Enable clock for otp fsm
   [i2c_write] device_addr=0x39, PageName=PAG1, register_addr=0x10, data=0x2, Mask=0x2, Default=0x0
