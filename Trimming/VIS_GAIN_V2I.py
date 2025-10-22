@@ -43,6 +43,7 @@ def vis_gain_v2i():
   vsns_gain_high_measured =  0x10000 - vsns_gain_high_measured if vsns_gain_high_measured & 0x8000 else vsns_gain_high_measured
   print(f'vsns_gain_high_measured : {hex(vsns_gain_high_measured)}')
   isns_gain_high_measured = I2C_READ("0x38", field_info={'fieldname': 'i_sense', 'length': 16, 'registers': [{'REG': '0x6B', 'POS': 0, 'RegisterName': 'I SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'i_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6C', 'POS': 0, 'RegisterName': 'I SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'i_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]}, expected_value=0x7F)
+  isns_gain_high_measured =   0x10000 - isns_gain_high_measured    if isns_gain_high_measured & 0x8000 else isns_gain_high_measured
   print(f'isns_gain_high_measured : {hex(isns_gain_high_measured)}')
   VFORCE ("OUTP","OUTN",-2.5,0)
   sleep(1)
@@ -50,6 +51,7 @@ def vis_gain_v2i():
   vsns_gain_low_measured = 0x10000 - vsns_gain_low_measured   if vsns_gain_low_measured & 0x8000 else vsns_gain_low_measured
   print(f'vsns_gain_low_measured : {hex(vsns_gain_low_measured)}')
   isns_gain_low_measured = I2C_READ("0x38", field_info={'fieldname': 'i_sense', 'length': 16, 'registers': [{'REG': '0x6B', 'POS': 0, 'RegisterName': 'I SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'i_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6C', 'POS': 0, 'RegisterName': 'I SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'i_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]}, expected_value=0x7E)
+  isns_gain_low_measured =   0x10000 - isns_gain_low_measured  if isns_gain_low_measured & 0x8000 else isns_gain_low_measured
   print(f'isns_gain_low_measured : {hex(isns_gain_low_measured)}')
   
   LSB_expander = 64/2**20 # expand to know how many lsb's
