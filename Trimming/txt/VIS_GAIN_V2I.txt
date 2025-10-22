@@ -1,4 +1,4 @@
-# Processed on 2025-09-12 12:00:48
+# Processed on 2025-10-22 16:11:58
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -47,6 +47,7 @@ def vis_gain_v2i():
   print(f'vsns_gain_high_measured : {hex(vsns_gain_high_measured)}')
   isns_gain_high_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
+  isns_gain_high_measured =   0x10000 - isns_gain_high_measured    if isns_gain_high_measured & 0x8000 else isns_gain_high_measured
   print(f'isns_gain_high_measured : {hex(isns_gain_high_measured)}')
   VFORCE ("OUTP","OUTN",-2.5,0)
   sleep(1)
@@ -56,6 +57,7 @@ def vis_gain_v2i():
   print(f'vsns_gain_low_measured : {hex(vsns_gain_low_measured)}')
   isns_gain_low_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
+  isns_gain_low_measured =   0x10000 - isns_gain_low_measured  if isns_gain_low_measured & 0x8000 else isns_gain_low_measured
   print(f'isns_gain_low_measured : {hex(isns_gain_low_measured)}')
   
   LSB_expander = 64/2**20 # expand to know how many lsb's
