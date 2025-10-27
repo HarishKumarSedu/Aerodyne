@@ -1,4 +1,4 @@
-# Processed on 2025-09-12 11:53:42
+# Processed on 2025-10-27 13:17:13
 Test_Name = 'VI_SNS_turn_on'
 from dfttools import *
 from time import sleep
@@ -10,6 +10,8 @@ def vi_sns_turn_on():
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA6, data=0x0, Mask=0x8, Default=0xC
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA7, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA7, data=0x2, Mask=0x2, Default=0x0
+  # enable the TDM 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x44, data=0x1, Mask=0x3F, Default=0x0
 
 if __name__ == '__main__':
   vi_sns_turn_on()
