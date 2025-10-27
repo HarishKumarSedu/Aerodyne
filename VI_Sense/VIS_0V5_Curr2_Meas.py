@@ -30,7 +30,7 @@ def vis_2ua_curr1_meas():
     # Step 4: Current Measurement
     expected_curr = 0.5e-6    # 0.5 uA target
     curr_error = 0.05e-6      # ±0.05 uA tolerance
-    imeas = AMEASURE(signal="IODATA1", reference="GND", expected_value=expected_curr, error_spread=curr_error)
+    imeas = AMEASURE(signal="ADDR", reference="GND", expected_value=expected_curr, error_spread=curr_error)
     print(f'Measured Current: {imeas * 1e6:.3f} uA [Target: {expected_curr * 1e6:.1f}uA ±{curr_error * 1e6:.1f}uA]')
     # Pass/Fail Criteria
     AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
