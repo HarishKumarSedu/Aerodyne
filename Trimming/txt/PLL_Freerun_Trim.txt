@@ -1,4 +1,4 @@
-# Processed on 2025-10-15 09:22:36
+# Processed on 2025-10-27 12:30:16
 from dfttools import *
 from time import sleep
 import random
@@ -70,6 +70,9 @@ def pll_freerun():
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0x0, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=1
     [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 1  #Change page in regmap
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0x0, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=1
+    [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1  #Change page in regmap
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0   #enable "IODATA1" TMUX
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 #bring out the pll output
     print(f"Optimal Code: {optimal_code}")
     print(f"Optimal measured value : {optimal_measured_value/1e6}MHz, Target vlaue : {target_value/1e6}MHz")
     print(f"Minimum Error: {min_error}%")
