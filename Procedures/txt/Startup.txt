@@ -1,4 +1,4 @@
-# Processed on 2025-10-28 17:40:16
+# Processed on 2025-10-28 17:40:30
 from time import sleep
 import os 
 import sys
@@ -32,7 +32,6 @@ def startup():
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x2D, data=0x8, Mask=0xC, Default=0x50
 
-  print(SIGNAL_PHASE_MEASURE("VDD","GND",1.0,0.05))
 
 if __name__ == '__main__':
   startup()
