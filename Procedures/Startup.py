@@ -2,10 +2,10 @@ from time import sleep
 import os 
 import sys
 # example code to install python pacakage
-command = f"{sys.executable} -m pip uninstall dfttools -y"
-os.system(command)
-command = f"{sys.executable} -m pip install git+https://github.com/HarishKumarSedu/dfttools.git@main"
-os.system(command)
+# command = f"{sys.executable} -m pip uninstall dfttools -y"
+# os.system(command)
+# command = f"{sys.executable} -m pip install git+https://github.com/HarishKumarSedu/dfttools.git@main"
+# os.system(command)
 
 from dfttools import *
 def startup():
@@ -31,3 +31,4 @@ def startup():
   I2C_WRITE(device_address="0x38",field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0x0)
   I2C_WRITE(device_address="0x38",field_info={'fieldname': 'prechg_step_time', 'length': 2, 'registers': [{'REG': '0x2D', 'POS': 2, 'RegisterName': 'Sequencer settings 2', 'RegisterLength': 8, 'Name': 'prechg_step_time[1:0]', 'Mask': '0xC', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x50', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0x2)
 
+  print(SIGNAL_PHASE_MEASURE("VDD","GND",1.0,0.05))
