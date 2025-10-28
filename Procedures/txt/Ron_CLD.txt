@@ -1,6 +1,13 @@
-# Processed on 2025-10-06 09:43:58
+# Processed on 2025-10-28 12:58:38
 from dfttools import *
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable 
+from Procedures.Playback import playback 
+
 def ron_cld_setup():
+  startup()
+  globale_enable()
+  playback()
   #Setup CLD 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0  # select all switch off
