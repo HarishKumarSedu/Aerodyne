@@ -13,7 +13,6 @@ def dac_vcm():
   startup()
   global_enable()
   playback()
-
   '''
 DAC common mode voltage test
 Step 1. Configure the device registers to enable testing.
