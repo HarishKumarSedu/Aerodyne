@@ -33,7 +33,7 @@ def vis_1ua_curr1_meas():
     imeas = AMEASURE(signal="IODATA1", reference="GND", expected_value=expected_curr, error_spread=curr_error)
     print(f'Measured Current: {imeas * 1e6:.3f} uA [Target: {expected_curr * 1e6:.1f}uA ±{curr_error * 1e6:.1f}uA]')
     # Pass/Fail Criteria
-    AMEASURE(signal="ADDR", reference="GND", expected_value=float('Inf')) # trun the Ammeter multimeter switch wtih "ADDR" pin
+    AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf')) # trun the Ammeter multimeter switch wtih "ADDR" pin
     if abs(imeas - expected_curr) <= curr_error:
         print("PASS: Current within ±0.1uA specification")
     else:
