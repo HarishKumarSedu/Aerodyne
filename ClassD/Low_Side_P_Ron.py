@@ -19,9 +19,9 @@ I_forced= 0.5 #APPLY I WITH RAMP
 AFORCE(signal="OUTP", reference="PGND", value=I_forced, error_spread=0.05)  # 500mA ±5%
 
 dV = VMEASURE(signal="VMID", reference="IODATA1", expected_value=0.015, error_spread=0.01) # measure voltage 
-LSN_ron = dV / I_forced  # R = V/I
+LSP_ron = dV / I_forced  # R = V/I
 
-print(f'Calculated Low-Side P-Ron: {LSN_ron:.3f} Ohms')
+print(f'Calculated Low-Side P-Ron: {LSP_ron:.3f} Ohms')
 print(f'[Expected ~30m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
 
 AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
