@@ -1,4 +1,4 @@
-# Processed on 2025-11-05 11:57:32
+# Processed on 2025-11-05 11:57:41
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -40,7 +40,7 @@ def vis_1ua_curr1_meas():
     else:
         print(f"FAIL: Current error {abs(imeas - expected_curr) * 1e6:.1f}uA exceeds limit")
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x2, Default=0x0  # disable analog test mux
-    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0 
     vi_sns_turn_off()
 if __name__ == "__main__":
