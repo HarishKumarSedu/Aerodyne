@@ -1,4 +1,4 @@
-# Processed on 2025-11-05 11:51:02
+# Processed on 2025-11-05 11:57:32
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -26,7 +26,7 @@ def vis_1ua_curr1_meas():
     # Step 3: Route Current to "ADDR"
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  # Change page in regmap
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x2, Mask=0x2, Default=0x0  # Enable test mux
-    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x2, Mask=0x2, Default=0x0  # Enable apt_p ping ("IODATA1")  # Enable test mux
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0  # Enable apt_p ping ("IODATA1")  # Enable test mux
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x4, Mask=0xF, Default=0x0  # Enable tests 1uA current
     # Step 4: Current Measurement
     expected_curr = 1.0e-6    # 1.0 uA target
