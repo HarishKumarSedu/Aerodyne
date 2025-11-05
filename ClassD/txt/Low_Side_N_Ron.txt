@@ -1,4 +1,4 @@
-# Processed on 2025-10-06 09:59:17
+# Processed on 2025-11-05 10:01:32
 from dfttools import *
 from time import sleep
 import random
@@ -25,7 +25,7 @@ LSN_ron = dV / I_forced  # R = V/I
 print(f'Calculated Low-Side N-Ron: {LSN_ron:.3f} Ohms')
 print(f'[Expected ~30m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
 
-AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
+AFORCE(signal="OUTN", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
 ron_cld_unset()
 
 [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 
