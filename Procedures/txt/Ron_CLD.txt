@@ -1,4 +1,4 @@
-# Processed on 2025-11-05 09:58:19
+# Processed on 2025-11-05 10:00:38
 from dfttools import *
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable 
@@ -6,7 +6,7 @@ from Procedures.Playback import playback
 
 def ron_cld_setup():
   startup()
-  globale_enable()
+  global_enable()
   playback()
   #Setup CLD 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
@@ -40,3 +40,6 @@ def ron_cld_unset():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x40, Default=0x0  # test enable for driver
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x0, Mask=0x10, Default=0x0  # force partitioning
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x10, Default=0x0  # force full switch on
+if __name__ == '__main__':
+  ron_cld_setup()
+  ron_cld_unset()
