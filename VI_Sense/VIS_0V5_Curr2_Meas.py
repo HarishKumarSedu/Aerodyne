@@ -6,8 +6,8 @@ from Procedures.Playback import playback
 from Procedures.VI_SNS_turn_on import vi_sns_turn_on
 from Procedures.VI_SNS_turn_off import vi_sns_turn_off
 
-def vis_0u5A_curr1_meas():
-    Test_Name = 'vis_0u5A_curr1_meas'
+def vis_0u5A_curr2_meas():
+    Test_Name = 'vis_0u5A_curr2_meas'
     print(f'............ {Test_Name} ........')
     startup()
     global_enable()
@@ -44,4 +44,4 @@ def vis_0u5A_curr1_meas():
     vi_sns_turn_off()
 
 if __name__ == "__main__":
-    vis_0u5A_curr1_meas()
+    vis_0u5A_curr2_meas()
