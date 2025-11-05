@@ -20,10 +20,10 @@ I_forced= -0.5  # APPLY WITH RAMP
 AFORCE(signal="OUTP", reference="PGND", value=I_forced, error_spread=0.05)  # 500mA ±5%
 
 dV = VMEASURE(signal="PVDD", reference="OUTP", expected_value=0.062, error_spread=0.01) #pin 10
-LSN_ron = abs(dV / I_forced) - 0.025 # R = V/I
+HSP_ron = abs(dV / I_forced) # R = V/I
 
-print(f'Calculated highside P-Ron: {LSN_ron:.3f} Ohms')
-print(f'[Expected ~100m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
+print(f'Calculated highside P-Ron: {HSP_ron:.3f} Ohms')
+print(f'[Expected ~131m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
 
 AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
 ron_cld_unset()
