@@ -1,4 +1,4 @@
-# Processed on 2025-10-27 11:44:00
+# Processed on 2025-11-05 11:48:24
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -7,8 +7,8 @@ from Procedures.Playback import playback
 from Procedures.VI_SNS_turn_on import vi_sns_turn_on
 from Procedures.VI_SNS_turn_off import vi_sns_turn_off
 
-def vis_2ua_curr1_meas():
-    Test_Name = 'VIS_2uA_Curr1_Meas'
+def vis_0u5A_curr1_meas():
+    Test_Name = 'vis_0u5A_curr1_meas'
     print(f'............ {Test_Name} ........')
     startup()
     global_enable()
@@ -31,7 +31,7 @@ def vis_2ua_curr1_meas():
     # Step 4: Current Measurement
     expected_curr = 0.5e-6    # 0.5 uA target
     curr_error = 0.05e-6      # ±0.05 uA tolerance
-    imeas = AMEASURE(signal="IODATA1", reference="GND", expected_value=expected_curr, error_spread=curr_error)
+    imeas = AMEASURE(signal="ADDR", reference="GND", expected_value=expected_curr, error_spread=curr_error)
     print(f'Measured Current: {imeas * 1e6:.3f} uA [Target: {expected_curr * 1e6:.1f}uA ±{curr_error * 1e6:.1f}uA]')
     # Pass/Fail Criteria
     AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
@@ -45,4 +45,4 @@ def vis_2ua_curr1_meas():
     vi_sns_turn_off()
 
 if __name__ == "__main__":
-    vis_2ua_curr1_meas()
+    vis_0u5A_curr1_meas()
