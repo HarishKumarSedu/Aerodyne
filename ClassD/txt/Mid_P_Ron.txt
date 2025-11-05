@@ -1,4 +1,4 @@
-# Processed on 2025-10-14 12:19:13
+# Processed on 2025-11-05 10:02:09
 from dfttools import *
 from time import sleep
 import random
@@ -20,13 +20,13 @@ def mid_p_ron():
   # Step 3: Force 500mA current into "OUTP" pin
   AFORCE(signal="VMID", reference="PGND", value=I_forced, error_spread=0.05)  # 500mA ±5%
 
-  dV = VMEASURE(signal="OUTP", reference="VMID", expected_value=0.065, error_spread=0.01)
-  LSN_ron = dV / I_forced  # R = V/I
+  dV = VMEASURE(signal="VMID", reference="OUTP", expected_value=0.065, error_spread=0.01)
+  MIDP_ron = dV / I_forced  # R = V/I
 
-  print(f'Calculated Mid P-Ron: {LSN_ron:.3f} Ohms')
+  print(f'Calculated Mid P-Ron: {MIDP_ron:.3f} Ohms')
   print(f'[Expected ~135m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
   ron_cld_unset()
-  AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
+  AFORCE(signal="VMID", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 
 
