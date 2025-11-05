@@ -21,13 +21,13 @@ def mid_n_ron():
   # Step 3: Force 500mA current into "OUTP" pin
   AFORCE(signal="VMID", reference="PGND", value=I_forced, error_spread=0.05)  # 500mA ±5%
 
-  dV = VMEASURE(signal="OUTN", reference="VMID", expected_value=0.065, error_spread=0.01)
-  LSN_ron = dV / I_forced  # R = V/I
+  dV = VMEASURE(signal="VMID", reference="OUTN", expected_value=0.065, error_spread=0.01)
+  MIDN_ron = dV / I_forced  # R = V/I
 
-  print(f'Calculated Mid N-Ron: {LSN_ron:.3f} Ohms')
+  print(f'Calculated Mid N-Ron: {MIDN_ron:.3f} Ohms')
   print(f'[Expected ~135m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
 
-  AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
+  AFORCE(signal="VMID", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
   ron_cld_unset()
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_dvr_force_sel', 'length': 8, 'registers': [{'REG': '0x9C', 'POS': 0, 'RegisterName': 'CLD analog setting reg 6', 'RegisterLength': 8, 'Name': 'cld_dvr_force_sel[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x0) 
 
