@@ -20,11 +20,11 @@ I_forced= 0.5 # APPLY WITH RAMP
 # Step 3: Force 500mA current into "OUTP" pin
 AFORCE(signal="OUTP", reference="PGND", value=I_forced, error_spread=0.05)  # 500mA ±5%
 
-dV = VMEASURE(signal="OUTN", reference="VMID", expected_value=0.028, error_spread=0.01)
-LSN_ron = dV / I_forced - 0.025  # R = V/I
+dV = VMEASURE(signal="OUTP", reference="VMID", expected_value=0.028, error_spread=0.01)
+CASCODEP_ron = dV / I_forced  # R = V/I
 
-print(f'Calculated cascode P-Ron: {LSN_ron:.3f} Ohms')
-print(f'[Expected ~30m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
+print(f'Calculated cascode P-Ron: {CASCODEP_ron:.3f} Ohms')
+print(f'[Expected ~67m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
 
 AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
 ron_cld_unset()
