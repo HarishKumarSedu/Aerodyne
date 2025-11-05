@@ -5,7 +5,7 @@ from Procedures.Playback import playback
 
 def ron_cld_setup():
   startup()
-  globale_enable()
+  global_enable()
   playback()
   #Setup CLD 
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0) # page 0
@@ -39,3 +39,6 @@ def ron_cld_unset():
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_vmid_buf_en_m', 'length': 1, 'registers': [{'REG': '0x1B', 'POS': 6, 'RegisterName': 'Force registers 4', 'RegisterLength': 8, 'Name': 'cld_vmid_buf_en_m', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]} , write_value=0x0)  # test enable for driver
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_sel_part_force', 'length': 1, 'registers': [{'REG': '0x1A', 'POS': 4, 'RegisterName': 'Force registers 3', 'RegisterLength': 8, 'Name': 'cld_sel_part_force', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x0)  # force partitioning
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_sel_part_m', 'length': 1, 'registers': [{'REG': '0x1B', 'POS': 4, 'RegisterName': 'Force registers 4', 'RegisterLength': 8, 'Name': 'cld_sel_part_m', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x0)  # force full switch on
+if __name__ == '__main__':
+  ron_cld_setup()
+  ron_cld_unset()
