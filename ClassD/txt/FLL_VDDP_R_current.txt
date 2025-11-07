@@ -1,4 +1,4 @@
-# Processed on 2025-11-03 16:20:34
+# Processed on 2025-11-07 10:08:43
 from dfttools import *
 from time import sleep 
 import random
@@ -28,6 +28,11 @@ def fll_vddp_r_current():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0 #bring out the VDDD/R current
   sleep(0.0001) 
   expected_value = 1e-6 #3.6/(3*1200000)->(vddp/3R)
+  '''
+  FLL Bias Current is the n2p current measurement
+  1. Measure current between the "VDD" and "IODATA1"
+  2. Current Measured at bench ~ 1.136uA
+  '''
   error_spread = expected_value*0.2
   measured_value=AMEASURE(signal="VDD", reference="IODATA1", expected_value=expected_value, error_spread=error_spread)
 
