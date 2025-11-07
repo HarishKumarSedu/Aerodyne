@@ -1,4 +1,4 @@
-# Processed on 2025-11-07 09:58:54
+# Processed on 2025-11-07 10:02:55
 from dfttools import *
 from time import sleep 
 import random
@@ -28,7 +28,11 @@ def fll_ramp_current():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x20, Mask=0x20, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x3, Mask=0xF, Default=0x0 #bring out the VDDD/R current
   sleep(0.0001) 
-  expected_value = 1.5e-6 #3.6/(3*1200000)*18/12->(vddp/2R)
+  expected_value = 1.5e-6 #3.6/(3*1200000)*18/12->(vddp/2R) 
+  '''
+  FLL_Ramp_current is the n2p current :
+  @ bench we have measured arround 1.13uA between "VDD" and "IODATA1"
+  '''
   error_spread = expected_value*0.2
   measured_value=AMEASURE(signal="VDD", reference="IODATA1", expected_value=expected_value, error_spread=error_spread)
 
