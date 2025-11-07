@@ -27,6 +27,11 @@ def fll_vddp_r_current():
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0) #bring out the VDDD/R current
   sleep(0.0001) 
   expected_value = 1e-6 #3.6/(3*1200000)->(vddp/3R)
+  '''
+  FLL Bias Current is the n2p current measurement
+  1. Measure current between the "VDD" and "IODATA1"
+  2. Current Measured at bench ~ 1.136uA
+  '''
   error_spread = expected_value*0.2
   measured_value=AMEASURE(signal="VDD", reference="IODATA1", expected_value=expected_value, error_spread=error_spread)
 
