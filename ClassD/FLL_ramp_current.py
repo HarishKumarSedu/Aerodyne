@@ -27,7 +27,11 @@ def fll_ramp_current():
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_pwm_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 5, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'cld_pwm_test_en', 'Mask': '0x20', 'Length': 1, 'FieldMSB': 5, 'FieldLSB': 5, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=1)
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=3) #bring out the VDDD/R current
   sleep(0.0001) 
-  expected_value = 1.5e-6 #3.6/(3*1200000)*18/12->(vddp/2R)
+  expected_value = 1.5e-6 #3.6/(3*1200000)*18/12->(vddp/2R) 
+  '''
+  FLL_Ramp_current is the n2p current :
+  @ bench we have measured arround 1.13uA between "VDD" and "IODATA1"
+  '''
   error_spread = expected_value*0.2
   measured_value=AMEASURE(signal="VDD", reference="IODATA1", expected_value=expected_value, error_spread=error_spread)
 
