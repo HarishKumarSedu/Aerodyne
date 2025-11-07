@@ -1,4 +1,4 @@
-# Processed on 2025-10-02 17:43:53
+# Processed on 2025-11-07 09:58:54
 from dfttools import *
 from time import sleep 
 import random
@@ -30,10 +30,10 @@ def fll_ramp_current():
   sleep(0.0001) 
   expected_value = 1.5e-6 #3.6/(3*1200000)*18/12->(vddp/2R)
   error_spread = expected_value*0.2
-  measured_value=VMEASURE(signal="VDD", reference="IODATA1", expected_value=expected_value, error_spread=error_spread)
+  measured_value=AMEASURE(signal="VDD", reference="IODATA1", expected_value=expected_value, error_spread=error_spread)
 
   print(f'FLL ramp VDDP/R-derived current expected_value {expected_value} is: {measured_value}')
-  VMEASURE(signal="VDD", reference="IODATA1", expected_value=float('Inf'))
+  AMEASURE(signal="VDD", reference="IODATA1", expected_value=float('Inf'))
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x20, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0 
