@@ -30,7 +30,7 @@ def fll_ramp_current():
   expected_value = 1.5e-6 #3.6/(3*1200000)*18/12->(vddp/2R) 
   '''
   FLL_Ramp_current is the n2p current :
-  @ bench we have measured arround 1.13uA between "VDD" and "IODATA1"
+  @ bench we  measured ~ 1.13uA between "VDD" and "IODATA1"
   '''
   error_spread = expected_value*0.2
   measured_value=AMEASURE(signal="VDD", reference="IODATA1", expected_value=expected_value, error_spread=error_spread)
