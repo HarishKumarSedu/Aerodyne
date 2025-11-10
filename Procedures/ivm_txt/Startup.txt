@@ -15,4 +15,3 @@ WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 3C; DATA: 1; MSB: 3; LSB: 3;COM: Mask: 
 RD-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 25; DATA: 0; MSB: 1; LSB: 0;COM: Mask: 0x3;;
 RD-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 26; DATA: 00;;COM: Mask: 0xFF;;
 WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 2D; DATA: 2; MSB: 3; LSB: 2;COM: Mask: 0xC;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 16; DATA: 1; MSB: 7; LSB: 6;COM: Mask: 0xC0;;
