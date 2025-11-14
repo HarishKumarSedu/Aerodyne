@@ -1,9 +1,9 @@
-# Processed on 2025-11-14 09:50:07
+# Processed on 2025-11-14 09:50:35
 from time import sleep
 Test_Name = 'GPADC_Vbat_2P8_Test'
-# from Procedures.Startup import startup
+from Procedures.Startup import startup
 def gpadc_vbat_2P8_test():
-    # startup()
+    startup()
 
     print(f'............ {Test_Name} ........')
     # designers must go through the details and correct the procedure
