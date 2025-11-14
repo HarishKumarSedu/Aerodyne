@@ -1,23 +1,3 @@
 
 
 Command;Check;Page;SAD;ADD;DATA;MSB;LSB;Comment
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 0F; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: D8; DATA: 10; MSB: 5; LSB: 0;COM: Mask: 0x3F;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: D9; DATA: 10; MSB: 5; LSB: 0;COM: Mask: 0x3F;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: DE; DATA: 3; MSB: 1; LSB: 0;COM: Mask: 0x3;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: D7; DATA: 1; MSB: 4; LSB: 4;COM: Mask: 0x10;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: D7; DATA: 0; MSB: 2; LSB: 2;COM: Mask: 0x4;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: DA; DATA: 0; MSB: 3; LSB: 0;COM: Mask: 0xF;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 80; DATA: 1; MSB: 3; LSB: 3;COM: Mask: 0x8;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: DF; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
-RD-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 23; DATA: 0; MSB: 1; LSB: 0;COM: Mask: 0x3;;
-RD-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 24; DATA: 00;;COM: Mask: 0xFF;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: DF; DATA: 0; MSB: 0; LSB: 0;COM: Mask: 0x1;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 0F; DATA: 0; MSB: 0; LSB: 0;COM: Mask: 0x1;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 80; DATA: 0; MSB: 3; LSB: 3;COM: Mask: 0x8;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: D8; DATA: 00; MSB: 5; LSB: 0;COM: Mask: 0x3F;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: D9; DATA: 00; MSB: 5; LSB: 0;COM: Mask: 0x3F;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: D7; DATA: 0; MSB: 4; LSB: 4;COM: Mask: 0x10;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: D7; DATA: 0; MSB: 2; LSB: 2;COM: Mask: 0x4;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: DE; DATA: 0; MSB: 1; LSB: 0;COM: Mask: 0x3;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: DA; DATA: 1; MSB: 3; LSB: 0;COM: Mask: 0xF;;

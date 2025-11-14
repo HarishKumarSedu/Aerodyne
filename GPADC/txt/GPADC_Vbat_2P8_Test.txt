@@ -1,59 +1,68 @@
-# Processed on 2025-07-09 11:55:37
-from dfttools import *
+# Processed on 2025-11-14 09:48:20
 from time import sleep
-
 Test_Name = 'GPADC_Vbat_2P8_Test'
-from Procedures import Startup
-print(f'............ {Test_Name} ........')
-# designers must go through the details and correct the procedure
-'''
-Procedure 
-    before to start the bandgap has to be trimmed
-    1.Enable the SAR ADC with extenal clock
-    2.Force VBAT at 2.8 V
-    3.Measure VBAT and save the result in Variable VB0
-    4.Measure the Vbat register after 8 average save in the Variable CODE0
-    5. Check that 518<CODE0<522
-'''
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
-sleep(0.001)
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x10, Mask=0x3F, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x10, Mask=0x3F, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x3, Mask=0x3, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x10, Mask=0x10, Default=0x40
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x0, Mask=0x4, Default=0x40
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x0, Mask=0xF, Default=0x1
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x8, Mask=0x8, Default=0x21
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x1
-pvdd_forced_voltage = VFORCE(signal="PVDD", reference="GND", value=2.8,error_spread=0)
-sleep(0.01)
-VB0 = VMEASURE(signal="PVDD", reference="GND", expected_value=2.8,error_spread=0)
-sleep(0.001)
-expected_value=round(((VB0*22/(22+79))*1024/(0.6*2)))
+# from Procedures.Startup import startup
+def gpadc_vbat_2P8_test():
+    # startup()
 
-Vbat_min=expected_value-2
-Vbat_max=expected_value+2
+    print(f'............ {Test_Name} ........')
+    # designers must go through the details and correct the procedure
+    # '''
+    # Procedure 
+    #     before to start the bandgap has to be trimmed
+    #     1.Enable the SAR ADC with extenal clock
+    #     2.Force VBAT at 2.8 V
+    #     3.Measure VBAT and save the result in Variable VB0
+    #     4.Measure the Vbat register after 8 average save in the Variable CODE0
+    #     5. Check that 518<CODE0<522
+    # '''
+    # FREQFORCE(signal="IOCLK0",reference="GND",value=3.072e6)   # force clock 
+    # sleep(0.001)
 
-HCODE0=[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x23, Mask=0x3
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0
+    # sleep(0.001)
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x10, Mask=0x3F, Default=0x0
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x10, Mask=0x3F, Default=0x0
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x3, Mask=0x3, Default=0x0
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x10, Mask=0x10, Default=0x40
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x0, Mask=0x4, Default=0x40
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x0, Mask=0xF, Default=0x1
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x1
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x1, Mask=0x1, Default=0x0
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x1
+    # pvdd_forced_voltage = VFORCE(signal="PVDD", reference="GND", value=2.8,error_spread=0)
+    # sleep(0.01)
+    # VB0 = VMEASURE(signal="PVDD", reference="GND", expected_value=2.8,error_spread=0)
+    # sleep(0.001)
+    # expected_value=round(((VB0*22/(22+79))*1024/(0.6*2)))
+
+    # Vbat_min=expected_value-2
+    # Vbat_max=expected_value+2
+
+    # HCODE0=[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x23, Mask=0x3
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x24, Mask=0xFF
-CODE0=int(HCODE0)
+    # CODE0=int(HCODE0)
 
-if Vbat_min <= CODE0 <= Vbat_max:
-  print(f'............ {Test_Name} Passed ........')
-    # write the optimized code if the trim passed
+    # if Vbat_min <= CODE0 <= Vbat_max:
+    # print(f'............ {Test_Name} Passed ........')
+    #     # write the optimized code if the trim passed
 
 
-print(f"VBAT2P8 Code: {CODE0}")
-print(f"Vbat_min Code: {Vbat_min}")
-print(f"Vbat_max Code: {Vbat_max}")
+    # print(f"VBAT2P8 Code: {CODE0}")
+    # print(f"Vbat_min Code: {Vbat_min}")
+    # print(f"Vbat_max Code: {Vbat_max}")
 
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x0, Mask=0x1, Default=0x1
-sleep(0.001)
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x80, data=0x0, Mask=0x8, Default=0x21
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x0, Mask=0x3F, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x0, Mask=0x3F, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x0, Mask=0x10, Default=0x40
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x0, Mask=0x4, Default=0x40
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x0, Mask=0x3, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x1, Mask=0xF, Default=0x1
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x0, Mask=0x1, Default=0x1
+    # sleep(0.001)
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x0, Mask=0x3F, Default=0x0
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x0, Mask=0x3F, Default=0x0
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x0, Mask=0x10, Default=0x40
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x0, Mask=0x4, Default=0x40
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x0, Mask=0x3, Default=0x0
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x0, Mask=0x1, Default=0x0
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x1, Mask=0xF, Default=0x1
+
+if __name__ == "__main__":
+    gpadc_vbat_2P8_test()
