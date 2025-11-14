@@ -6,15 +6,15 @@ def gpadc_vbat_2P8_test():
 
     print(f'............ {Test_Name} ........')
     # designers must go through the details and correct the procedure
-    # '''
-    # Procedure 
-    #     before to start the bandgap has to be trimmed
-    #     1.Enable the SAR ADC with extenal clock
-    #     2.Force VBAT at 2.8 V
-    #     3.Measure VBAT and save the result in Variable VB0
-    #     4.Measure the Vbat register after 8 average save in the Variable CODE0
-    #     5. Check that 518<CODE0<522
-    # '''
+    '''
+        Procedure 
+        before to start the bandgap has to be trimmed
+        1.Enable the SAR ADC with extenal clock
+        2.Force VBAT at 2.8 V
+        3.Measure VBAT and save the result in Variable VB0
+        4.Measure the Vbat register after 8 average save in the Variable CODE0
+        5. Check that 518<CODE0<522
+    '''
     FREQFORCE(signal="IOCLK0",reference="GND",value=3.072e6)   # force clock 
     sleep(0.001)
 
