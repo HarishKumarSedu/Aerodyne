@@ -2,9 +2,9 @@ from time import sleep
 Test_Name = 'GPADC_Vbat_2P8_Test'
 from Procedures.Startup import startup
 def gpadc_vbat_2P8_test():
+    print(f'............ {Test_Name} ........')
     startup()
 
-    print(f'............ {Test_Name} ........')
     # designers must go through the details and correct the procedure
     '''
         Procedure 
