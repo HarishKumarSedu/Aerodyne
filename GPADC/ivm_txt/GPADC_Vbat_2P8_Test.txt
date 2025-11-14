@@ -12,3 +12,5 @@ WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: da; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: df; DATA: 1;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: d6; DATA: 1;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: df; DATA: 1;;
+RR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 23; DATA: 2;;
+RR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 24; DATA: 7;;
