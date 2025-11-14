@@ -1,4 +1,4 @@
-# Processed on 2025-11-14 09:49:58
+# Processed on 2025-11-14 09:50:07
 from time import sleep
 Test_Name = 'GPADC_Vbat_2P8_Test'
 # from Procedures.Startup import startup
@@ -53,16 +53,16 @@ def gpadc_vbat_2P8_test():
     print(f"Vbat_min Code: {Vbat_min}")
     print(f"Vbat_max Code: {Vbat_max}")
 
-    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x0, Mask=0x1, Default=0x1
-    # sleep(0.001)
-    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0
-    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x0, Mask=0x3F, Default=0x0
-    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x0, Mask=0x3F, Default=0x0
-    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x0, Mask=0x10, Default=0x40
-    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x0, Mask=0x4, Default=0x40
-    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x0, Mask=0x3, Default=0x0
-    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x0, Mask=0x1, Default=0x0
-    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x1, Mask=0xF, Default=0x1
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x0, Mask=0x1, Default=0x1
+    sleep(0.001)
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x0, Mask=0x3F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x0, Mask=0x3F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x0, Mask=0x10, Default=0x40
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD7, data=0x0, Mask=0x4, Default=0x40
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x0, Mask=0x3, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x0, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x1, Mask=0xF, Default=0x1
 
 if __name__ == "__main__":
     gpadc_vbat_2P8_test()
