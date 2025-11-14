@@ -35,5 +35,6 @@ def startup():
   cal_meas_code = I2C_READ(device_address="0x38",field_info={'fieldname': 'cal_meas', 'length': 10, 'registers': [{'REG': '0x25', 'POS': 0, 'RegisterName': 'CAL measurement reg 1', 'RegisterLength': 8, 'Name': 'cal_meas[9:8]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': '000000RR', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x26', 'POS': 0, 'RegisterName': 'CAL measurement reg 2', 'RegisterLength': 8, 'Name': 'cal_meas[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},expected_value=0x0)
   I2C_WRITE(device_address="0x38",field_info={'fieldname': 'prechg_step_time', 'length': 2, 'registers': [{'REG': '0x2D', 'POS': 2, 'RegisterName': 'Sequencer settings 2', 'RegisterLength': 8, 'Name': 'prechg_step_time[1:0]', 'Mask': '0xC', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x50', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0x2)
 
+
 if __name__ == '__main__':
   startup()
