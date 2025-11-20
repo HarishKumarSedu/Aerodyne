@@ -1,4 +1,4 @@
-# Processed on 2025-11-14 09:47:16
+# Processed on 2025-11-20 13:54:41
 from time import sleep
 import os 
 import sys
@@ -28,6 +28,7 @@ def startup():
   [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0x2F, data=0xAA, Mask=0xFF
   [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0x2F, data=0xBB, Mask=0xFF
   # Switch to page 0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x4E, data=0x0, Mask=0x30, Default=0x89
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x38, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x39, data=0x8, Mask=0x8, Default=0x0

@@ -7,6 +7,7 @@ WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 83; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: fe; DATA: 1;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 2f; DATA: aa;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 2f; DATA: bb;;
+WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 4e; DATA: 89;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: fe; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 38; DATA: 1;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 39; DATA: 8;;
