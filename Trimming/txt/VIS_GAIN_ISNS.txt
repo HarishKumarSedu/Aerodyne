@@ -1,4 +1,4 @@
-# Processed on 2025-11-24 09:52:28
+# Processed on 2025-11-24 11:16:56
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -26,6 +26,7 @@ def vis_gain_isns():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x1, Mask=0x1, Default=0x0 # force ocp bit
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x1, Default=0x0 # mode diable ocp 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x92, data=0x5, Mask=0x7, Default=0x3 # adjust the speaker gain 
   playback()
   vi_sns_turn_on()
