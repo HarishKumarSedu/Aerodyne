@@ -1,4 +1,4 @@
-# Processed on 2025-10-22 15:28:30
+# Processed on 2025-11-24 09:52:28
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -23,71 +23,73 @@ def vis_gain_isns():
   '''
   startup()
   global_enable()
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x1, Mask=0x1, Default=0x0 # force ocp bit
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x1, Default=0x0 # mode diable ocp 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x92, data=0x5, Mask=0x7, Default=0x3 # adjust the speaker gain 
   playback()
   vi_sns_turn_on()
-
-  
-  source_current = 500e-3
-  sleep(0.1)
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0  # N Cascode , and N Mid FETS on 
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81  # force the switch in the selected position above
-  # Force 0A between "OUTP" and "OUTN" measure the Isense offset 
+    # Force 0A between "OUTP" and "OUTN" measure the Isense offset 
   AFORCE(signal="OUTP",reference="OUTN",value=0.0, error_spread=0) # 1% error
   isns_offset_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
   isns_offset_code = (0x10000 - isns_offset_code) if isns_offset_code & 0x8000 else isns_offset_code
   print(f' ........ 0A Current from SPKRP/SPKRM : {hex(isns_offset_code)} ........ ')
-  source_current_measured = AFORCE(signal="OUTP",reference="OUTN",value=source_current, error_spread=source_current*0.01) # 1% error
+  
+  source_current = 500e-3
   sleep(0.1)
+  
+  ############ current from outp to outn ##########################
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0xFF, Mask=0xFF, Default=0x0  # Staturate DAC "OUTP" side 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x80, Mask=0x80, Default=0x0  # force the switch in the selected position above
+  source_current_measured = AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) # 1% error sink current between outp and outn 
+  sleep(0.1)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   isns_current_source_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
   # complement the 16bit isense value 
   isns_current_source_code = (0x10000 - isns_current_source_code) if isns_current_source_code & 0x8000 else isns_current_source_code
   print(f' ........ Source 500mA from SPKRP/SPKRM ........ Code {hex(isns_current_source_code)} ')
-  sink_current_measured = AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) # 1% error
+  
+  ############ current from outn to outp ##########################
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0  # Staturate DAC "OUTN" side 
   sleep(0.1)
+  sink_current_measured = AFORCE(signal="OUTN",reference="OUTP",value=-source_current, error_spread=source_current*0.01) # 1% error current from ount to outp 
+  sleep(0.1)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   isns_current_sink_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
   isns_current_sink_code = (0x10000 - isns_current_sink_code) if isns_current_sink_code & 0x8000 else isns_current_sink_code
   print(f' ........ Sink 500mA to SPKRP/SPKRM ........ Code {hex(isns_current_sink_code)} ')
+  AFORCE(signal="OUTN",reference="OUTP",value=float('Inf')) # remove current 
+  
   ######## Isense Gain Calculations #####################
-  LSB = (20/2**15) # lsb of the 16 bit isense value 
+  LSB = (3/2**15) # lsb of the 16 bit isense value 
   Scale_Factor = (3/20) # full adapter 
   Scale_Down = (64/2**20) # weight of the isense
-  isns_gain_calculated = -int((((isns_current_source_code + isns_current_sink_code)/(source_current_measured - sink_current_measured ) *LSB  -1 )*Scale_Factor) /Scale_Down) 
+  delta_current = (source_current_measured - sink_current_measured )
+  delta_crrent_code = (isns_current_source_code + isns_current_sink_code)
+  delta = delta_crrent_code / delta_current
+  correction_gain_coefficient = ( delta *LSB  -1 )
+  isns_gain_calculated_and_complimented = -int((correction_gain_coefficient/Scale_Down) * Scale_Factor) 
   # Change the sign of the gain code 
-  isns_gain_code = 0x4000+isns_gain_calculated if  isns_gain_calculated & 0x2000 else isns_gain_calculated
+  isns_gain_code = 0x4000+isns_gain_calculated_and_complimented if  isns_gain_calculated_and_complimented < 0 else isns_gain_calculated_and_complimented # gain complimented digital code conversion 
   print(f'{Testname} Gain Code  : {hex(isns_gain_code)} ')
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=isns_gain_code, Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBC, data=isns_gain_code, Mask=0xFF, Default=0x0
-  ################### Validation of the Isense Gain ###############
-  source_current_measured = AFORCE(signal="OUTP",reference="OUTN",value=source_current, error_spread=source_current*0.01) # 1% error
-  sleep(0.1)
+
+  # set chip in normal 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0  
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x80, Default=0x0  # Turn off DAC
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x0, Mask=0x1, Default=0x0 # disable ocp force 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-  isns_current_source_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
-[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
-  sign = "-" if isns_current_source_code & 0x8000 else "+"
-  isns_current_source_code = (0x10000 - isns_current_source_code) if isns_current_source_code & 0x8000 else isns_current_source_code
-  isense_current = isns_current_source_code * LSB * Scale_Factor
-  print(f'source_current_measured : {source_current_measured}A , isense_current : {sign}{isense_current} A ')
-  sink_current_measured = AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) # 1% error
-  sleep(0.1)
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-  isns_current_sink_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
-[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
-  sign = "-" if isns_current_sink_code & 0x8000 else "+"
-  isns_current_sink_code = (0x10000 - isns_current_sink_code) if isns_current_sink_code & 0x8000 else isns_current_sink_code
-  isense_current = isns_current_sink_code * LSB * Scale_Factor
-  print(f'sink_current_measured : {sink_current_measured}A , isense_current : {sign}{isense_current} A ')
-  ####################################################################
-  
-  # Put the Bridge in the HiZ  
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0  # select all switch off
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x0, Mask=0x10, Default=0x81  # force the switch in the selected position above
-  # disconnect the current sources applying infinity current 
-  AFORCE(signal="OUTP",reference="OUTN",value=float('Inf'), error_spread=source_current*0.01)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x0, Mask=0x1, Default=0x0 # disable speaker 
   vi_sns_turn_off()
 if __name__ == '__main__':
   vis_gain_isns()
