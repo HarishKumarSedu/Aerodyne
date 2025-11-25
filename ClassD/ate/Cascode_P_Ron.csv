@@ -43,7 +43,7 @@ I2C,WR-Reg,0x38,0x1a,0x10,1,
 I2C,WR-Reg,0x38,0x1b,0x10,1,
 I2C,WR-Reg,0x38,0xfe,0x0,0,
 I2C,WR-Reg,0x38,0x9c,0xe,0,
-Force,A,OUTP,OUTN,0.5,,"args=(), kwargs={}"
+Force,A,OUTP,OUTN,-0.5,,"args=(), kwargs={}"
 Measure,V,OUTP,VMID,0.028,,"args=(), kwargs={}"
 Force,A,OUTP,OUTN,inf,,"args=(), kwargs={}"
 I2C,WR-Reg,0x38,0xfe,0x0,0,
