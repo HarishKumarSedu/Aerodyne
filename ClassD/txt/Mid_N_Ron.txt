@@ -1,4 +1,4 @@
-# Processed on 2025-11-05 10:01:40
+# Processed on 2025-11-25 09:54:36
 from dfttools import *
 from time import sleep
 import random
@@ -13,6 +13,11 @@ def mid_n_ron():
   ron_cld_setup()
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0xE0, Mask=0xFF, Default=0x0  # set bridge switch (LSp on, MIDp on, CASp on, HSp off, LSn off, MIDn off, CASn off, HSn off)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x4, Mask=0x4, Default=0x0 # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x1, Mask=0x7F, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x6, Mask=0x7F, Default=0x0 
+  
 
   # Wait for device stabilization
   sleep(0.0001)  # 100 µs
