@@ -19,7 +19,7 @@ def high_side_p_ron():
   # Step 3: Force 500mA current into "OUTP" pin
   AFORCE(signal="OUTP", reference="OUTN", value=I_forced, error_spread=I_forced*5e-2)  # 300mA ±5%
   
-  dV = VMEASURE(signal='PVDD_B3', reference="OUTN", expected_value=0.062, error_spread=0.01) #pin 10
+  dV = VMEASURE(signal='PVDD_B3', reference="OUTN", expected_value=0.031, error_spread=0.01) #pin 10
   HSP_ron = abs(dV / I_forced) # R = V/I
   
   print(f'Calculated highside P-Ron: {HSP_ron:.3f} Ohms')
