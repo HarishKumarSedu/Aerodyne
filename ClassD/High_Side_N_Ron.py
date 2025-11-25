@@ -16,10 +16,10 @@ def high_side_n_ron():
   # Wait for device stabilization
   sleep(0.0001)  # 100 µs
   
-  I_forced= -0.3 # APPLY WITH RAMP
+  I_forced= -0.5 # APPLY WITH RAMP
   
   # Step 3: Force 500mA current into "OUTP" pin to "OUTN"
-  AFORCE(signal="OUTP", reference="OUTN", value=I_forced, error_spread=I_forced*1e-2)  # 300mA ±5%
+  AFORCE(signal="OUTP", reference="OUTN", value=I_forced, error_spread=I_forced*1e-2)  # 500mA ±5%
   
   dV = VMEASURE(signal='PVDD_B3', reference="OUTP", expected_value=0.031, error_spread=0.01) #measure voltage between PVDD_B3 pi to "OUTP"
   HSN_ron = abs(dV / I_forced) # R = V/I
