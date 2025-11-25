@@ -17,10 +17,10 @@ sleep(0.0001)  # 100 µs
 
 I_forced= -0.5 # APPLY WITH RAMP
 
-# Step 3: Force 500mA current into "OUTP" pin
-AFORCE(signal="OUTN", reference="PGND", value=I_forced, error_spread=0.05)  # 500mA ±5%
+# Step 3: Force 500mA current into "OUTP" pin to "OUTN"
+AFORCE(signal="OUTP", reference="OUTN", value=I_forced, error_spread=0.05)  # 500mA ±5%
 
-dV = VMEASURE(signal="PVDD", reference="OUTN", expected_value=0.062, error_spread=0.01) #pin 9
+dV = VMEASURE(signal='PVDD_B3', reference="OUTP", expected_value=0.062, error_spread=0.01) #measure voltage between PVDD_B3 pi to "OUTP"
 HSN_ron = abs(dV / I_forced) # R = V/I
 
 print(f'Calculated highside n-Ron: {HSN_ron:.3f} Ohms')
