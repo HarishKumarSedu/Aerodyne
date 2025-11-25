@@ -1,4 +1,4 @@
-# Processed on 2025-11-05 10:02:09
+# Processed on 2025-11-25 09:58:36
 from dfttools import *
 from time import sleep
 import random
@@ -12,6 +12,10 @@ def mid_p_ron():
   ron_cld_setup()
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0xE, Mask=0xFF, Default=0x0  # set bridge switch (LSp on, MIDp on, CASp on, HSp off, LSn off, MIDn off, CASn off, HSn off) 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x4, Mask=0x4, Default=0x0 # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x1, Mask=0x7F, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x6, Mask=0x7F, Default=0x0 
   # Wait for device stabilization
   sleep(0.0001)  # 100 µs
 
@@ -25,10 +29,15 @@ def mid_p_ron():
 
   print(f'Calculated Mid P-Ron: {MIDP_ron:.3f} Ohms')
   print(f'[Expected ~135m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
-  ron_cld_unset()
   AFORCE(signal="VMID", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
 
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0  
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x4, Default=0x0 # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 
+  ron_cld_unset()
 
 if __name__ == '__main__':
   mid_p_ron()
