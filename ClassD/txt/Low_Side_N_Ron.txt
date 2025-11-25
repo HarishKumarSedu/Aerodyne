@@ -1,31 +1,40 @@
-# Processed on 2025-11-05 10:01:32
+# Processed on 2025-11-25 10:04:58
 from dfttools import *
 from time import sleep
 import random
 
 Test_Name = 'Low_Side_N_Ron'
 from Procedures.Ron_CLD import ron_cld_setup,ron_cld_unset
-
-print(f'............ {Test_Name} ........')
-ron_cld_setup()
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0xE0, Mask=0xFF, Default=0x0  # set bridge switch (LSp on, MIDp on, CASp on, HSp off, LSn off, MIDn off, CASn off, HSn off)
-
-# Wait for device stabilization
-sleep(0.0001)  # 100 µs
-
-I_forced= 0.5 #APPLY I WITH RAMP
-
-# Step 3: Force 500mA current into "OUTP" pin
-AFORCE(signal="OUTN", reference="PGND", value=I_forced, error_spread=0.05)  # 500mA ±5%
-
-dV = VMEASURE(signal="VMID", reference="ADDR", expected_value=0.015, error_spread=0.01)
-LSN_ron = dV / I_forced  # R = V/I
-
-print(f'Calculated Low-Side N-Ron: {LSN_ron:.3f} Ohms')
-print(f'[Expected ~30m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
-
-AFORCE(signal="OUTN", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
-ron_cld_unset()
-
-[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 
+def low_side_n_ron():
+  print(f'............ {Test_Name} ........')
+  ron_cld_setup()
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0xE0, Mask=0xFF, Default=0x0  # set bridge switch (LSp on, MIDp on, CASp on, HSp off, LSn off, MIDn off, CASn off, HSn off)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x4, Mask=0x4, Default=0x0 # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0 # addr pin selection 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 
+  # Wait for device stabilization
+  sleep(0.0001)  # 100 µs
+  
+  I_forced= 0.5 #APPLY I WITH RAMP
+  
+  # Step 3: Force 500mA current into "OUTP" pin
+  AFORCE(signal="OUTN", reference="PGND", value=I_forced, error_spread=0.05)  # 500mA ±5%
+  
+  dV = VMEASURE(signal="VMID", reference="ADDR", expected_value=0.015, error_spread=0.01)
+  LSN_ron = dV / I_forced  # R = V/I
+  
+  print(f'Calculated Low-Side N-Ron: {LSN_ron:.3f} Ohms')
+  print(f'[Expected ~30m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
+  
+  AFORCE(signal="OUTN", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
+  ron_cld_unset()
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 # page 0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0  
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x4, Default=0x0 # page 1
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0 # addr pin selection 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 
+if __name__ == '__main__':
+  low_side_n_ron()
