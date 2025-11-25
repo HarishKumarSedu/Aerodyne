@@ -15,10 +15,10 @@ def cascode_p_ron():
   # Wait for device stabilization
   sleep(0.0001)  # 100 µs
   
-  I_forced= 0.3 # APPLY WITH RAMP
+  I_forced= 0.5 # APPLY WITH RAMP
   
   # Step 3: Force 500mA current into "OUTP" pin
-  AFORCE(signal="OUTP", reference="OUTN", value=I_forced, error_spread=I_forced*1e-2)  # 300mA ±5%
+  AFORCE(signal="OUTP", reference="OUTN", value=I_forced, error_spread=I_forced*1e-2)  # 500mA ±5%
   
   dV = VMEASURE(signal="OUTP", reference="VMID", expected_value=0.028, error_spread=0.01)
   CASCODEP_ron = (dV / I_forced ) - 25e-3 # R = V/I
@@ -26,7 +26,7 @@ def cascode_p_ron():
   print(f'Calculated cascode P-Ron: {CASCODEP_ron:.3f} Ohms')
   print(f'[Expected ~67m Ohms typical, based on dV={dV:.3f}V @ {I_forced*1000:.0f}mA]')
   
-  AFORCE(signal="OUTP", reference="PGND", value=float('inf'), error_spread=0.05)  # stop forcing
+  AFORCE(signal="OUTP", reference="OUTN", value=float('inf'), error_spread=0.05)  # stop forcing
   ron_cld_unset()
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'cld_dvr_force_sel', 'length': 8, 'registers': [{'REG': '0x9C', 'POS': 0, 'RegisterName': 'CLD analog setting reg 6', 'RegisterLength': 8, 'Name': 'cld_dvr_force_sel[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x0) 
 if __name__ == '__main__':
