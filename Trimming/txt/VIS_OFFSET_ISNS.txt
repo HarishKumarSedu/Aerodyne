@@ -1,4 +1,4 @@
-# Processed on 2025-11-27 06:59:34
+# Processed on 2025-11-27 07:00:00
 from dfttools import *
 
 
@@ -44,7 +44,6 @@ def vis_offset_isns():
   # turn the Vmid buffer Vmid = Vddp/2
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x0, Mask=0x1, Default=0x0
-  vi_sns_turn_off()
 
 if __name__ == '__main__':
   vis_offset_isns()
