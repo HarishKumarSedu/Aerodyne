@@ -1,4 +1,4 @@
-# Processed on 2025-11-27 07:03:15
+# Processed on 2025-11-27 09:31:41
 from dfttools import *
 
 
@@ -17,6 +17,9 @@ from Procedures.VI_SNS_turn_off import vi_sns_turn_off
 def vis_offset_isns():
   Testname = 'VIS_OFFSET_ISNS'
   print(f' {Testname}')
+  LSB1 = 3/2**15
+  LSB2 =  20/2**20
+  lsb_ratio = LSB1/LSB2
   # execute the necessary procedures in order 
   startup()
   global_enable()
@@ -32,7 +35,7 @@ def vis_offset_isns():
   isns_offset_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
   # convert from the two's complement
-  isns_offset_measured= (0x10000 - isns_offset_measured) >> 8 &0x7F  if isns_offset_measured & 0x8000 else 0x80 - (isns_offset_measured >> 8)&0x7f # {'fieldname': 'otp_isense_offset', 'length': 7, 'registers': [{'REG': '0xBA', 'POS': 0, 'RegisterName': 'OTP FIELDS 10', 'RegisterLength': 8, 'Name': 'otp_isense_offset[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xCC', 'POS': 7, 'RegisterName': 'OTP FIELDS 28', 'RegisterLength': 8, 'Name': 'otp_isense_offset[6]', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]} is the 7 bit  
+  isns_offset_measured=  int((0x10000 - isns_offset_measured)*lsb_ratio) >> 7 &0x7F if isns_offset_measured & 0x8000 else (0x80 - (int(isns_offset_measured*lsb_ratio) >> 7)) &0x7F# {'fieldname': 'otp_isense_offset', 'length': 7, 'registers': [{'REG': '0xBA', 'POS': 0, 'RegisterName': 'OTP FIELDS 10', 'RegisterLength': 8, 'Name': 'otp_isense_offset[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xCC', 'POS': 7, 'RegisterName': 'OTP FIELDS 28', 'RegisterLength': 8, 'Name': 'otp_isense_offset[6]', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]} is the 7 bit  
   
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   print(f'{Testname} value : {hex(isns_offset_measured)} ')
