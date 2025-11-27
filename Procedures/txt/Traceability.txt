@@ -1,4 +1,4 @@
-# Processed on 2025-11-27 10:27:29
+# Processed on 2025-11-27 11:03:34
 from dfttools import *
 from Procedures.Startup import startup 
 from Procedures.Global_enable import global_enable
@@ -9,6 +9,26 @@ def traceability_burn():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xAE, data=0x4, Mask=0x4, Default=0x0 
   # load otp value 
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xBC, data=0x25, Mask=0xFF
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xBD, data=0x69, Mask=0xFF
+  # register 0XBE in LOT number 3 digits #1
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xBE, data=0x0, Mask=0xFF
+  # register  0XBF in LOT number 3 digits #2
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xBF, data=0x0, Mask=0xFF
+  # register  0XBC0 in LOT number 3 digits #3
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xC0, data=0x0, Mask=0xFF
+  # register   0XC1 in  bits[7:5]=0x02 | bits[4:0] Wafer number
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xC1, data=0x0, Mask=0xFF
+  # register   0XC2 in  diex
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xC2, data=0x0, Mask=0xFF
+  # register   0XC3 in  diey
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xC3, data=0x0, Mask=0xFF
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xC4, data=0x2A, Mask=0xFF
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xC5, data=0x31, Mask=0xFF
+  # register   0XC6 in  bits[7:5] Probe W day | bits[4:0]=0x1
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xC6, data=0x1, Mask=0xFF
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xC7, data=0x0, Mask=0xFF
+
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xAE, data=0x2, Mask=0x2, Default=0x0 
 def traceability_load():
   startup()
