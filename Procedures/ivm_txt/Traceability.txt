@@ -23,4 +23,4 @@ WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 10; DATA: 2;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: cf; DATA: 82;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: d1; DATA: 1;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: fe; DATA: 1;;
-WR-Reg; CHECK: O; PAGE: 1; SAD: 0; ADD: ae; DATA: 4;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: ae; DATA: 4;;
