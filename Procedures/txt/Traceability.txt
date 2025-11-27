@@ -1,13 +1,26 @@
-# Processed on 2025-11-27 09:41:26
+# Processed on 2025-11-27 10:27:29
 from dfttools import *
 from Procedures.Startup import startup 
 from Procedures.Global_enable import global_enable
 
-def traceability():
+def traceability_burn():
   startup()
   global_enable()
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xAE, data=0x4, Mask=0x4, Default=0x0 
+  # load otp value 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xAE, data=0x2, Mask=0x2, Default=0x0 
+def traceability_load():
+  startup()
+  global_enable()
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xAE, data=0x4, Mask=0x4, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xAE, data=0x1, Mask=0x1, Default=0x0 
+  # read the burned otp values 
+  
+
 
 if __name__ == '__main__':
-  traceability()
+  traceability_burn()
+  traceability_load()
+  
