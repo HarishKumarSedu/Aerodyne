@@ -1,4 +1,4 @@
-# Processed on 2025-09-25 10:19:27
+# Processed on 2025-11-27 14:41:55
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -15,11 +15,11 @@ def offset_cal_cld_3lvl():
   print(f'"OUTP" - "OUTN" before calibration {v1}')
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x0, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x76, data=0x0, Mask=0x2, Default=0x82
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA6, data=0x0, Mask=0x4, Default=0xC
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x76, data=0xF0, Mask=0xF0, Default=0x82 # {'fieldname': 'cal_offs_steps', 'length': 4, 'registers': [{'REG': '0x76', 'POS': 4, 'RegisterName': 'CAL reg 1', 'RegisterLength': 8, 'Name': 'cal_offs_steps[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x82', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]} default is 8 calibration, with bit (1111) makes 15 calibration (suggested)
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x76, data=0x8, Mask=0x8, Default=0x82 
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x76, data=0x1, Mask=0x1, Default=0x82 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x76, data=0x0, Mask=0x2, Default=0x83
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xA6, data=0x0, Mask=0x4, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x76, data=0xF0, Mask=0xF0, Default=0x83 # {'fieldname': 'cal_offs_steps', 'length': 4, 'registers': [{'REG': '0x76', 'POS': 4, 'RegisterName': 'CAL reg 1', 'RegisterLength': 8, 'Name': 'cal_offs_steps[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x83', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]} default is 8 calibration, with bit (1111) makes 15 calibration (suggested)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x76, data=0x0, Mask=0x8, Default=0x83 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x76, data=0x1, Mask=0x1, Default=0x83 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x77, data=0x0, Mask=0x70, Default=0x2A 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x77, data=0x0, Mask=0x7, Default=0x2A 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x78, data=0x70, Mask=0x70, Default=0x57 
