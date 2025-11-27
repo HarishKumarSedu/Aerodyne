@@ -1,4 +1,4 @@
-# Processed on 2025-10-17 11:07:20
+# Processed on 2025-11-27 09:27:09
 from dfttools import *
 from time import sleep
 
@@ -32,10 +32,10 @@ def gpadc_vbat_gain_off_trim():
     [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
     sleep(0.001)
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x0, Mask=0x3F, Default=0x0
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x20, Mask=0x3F, Default=0x0
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x3, Mask=0x3, Default=0x0
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x1
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x1, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x20, Mask=0x3F, Default=0x20
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x3, Mask=0x3, Default=0xF
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x3
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x1, Mask=0x1, Default=0x1
     VB0 = VFORCE(signal="PVDD", reference="GND", value=2.8,error_spread=0)
     sleep(0.1)
     mid=5.3763441E-03
@@ -61,8 +61,7 @@ def gpadc_vbat_gain_off_trim():
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC1, data=otp_vbat_off, Mask=0xFF, Default=0x0
         print(f"Optimal Code: {otp_vbat_off}")
     else:
-    #     otp_vbat_off=vbat_off
-          print('!!!!!!!!!!!!!! Offset Can not be Trimmed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        otp_vbat_off=vbat_off
     vbat_gain=int((mreal/mid-1)*1024)
     # complement the value 
     otp_vbat_gain = 0x100 + vbat_gain if vbat_gain & 0x80 else 0x100 - vbat_gain
@@ -79,8 +78,8 @@ def gpadc_vbat_gain_off_trim():
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD8, data=0x0, Mask=0x3F, Default=0x0
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x0, Mask=0x3F, Default=0x0
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x0, Mask=0x3, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD9, data=0x0, Mask=0x3F, Default=0x20
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x0, Mask=0x3, Default=0xF
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDA, data=0x1, Mask=0xF, Default=0x1
     FREQFORCE(signal="IOCLK0",reference="GND",value=float('Inf')) # disable the clock at the end of the test 
 
