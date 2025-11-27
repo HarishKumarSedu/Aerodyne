@@ -1,4 +1,4 @@
-# Processed on 2025-09-12 12:00:29
+# Processed on 2025-11-27 06:58:27
 from dfttools import *
 
 
@@ -43,11 +43,12 @@ def vis_offset_isns():
   isns_offset_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
   # convert from the two's complement
-  isns_offset_measured= (0x10000 - isns_offset_measured) >> 8 &0x3F  if isns_offset_measured & 0x8000 else 0x40 - (isns_offset_measured >> 8)&0x3f
+  isns_offset_measured= (0x10000 - isns_offset_measured) >> 8 &0x3F  if isns_offset_measured & 0x8000 else 0x80 - (isns_offset_measured >> 8)&0x3f
   
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   print(f'{Testname} value : {hex(isns_offset_measured)} ')
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBA, data=hex(isns_offset_measured), Mask=0x3F, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCC, data=hex(isns_offset_measured), Mask=0x80, Default=0x0
   
   vi_sns_turn_off()
   # put the birdge in the HiZ
