@@ -1,4 +1,4 @@
-# Processed on 2025-11-27 06:58:27
+# Processed on 2025-11-27 06:59:34
 from dfttools import *
 
 
@@ -23,17 +23,6 @@ def vis_offset_isns():
   # Put the it into the Playback mode then go to standlone 
   # apply 3.072MHz Clolk @ "IOCLK0"
   playback()
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-  # put the bridge in the high impedence before we force the brideg ein standelone mode 
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-  # turn the Vmid buffer Vmid = Vddp/2
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x40, Mask=0x40, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x40, Mask=0x40, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-  # put the output stage to the common mode at the VDDP/2
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0 # tun on CAS_ouup, N_outp, CAS_ouun, N_outn
   # call Vi sense tunr off block
   vi_sns_turn_on()
   
@@ -53,11 +42,9 @@ def vis_offset_isns():
   vi_sns_turn_off()
   # put the birdge in the HiZ
   # turn the Vmid buffer Vmid = Vddp/2
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x40, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x0, Mask=0x40, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 # bridge HiZ
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x0, Mask=0x10, Default=0x81
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x0, Mask=0x1, Default=0x0
+  vi_sns_turn_off()
 
 if __name__ == '__main__':
   vis_offset_isns()
