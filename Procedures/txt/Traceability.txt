@@ -1,0 +1,13 @@
+# Processed on 2025-11-27 09:41:12
+from dfttools import *
+from Procedures.Startup import startup 
+from Procedures.Global_enable import global_enable
+
+def traceability():
+  startup()
+  global_enable()
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x00, PageName=PAG1, register_addr=0xAE, data=0x4, Mask=0x4, Default=0x0 
+
+if __name__ == '__main__':
+  traceability()
