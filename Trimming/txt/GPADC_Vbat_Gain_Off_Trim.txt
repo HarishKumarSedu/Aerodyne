@@ -1,4 +1,4 @@
-# Processed on 2025-11-27 09:27:09
+# Processed on 2025-11-27 09:28:34
 from dfttools import *
 from time import sleep
 
@@ -52,22 +52,15 @@ def gpadc_vbat_gain_off_trim():
     mreal=(VB1-VB0)/(CODE1-CODE0)
     vbat_off=int((VB0/mreal)-CODE0)
 
-    # check if the offset is negative trim otherwise just passby
-    if vbat_off >0:  
-        # otp_vbat_off=0x400 + vbat_off
-        otp_vbat_off= vbat_off
-        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBF, data=otp_vbat_off, Mask=0x30, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC1, data=otp_vbat_off, Mask=0xFF, Default=0x0
-        print(f"Optimal Code: {otp_vbat_off}")
-    else:
-        otp_vbat_off=vbat_off
     vbat_gain=int((mreal/mid-1)*1024)
     # complement the value 
     otp_vbat_gain = 0x100 + vbat_gain if vbat_gain & 0x80 else 0x100 - vbat_gain
 
     print(f'............ {Test_Name} Passed ........')
         # write the optimized code if the trim passed
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBF, data=vbat_off, Mask=0x30, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC1, data=vbat_off, Mask=0xFF, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC2, data=hex(otp_vbat_gain), Mask=0xFF, Default=0x0
 
