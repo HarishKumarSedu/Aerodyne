@@ -1,4 +1,4 @@
-# Processed on 2025-11-27 09:28:34
+# Processed on 2025-11-27 09:29:02
 from dfttools import *
 from time import sleep
 
@@ -65,7 +65,8 @@ def gpadc_vbat_gain_off_trim():
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC2, data=hex(otp_vbat_gain), Mask=0xFF, Default=0x0
 
    
-    print(f"Optimal Code: {hex(otp_vbat_gain)}")
+    print(f"Optimal gain Code: {hex(otp_vbat_gain)}")
+    print(f"Optimal oofset Code: {hex(vbat_off)}")
 
     sleep(0.001)
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
