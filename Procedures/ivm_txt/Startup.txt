@@ -3,7 +3,7 @@
 Command;Check;Page;SAD;ADD;DATA;MSB;LSB;Comment
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: fe; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 84; DATA: 97;;
-WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 83; DATA: 0;;
+WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 83; DATA: 10;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: fe; DATA: 1;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 2f; DATA: aa;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 2f; DATA: bb;;
