@@ -52,7 +52,7 @@ def gpadc_vbat_gain_off_trim():
     vbat_gain=int((mreal/mid-1)*1024)
     # complement the value 
     otp_vbat_gain = 0x100 + vbat_gain if vbat_gain & 0x80 else 0x100 - vbat_gain
-
+    otp_vbat_off = 0x400+vbat_off if vbat_off <0 else vbat_off
     print(f'............ {Test_Name} Passed ........')
         # write the optimized code if the trim passed
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'i2c_page_sel_1', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel_1', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=1)
