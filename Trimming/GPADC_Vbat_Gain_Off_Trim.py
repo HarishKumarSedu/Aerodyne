@@ -51,7 +51,7 @@ def gpadc_vbat_gain_off_trim():
 
     vbat_gain=int((mreal/mid-1)*1024)
     # complement the value 
-    otp_vbat_gain = 0x100 + vbat_gain if vbat_gain & 0x80 else 0x100 - vbat_gain
+    otp_vbat_gain = 0x100 + vbat_gain if vbat_gain < 0 else vbat_gain
     otp_vbat_off = 0x400+vbat_off if vbat_off <0 else vbat_off
     print(f'............ {Test_Name} Passed ........')
         # write the optimized code if the trim passed
