@@ -25,7 +25,7 @@ def ocp_hs_th():
 
   # Wait for device stabilization
   sleep(0.0001)  # 100 µs
-  i_start = 0.5
+  i_start = 0.05
   i_step = 0.05
   i_end = 0.85
   AFORCE(signal="OUTN", reference="GND", value=-i_start, error_spread=0.01)  # 500mA ±5%
