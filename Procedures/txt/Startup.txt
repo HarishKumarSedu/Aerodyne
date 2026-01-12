@@ -1,4 +1,4 @@
-# Processed on 2026-01-12 16:59:05
+# Processed on 2026-01-12 16:59:25
 from time import sleep
 import os 
 import sys
@@ -37,8 +37,6 @@ def startup():
   cal_meas_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x25, Mask=0x3
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x26, Mask=0xFF
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x2D, data=0x8, Mask=0xC, Default=0x58
-  page_val = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0xFE, Mask=0x1
-  print(f'page_value {page_val}')
 
 if __name__ == '__main__':
   startup()
