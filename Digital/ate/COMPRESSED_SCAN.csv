@@ -1,0 +1,5 @@
+Instruction,Unit,Signal/SAD,Reference/ADD,Value/DATA,PAGE,Comments
+I2C,WR-Reg,0x38,0xfe,0x1,0,
+I2C,WR-Reg,0x38,0x5,0x19,1,
+I2C,WR-Reg,0x38,0x5,0x1b,1,
+Force,V,VDD,1.2,0.0,,"args=(), kwargs={}"
