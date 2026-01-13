@@ -1,0 +1,15 @@
+Instruction,Unit,Signal/SAD,Reference/ADD,Value/DATA,PAGE,Comments
+I2C,WR-Reg,0x38,0x84,0x97,0,
+I2C,WR-Reg,0x38,0x81,0x6,0,
+I2C,WR-Reg,0x38,0x82,0x18,0,
+I2C,WR-Reg,0x38,0x83,0x10,0,
+Force,Hz,IOCLK0,GND,3072000.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xfe,0x1,0,
+I2C,WR-Reg,0x38,0x3,0x18,1,
+I2C,WR-Reg,0x38,0x4,0x23,1,
+Measure,V,ADDR,GND,0.9,,"args=(), kwargs={}"
+Measure,Hz,IODATA1,GND,12288000.0,,"args=(), kwargs={}"
+Measure,V,ADDR,GND,inf,,"args=(), kwargs={}"
+Force,Hz,IOCLK0,GND,3400000.0,,"args=(), kwargs={}"
+Measure,Hz,IODATA1,GND,13680000.0,,"args=(), kwargs={}"
+Measure,Hz,IODATA1,GND,inf,,"args=(), kwargs={}"

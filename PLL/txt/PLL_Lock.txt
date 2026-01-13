@@ -1,4 +1,4 @@
-# Processed on 2025-10-15 09:23:38
+# Processed on 2026-01-13 06:46:45
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -20,7 +20,7 @@ def pll_lock_test():
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x84, data=0x80, Mask=0xC0, Default=0x17      #dig_pll_freerun_en_vddd=0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x81, data=0x6, Mask=0x3F, Default=0x6         #dig_pll_prediv_vddd<5:0>=6d 
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x82, data=0x18, Mask=0x3F, Default=0x18        #dig_pll_n<5:0>=24d 
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x83, data=0x10, Mask=0x1F, Default=0x10 #rfu_pll_ldet_cnt<4:0>=16d
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x83, data=0x10, Mask=0x1F, Default=0x0 #rfu_pll_ldet_cnt<4:0>=16d
     FREQFORCE(signal="IOCLK0",reference="GND",value=BLCK_Set_1)                          #BCLK frequency=3.072MHz
     sleep(0.0001)                                                                    #wait 100us
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Change page in regmap
