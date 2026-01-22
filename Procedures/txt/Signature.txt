@@ -1,0 +1,51 @@
+# Processed on 2026-01-22 12:22:38
+from dfttools import *
+from Procedures.Startup import startup 
+from Procedures.Global_enable import global_enable
+
+def Signature_burn():
+  startup()
+  global_enable()
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  
+  REG_B0=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xB0'
+  REG_B1=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xB1'
+  REG_B2=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xB2'
+  REG_B3=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xB3'
+  REG_B4=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xB4'
+  REG_B5=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xB5'
+  REG_B6=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xB6'
+  REG_B7=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xB7'
+  REG_B8=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xB8'
+  REG_B9=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xB9'
+  REG_BA=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xBA'
+  REG_BB=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xBB'
+  REG_BC=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xBC'
+  REG_BD=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xBD'
+  REG_BE=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xBE'
+  REG_BF=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xBF'
+  
+  REG_D0=REG_B0^REG_B1^REG_B2^REG_B3^REG_B4^REG_B5^_REG_B6^_REG_B7^REG_B8^REG_B9^REG_BA^REG_BB^REG_BC^REG_BD^REG_BE^REG_BF
+
+  REG_C0=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC0'
+  REG_C1=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC1'
+  REG_C2=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC2'
+  REG_C3=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC3'
+  REG_C4=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC4'
+  REG_C5=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC5'
+  REG_C6=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC6'
+  REG_C7=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC7'
+  REG_C8=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC8'
+  REG_C9=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC9'
+  REG_CA=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xCA'
+  REG_CB=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xCB'
+  REG_CC=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xCC'
+  REG_CD=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xCD'
+  REG_CE=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xCE'
+  REG_CF=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xCF'
+  
+  REG_D1=REG_C0^REG_C1^REG_C2^REG_C3^REG_C4^REG_C5^_REG_C6^_REG_C7^REG_C8^REG_C9^REG_CA^REG_CB^REG_CC^REG_CD^REG_CE^REG_CF
+
+  # ERROR executing I2C_REG_WRITE: invalid literal for int() with base 0: 'xD0'
+  # ERROR executing I2C_REG_WRITE: invalid literal for int() with base 0: 'xD1'
+ 
