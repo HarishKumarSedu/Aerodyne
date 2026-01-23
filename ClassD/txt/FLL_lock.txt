@@ -1,4 +1,4 @@
-# Processed on 2025-10-02 10:06:19
+# Processed on 2026-01-23 13:06:03
 from dfttools import *
 from time import sleep 
 import random
@@ -23,7 +23,7 @@ def fll_lock_check():
   # Step 1
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x6, Mask=0x7F, Default=0x0  # enable "IODATA0"
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x2, Mask=0x7F, Default=0x0 # bring out {'fieldname': 'fll_lock', 'length': 1, 'registers': [{'REG': '0x24', 'POS': 6, 'RegisterName': 'Sequencer status register 1', 'RegisterLength': 8, 'Name': 'fll_lock', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'PR0RRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x3, Mask=0x7F, Default=0x0 # bring out {'fieldname': 'fll_lock', 'length': 1, 'registers': [{'REG': '0x24', 'POS': 6, 'RegisterName': 'Sequencer status register 1', 'RegisterLength': 8, 'Name': 'fll_lock', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'PR0RRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}
   sleep(0.0001) 
   expected_value = 1.2
   error_spread = expected_value*0.2 
