@@ -24,7 +24,7 @@ def fll_lock_check():
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'dig_test_en', 'length': 7, 'registers': [{'REG': '0x03', 'POS': 0, 'RegisterName': 'DIGITAL_TEST_SETTINGS_1', 'RegisterLength': 8, 'Name': 'dig_test_en[6:0]', 'Mask': '0x7F', 'Length': 7, 'FieldMSB': 6, 'FieldLSB': 0, 'Attribute': '0NNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=6)  # enable "IODATA0"
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'dig_test_sel', 'length': 7, 'registers': [{'REG': '0x04', 'POS': 0, 'RegisterName': 'DIGITAL_TEST_SETTINGS_2', 'RegisterLength': 8, 'Name': 'dig_test_sel[6:0]', 'Mask': '0x7F', 'Length': 7, 'FieldMSB': 6, 'FieldLSB': 0, 'Attribute': '0NNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=3) # bring out {'fieldname': 'fll_lock', 'length': 1, 'registers': [{'REG': '0x24', 'POS': 6, 'RegisterName': 'Sequencer status register 1', 'RegisterLength': 8, 'Name': 'fll_lock', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'PR0RRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}
   sleep(0.0001) 
-  expected_value = 1.2
+  expected_value = 1.8
   error_spread = expected_value*0.2 
   fll_lock_vddd=VMEASURE(signal="IODATA0", reference="GND", expected_value=expected_value, error_spread=error_spread)
   VMEASURE(signal="IODATA0", reference="GND", expected_value=float('Inf')) # remote path once measure is done 
