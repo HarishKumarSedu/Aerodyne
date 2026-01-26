@@ -1,4 +1,4 @@
-# Processed on 2025-11-25 09:49:18
+# Processed on 2026-01-26 14:27:18
 from dfttools import *
 from time import sleep
 import random
@@ -19,7 +19,8 @@ def cascode_n_ron():
   I_forced= 0.5
   
   # Step 3: Force 500mA current into "OUTP" pin
-  AFORCE(signal="OUTP", reference="OUTN", value=I_forced, error_spread=0.05)  # 500mA ±5%
+  AFORCE(signal="OUTN", reference="GND", value=I_forced, error_spread=0.05)  # 500mA ±5%
+  # connect the load between "OUTP" and "OUTN"
   
   dV = VMEASURE(signal="OUTP", reference="VMID", expected_value=0.028, error_spread=0.01)
   CASCODEN_ron = (dV / I_forced) - 25e-3 # R = V/I
