@@ -18,9 +18,9 @@ def cascode_p_ron():
   I_forced= 0.5 # APPLY WITH RAMP
   
   # Step 3: Force 500mA current into "OUTP" pin
-  AFORCE(signal="OUTP", reference="OUTN", value=I_forced, error_spread=I_forced*1e-2)  # 500mA ±5%
-  
-  dV = VMEASURE(signal="OUTP", reference="VMID", expected_value=0.028, error_spread=0.01)
+  AFORCE(signal="OUTP", reference="GND", value=I_forced, error_spread=I_forced*1e-2)  # 500mA ±5%
+  # connect load beween "OUTP" and "OUTN"
+  dV = VMEASURE(signal="OUTN", reference="VMID", expected_value=0.028, error_spread=0.01)
   CASCODEP_ron = (dV / I_forced ) - 25e-3 # R = V/I
   
   print(f'Calculated cascode P-Ron: {CASCODEP_ron:.3f} Ohms')
