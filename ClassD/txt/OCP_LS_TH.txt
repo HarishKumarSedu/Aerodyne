@@ -1,4 +1,4 @@
-# Processed on 2025-10-02 10:06:01
+# Processed on 2026-01-27 16:44:59
 from dfttools import *
 from time import sleep
 import random
@@ -20,7 +20,7 @@ def ocp_ls_th():
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x92, data=0x5, Mask=0x7, Default=0x3  
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x2, Mask=0x7F, Default=0x0 #only bit 2 need to be changed
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x5, Mask=0x7F, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x4, Mask=0x7F, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0  
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x80, Mask=0x80, Default=0x0  
