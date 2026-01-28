@@ -1,0 +1,177 @@
+Instruction,Unit,Signal/SAD,Reference/ADD,Value/DATA,PAGE,Comments
+Force,V,VDD,GND,1.8,,"args=(), kwargs={}"
+Force,V,RESETB,GND,1.8,,"args=(), kwargs={}"
+Force,V,PVDD,GND,3.7,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xfe,0x0,0,
+I2C,WR-Reg,0x38,0x84,0x97,0,
+I2C,WR-Reg,0x38,0x83,0x10,0,
+I2C,WR-Reg,0x38,0xfe,0x1,1,
+I2C,WR-Reg,0x38,0x2f,0xaa,1,
+I2C,WR-Reg,0x38,0x2f,0xbb,1,
+I2C,WR-Reg,0x38,0xfe,0x0,0,
+I2C,WR-Reg,0x38,0x4e,0x89,0,
+I2C,WR-Reg,0x38,0x38,0x1,0,
+I2C,WR-Reg,0x38,0x39,0x8,0,
+I2C,WR-Reg,0x38,0x3a,0x8,0,
+I2C,WR-Reg,0x38,0x3c,0x8,0,
+I2C,RR-Reg,0x38,0x25,0x0,0,
+I2C,RR-Reg,0x38,0x26,0x0,0,
+I2C,WR-Reg,0x38,0x2d,0x58,0,
+I2C,WR-Reg,0x38,0xfe,0x0,0,
+I2C,WR-Reg,0x38,0xf,0x1,0,
+I2C,WR-Reg,0x38,0xfe,0x1,1,
+I2C,WR-Reg,0x38,0x10,0x2,1,
+I2C,WR-Reg,0x38,0xcf,0x82,1,
+I2C,WR-Reg,0x38,0xd1,0x1,1,
+I2C,WR-Reg,0x38,0xfe,0x0,0,
+I2C,WR-Reg,0x38,0x2d,0x58,0,
+I2C,WR-Reg,0x38,0xf,0x1,0,
+Force,Hz,IOCLK0,GND,3072000.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0x9f,0x1,0,
+I2C,WR-Reg,0x38,0x5e,0x1,0,
+I2C,WR-Reg,0x38,0xfe,0x1,1,
+I2C,WR-Reg,0x38,0x18,0x10,1,
+I2C,WR-Reg,0x38,0x18,0x14,1,
+I2C,WR-Reg,0x38,0x18,0x14,1,
+I2C,WR-Reg,0x38,0xfe,0x0,0,
+I2C,WR-Reg,0x38,0x75,0x4,0,
+I2C,WR-Reg,0x38,0x95,0x95,0,
+I2C,WR-Reg,0x38,0x73,0x10,0,
+I2C,WR-Reg,0x38,0x75,0x4,0,
+I2C,WR-Reg,0x38,0xfe,0x1,1,
+I2C,WR-Reg,0x38,0x3,0x10,1,
+I2C,WR-Reg,0x38,0x4,0x0,1,
+I2C,WR-Reg,0x38,0xb5,0x0,1,
+Measure,Hz,ADDR,GND,280000.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x1,1,
+Measure,Hz,ADDR,GND,280437.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x2,1,
+Measure,Hz,ADDR,GND,280875.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x3,1,
+Measure,Hz,ADDR,GND,281312.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x4,1,
+Measure,Hz,ADDR,GND,281750.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x5,1,
+Measure,Hz,ADDR,GND,282187.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x6,1,
+Measure,Hz,ADDR,GND,282625.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x7,1,
+Measure,Hz,ADDR,GND,283062.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x8,1,
+Measure,Hz,ADDR,GND,283500.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x9,1,
+Measure,Hz,ADDR,GND,283937.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0xa,1,
+Measure,Hz,ADDR,GND,284375.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0xb,1,
+Measure,Hz,ADDR,GND,284812.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0xc,1,
+Measure,Hz,ADDR,GND,285250.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0xd,1,
+Measure,Hz,ADDR,GND,285687.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0xe,1,
+Measure,Hz,ADDR,GND,286125.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0xf,1,
+Measure,Hz,ADDR,GND,286562.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x10,1,
+Measure,Hz,ADDR,GND,287000.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x11,1,
+Measure,Hz,ADDR,GND,287437.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x12,1,
+Measure,Hz,ADDR,GND,287875.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x13,1,
+Measure,Hz,ADDR,GND,288312.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x14,1,
+Measure,Hz,ADDR,GND,288750.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x15,1,
+Measure,Hz,ADDR,GND,289187.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x16,1,
+Measure,Hz,ADDR,GND,289625.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x17,1,
+Measure,Hz,ADDR,GND,290062.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x18,1,
+Measure,Hz,ADDR,GND,290500.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x19,1,
+Measure,Hz,ADDR,GND,290937.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x1a,1,
+Measure,Hz,ADDR,GND,291375.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x1b,1,
+Measure,Hz,ADDR,GND,291812.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x1c,1,
+Measure,Hz,ADDR,GND,292250.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x1d,1,
+Measure,Hz,ADDR,GND,292687.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x1e,1,
+Measure,Hz,ADDR,GND,293125.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x1f,1,
+Measure,Hz,ADDR,GND,293562.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x20,1,
+Measure,Hz,ADDR,GND,294000.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x21,1,
+Measure,Hz,ADDR,GND,294437.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x22,1,
+Measure,Hz,ADDR,GND,294875.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x23,1,
+Measure,Hz,ADDR,GND,295312.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x24,1,
+Measure,Hz,ADDR,GND,295750.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x25,1,
+Measure,Hz,ADDR,GND,296187.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x26,1,
+Measure,Hz,ADDR,GND,296625.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x27,1,
+Measure,Hz,ADDR,GND,297062.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x28,1,
+Measure,Hz,ADDR,GND,297500.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x29,1,
+Measure,Hz,ADDR,GND,297937.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x2a,1,
+Measure,Hz,ADDR,GND,298375.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x2b,1,
+Measure,Hz,ADDR,GND,298812.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x2c,1,
+Measure,Hz,ADDR,GND,299250.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x2d,1,
+Measure,Hz,ADDR,GND,299687.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x2e,1,
+Measure,Hz,ADDR,GND,300125.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x2f,1,
+Measure,Hz,ADDR,GND,300562.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x30,1,
+Measure,Hz,ADDR,GND,301000.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x31,1,
+Measure,Hz,ADDR,GND,301437.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x32,1,
+Measure,Hz,ADDR,GND,301875.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x33,1,
+Measure,Hz,ADDR,GND,302312.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x34,1,
+Measure,Hz,ADDR,GND,302750.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x35,1,
+Measure,Hz,ADDR,GND,303187.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x36,1,
+Measure,Hz,ADDR,GND,303625.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x37,1,
+Measure,Hz,ADDR,GND,304062.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x38,1,
+Measure,Hz,ADDR,GND,304500.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x39,1,
+Measure,Hz,ADDR,GND,304937.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x3a,1,
+Measure,Hz,ADDR,GND,305375.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x3b,1,
+Measure,Hz,ADDR,GND,305812.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x3c,1,
+Measure,Hz,ADDR,GND,306250.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x3d,1,
+Measure,Hz,ADDR,GND,306687.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x3e,1,
+Measure,Hz,ADDR,GND,307125.0,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x3f,1,
+Measure,Hz,ADDR,GND,307562.5,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0xb5,0x18,1,
+I2C,WR-Reg,0x38,0xfe,0x1,1,
+I2C,WR-Reg,0x38,0x18,0x4,1,
+I2C,WR-Reg,0x38,0x18,0x0,1,
+I2C,WR-Reg,0x38,0x3,0x0,1,
+I2C,WR-Reg,0x38,0x4,0x0,1,

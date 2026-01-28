@@ -1,0 +1,93 @@
+# Processed on 2026-01-28 10:18:05
+from dfttools import *
+from time import sleep
+import random
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
+
+def fll_freerun():
+
+    Test_Name = 'FLL_Freerun_Trim'
+    startup()
+    global_enable()
+    playback()
+    print(f'............ {Test_Name} ........')
+
+    '''
+    dig_ds_cld_pwm_en_vddd=1
+    rfu_ds_fll_vco_freerun_en_vddd=1
+    rfu_ds_cld_fll_vco_fctrl_vddd<1:0> =0
+    dig_dd_cld_fll_vco_dith_vddd<5:0>=32d
+    rfu_ds_cld_fll_vco_amp_vddd<2:0>=4d
+    dig_ds_cld_fll_fd_fset_vddd<8:0>=170d
+    '''
+    [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x10, Mask=0x10, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x4, Mask=0x4, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x0, Mask=0x20, Default=0x0
+    [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x75, data=0x0, Mask=0x30, Default=0x4
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x95, data=0x1, Mask=0x3, Default=0x96 # 3L modulation
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x73, data=0x0, Mask=0x20, Default=0x10
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x75, data=0x4, Mask=0x7, Default=0x4
+
+    '''Bring out on the digital test point the PWM clock output 
+    ana_dd_fllvco_classdck1_vddd and measure the clock frequency'''
+    [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x10, Mask=0x7F, Default=0x0 #enable "ADDR"
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 #select the test for ana_dd_fllvco_classdck1
+    # Bring out the singla through "ADDR"/ write test mux
+
+
+    # desingers needs to correct the assumptions
+    target_value = 289.275e3 
+    # higher and lower limits taken about +/- 10% of the target value 
+    lower_limit = 280e3
+    higher_limit = 300e3
+    error_spread = target_value*0.05 # 5% of target value
+
+    # LSB is the assumption designer needs to correct
+    # Step size
+    step_size = 437.5 # assumed 437.5Hz
+
+    # Initialize minimum error and optimal code
+    min_error = float('inf')
+    optimal_code = None
+    optimal_measured_value = None
+    num_steps = 2**6 # trimming field is 6 bit
+    for i in range(num_steps):
+        # sweep trimg code
+        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB5, data=hex(i), Mask=0x3F, Default=0x22
+        # Generate monotonic values with step size
+        expected_value = lower_limit + i * step_size 
+        # Add white noise to the expected value
+        # Pass the noisy value as the expected measurement values
+        measured_value = FREQMEASURE(signal="ADDR", reference="GND", expected_value=expected_value, error_spread=error_spread)
+        error = abs(measured_value - target_value)/abs(target_value) *100
+        if error < min_error:
+            min_error = error
+            optimal_code = hex(i)
+            optimal_measured_value = measured_value
+        sleep(0.1)
+    # Check for limits
+    if lower_limit < optimal_measured_value < higher_limit:
+        print(f'............ {Test_Name} Passed ........')
+        # write the optimized code if the trim passed
+        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB5, data=optimal_code, Mask=0x3F, Default=0x22
+    else:
+        print(f'............ {Test_Name} Failed ........')
+        # if the trimh failed program detult zero
+        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB5, data=0x22, Mask=0x3F, Default=0x22
+    print(f"Optimal Code: {optimal_code}")
+    print(f"Optimal measured value : {optimal_measured_value}Hz, Target value : {target_value}Hz")
+    print(f"Minimum Error: {min_error}%")
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x0, Mask=0x10, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x0, Mask=0x4, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0 #enable "ADDR"
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0 #select the test for ana_dd_fllvco_classdck1
+    return optimal_code,optimal_measured_value,min_error
+
+if __name__ == '__main__':
+    fll_freerun()
