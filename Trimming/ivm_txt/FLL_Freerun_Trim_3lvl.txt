@@ -103,7 +103,7 @@ WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: b5; DATA: 3c;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: b5; DATA: 3d;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: b5; DATA: 3e;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: b5; DATA: 3f;;
-WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: b5; DATA: 18;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: b5; DATA: 7;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: fe; DATA: 1;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 18; DATA: 4;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 18; DATA: 0;;
