@@ -1,4 +1,4 @@
-# Processed on 2026-01-22 12:22:41
+# Processed on 2026-01-28 09:41:46
 from dfttools import *
 from Procedures.Startup import startup 
 from Procedures.Global_enable import global_enable
@@ -7,6 +7,7 @@ def Signature_burn():
   startup()
   global_enable()
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+# this is an example, in the real case you need to combine the OTP values you have found to create the values of the registers from B0 to BF
   
   REG_B0=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xB0'
   REG_B1=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xB1'
@@ -27,6 +28,7 @@ def Signature_burn():
   
   REG_D0=REG_B0^REG_B1^REG_B2^REG_B3^REG_B4^REG_B5^_REG_B6^_REG_B7^REG_B8^REG_B9^REG_BA^REG_BB^REG_BC^REG_BD^REG_BE^REG_BF
 
+  # this is an example, in the real case you need to combine the OTP values you have found to create the values of the registers from C0 to CF
   REG_C0=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC0'
   REG_C1=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC1'
   REG_C2=# ERROR executing I2C_REG_READ: invalid literal for int() with base 0: 'xC2'

@@ -6,6 +6,7 @@ def Signature_burn():
   startup()
   global_enable()
   I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel_1', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel_1', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},   write_value=1)
+# this is an example, in the real case you need to combine the OTP values you have found to create the values of the registers from B0 to BF
   
   REG_B0=I2C_REG_READ("0x38", xB0, x00, PageNo=1)
   REG_B1=I2C_REG_READ("0x38", xB1, x00, PageNo=1)
@@ -26,6 +27,7 @@ def Signature_burn():
   
   REG_D0=REG_B0^REG_B1^REG_B2^REG_B3^REG_B4^REG_B5^_REG_B6^_REG_B7^REG_B8^REG_B9^REG_BA^REG_BB^REG_BC^REG_BD^REG_BE^REG_BF
 
+  # this is an example, in the real case you need to combine the OTP values you have found to create the values of the registers from C0 to CF
   REG_C0=I2C_REG_READ("0x38", xC0, x00, PageNo=1)
   REG_C1=I2C_REG_READ("0x38", xC1, x00, PageNo=1)
   REG_C2=I2C_REG_READ("0x38", xC2, x00, PageNo=1)
