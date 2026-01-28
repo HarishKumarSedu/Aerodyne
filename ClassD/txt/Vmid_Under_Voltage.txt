@@ -1,4 +1,4 @@
-# Processed on 2025-10-01 11:49:36
+# Processed on 2026-01-28 12:07:12
 from dfttools import *
 from time import sleep
 import random
@@ -45,7 +45,13 @@ def vmid_under_voltage():
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x1, Mask=0x1, Default=0x0 # turn on ocp
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x80, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x40, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x80, Mask=0x80, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x40, Mask=0x40, Default=0x0
 
+  
   v_force = 1.85 - 0.5
   step = 0.05
   max_step = 10
