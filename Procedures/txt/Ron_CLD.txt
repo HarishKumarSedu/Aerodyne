@@ -1,4 +1,4 @@
-# Processed on 2026-01-28 13:55:44
+# Processed on 2026-01-30 13:22:34
 from dfttools import *
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable 
@@ -23,6 +23,7 @@ def ron_cld_setup():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x40, Default=0x0  # vmid buffer off
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x10, Mask=0x10, Default=0x0  # force partitioning
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x10, Mask=0x10, Default=0x0  # force full switch on
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x1, Mask=0x1, Default=0x0 #force ocp OFF
 
 def ron_cld_unset():
   #Setup CLD 
@@ -36,10 +37,11 @@ def ron_cld_unset():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0  # {'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x4, Default=0x0  # test enable for driver  
-  #[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x0, Mask=0x40, Default=0x0  # disable vmid buffer
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x0, Mask=0x40, Default=0x0  # disable vmid buffer
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x40, Default=0x0  # test enable for driver
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x0, Mask=0x10, Default=0x0  # force partitioning
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x10, Default=0x0  # force full switch on
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x0, Mask=0x1, Default=0x0 # no force OCP OFF
 if __name__ == '__main__':
   ron_cld_setup()
   ron_cld_unset()
