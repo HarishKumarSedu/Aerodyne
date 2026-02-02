@@ -1,0 +1,34 @@
+# Processed on 2026-02-02 17:26:28
+from dfttools import *
+from time import sleep
+import random
+
+Test_Name = 'Pvdd_uvlo_0V4'
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Trimming.REF_BUF_OFF import offset
+def Pvdd_uvlo_0V4():
+  print(f'............ {Test_Name} ........')
+  startup()
+  global_enable()
+  target_value = 0.4 # 0.4V
+  buffer_offset = offset(target_value) # 10mV
+  # Enabling test page
+  [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+  # Enabling the analog TMUX
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x80, Mask=0x80, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x1, Mask=0xF, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x40, Mask=0x40, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+
+  error_spread = target_value*0.1 # 10% of target value
+  measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target_value,error_spread=error_spread) - buffer_offset
+  error = abs(measured_value - target_value)/abs(target_value) *100
+  print(f"Optimal measured value : {measured_value}V, Target value : {target_value}V")
+  print(f"Minimum Error: {error}%")
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
+if __name__ == '__main__':
+  Pvdd_uvlo_0V4()
