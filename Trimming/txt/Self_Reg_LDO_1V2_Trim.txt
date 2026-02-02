@@ -1,0 +1,79 @@
+# Processed on 2026-02-02 17:17:42
+from dfttools import *
+from time import sleep
+import random
+# Newwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+def Self_Reg_LDO_1V2_Trim():
+
+
+    Test_Name = 'Self_Reg_LDO_1V2_Trim'
+    from Procedures.Startup import startup
+    from Procedures.Global_enable import global_enable
+    print(f'............ {Test_Name} ........')
+    startup()
+    global_enable()
+    typical_value = 1.2
+    # Enabling test page
+    [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x80, Mask=0x80, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0xC, Mask=0xF, Default=0x0      
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0
+    '''
+    Bring 1.2v self-regLDO voltage to "IODATA1" through the analog test mux and trim it to the closest value to 1.2V
+    '''
+
+    # Initial value
+    percentage = 1e-2 # 1% difference
+    
+    low_value = typical_value - typical_value*percentage
+    high_value = typical_value + typical_value*percentage
+
+    
+    # Step size
+    step_size = 15.14e-3       # 15.14mV
+
+    # Number of steps width of the field / bits
+    num_bits = 4  # 4-bit
+
+    # Standard deviation for white noise
+    noise_std_dev = 0.025
+
+    # Initialize minimum error and optimal code
+    min_error = float('inf')
+    optimal_code = None
+    optimal_measured_value = None
+    # 4bit :> sweep 8 to 15, 0 t0 7
+    for i in list(list(range(2**num_bits//2, 2**num_bits))+list(range(0,2**num_bits//2))):
+        # sweep trimg code
+        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCD, data=hex(i), Mask=0xF, Default=0x0
+        expected_value = low_value + i * step_size 
+        # Add white noise to each value 
+        measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=expected_value,error_spread=noise_std_dev)      
+        error = abs(measured_value - typical_value)/abs(typical_value) *100
+        if error < min_error:
+            min_error = error
+            optimal_code = hex(i)
+            optimal_measured_value = measured_value
+        sleep(0.01) # 1ms
+    # Check for limits
+    if low_value < optimal_measured_value < high_value:
+        print(f'............ {Test_Name} Passed ........')
+        # write the optimized code if the trim passed
+        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCD, data=optimal_code, Mask=0xF, Default=0x0
+    else:
+        print(f'............ {Test_Name} Failed ........')
+        raise RuntimeWarning(f'............ {Test_Name} Failed ........')
+        # if the trimh failed program detult zero
+        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCD, data=0x0, Mask=0xF, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
+    print(f"Optimal Code: {optimal_code}")
+    print(f"Optimal measured value : {optimal_measured_value}V, Target value : {typical_value}V")
+    print(f"Minimum Error: {min_error}%")
+
+
+    return optimal_code,optimal_measured_value,min_error
+
+if __name__ == '__main__':
+    Self_Reg_LDO_1V2_Trim()
