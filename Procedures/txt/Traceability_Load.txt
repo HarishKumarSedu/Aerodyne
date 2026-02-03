@@ -1,0 +1,26 @@
+# Processed on 2026-02-03 10:22:01
+from dfttools import *
+from Procedures.Startup import startup 
+from Procedures.Global_enable import global_enable
+
+
+def traceability_load():
+  print('traceability_load')
+  startup()
+  global_enable()
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xAE, data=0x4, Mask=0x4, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xAE, data=0x1, Mask=0x1, Default=0x0 
+  # read the burned otp values 
+  REG_C0=# ERROR executing I2C_REG_READ: i2c_reg_read() got an unexpected keyword argument 'No_bytes'
+  REG_C1=# ERROR executing I2C_REG_READ: i2c_reg_read() got an unexpected keyword argument 'No_bytes'
+  REG_C2=# ERROR executing I2C_REG_READ: i2c_reg_read() got an unexpected keyword argument 'No_bytes'
+  REG_C3=# ERROR executing I2C_REG_READ: i2c_reg_read() got an unexpected keyword argument 'No_bytes'
+  REG_C4=# ERROR executing I2C_REG_READ: i2c_reg_read() got an unexpected keyword argument 'No_bytes'
+  REG_C5=# ERROR executing I2C_REG_READ: i2c_reg_read() got an unexpected keyword argument 'No_bytes'
+  REG_C6=# ERROR executing I2C_REG_READ: i2c_reg_read() got an unexpected keyword argument 'No_bytes'
+  REG_C7=# ERROR executing I2C_REG_READ: i2c_reg_read() got an unexpected keyword argument 'No_bytes'
+
+if __name__ == '__main__':
+  traceability_load()
+  
