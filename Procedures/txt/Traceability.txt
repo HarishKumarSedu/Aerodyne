@@ -1,9 +1,10 @@
-# Processed on 2026-02-03 10:14:38
+# Processed on 2026-02-03 10:15:59
 from dfttools import *
 from Procedures.Startup import startup 
 from Procedures.Global_enable import global_enable
 
 def traceability_burn():
+  print('traceability_burn')
   startup()
   global_enable()
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
@@ -33,6 +34,7 @@ def traceability_burn():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xAE, data=0x2, Mask=0x2, Default=0x0
    
 def traceability_load():
+  print('traceability_load')
   startup()
   global_enable()
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
