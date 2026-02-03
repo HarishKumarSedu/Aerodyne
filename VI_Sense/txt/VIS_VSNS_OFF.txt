@@ -1,0 +1,58 @@
+# Processed on 2026-02-03 15:32:01
+from dfttools import *
+
+
+'''
+Class D output staged are programmed to have both SPKRP and SPKRN at VCM. In this way, no current signal is applied (across R-sense) at the input of I-sense channel.
+Then output code (I-sns code) it is stored.
+
+'''
+from time import sleep
+from Procedures.Startup import startup
+from Procedures.Global_enable import global_enable
+from Procedures.Playback import playback
+from Procedures.VI_SNS_turn_on import vi_sns_turn_on
+from Procedures.VI_SNS_turn_off import vi_sns_turn_off
+
+def vis_voffset_meas():
+  Testname = 'VIS_OFFSET_VSNS'
+  print(f' {Testname}')
+  # execute the necessary procedures in order 
+  startup()
+  global_enable()
+  # Put the it into the Playback mode then go to standlone 
+  # apply 3.072MHz Clolk @ "IOCLK0"
+  playback()
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+  # put the bridge in the high impedence before we force the brideg ein standelone mode 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  # turn the Vmid buffer Vmid = Vddp/2
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x40, Mask=0x40, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x40, Mask=0x40, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+  # put the output stage to the common mode at the VDDP/2
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0 # tun on CAS_ouup, N_outp, CAS_ouun, N_outn
+  # call Vi sense tunr off block
+  vi_sns_turn_on()
+  
+  sleep(0.1)
+  # read the vsense voltage 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+  vsns_offset_measured = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x69, Mask=0xFF
+[i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6A, Mask=0xFF
+  # convert from the two's complement
+  print(f'{Testname} value : {hex(vsns_offset_measured)} ')
+  
+  # put the birdge in the HiZ
+  # turn the Vmid buffer Vmid = Vddp/2
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x40, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x0, Mask=0x40, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 # bridge HiZ
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x0, Mask=0x10, Default=0x81
+  vi_sns_turn_off()
+
+if __name__ == '__main__':
+  vis_voffset_meas()
