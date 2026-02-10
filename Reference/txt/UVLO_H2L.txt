@@ -1,4 +1,4 @@
-# Processed on 2025-10-02 17:50:48
+# Processed on 2026-02-10 11:02:26
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -23,7 +23,7 @@ at which the compator toggles
 '''
   # Enabling test page
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x0, Mask=0x80, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x80, Mask=0x80, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x20, Mask=0x20, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1D, data=0x10, Mask=0x10, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1C, data=0x10, Mask=0x10, Default=0x0
