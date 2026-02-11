@@ -42,6 +42,6 @@ WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: cd; DATA: 4;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: cd; DATA: 5;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: cd; DATA: 6;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: cd; DATA: 7;;
-WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: cd; DATA: 1;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: cd; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 16; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 17; DATA: 0;;
