@@ -1,4 +1,4 @@
-# Processed on 2026-02-23 07:28:41
+# Processed on 2026-02-26 09:06:55
 from dfttools import *
 
 
@@ -39,13 +39,18 @@ def vis_offset_isns():
        return offset 
     else:
       return 0x80 - offset
+  def convert_negative_offset_code(offset):
+    if offset < 0x3F:
+       return offset 
+    else:
+      return 0x80 - offset
+  isns_offset_code=  convert_negative_offset_code(int((0x10000 - isns_offset_measured)*lsb_ratio) >> 7 &0x7F) if isns_offset_measured & 0x8000 else convert_positve_offset_code(int(isns_offset_measured*lsb_ratio) >> 7 &0x7F)
   # convert from the two's complement
-  isns_offset_measured=  int((0x10000 - isns_offset_measured)*lsb_ratio) >> 7 &0x7F if isns_offset_measured & 0x8000 else convert_positve_offset_code(int(isns_offset_measured*lsb_ratio) >> 7 &0x7F) # {'fieldname': 'otp_isense_offset', 'length': 7, 'registers': [{'REG': '0xBA', 'POS': 0, 'RegisterName': 'OTP FIELDS 10', 'RegisterLength': 8, 'Name': 'otp_isense_offset[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xCC', 'POS': 7, 'RegisterName': 'OTP FIELDS 28', 'RegisterLength': 8, 'Name': 'otp_isense_offset[6]', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]} is the 7 bit  
   
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   print(f'{Testname} value : {hex(isns_offset_measured)} ')
-  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBA, data=hex(isns_offset_measured), Mask=0x3F, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCC, data=hex(isns_offset_measured), Mask=0x80, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBA, data=hex(isns_offset_code), Mask=0x3F, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCC, data=hex(isns_offset_code), Mask=0x80, Default=0x0
   
   vi_sns_turn_off()
   # put the birdge in the HiZ
