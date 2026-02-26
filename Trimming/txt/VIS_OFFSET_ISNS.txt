@@ -1,11 +1,8 @@
-# Processed on 2026-02-26 09:06:55
+# Processed on 2026-02-26 09:07:58
 from dfttools import *
-
-
 '''
 Class D output staged are programmed to have both SPKRP and SPKRN at VCM. In this way, no current signal is applied (across R-sense) at the input of I-sense channel.
 Then output code (I-sns code) it is stored.
-
 '''
 from time import sleep
 from Procedures.Startup import startup
@@ -46,12 +43,10 @@ def vis_offset_isns():
       return 0x80 - offset
   isns_offset_code=  convert_negative_offset_code(int((0x10000 - isns_offset_measured)*lsb_ratio) >> 7 &0x7F) if isns_offset_measured & 0x8000 else convert_positve_offset_code(int(isns_offset_measured*lsb_ratio) >> 7 &0x7F)
   # convert from the two's complement
-  
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   print(f'{Testname} value : {hex(isns_offset_measured)} ')
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBA, data=hex(isns_offset_code), Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCC, data=hex(isns_offset_code), Mask=0x80, Default=0x0
-  
   vi_sns_turn_off()
   # put the birdge in the HiZ
   # turn the Vmid buffer Vmid = Vddp/2

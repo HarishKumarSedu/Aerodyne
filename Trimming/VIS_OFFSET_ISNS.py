@@ -1,10 +1,7 @@
 from dfttools import *
-
-
 '''
 Class D output staged are programmed to have both SPKRP and SPKRN at VCM. In this way, no current signal is applied (across R-sense) at the input of I-sense channel.
 Then output code (I-sns code) it is stored.
-
 '''
 from time import sleep
 from Procedures.Startup import startup
@@ -44,11 +41,9 @@ def vis_offset_isns():
       return 0x80 - offset
   isns_offset_code=  convert_negative_offset_code(int((0x10000 - isns_offset_measured)*lsb_ratio) >> 7 &0x7F) if isns_offset_measured & 0x8000 else convert_positve_offset_code(int(isns_offset_measured*lsb_ratio) >> 7 &0x7F)
   # convert from the two's complement
-  
   I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel_1', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel_1', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=1)
   print(f'{Testname} value : {hex(isns_offset_measured)} ')
   I2C_WRITE("0x38", field_info={'fieldname': 'otp_isense_offset', 'length': 7, 'registers': [{'REG': '0xBA', 'POS': 0, 'RegisterName': 'OTP FIELDS 10', 'RegisterLength': 8, 'Name': 'otp_isense_offset[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xCC', 'POS': 7, 'RegisterName': 'OTP FIELDS 28', 'RegisterLength': 8, 'Name': 'otp_isense_offset[6]', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=hex(isns_offset_code))
-  
   vi_sns_turn_off()
   # put the birdge in the HiZ
   # turn the Vmid buffer Vmid = Vddp/2
