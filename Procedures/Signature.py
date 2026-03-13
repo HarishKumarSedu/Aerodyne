@@ -45,7 +45,6 @@ def Signature_burn():
   REG_CD=I2C_REG_READ("0x38", 0xCD, 0x00, PageNo=1)
   REG_CE=I2C_REG_READ("0x38", 0xCE, 0x00, PageNo=1)
   REG_CF=I2C_REG_READ("0x38", 0xCF, 0x00, PageNo=1)
-  
   REG_D1=REG_C0^REG_C1^REG_C2^REG_C3^REG_C4^REG_C5^REG_C6^REG_C7^REG_C8^REG_C9^REG_CA^REG_CB^REG_CC^REG_CD^REG_CE^REG_CF
 
   I2C_REG_WRITE(device_address="0x38", register_address=0xD0, write_value=REG_D0, PageNo=1)
