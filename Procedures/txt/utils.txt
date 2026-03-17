@@ -1,0 +1,37 @@
+# Processed on 2026-03-17 15:45:44
+from typing import Union
+import math
+
+def complement(data: Union[int, str], length: int) -> str:
+    if length <= 0:
+        raise ValueError("Length must be positive")
+    # Convert input to int
+    if isinstance(data, str):
+        data_int = int(data, 16)
+    else:
+        data_int = int(data)
+    mask = (1 << length) - 1
+    masked_data = data_int & mask
+    # MSB check and conditional complement - FIXED
+    return masked_data - (1 << length) if masked_data & (1 << (length - 1)) else masked_data
+def dec_to_2complement( value_dec, bit_len, max_1=True):
+    max_pos_value = 2 ** (bit_len - 1) - 1
+    max_value = (2 ** bit_len) - 1
+    if max_1:
+        value = value_dec * max_pos_value
+    else:
+        value = value_dec
+    if not(-max_pos_value< value < max_pos_value):
+        raise Exception('Value out of range')
+    if value < 0:
+        value_2c = value + (2 ** bit_len)
+    else:
+        value_2c = value
+    return value_2c
+if __name__ == '__main__':
+  print(complement(0xFFFE,16))
+  # print(dec_to_2complement(0xFFFE,16,True))
+    
+
+
+
