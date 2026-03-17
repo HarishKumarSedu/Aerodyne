@@ -1,4 +1,4 @@
-# Processed on 2025-09-12 11:52:28
+# Processed on 2026-03-17 08:49:56
 from dfttools import *
 def playback():
   Test_Name = 'Playback'
@@ -7,9 +7,9 @@ def playback():
 
   #indicate modulation tipe 
   [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x2D, data=0x8, Mask=0xC, Default=0x50 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x2D, data=0x8, Mask=0xC, Default=0x58 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0 
   FREQFORCE(signal="IOCLK0",reference="GND",value=3.072e6)                          #BCLK frequency=3.072MHz
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0 
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x5E, data=0x1, Mask=0x1, Default=0x0 
-  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x4E, data=0x0, Mask=0x80, Default=0x89 
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x4E, data=0x0, Mask=0x80, Default=0x99 
