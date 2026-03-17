@@ -1,4 +1,4 @@
-# Processed on 2026-03-17 15:48:34
+# Processed on 2026-03-17 15:48:52
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -46,7 +46,7 @@ def vis_offset_isns():
   vi_sns_turn_off()
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x0, Mask=0x1, Default=0x0
-  print(f'{"*"*50}')
+  print(f'{"*"*60}')
 
 if __name__ == '__main__':
   vis_offset_isns()
