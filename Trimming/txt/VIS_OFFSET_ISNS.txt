@@ -1,4 +1,4 @@
-# Processed on 2026-03-17 15:52:57
+# Processed on 2026-03-17 15:58:52
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -32,7 +32,7 @@ def vis_offset_isns():
   print(f'{"="*10}ISNS PRE-TRIM{"="*10}')
   sns_pretrim_offset_value = isns_pretrim_offset_code*LSB1
   print(f'Isns Offset :~ {sns_pretrim_offset_value:.6f} A [{isns_pretrim_offset_code_raw:#04X}]')
-  isns_offset_calculated = -(round(isns_pretrim_offset_code*lsb_ratio) >> 7 & 0x7F)
+  isns_offset_calculated = -(round(isns_pretrim_offset_code*lsb_ratio/128))
   isns_offset_otp_code = dec_to_2complement(value_dec=isns_offset_calculated,bit_len=otp_isense_offset_field_length,max_1=False)
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBA, data=isns_offset_otp_code, Mask=0x3F, Default=0x0

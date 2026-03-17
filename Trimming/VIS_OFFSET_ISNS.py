@@ -30,7 +30,7 @@ def vis_offset_isns():
   print(f'{"="*10}ISNS PRE-TRIM{"="*10}')
   sns_pretrim_offset_value = isns_pretrim_offset_code*LSB1
   print(f'Isns Offset :~ {sns_pretrim_offset_value:.6f} A [{isns_pretrim_offset_code_raw:#04X}]')
-  isns_offset_calculated = -(round(isns_pretrim_offset_code*lsb_ratio) >> 7 & 0x7F)
+  isns_offset_calculated = -(round(isns_pretrim_offset_code*lsb_ratio/128))
   isns_offset_otp_code = dec_to_2complement(value_dec=isns_offset_calculated,bit_len=otp_isense_offset_field_length,max_1=False)
   I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel_1', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel_1', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=1)
   I2C_WRITE("0x38", field_info={'fieldname': 'otp_isense_offset', 'length': 7, 'registers': [{'REG': '0xBA', 'POS': 0, 'RegisterName': 'OTP FIELDS 10', 'RegisterLength': 8, 'Name': 'otp_isense_offset[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xCC', 'POS': 7, 'RegisterName': 'OTP FIELDS 28', 'RegisterLength': 8, 'Name': 'otp_isense_offset[6]', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=isns_offset_otp_code)
