@@ -9,7 +9,7 @@ from Procedures.utils import complement,dec_to_2complement
 
 def vis_offset_isns():
   Testname = 'VIS_OFFSET_ISNS'
-  print(f'{"*"*20}{Testname}{"*"*20}')
+  print(f'\n{"*"*20}{Testname}{"*"*20}')
   LSB1 = 3/2**15
   LSB2 =  20/2**20
   lsb_ratio = LSB1/LSB2
