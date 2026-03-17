@@ -1,4 +1,4 @@
-# Processed on 2026-03-17 16:51:48
+# Processed on 2026-03-17 16:52:18
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -44,7 +44,7 @@ def vis_offset_isns():
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
   isns_posttrim_offset_code = complement(isns_posttrim_offset_code_raw,isns_field_length)
   isns_posttrim_offset_value = isns_posttrim_offset_code*LSB1
-  if abs(isns_posttrim_offset_value) > isns_offset_target :
+  if abs(isns_posttrim_offset_value) < isns_offset_target :
     print(f'Isns Offset Measured {isns_posttrim_offset_value:.6f} A Passed the limit {isns_offset_target} A..............!')
   else  :
     print(f'Isns Offset Measured {isns_posttrim_offset_value:.6f} A Failed the limit {isns_offset_target} A..............!')

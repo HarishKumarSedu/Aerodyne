@@ -40,7 +40,7 @@ def vis_offset_isns():
   isns_posttrim_offset_code_raw = I2C_READ("0x38", field_info={'fieldname': 'i_sense', 'length': 16, 'registers': [{'REG': '0x6B', 'POS': 0, 'RegisterName': 'I SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'i_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6C', 'POS': 0, 'RegisterName': 'I SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'i_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]}, expected_value=0xFFFE)
   isns_posttrim_offset_code = complement(isns_posttrim_offset_code_raw,isns_field_length)
   isns_posttrim_offset_value = isns_posttrim_offset_code*LSB1
-  if abs(isns_posttrim_offset_value) > isns_offset_target :
+  if abs(isns_posttrim_offset_value) < isns_offset_target :
     print(f'Isns Offset Measured {isns_posttrim_offset_value:.6f} A Passed the limit {isns_offset_target} A..............!')
   else  :
     print(f'Isns Offset Measured {isns_posttrim_offset_value:.6f} A Failed the limit {isns_offset_target} A..............!')
