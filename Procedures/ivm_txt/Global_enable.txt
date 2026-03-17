@@ -1,9 +1,3 @@
 
 
 Command;Check;Page;SAD;ADD;DATA;MSB;LSB;Comment
-WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: FE; DATA: 00;;COM: Mask: 0xFF;;
-WR-bit; CHECK: O; PAGE: 0; SAD: 38; ADD: 0F; DATA: 1; MSB: 0; LSB: 0;COM: Mask: 0x1;;
-WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: FE; DATA: 01;;COM: Mask: 0xFF;;
-WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: 10; DATA: 1; MSB: 1; LSB: 1;COM: Mask: 0x2;;
-WR-bit; CHECK: O; PAGE: 1; SAD: 38; ADD: CF; DATA: 1; MSB: 7; LSB: 7;COM: Mask: 0x80;;
-WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: D1; DATA: 01;;COM: Mask: 0xFF;;
