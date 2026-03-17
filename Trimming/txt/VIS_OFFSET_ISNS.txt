@@ -1,4 +1,4 @@
-# Processed on 2026-03-17 15:49:06
+# Processed on 2026-03-17 15:49:45
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -29,7 +29,7 @@ def vis_offset_isns():
   isns_pretrim_offset_code_raw = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
   isns_pretrim_offset_code = complement(isns_pretrim_offset_code_raw,isns_field_length)
-  print('=================== ISNS PRE-TRIM ====================')
+  print('{"="*10}ISNS PRE-TRIM{"="*10}')
   sns_pretrim_offset_value = isns_pretrim_offset_code*LSB1
   print(f'Isns Offset :~ {sns_pretrim_offset_value:.6f} A [{isns_pretrim_offset_code_raw:#04X}]')
   isns_offset_calculated = -(round(isns_pretrim_offset_code*lsb_ratio) >> 7 & 0x7F)
@@ -37,7 +37,7 @@ def vis_offset_isns():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBA, data=isns_offset_otp_code, Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCC, data=isns_offset_otp_code, Mask=0x80, Default=0x0
-  print('================== ISNS POST-TRIM ===================')
+  print('{"="*10}SNS POST-TRIM{"="*10}')
   isns_posttrim_offset_code_raw = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
   isns_posttrim_offset_code = complement(isns_posttrim_offset_code_raw,isns_field_length)
