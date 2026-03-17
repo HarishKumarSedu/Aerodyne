@@ -13,6 +13,7 @@ def vis_offset_isns():
   LSB1 = 3/2**15
   LSB2 =  20/2**20
   lsb_ratio = LSB1/LSB2
+  isns_offset_target = 3e-3 # 3mA abs 
   # execute the necessary procedures in order 
   startup()
   global_enable()
@@ -38,8 +39,12 @@ def vis_offset_isns():
   print(f'{"="*10}SNS POST-TRIM{"="*10}')
   isns_posttrim_offset_code_raw = I2C_READ("0x38", field_info={'fieldname': 'i_sense', 'length': 16, 'registers': [{'REG': '0x6B', 'POS': 0, 'RegisterName': 'I SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'i_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6C', 'POS': 0, 'RegisterName': 'I SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'i_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]}, expected_value=0xFFFE)
   isns_posttrim_offset_code = complement(isns_posttrim_offset_code_raw,isns_field_length)
-  sns_posttrim_offset_value = isns_posttrim_offset_code*LSB1
-  print(f'Isns Offset :~ {sns_posttrim_offset_value:.6f} A [{isns_posttrim_offset_code_raw:#04X}]')
+  isns_posttrim_offset_value = isns_posttrim_offset_code*LSB1
+  if abs(isns_posttrim_offset_value) > isns_offset_target :
+    print(f'Isns Offset Measured {isns_posttrim_offset_value:.6f} A Passed the limit {isns_offset_target} A..............!')
+  else  :
+    print(f'Isns Offset Measured {isns_posttrim_offset_value:.6f} A Failed the limit {isns_offset_target} A..............!')
+  print(f'Isns Offset :~ {isns_posttrim_offset_value:.6f} A [{isns_posttrim_offset_code_raw:#04X}]')
   vi_sns_turn_off()
   I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0)
   I2C_WRITE("0x38", field_info={'fieldname': 'spk_en', 'length': 1, 'registers': [{'REG': '0x9F', 'POS': 0, 'RegisterName': 'Enables settings 5', 'RegisterLength': 8, 'Name': 'spk_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000S', 'Default': '0x00', 'User': '0000000Y', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0)
