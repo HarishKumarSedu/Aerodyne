@@ -41,9 +41,9 @@ def vis_offset_isns():
   isns_posttrim_offset_code = complement(isns_posttrim_offset_code_raw,isns_field_length)
   isns_posttrim_offset_value = isns_posttrim_offset_code*LSB1
   if abs(isns_posttrim_offset_value) < isns_offset_target :
-    print(f'Isns Offset Measured {isns_posttrim_offset_value:.6f} A Passed the limit {isns_offset_target} A..............!')
+    print(f'Isns Offset Measured {isns_posttrim_offset_value:.6f} A Passed the limit {isns_offset_target} A ..............!')
   else  :
-    print(f'Isns Offset Measured {isns_posttrim_offset_value:.6f} A Failed the limit {isns_offset_target} A..............!')
+    print(f'Isns Offset Measured {isns_posttrim_offset_value:.6f} A Failed the limit {isns_offset_target} A ..............!')
   print(f'Isns Offset :~ {isns_posttrim_offset_value:.6f} A [{isns_posttrim_offset_code_raw:#04X}]')
   vi_sns_turn_off()
   I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0)
