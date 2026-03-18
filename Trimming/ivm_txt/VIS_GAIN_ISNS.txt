@@ -54,7 +54,7 @@ RR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 6b; DATA: f4;;
 RR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 6c; DATA: 90;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: fe; DATA: 1;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: bb; DATA: 2;;
-WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: bc; DATA: 7d;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: bc; DATA: 36;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: fe; DATA: 1;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 11; DATA: 80;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 12; DATA: ff;;
