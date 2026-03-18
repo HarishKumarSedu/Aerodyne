@@ -1,4 +1,4 @@
-# Processed on 2026-03-18 05:42:27
+# Processed on 2026-03-18 05:46:08
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -66,7 +66,8 @@ def vis_gain_isns():
   m = (isns_gain_pretrim_forced_high_current - isns_gain_pretrim_forced_low_current) / ((isns_gain_pretrim_high_code - isns_gain_pretrim_low_code) * LSB)
   isns_gain =  m - 1
   isns_gain_scaled = round(isns_gain * ((2 ** 20) / 64))
-  isns_gain_otp_code = dec_to_2complement(isns_gain_scaled,isns_gain_otp_feild_length,False)
+  # isns_gain_otp_code = dec_to_2complement(isns_gain_scaled,isns_gain_otp_feild_length,False)
+  isns_gain_otp_code = (0x4000+isns_gain_scaled) if  isns_gain_scaled < 0 else   isns_gain_scaled
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=isns_gain_otp_code, Mask=0x3F, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBC, data=isns_gain_otp_code, Mask=0xFF, Default=0x0
