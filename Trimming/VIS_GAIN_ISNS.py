@@ -60,8 +60,8 @@ def vis_gain_isns():
   m = (isns_gain_pretrim_forced_high_current - isns_gain_pretrim_forced_low_current) / ((isns_gain_pretrim_high_code - isns_gain_pretrim_low_code) * LSB)
   isns_gain =  m - 1
   isns_gain_scaled = round(isns_gain * ((2 ** 20) / 64))
-  # isns_gain_otp_code = dec_to_2complement(isns_gain_scaled,isns_gain_otp_feild_length,False)
-  isns_gain_otp_code = (0x4000+isns_gain_scaled) if  isns_gain_scaled < 0 else   isns_gain_scaled
+  isns_gain_otp_code = dec_to_2complement(isns_gain_scaled,isns_gain_otp_feild_length,False)
+  # isns_gain_otp_code = (0x4000+isns_gain_scaled) if  isns_gain_scaled < 0 else   isns_gain_scaled
   I2C_WRITE(device_address="0x38", field_info={'fieldname': 'i2c_page_sel_1', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel_1', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x1)
   I2C_WRITE("0x38", field_info={'fieldname': 'otp_isense_gain', 'length': 14, 'registers': [{'REG': '0xBB', 'POS': 0, 'RegisterName': 'OTP FIELDS 11', 'RegisterLength': 8, 'Name': 'otp_isense_gain[13:8]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 13, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xBC', 'POS': 0, 'RegisterName': 'OTP FIELDS 12- TRACEABILITY 0', 'RegisterLength': 8, 'Name': 'otp_isense_gain[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=isns_gain_otp_code )
   print(f'ISNS GAIN : {isns_gain:.6f}, ISNS GAIN SCALED : {isns_gain_scaled} , ISNS OTP CODE : {isns_gain_otp_code:#04X}')
