@@ -1,4 +1,4 @@
-# Processed on 2026-03-18 05:46:41
+# Processed on 2026-03-18 05:53:07
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -53,7 +53,7 @@ def vis_gain_isns():
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0  # Staturate DAC "OUTN" side 
   isns_gain_pretrim_forced_low_current = AFORCE(signal="OUTN",reference="OUTP",value=-source_current, error_spread=source_current*0.01) # sink/source current from outn to outp
-  isns_gain_pretrim_forced_low_current = abs(isns_gain_pretrim_forced_low_current)
+  isns_gain_pretrim_forced_low_current = -abs(isns_gain_pretrim_forced_low_current)
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   isns_gain_pretrim_low_raw_code = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6B, Mask=0xFF
 [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x6C, Mask=0xFF
