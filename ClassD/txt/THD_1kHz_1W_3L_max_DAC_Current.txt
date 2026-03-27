@@ -1,0 +1,43 @@
+# Processed on 2026-03-27 10:29:10
+from dfttools import *
+from time import sleep 
+import random
+Test_Name = 'THD_1kHz_1W_3L_max_DAC_Current'
+
+print(f'............ {Test_Name} ........')
+
+'''
+1.Reach the playback state with 3L modulation
+2.Set class D DAC at maximum current
+2.Enable internal sinusoid generator to play 1W at 1 kHz.
+3.Wait 1ms.
+4.Perform THD measurement on the differential voltage signal measured as voltage @"OUTP" pin - voltage #"OUTN" pin.
+5.Expected value is -80dB. Maximum value is -74dB.
+'''
+# 1.
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x1, Mask=0x1, Default=0x0 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x95, data=0x1, Mask=0x3, Default=0x96 # 3L modulation
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0 
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x92, data=0x5, Mask=0x7, Default=0x3 # dac at max current
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x4E, data=0x0, Mask=0x80, Default=0x99 
+# 2.
+[i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  #Page 1 in regmap
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x10, Mask=0xF0, Default=0x0  # -6dB sinus amplitude
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x2, Mask=0x7, Default=0x0  # 1kHz sinus wave
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1F, data=0x8, Mask=0x8, Default=0x0  # Enable internal sin generator
+# 3.
+sleep(0.0001) 
+# 4.
+maximum_thd = -74
+error_percentage = 0.075 #7.5%
+expeted_thd = -80
+expected_vals = {'THD': expeted_thd}
+error_spreads = {'THD': expeted_thd*error_percentage}
+measured_Values = FFT(signal="OUTP",reference="OUTN",signal_type='Analog',expected_values=expected_vals,error_spreads=error_spreads) #sample_number=?,sample_time=?,window='Hanning' do we need to specify them?
+measured_THD = measured_Values.get('THD') 
+# 5.
+if measured_THD < maximum_thd:
+  print(f'...... {Test_Name}..Passed THD:{measured_THD}dB ')
+else:
+  print(f'...... {Test_Name}..Failed THD:{measured_THD}dB ')
