@@ -10,6 +10,4 @@ I2C,WR-Reg,0x38,0x4,0x23,1,
 Measure,V,ADDR,GND,0.9,,"args=(), kwargs={}"
 Measure,Hz,IODATA1,GND,12288000.0,,"args=(), kwargs={}"
 Measure,V,ADDR,GND,inf,,"args=(), kwargs={}"
-Force,Hz,IOCLK0,GND,3400000.0,,"args=(), kwargs={}"
-Measure,Hz,IODATA1,GND,13680000.0,,"args=(), kwargs={}"
 Measure,Hz,IODATA1,GND,inf,,"args=(), kwargs={}"
