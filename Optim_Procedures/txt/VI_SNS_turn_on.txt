@@ -1,0 +1,10 @@
+# Processed on 2026-05-06 08:54:25
+Test_Name = 'VI_SNS_turn_on'
+from dfttools import *
+def vi_sns_turn_on():
+  print(f'............ {Test_Name} ........')
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+  [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xA7, data=0x3, Mask=0xFF # enable the v and i channel
+
+if __name__ == '__main__':
+  vi_sns_turn_on()
