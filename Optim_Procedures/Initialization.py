@@ -2,7 +2,7 @@ from dfttools import *
 
 def initialization():
     testname = 'Initialization'
-    print('*' * ((10 - len(testname)) // 2) + testname + '*' * ((10 - len(testname) + 1) // 2)) # do not bother too much about it will just align the test in between
+    print('*' * ((20 - len(testname)) // 2) + testname + '*' * ((20 - len(testname) + 1) // 2)) # do not bother too much about it will just align the test in between
     
 if __name__ == '__main__':
     initialization()
