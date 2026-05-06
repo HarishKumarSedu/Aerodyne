@@ -1,4 +1,4 @@
-# Processed on 2026-05-06 10:07:47
+# Processed on 2026-05-06 10:08:18
 from dfttools import *
 
 def bgs_trim():
@@ -75,7 +75,7 @@ def bgs_trim():
             'lower_limit':lower_limit,
             'higher_limit':higher_limit,
             'posttrim_bg_measured_value':posttrim_bg_measured_value,
-            'error':min_error
+            'error_%':min_error
         }
     VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'),comments='Remove Multimeter')
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0

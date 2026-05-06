@@ -74,7 +74,7 @@ def bgs_trim():
             'lower_limit':lower_limit,
             'higher_limit':higher_limit,
             'posttrim_bg_measured_value':posttrim_bg_measured_value,
-            'error':min_error
+            'error_%':min_error
         }
     VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'),comments='Remove Multimeter')
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 7, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'ref_test_en', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
