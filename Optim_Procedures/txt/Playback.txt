@@ -1,0 +1,13 @@
+# Processed on 2026-05-06 08:48:24
+from dfttools import *
+def playback():
+  Test_Name = 'Playback'
+  # Reach the PLAYBACK state in the main FSM
+  print(f'............ {Test_Name} ........')
+  FREQFORCE(signal="IOCLK0",reference="GND",value=3.072e6)                          #BCLK frequency=3.072MHz
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0 
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x5E, data=0x1, Mask=0x1, Default=0x0 # needed ?
+  # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x4E, data=0x0, Mask=0x80, Default=0x99 # needed ?
+
+if __name__ =='__main__':
+    playback()
