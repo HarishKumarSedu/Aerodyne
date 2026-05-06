@@ -11,21 +11,21 @@ Force,V,ADDR,GND,1.2,,"args=(), kwargs={}"
 Measure,V,IODATA1,GND,1.2,,"args=(), kwargs={}"
 Force,V,ADDR,GND,inf,,"args=(), kwargs={}"
 Measure,V,IODATA1,GND,1.2,,"args=(), kwargs={}"
-I2C,WR-Reg,0x38,0xb1,0x8f,1,
+I2C,WR-Reg,0x38,0xb1,0x8d,1,
 Measure,V,IODATA1,GND,1.2,,"args=(), kwargs={}"
 I2C,WR-Reg,0x38,0x15,0x4,1,
 Force,V,ADDR,GND,0.9,,"args=(), kwargs={}"
 Measure,V,IODATA1,GND,0.9,,"args=(), kwargs={}"
 Force,V,ADDR,GND,inf,,"args=(), kwargs={}"
 Measure,V,IODATA1,GND,0.9,,"args=(), kwargs={}"
-I2C,WR-Reg,0x38,0xb0,0xe0,1,
+I2C,WR-Reg,0x38,0xb0,0x30,1,
 Measure,V,IODATA1,GND,0.9,,"args=(), kwargs={}"
 I2C,WR-Reg,0x38,0x15,0x4,1,
 Force,V,ADDR,GND,0.6,,"args=(), kwargs={}"
 Measure,V,IODATA1,GND,0.6,,"args=(), kwargs={}"
 Force,V,ADDR,GND,inf,,"args=(), kwargs={}"
 Measure,V,IODATA1,GND,0.6,,"args=(), kwargs={}"
-I2C,WR-Reg,0x38,0xb0,0xef,1,
+I2C,WR-Reg,0x38,0xb0,0x3d,1,
 Measure,V,IODATA1,GND,0.6,,"args=(), kwargs={}"
 Measure,V,IODATA1,GND,inf,,"args=(), kwargs={'comments': 'Remove Multimeter'}"
 I2C,WR-Reg,0x38,0x16,0x0,1,

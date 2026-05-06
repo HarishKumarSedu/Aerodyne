@@ -1,4 +1,4 @@
-# Processed on 2026-05-06 10:07:22
+# Processed on 2026-05-06 10:07:47
 from dfttools import *
 
 def bgs_trim():
@@ -85,6 +85,7 @@ def bgs_trim():
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
+    return data
 if __name__ == '__main__':
     data = bgs_trim()
     print(data)
