@@ -27,7 +27,7 @@ def bgs_trim():
         testsel_code = test_values['testsel_code']
         otp_field = test_values['otp_field']
         min_error = float('inf')
-        ######################### OFFSET MEASURMENT #######################
+        ######################### OFFSET MEASURMENT ##########
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x4) # PROGRAM THE TEST SEL CODE 
         buf_forced_voltage=VFORCE(signal="ADDR", reference="GND", value=target, error_spread=lsb_v/2)
         buf_measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target, error_spread=lsb_v/2)
@@ -35,13 +35,13 @@ def bgs_trim():
         print(f"{test_name} : BUFFER OFFSET : {buffer_offset} V")
         # REMOVE THE VOLTAGE FORCING 
         VFORCE(signal="ADDR", reference="GND", value=float('Inf'))
-        ######################### OFFSET MEASURMENT FINISH #################
+        ######################### OFFSET MEASURMENT FINISH ##
         pretrim_bg_measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target,error_spread=3*lsb_v) - buffer_offset
-        ############### Trim code esitmation ########################
+        ############### Trim code esitmation ################
         delta_v     = target - pretrim_bg_measured_value          
         raw_steps   = delta_v / lsb_v               # float steps needed
         trim_code   = -round(raw_steps)              # standard rounding
-        ############### Check for the Trim code range ########################
+        ############### Check for the Trim code range #######
         if trim_code < min_code or trim_code > max_code:
             raise RuntimeError(f"  [WARNING] Required steps ({trim_code}) out of range "
                   f"[{min_code}, {max_code}] — clamping!")
@@ -50,7 +50,7 @@ def bgs_trim():
         I2C_WRITE(device_address="0x38",field_info=otp_field,write_value=otp_trim_code)
         posttrim_bg_measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target,error_spread=lsb_v/2) - buffer_offset
         min_error = (posttrim_bg_measured_value - target) /  target *100
-        ##### lIMIT CHECK 
+        ############### LIMIT CHECK #######################
         lower_limit = target - target*percentage
         higher_limit = target + target*percentage
         if lower_limit < posttrim_bg_measured_value < higher_limit:
@@ -60,7 +60,7 @@ def bgs_trim():
             raise RuntimeError(f'{test_name} PASSED !!!')
             # WRITE DEFAULT
             I2C_WRITE(device_address="0x38",field_info=otp_field,write_value=0)
-        # PRINTING THE DATA
+        ############### DATA LOGGING ########################
         print(f'PRE -TRIM  : {pretrim_bg_measured_value:.6f} V')
         print(f"OTP CODE   : {otp_trim_code:#02X}")
         print(f'POST -TRIM : {posttrim_bg_measured_value:.6f} V')
@@ -76,6 +76,7 @@ def bgs_trim():
             'posttrim_bg_measured_value':posttrim_bg_measured_value,
             'error_%':min_error
         }
+    ############### CLEANUP ########################
     VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'),comments='Remove Multimeter')
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en', 'length': 1, 'registers': [{'REG': '0x16', 'POS': 7, 'RegisterName': 'ANA_TESTMUX_EN1', 'RegisterLength': 8, 'Name': 'ref_test_en', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'atp_n_en', 'length': 1, 'registers': [{'REG': '0x17', 'POS': 1, 'RegisterName': 'ANA_TESTMUX_EN2', 'RegisterLength': 8, 'Name': 'atp_n_en', 'Mask': '0x2', 'Length': 1, 'FieldMSB': 1, 'FieldLSB': 1, 'Attribute': '0000NNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
