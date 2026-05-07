@@ -92,7 +92,6 @@ def bgs_trim():
     delta_v     = LDO_TARGET - pretrim_ldo_measured_value          
     raw_steps   = delta_v / LDO_LSB               # float steps needed
     trim_code   = -round(raw_steps)              # standard rounding
-    print(pretrim_ldo_measured_value)
     ############### Check for the Trim code range #######
     if trim_code < min_code or trim_code > max_code:
         raise RuntimeError(f"  [WARNING] Required steps ({trim_code}) out of range "
@@ -104,6 +103,7 @@ def bgs_trim():
     ############### LIMIT CHECK #######################
     lower_limit = LDO_TARGET - LDO_TARGET*LDO_ERROR_PERCENTAGE
     higher_limit = LDO_TARGET + LDO_TARGET*LDO_ERROR_PERCENTAGE
+    min_error = (posttrim_ldo_measured_value - LDO_TARGET) /  LDO_TARGET *100
     if lower_limit < posttrim_ldo_measured_value < higher_limit:
         print(f'{test_name} PASSED !!!')
     else:
