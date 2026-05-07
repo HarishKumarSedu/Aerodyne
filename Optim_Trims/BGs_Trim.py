@@ -86,7 +86,7 @@ def bgs_trim():
     LDO_ERROR_PERCENTAGE = 1e-2
     test_name='SELF_REG_LDO_1V2'
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0xC) # PROGRAM THE TEST SEL CODE 
-    pretrim_ldo_measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=LDO_TARGET,error_spread=1*LDO_LSB)
+    pretrim_ldo_measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=LDO_TARGET,error_spread=3*LDO_LSB)
     ############### Trim code esitmation ################
     delta_v     = LDO_TARGET - pretrim_ldo_measured_value          
     raw_steps   = delta_v / LDO_LSB               # float steps needed

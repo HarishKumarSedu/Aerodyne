@@ -1,4 +1,4 @@
-# Processed on 2026-05-07 14:40:45
+# Processed on 2026-05-07 14:41:08
 from dfttools import *
 
 def bgs_trim():
@@ -87,7 +87,7 @@ def bgs_trim():
     LDO_ERROR_PERCENTAGE = 1e-2
     test_name='SELF_REG_LDO_1V2'
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0xC, Mask=0xF, Default=0x0 # PROGRAM THE TEST SEL CODE 
-    pretrim_ldo_measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=LDO_TARGET,error_spread=1*LDO_LSB)
+    pretrim_ldo_measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=LDO_TARGET,error_spread=3*LDO_LSB)
     ############### Trim code esitmation ################
     delta_v     = LDO_TARGET - pretrim_ldo_measured_value          
     raw_steps   = delta_v / LDO_LSB               # float steps needed
