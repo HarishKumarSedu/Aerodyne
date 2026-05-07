@@ -115,7 +115,7 @@ def bgs_trim():
     print(f'PRE -TRIM  : {pretrim_ldo_measured_value:.6f} V')
     print(f"OTP CODE   : {otp_trim_code:#02X}")
     print(f'POST -TRIM : {posttrim_ldo_measured_value:.6f} V')
-    print(f'TARGET     : {target:.6f} V')
+    print(f'TARGET     : {LDO_TARGET:.6f} V')
     print(f"ERROR      : {min_error:.6f} %")
     data[test_name] = {
             'target':LDO_TARGET,
