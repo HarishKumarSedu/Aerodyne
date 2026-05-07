@@ -28,7 +28,7 @@ def bgs_trim():
         otp_field = test_values['otp_field']
         min_error = float('inf')
         ######################### OFFSET MEASURMENT ##########
-        I2C_WRITE(device_address="0x38",field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x4) # PROGRAM THE TEST SEL CODE 
+        I2C_WRITE(device_address="0x38",field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=testsel_code) # PROGRAM THE TEST SEL CODE 
         buf_forced_voltage=VFORCE(signal="ADDR", reference="GND", value=target, error_spread=lsb_v/2)
         buf_measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target, error_spread=lsb_v/2)
         buffer_offset = abs(buf_measured_value - buf_forced_voltage)

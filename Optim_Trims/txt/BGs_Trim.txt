@@ -1,4 +1,4 @@
-# Processed on 2026-05-07 14:44:47
+# Processed on 2026-05-07 15:17:13
 from dfttools import *
 
 def bgs_trim():
@@ -29,7 +29,7 @@ def bgs_trim():
         otp_field = test_values['otp_field']
         min_error = float('inf')
         ######################### OFFSET MEASURMENT ##########
-        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x4, Mask=0xF, Default=0x0 # PROGRAM THE TEST SEL CODE 
+        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=testsel_code, Mask=0xF, Default=0x0 # PROGRAM THE TEST SEL CODE 
         buf_forced_voltage=VFORCE(signal="ADDR", reference="GND", value=target, error_spread=lsb_v/2)
         buf_measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target, error_spread=lsb_v/2)
         buffer_offset = abs(buf_measured_value - buf_forced_voltage)
