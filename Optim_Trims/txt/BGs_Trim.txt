@@ -1,4 +1,4 @@
-# Processed on 2026-05-07 14:42:27
+# Processed on 2026-05-07 14:43:19
 from dfttools import *
 
 def bgs_trim():
@@ -75,6 +75,7 @@ def bgs_trim():
             'buffer_offset':buffer_offset,
             'lower_limit':lower_limit,
             'higher_limit':higher_limit,
+            'otp_trim_code':otp_trim_code,
             'posttrim_bg_measured_value':posttrim_bg_measured_value,
             'error_%':min_error
         }
@@ -123,6 +124,7 @@ def bgs_trim():
             'pretrim_ldo_measured_value':pretrim_ldo_measured_value,
             'lower_limit':lower_limit,
             'higher_limit':higher_limit,
+            'otp_trim_code':otp_trim_code,
             'posttrim_ldo_measured_value':posttrim_ldo_measured_value,
             'error_%':min_error
         }
