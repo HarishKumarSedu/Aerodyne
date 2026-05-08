@@ -3,4 +3,4 @@
 Command;Check;Page;SAD;ADD;DATA;MSB;LSB;Comment
 Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Force', 'Unit': 'Hz', 'Signal/SAD': 'IOCLK0', 'Reference/ADD': 'GND', 'Value/DATA': 3072000.0, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 9f; DATA: 1;;
-WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 5e; DATA: 1;;
+WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 4e; DATA: 19;;
