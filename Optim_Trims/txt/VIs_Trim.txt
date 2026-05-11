@@ -1,4 +1,4 @@
-# Processed on 2026-05-11 13:54:32
+# Processed on 2026-05-11 13:54:43
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -169,7 +169,7 @@ def VIs_Trim():
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0 # put the dac in the HiZ
-    print('VSNS-GAIN:~')
+    print('V2I-GAIN:~')
     print(f'V2I-GAIN PRE-TRIM VSNS VP  : [{V2I_Vgain_vp_pretrim_code:#04X}] {V2I_Vgain_vp_pretrim_value:.6F} V')
     print(f'V2I-GAIN PRE-TRIM VSNS VP  : [{V2I_Igain_vp_pretrim_code:#04X}] {V2I_Igain_vp_pretrim_value:.6F} A')
     print(f'V2I-GAIN PRE-TRIM VSNS VN  : [{V2I_Vgain_vn_pretrim_code:#04X}] {V2I_Vgain_vn_pretrim_value:.6F} V')
