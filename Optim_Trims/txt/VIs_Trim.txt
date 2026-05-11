@@ -1,4 +1,4 @@
-# Processed on 2026-05-11 14:46:55
+# Processed on 2026-05-11 15:12:38
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -83,7 +83,6 @@ def vis_trim():
     Scale_Factor = (5/5.5)
     Scale_Down = (64/2**20)
     ratio = (vsns_gain_vp_pretrim_code - vsns_gain_vn_pretrim_code)/ (2*pvdd_value)
-    print(f'gain : {ratio*vLSB},{vsns_gain_otp_length}')
     vsns_gain_calculated = -round(((ratio *vLSB ) -1 ) /Scale_Down) 
     vns_gain_otp_code = dec_to_2complement(vsns_gain_calculated,vsns_gain_otp_length,False)
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0

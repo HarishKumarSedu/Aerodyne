@@ -80,7 +80,6 @@ def vis_trim():
     Scale_Factor = (5/5.5)
     Scale_Down = (64/2**20)
     ratio = (vsns_gain_vp_pretrim_code - vsns_gain_vn_pretrim_code)/ (2*pvdd_value)
-    print(f'gain : {ratio*vLSB},{vsns_gain_otp_length}')
     vsns_gain_calculated = -round(((ratio *vLSB ) -1 ) /Scale_Down) 
     vns_gain_otp_code = dec_to_2complement(vsns_gain_calculated,vsns_gain_otp_length,False)
     I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=1)
