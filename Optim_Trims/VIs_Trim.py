@@ -23,10 +23,7 @@ def samples_average(fields=None, samples=8, sleep_time=5e-3):
     for field_no in range(no_fields):
         data[field_no] = data[field_no] >> shift_amount
     return data
-# def logger(*args,**kwargs):
-#     for k, v in kwargs.items():
-#         print(f'{k.upper()} : {v}')
-def VIs_Trim():
+def vis_trim():
     test_name = 'VIs_Trim'
     print(f'...........{test_name}..........')
     vLSB = 5.5/2**15
@@ -172,4 +169,4 @@ def VIs_Trim():
     print(f'V2I-GAIN POST-TRIM ISNS VN  : [{V2I_Igain_vn_posttrim_code:#04X}] {V2I_Igain_vn_posttrim_value:.6F} A')
     
 if __name__ == '__main__':
-    VIs_Trim()
+    vis_trim()
