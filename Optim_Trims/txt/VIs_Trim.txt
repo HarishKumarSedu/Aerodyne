@@ -1,0 +1,57 @@
+# Processed on 2026-05-11 12:28:29
+from dfttools import *
+from time import sleep
+from Procedures.utils import complement,dec_to_2complement
+from time import sleep
+
+def samples_average(fields=None, samples=8, sleep_time=5e-3):
+    if fields is None:
+        fields = []
+    no_fields = len(fields)
+    if no_fields == 0:
+        return []
+    # Initialize data with zeros for each field
+    data = [0] * no_fields
+    for _ in range(samples):
+        for field_no in range(no_fields):
+            field = fields[field_no].get('field', {})
+            expected_value = fields[field_no].get('expected_value', 0xffff)
+            raw_data = I2C_READ("0x38", field_info=field, expected_value=expected_value)
+            data[field_no] += complement(raw_data,field.get('length'),16)
+        sleep(sleep_time)
+    # Correct averaging: divide by samples (right-shift by log2(samples))
+    shift_amount = samples.bit_length() - 1  # For samples=8, shift=3
+    for field_no in range(no_fields):
+        data[field_no] = data[field_no] >> shift_amount
+    return data
+# def logger(*args,**kwargs):
+#     for k, v in kwargs.items():
+#         print(f'{k.upper()} : {v}')
+def VIs_Trim():
+    test_name = 'VIs_Trim'
+    print(f'...........{test_name}..........')
+    vLSB = 5.5/2**15
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+    # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+    # turn the Vmid buffer Vmid = Vddp/2
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x40, Mask=0x40, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x40, Mask=0x40, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+    # put the output stage to the common mode at the VDDP/2
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x66, Mask=0xFF, Default=0x0
+    vsns_offset_otp_length = {'fieldname': 'otp_vsense_offset', 'length': 6, 'registers': [{'REG': '0xB8', 'POS': 0, 'RegisterName': 'OTP FIELDS 8', 'RegisterLength': 8, 'Name': 'otp_vsense_offset[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get( 'length',6)
+    [vsns_offset_pretrim_code] = samples_average([{'field':{'fieldname': 'v_sense', 'length': 16, 'registers': [{'REG': '0x69', 'POS': 0, 'RegisterName': 'V SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'v_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6A', 'POS': 0, 'RegisterName': 'V SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'v_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':0xfffc}])
+    vsns_pretrim_offset_value = vsns_offset_pretrim_code*vLSB
+    vns_offset_otp_code = dec_to_2complement(vsns_offset_pretrim_code>>3,vsns_offset_otp_length)
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB8, data=vns_offset_otp_code, Mask=0x3F, Default=0x0
+    [vsns_offset_posttrim_code] = samples_average([{'field':{'fieldname': 'v_sense', 'length': 16, 'registers': [{'REG': '0x69', 'POS': 0, 'RegisterName': 'V SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'v_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6A', 'POS': 0, 'RegisterName': 'V SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'v_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':0xffff}])
+    vsns_posttrim_offset_value = vsns_offset_posttrim_code*vLSB
+    print(f'VSNS OFFSET:~')
+    print(f'PRE-TRIM CODE   : {vsns_offset_pretrim_code:04x}')
+    print(f'PRE-TRIM OFFSET : {vsns_pretrim_offset_value} V')
+    print(f'OTP CODE        : {vns_offset_otp_code:04x}')
+    print(f'POST-TRIM OFFSET: {vsns_posttrim_offset_value} V')
+    print(f'PRE-TRIM CODE : {vsns_offset_pretrim_code:04x}')
