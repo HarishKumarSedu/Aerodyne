@@ -49,10 +49,10 @@ def VIs_Trim():
     [vsns_offset_posttrim_code] = samples_average([{'field':{'fieldname': 'v_sense', 'length': 16, 'registers': [{'REG': '0x69', 'POS': 0, 'RegisterName': 'V SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'v_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6A', 'POS': 0, 'RegisterName': 'V SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'v_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':0xffff}])
     vsns_posttrim_offset_value = vsns_offset_posttrim_code*vLSB
     print(f'VSNS OFFSET:~')
-    print(f'PRE-TRIM CODE   : 0X{vsns_offset_pretrim_code:02X}')
+    print(f'PRE-TRIM CODE   : {vsns_offset_pretrim_code:#02X}')
     print(f'PRE-TRIM OFFSET : {vsns_pretrim_offset_value} V')
-    print(f'OTP CODE        : 0X{vns_offset_otp_code:02X}')
+    print(f'OTP CODE        : {vns_offset_otp_code:#02X}')
+    print(f'POST-TRIM CODE  : {vsns_offset_posttrim_code:#02X}')
     print(f'POST-TRIM OFFSET: {vsns_posttrim_offset_value} V')
-    print(f'PRE-TRIM CODE : 0X{vsns_offset_pretrim_code:04X}')
 if __name__ == '__main__':
     VIs_Trim()
