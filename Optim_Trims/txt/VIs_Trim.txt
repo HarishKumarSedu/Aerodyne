@@ -1,4 +1,4 @@
-# Processed on 2026-05-11 13:50:42
+# Processed on 2026-05-11 13:54:32
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -170,14 +170,10 @@ def VIs_Trim():
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0 # put the dac in the HiZ
     print('VSNS-GAIN:~')
-    print(f'VSNS-GAIN PRE-TRIM VP CODE   : {vsns_gain_vp_pretrim_code:#04X}')
-    print(f'VSNS-GAIN PRE-TRIM VP VALUE  : {vsns_gain_vp_pretrim_value:0.6F} V')
-    print(f'VSNS-GAIN PRE-TRIM VN CODE   : {vsns_gain_vn_pretrim_code:#04X}')
-    print(f'VSNS-GAIN PRE-TRIM VN VALUE  : {vsns_gain_vn_pretrim_value:0.6F} V')
-    print(f'VSNS-GAIN TRIM OTP CODE      : {vns_gain_otp_code:#04X} ')
-    print(f'VSNS-GAIN POST-TRIM VP CODE  : {vsns_gain_vp_posttrim_code:#04X}')
-    print(f'VSNS-GAIN POST-TRIM VP VALUE : {vsns_gain_vp_posttrim_value:0.6F} V')
-    print(f'VSNS-GAIN POST-TRIM VN CODE  : {vsns_gain_vn_posttrim_code:#04X}')
-    print(f'VSNS-GAIN POST-TRIM VN VALUE : {vsns_gain_vn_posttrim_value:0.6F} V')
+    print(f'V2I-GAIN PRE-TRIM VSNS VP  : [{V2I_Vgain_vp_pretrim_code:#04X}] {V2I_Vgain_vp_pretrim_value:.6F} V')
+    print(f'V2I-GAIN PRE-TRIM VSNS VP  : [{V2I_Igain_vp_pretrim_code:#04X}] {V2I_Igain_vp_pretrim_value:.6F} A')
+    print(f'V2I-GAIN PRE-TRIM VSNS VN  : [{V2I_Vgain_vn_pretrim_code:#04X}] {V2I_Vgain_vn_pretrim_value:.6F} V')
+    print(f'V2I-GAIN PRE-TRIM VSNS VN  : [{V2I_Igain_vn_pretrim_code:#04X}] {V2I_Igain_vn_pretrim_value:.6F} A')
+    
 if __name__ == '__main__':
     VIs_Trim()
