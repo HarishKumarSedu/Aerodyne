@@ -1,7 +1,8 @@
-# Processed on 2026-05-11 14:25:52
+# Processed on 2026-05-11 14:28:24
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
+from Optim_Procedures.VI_SNS_turn_on import vi_sns_turn_on
 from time import sleep
 
 def samples_average(fields=None, samples=8, sleep_time=5e-3):
@@ -32,6 +33,7 @@ def VIs_Trim():
     print(f'...........{test_name}..........')
     vLSB = 5.5/2**15
     cLSB=3/2**15
+    vi_sns_turn_on()
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
     # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81
