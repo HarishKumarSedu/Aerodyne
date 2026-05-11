@@ -16,7 +16,7 @@ def samples_average(fields=None, samples=8, sleep_time=5e-3):
             field = fields[field_no].get('field', {})
             expected_value = fields[field_no].get('expected_value', 0xffff)
             raw_data = I2C_READ("0x38", field_info=field, expected_value=expected_value)
-            data[field_no] += complement(raw_data,field.get('length'),16)
+            data[field_no] += complement(raw_data,field.get('length',16))
         sleep(sleep_time)
     # Correct averaging: divide by samples (right-shift by log2(samples))
     shift_amount = samples.bit_length() - 1  # For samples=8, shift=3
@@ -43,7 +43,7 @@ def VIs_Trim():
     vsns_offset_otp_length = {'fieldname': 'otp_vsense_offset', 'length': 6, 'registers': [{'REG': '0xB8', 'POS': 0, 'RegisterName': 'OTP FIELDS 8', 'RegisterLength': 8, 'Name': 'otp_vsense_offset[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get( 'length',6)
     [vsns_offset_pretrim_code] = samples_average([{'field':{'fieldname': 'v_sense', 'length': 16, 'registers': [{'REG': '0x69', 'POS': 0, 'RegisterName': 'V SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'v_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6A', 'POS': 0, 'RegisterName': 'V SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'v_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':0xfffc}])
     vsns_pretrim_offset_value = vsns_offset_pretrim_code*vLSB
-    vns_offset_otp_code = dec_to_2complement(vsns_offset_pretrim_code>>3,vsns_offset_otp_length)
+    vns_offset_otp_code = dec_to_2complement(vsns_offset_pretrim_code>>3,vsns_offset_otp_length,False)
     I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=1)
     I2C_WRITE("0x38", field_info={'fieldname': 'otp_vsense_offset', 'length': 6, 'registers': [{'REG': '0xB8', 'POS': 0, 'RegisterName': 'OTP FIELDS 8', 'RegisterLength': 8, 'Name': 'otp_vsense_offset[5:0]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 5, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=vns_offset_otp_code)
     [vsns_offset_posttrim_code] = samples_average([{'field':{'fieldname': 'v_sense', 'length': 16, 'registers': [{'REG': '0x69', 'POS': 0, 'RegisterName': 'V SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'v_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6A', 'POS': 0, 'RegisterName': 'V SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'v_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':0xffff}])
@@ -54,3 +54,5 @@ def VIs_Trim():
     print(f'OTP CODE        : {vns_offset_otp_code:04x}')
     print(f'POST-TRIM OFFSET: {vsns_posttrim_offset_value} V')
     print(f'PRE-TRIM CODE : {vsns_offset_pretrim_code:04x}')
+if __name__ == '__main__':
+    VIs_Trim()
