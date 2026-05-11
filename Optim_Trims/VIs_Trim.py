@@ -157,9 +157,9 @@ def VIs_Trim():
     I2C_WRITE("0x38", field_info={'fieldname': 'tst_data_dwa', 'length': 9, 'registers': [{'REG': '0x11', 'POS': 0, 'RegisterName': 'DAC test 1', 'RegisterLength': 8, 'Name': 'tst_data_dwa[8]', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 8, 'FieldLSB': 8, 'Attribute': 'N000000N', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0x12', 'POS': 0, 'RegisterName': 'DAC test 2', 'RegisterLength': 8, 'Name': 'tst_data_dwa[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x00) # put the dac in the HiZ
     print('V2I-GAIN:~')
     print(f'V2I-GAIN PRE-TRIM VSNS VP  : [{V2I_Vgain_vp_pretrim_code:#04X}] {V2I_Vgain_vp_pretrim_value:.6F} V')
-    print(f'V2I-GAIN PRE-TRIM VSNS VP  : [{V2I_Igain_vp_pretrim_code:#04X}] {V2I_Igain_vp_pretrim_value:.6F} A')
+    print(f'V2I-GAIN PRE-TRIM ISNS VP  : [{V2I_Igain_vp_pretrim_code:#04X}] {V2I_Igain_vp_pretrim_value:.6F} A')
     print(f'V2I-GAIN PRE-TRIM VSNS VN  : [{V2I_Vgain_vn_pretrim_code:#04X}] {V2I_Vgain_vn_pretrim_value:.6F} V')
-    print(f'V2I-GAIN PRE-TRIM VSNS VN  : [{V2I_Igain_vn_pretrim_code:#04X}] {V2I_Igain_vn_pretrim_value:.6F} A')
+    print(f'V2I-GAIN PRE-TRIM ISNS VN  : [{V2I_Igain_vn_pretrim_code:#04X}] {V2I_Igain_vn_pretrim_value:.6F} A')
     
 if __name__ == '__main__':
     VIs_Trim()
