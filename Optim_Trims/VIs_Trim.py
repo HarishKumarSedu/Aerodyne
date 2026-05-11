@@ -50,9 +50,9 @@ def VIs_Trim():
     vsns_posttrim_offset_value = vsns_offset_posttrim_code*vLSB
     print(f'VSNS OFFSET:~')
     print(f'PRE-TRIM CODE   : {vsns_offset_pretrim_code:#02X}')
-    print(f'PRE-TRIM OFFSET : {vsns_pretrim_offset_value:.4F} V')
+    print(f'PRE-TRIM OFFSET : {vsns_pretrim_offset_value:.6F} V')
     print(f'OTP CODE        : {vns_offset_otp_code:#02X}')
     print(f'POST-TRIM CODE  : {vsns_offset_posttrim_code:#02X}')
-    print(f'POST-TRIM OFFSET: {vsns_posttrim_offset_value:.4F} V')
+    print(f'POST-TRIM OFFSET: {vsns_posttrim_offset_value:.6F} V')
 if __name__ == '__main__':
     VIs_Trim()
