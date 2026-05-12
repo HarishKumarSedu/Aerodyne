@@ -114,7 +114,7 @@ def vis_trim():
     vsns_gain_vn_posttrim_value = vsns_gain_vn_posttrim_code*vLSB
     V2I_Igain_vn_pretrim_value = V2I_Igain_vn_pretrim_code*cLSB
     vsns_posttrim_ratio = (vsns_gain_vp_pretrim_code - vsns_gain_vn_pretrim_code)/ (2*pvdd_value)
-    vsns_posttrim_gain_correction = (vsns_posttrim_ratio *vLSB ) -1
+    vsns_posttrim_gain_correction = (vsns_posttrim_ratio *vLSB )
     ##########################  VI - V2I GAIN CALCULATIONS ####################
     V2I_gain = ((V2I_Igain_vp_pretrim_code  - V2I_Igain_vn_pretrim_code) /(vsns_gain_vp_posttrim_code - vsns_gain_vn_posttrim_code))
     V2I_gain_scaled = -round(V2I_gain * (3/20)*(2**20/64))  # convert it to the 12bit value
