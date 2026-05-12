@@ -1,4 +1,4 @@
-# Processed on 2026-05-12 09:25:06
+# Processed on 2026-05-12 09:25:25
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -124,8 +124,8 @@ def vis_trim():
     V2I_gain_scaled = -round(V2I_gain * (3/20)*(2**20/64))  # convert it to the 12bit value
     V2I_gain_otp_code = dec_to_2complement(V2I_gain_scaled,v2i_gain_otp_length,False)
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
-    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBF, data=vns_gain_otp_code, Mask=0xF, Default=0x0
-[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC0, data=vns_gain_otp_code, Mask=0xFF, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBF, data=V2I_gain_otp_code, Mask=0xF, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC0, data=V2I_gain_otp_code, Mask=0xFF, Default=0x0
     ##########################  VI - V2I POST TRIM ####################
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0xFF, Mask=0xFF, Default=0x0
