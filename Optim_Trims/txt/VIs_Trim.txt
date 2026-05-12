@@ -1,4 +1,4 @@
-# Processed on 2026-05-12 07:09:47
+# Processed on 2026-05-12 07:10:36
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -135,9 +135,9 @@ def vis_trim():
     print(f'VSNS-GAIN TRIM OTP CODE      : {vns_gain_otp_code:#04X} ')
     print(f'VSNS-GAIN POST-TRIM : VP+    :> [{vsns_gain_vp_posttrim_code:#04X}] {vsns_gain_vp_posttrim_value:0.6F} V , VN- :> [{vsns_gain_vn_posttrim_code:#04X}] {vsns_gain_vn_posttrim_value:0.6F} V')
     print('V2I-GAIN:~')
-    print(f'V2I-GAIN PRE-TRIM   : VP+    :> [{V2I_Igain_vp_pretrim_code:#04X}] {V2I_Igain_vp_pretrim_value:0.6F} V , VN- :> [{V2I_Igain_vn_pretrim_code:#04X}] {V2I_Igain_vn_pretrim_value:0.6F} V')
+    print(f'V2I-GAIN PRE-TRIM   : VP+    :> [{V2I_Igain_vp_pretrim_code:#04X}] {V2I_Igain_vp_pretrim_value:0.6F} A , VN- :> [{V2I_Igain_vn_pretrim_code:#04X}] {V2I_Igain_vn_pretrim_value:0.6F} A')
     print(f'V2I-GAIN TRIM OTP CODE       : {V2I_gain_otp_code:#04X} ')
-    print(f'V2I-GAIN POST-TRIM  : VP+    :> [{V2I_Igain_vp_posttrim_code:#04X}] {V2I_Igain_vp_posttrim_value:0.6F} V , VN- :> [{V2I_Igain_vn_posttrim_code:#04X}] {V2I_Igain_vn_posttrim_value:0.6F} V')
+    print(f'V2I-GAIN POST-TRIM  : VP+    :> [{V2I_Igain_vp_posttrim_code:#04X}] {V2I_Igain_vp_posttrim_value:0.6F} A , VN- :> [{V2I_Igain_vn_posttrim_code:#04X}] {V2I_Igain_vn_posttrim_value:0.6F} A')
     
     
 if __name__ == '__main__':
