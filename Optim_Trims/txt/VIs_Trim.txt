@@ -1,4 +1,4 @@
-# Processed on 2026-05-12 10:02:48
+# Processed on 2026-05-12 10:12:18
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -184,13 +184,38 @@ def vis_trim():
     ISNS_gain_vn_pretrim_value = ISNS_gain_vn_pretrim_code*cLSB
     AFORCE(signal="OUTP",reference="OUTN",value=float('Inf'))
     ###### ISNS GAIN CALCULATIONS ##############
-    print(isns_gain_vp_current,isns_gain_vn_current)
     m = (isns_gain_vp_current - isns_gain_vn_current) / ((ISNS_gain_vp_pretrim_code - ISNS_gain_vn_pretrim_code) * cLSB)
     # m = (2*0.340) / ((ISNS_gain_vp_pretrim_code - ISNS_gain_vn_pretrim_code) * cLSB)
     gain =  m - 1
     isns_gain_code = round(gain * ((2 ** 20) / 64)) 
     ISNS_gain_otp_code = dec_to_2complement(isns_gain_code,14,False)
-    print(hex(ISNS_gain_otp_code))
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBB, data=ISNS_gain_otp_code, Mask=0x3F, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xBC, data=ISNS_gain_otp_code, Mask=0xFF, Default=0x0
+    ###### ISNS GAIN POST-TRIM ##############
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0xFF, Mask=0xFF, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+    [ISNS_gain_vp_post_code] = samples_average([{'field':{'fieldname': 'i_sense', 'length': 16, 'registers': [{'REG': '0x6B', 'POS': 0, 'RegisterName': 'I SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'i_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6C', 'POS': 0, 'RegisterName': 'I SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'i_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':0XEBF}])
+    ISNS_gain_vp_post_code_value = ISNS_gain_vp_post_code*cLSB
+    AFORCE(signal="OUTP",reference="OUTN",value=float('Inf'))
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x1, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0
+    # IN ATE this must be ""OUTN"" VS ""OUTP""
+    AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) # 1% error
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+    [ISNS_gain_vn_postrim_code] = samples_average([{'field':{'fieldname': 'i_sense', 'length': 16, 'registers': [{'REG': '0x6B', 'POS': 0, 'RegisterName': 'I SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'i_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6C', 'POS': 0, 'RegisterName': 'I SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'i_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':0xf198}])
+    ISNS_gain_vn_postrim_value = ISNS_gain_vn_postrim_code*cLSB
+    AFORCE(signal="OUTP",reference="OUTN",value=float('Inf'))
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x1, Default=0x0
+[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x80, Default=0x0
+    print('ISNS-GAIN:~')
+    print(f'ISNS-GAIN PRE-TRIM [{isns_gain_vp_current:.6F}A]   : VP+    :> [{ISNS_gain_vp_pretrim_code:#04X}] {ISNS_gain_vp_pretrim_value:0.6F} A , VN- :> [{ISNS_gain_vn_pretrim_code:#04X}] {ISNS_gain_vn_pretrim_value:0.6F} A')
+    print(f'ISNS-GAIN TRIM OTP CODE   : {ISNS_gain_otp_code:#04X} ')
+    print(f'ISNS-GAIN POST-TRIM  [{isns_gain_vn_current:.6F}A] : VP+    :> [{ISNS_gain_vp_post_code:#04X}] {ISNS_gain_vp_post_code_value:0.6F} A , VN- :> [{ISNS_gain_vn_postrim_code:#04X}] {ISNS_gain_vn_postrim_value:0.6F} A')
     
 if __name__ == '__main__':
     vis_trim()
