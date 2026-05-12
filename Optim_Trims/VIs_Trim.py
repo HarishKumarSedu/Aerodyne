@@ -130,7 +130,6 @@ def vis_trim():
     V2I_Igain_vn_posttrim_value = V2I_Igain_vn_posttrim_code*cLSB
     I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=1)
     I2C_WRITE("0x38", field_info={'fieldname': 'tst_data_dwa', 'length': 9, 'registers': [{'REG': '0x11', 'POS': 0, 'RegisterName': 'DAC test 1', 'RegisterLength': 8, 'Name': 'tst_data_dwa[8]', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 8, 'FieldLSB': 8, 'Attribute': 'N000000N', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0x12', 'POS': 0, 'RegisterName': 'DAC test 2', 'RegisterLength': 8, 'Name': 'tst_data_dwa[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x00)
-    I2C_WRITE("0x38", field_info={'fieldname': 'tst_dac', 'length': 1, 'registers': [{'REG': '0x11', 'POS': 7, 'RegisterName': 'DAC test 1', 'RegisterLength': 8, 'Name': 'tst_dac', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'N000000N', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x0)
     print('VSNS-GAIN:~')
     print(f'VSNS-GAIN PRE-TRIM  :VP+ :> [{vsns_gain_vp_pretrim_code:#04X}] {vsns_gain_vp_pretrim_value:0.6F} V , VN- :> [{vsns_gain_vn_pretrim_code:#04X}] {vsns_gain_vn_pretrim_value:0.6F} V')
     print(f'VSNS-GAIN TRIM OTP CODE  : {vns_gain_otp_code:#04X} ')
@@ -139,7 +138,43 @@ def vis_trim():
     print(f'V2I-GAIN ISNS PRE-TRIM   : VP+    :> [{V2I_Igain_vp_pretrim_code:#04X}] {V2I_Igain_vp_pretrim_value:0.6F} A , VN- :> [{V2I_Igain_vn_pretrim_code:#04X}] {V2I_Igain_vn_pretrim_value:0.6F} A')
     print(f'V2I-GAIN TRIM OTP CODE   : {V2I_gain_otp_code:#04X} ')
     print(f'V2I-GAIN ISNS POST-TRIM  : VP+    :> [{V2I_Igain_vp_posttrim_code:#04X}] {V2I_Igain_vp_posttrim_value:0.6F} A , VN- :> [{V2I_Igain_vn_posttrim_code:#04X}] {V2I_Igain_vn_posttrim_value:0.6F} A')
-    
+    ##########################  VI - ISNS GAIN TRIM ####################
+    ###### MECHANISM TO CONTROL THE 340mA THROUGH SUPPLY ##############
+    isns_gain_otp_length = {'fieldname': 'otp_isense_gain', 'length': 14, 'registers': [{'REG': '0xBB', 'POS': 0, 'RegisterName': 'OTP FIELDS 11', 'RegisterLength': 8, 'Name': 'otp_isense_gain[13:8]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 13, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xBC', 'POS': 0, 'RegisterName': 'OTP FIELDS 12- TRACEABILITY 0', 'RegisterLength': 8, 'Name': 'otp_isense_gain[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get( 'length',14)
+    source_current=340e-3 # 340mA
+    I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=1)
+    I2C_WRITE("0x38", field_info={'fieldname': 'tst_data_dwa', 'length': 9, 'registers': [{'REG': '0x11', 'POS': 0, 'RegisterName': 'DAC test 1', 'RegisterLength': 8, 'Name': 'tst_data_dwa[8]', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 8, 'FieldLSB': 8, 'Attribute': 'N000000N', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0x12', 'POS': 0, 'RegisterName': 'DAC test 2', 'RegisterLength': 8, 'Name': 'tst_data_dwa[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0xff)
+    initial_v = VFORCE("PVDD","GND",3.7,0)
+    init_v = initial_v
+    while True:
+        isns_gain_vp_current = AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) # 1% error
+        VFORCE(signal="PVDD",reference="GND",value=init_v)
+        if isns_gain_vp_current < 345e-3 and isns_gain_vp_current > 100e-3: # check if the current is sourced successfully, with 1% margin
+          break
+        if init_v < 2.8:
+          break
+        init_v -= 0.05 
+    ###### MECHANISM TO CONTROL THE 340mA THROUGH SUPPLY ##############
+    ###### ISNS GAIN PRE-TRIM ##############
+    I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0)
+    [ISNS_gain_vp_pretrim_code] = samples_average([{'field':{'fieldname': 'i_sense', 'length': 16, 'registers': [{'REG': '0x6B', 'POS': 0, 'RegisterName': 'I SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'i_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6C', 'POS': 0, 'RegisterName': 'I SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'i_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':0X1057}])
+    ISNS_gain_vp_pretrim_value = ISNS_gain_vp_pretrim_code*cLSB
+    AFORCE(signal="OUTP",reference="OUTN",value=float('Inf'))
+    I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=1)
+    I2C_WRITE("0x38", field_info={'fieldname': 'tst_data_dwa', 'length': 9, 'registers': [{'REG': '0x11', 'POS': 0, 'RegisterName': 'DAC test 1', 'RegisterLength': 8, 'Name': 'tst_data_dwa[8]', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 8, 'FieldLSB': 8, 'Attribute': 'N000000N', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0x12', 'POS': 0, 'RegisterName': 'DAC test 2', 'RegisterLength': 8, 'Name': 'tst_data_dwa[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x100)
+    # IN ATE this must be ""OUTN"" VS ""OUTP""
+    isns_gain_vn_current = AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) # 1% error
+    I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0)
+    [ISNS_gain_vn_pretrim_code] = samples_average([{'field':{'fieldname': 'i_sense', 'length': 16, 'registers': [{'REG': '0x6B', 'POS': 0, 'RegisterName': 'I SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'i_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6C', 'POS': 0, 'RegisterName': 'I SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'i_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':0xf001}])
+    ISNS_gain_vn_pretrim_value = ISNS_gain_vn_pretrim_code*cLSB
+    AFORCE(signal="OUTP",reference="OUTN",value=float('Inf'))
+    ###### ISNS GAIN CALCULATIONS ##############
+    # m = (isns_gain_vp_current - isns_gain_vn_current) / ((ISNS_gain_vp_pretrim_code - ISNS_gain_vn_pretrim_code) * cLSB)
+    m = (2*0.340) / ((ISNS_gain_vp_pretrim_code - ISNS_gain_vn_pretrim_code) * cLSB)
+    gain =  m - 1
+    isns_gain_code = round(gain * ((2 ** 20) / 64)) 
+    ISNS_gain_otp_code = dec_to_2complement(isns_gain_code,14,False)
+    print(hex(ISNS_gain_otp_code))
     
 if __name__ == '__main__':
     vis_trim()
