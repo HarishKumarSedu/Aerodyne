@@ -19,11 +19,9 @@ def samples_average(fields=None, samples=8, sleep_time=5e-3):
             data[field_no] += complement(raw_data,field.get('length',16))
         sleep(sleep_time)
     # Correct averaging: divide by samples (right-shift by log2(samples))
-    print(data)
     shift_amount = samples.bit_length() - 1  # For samples=8, shift=3
     for field_no in range(no_fields):
         data[field_no] = round(data[field_no] / samples)
-    print(data)
     return data
 def vis_trim():
     test_name = 'VIs_Trim'
@@ -98,6 +96,7 @@ def vis_trim():
     Scale_Factor = (5/5.5)
     Scale_Down = (64/2**20)
     ratio = (vsns_gain_vp_pretrim_code - vsns_gain_vn_pretrim_code)/ (2*pvdd_value)
+    print(f'ratio : {ratio}')
     vsns_gain_calculated = -round(((ratio *vLSB ) -1 ) /Scale_Down) 
     print(f'vsns_gain_calculated : {vsns_gain_calculated}')
     vns_gain_otp_code = dec_to_2complement(vsns_gain_calculated,vsns_gain_otp_length,False)
