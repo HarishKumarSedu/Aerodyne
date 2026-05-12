@@ -58,13 +58,13 @@ def vis_trim():
     vsns_posttrim_offset_value = vsns_offset_posttrim_code*vLSB
     isns_posttrim_offset_value = isns_offset_posttrim_code*cLSB
     print(f'VSNS OFFSET:~')
-    print(f'PRE-TRIM OFFSET : [{vsns_offset_pretrim_code:#02X}] {vsns_pretrim_offset_value:.6F} V')
-    print(f'OTP CODE        : {vns_offset_otp_code:#02X}')
-    print(f'POST-TRIM OFFSET: [{vsns_offset_posttrim_code:#02X}] {vsns_posttrim_offset_value:.6F} V')
+    print(f'VSNS PRE-TRIM OFFSET : [{vsns_offset_pretrim_code:#02X}] {vsns_pretrim_offset_value:.6F} V')
+    print(f'VSNS OTP CODE        : {vns_offset_otp_code:#02X}')
+    print(f'VSNS POST-TRIM OFFSET: [{vsns_offset_posttrim_code:#02X}] {vsns_posttrim_offset_value:.6F} V')
     print(f'ISNS OFFSET:~')
-    print(f'PRE-TRIM OFFSET : [{isns_offset_pretrim_code:#02X}] {isns_pretrim_offset_value:.6F} V')
-    print(f'OTP CODE        : {ins_offset_otp_code:#02X}')
-    print(f'POST-TRIM OFFSET: [{isns_offset_posttrim_code:#02X}] {isns_posttrim_offset_value:.6F} V')
+    print(f'ISNS PRE-TRIM OFFSET : [{isns_offset_pretrim_code:#02X}] {isns_pretrim_offset_value:.6F} V')
+    print(f'ISNS OTP CODE        : {ins_offset_otp_code:#02X}')
+    print(f'ISNS POST-TRIM OFFSET: [{isns_offset_posttrim_code:#02X}] {isns_posttrim_offset_value:.6F} V')
     I2C_WRITE("0x38", field_info={'fieldname': 'cld_dvr_force_sel', 'length': 8, 'registers': [{'REG': '0x9C', 'POS': 0, 'RegisterName': 'CLD analog setting reg 6', 'RegisterLength': 8, 'Name': 'cld_dvr_force_sel[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0x00) # put the bridge in HIz
     I2C_WRITE("0x38", field_info={'fieldname': 'cld_drv_force', 'length': 1, 'registers': [{'REG': '0x9B', 'POS': 4, 'RegisterName': 'CLD analog setting reg 5', 'RegisterLength': 8, 'Name': 'cld_drv_force', 'Mask': '0x10', 'Length': 1, 'FieldMSB': 4, 'FieldLSB': 4, 'Attribute': 'NNNNNNNN', 'Default': '0x81', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=0)
     I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel_1', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel_1', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=1)

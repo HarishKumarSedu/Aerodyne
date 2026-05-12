@@ -1,4 +1,4 @@
-# Processed on 2026-05-12 06:53:51
+# Processed on 2026-05-12 06:54:58
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -60,13 +60,13 @@ def vis_trim():
     vsns_posttrim_offset_value = vsns_offset_posttrim_code*vLSB
     isns_posttrim_offset_value = isns_offset_posttrim_code*cLSB
     print(f'VSNS OFFSET:~')
-    print(f'PRE-TRIM OFFSET : [{vsns_offset_pretrim_code:#02X}] {vsns_pretrim_offset_value:.6F} V')
-    print(f'OTP CODE        : {vns_offset_otp_code:#02X}')
-    print(f'POST-TRIM OFFSET: [{vsns_offset_posttrim_code:#02X}] {vsns_posttrim_offset_value:.6F} V')
+    print(f'VSNS PRE-TRIM OFFSET : [{vsns_offset_pretrim_code:#02X}] {vsns_pretrim_offset_value:.6F} V')
+    print(f'VSNS OTP CODE        : {vns_offset_otp_code:#02X}')
+    print(f'VSNS POST-TRIM OFFSET: [{vsns_offset_posttrim_code:#02X}] {vsns_posttrim_offset_value:.6F} V')
     print(f'ISNS OFFSET:~')
-    print(f'PRE-TRIM OFFSET : [{isns_offset_pretrim_code:#02X}] {isns_pretrim_offset_value:.6F} V')
-    print(f'OTP CODE        : {ins_offset_otp_code:#02X}')
-    print(f'POST-TRIM OFFSET: [{isns_offset_posttrim_code:#02X}] {isns_posttrim_offset_value:.6F} V')
+    print(f'ISNS PRE-TRIM OFFSET : [{isns_offset_pretrim_code:#02X}] {isns_pretrim_offset_value:.6F} V')
+    print(f'ISNS OTP CODE        : {ins_offset_otp_code:#02X}')
+    print(f'ISNS POST-TRIM OFFSET: [{isns_offset_posttrim_code:#02X}] {isns_posttrim_offset_value:.6F} V')
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0 # put the bridge in HIz
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x0, Mask=0x10, Default=0x81
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
