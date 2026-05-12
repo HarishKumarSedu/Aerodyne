@@ -95,6 +95,7 @@ def vis_trim():
     ##########################  VI - VSNS GAIN CALCULATIONS ####################
     Scale_Factor = (5/5.5)
     Scale_Down = (64/2**20)
+    print(f'vsns_gain_vp_pretrim_code : {vsns_gain_vp_pretrim_code}, vsns_gain_vn_pretrim_code {vsns_gain_vn_pretrim_code}')
     ratio = (vsns_gain_vp_pretrim_code - vsns_gain_vn_pretrim_code)/ (2*pvdd_value)
     print(f'ratio : {ratio}')
     vsns_gain_calculated = -round(((ratio *vLSB ) -1 ) /Scale_Down) 
