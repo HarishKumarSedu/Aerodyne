@@ -116,8 +116,8 @@ def vis_trim():
     vsns_posttrim_ratio = (vsns_gain_vp_posttrim_code - vsns_gain_vn_posttrim_code)/ (2*pvdd_value)
     vsns_posttrim_gain = vsns_posttrim_ratio *vLSB
     ##########################  VI - V2I GAIN CALCULATIONS ####################
-    V2I_gain = ((V2I_Igain_vp_pretrim_code  - V2I_Igain_vn_pretrim_code) /(vsns_gain_vp_posttrim_code - vsns_gain_vn_posttrim_code))
-    V2I_gain_scaled = -round(V2I_gain * (3/20)*(2**20/64))  # convert it to the 12bit value
+    V2I_pretrim_gain = ((V2I_Igain_vp_pretrim_code  - V2I_Igain_vn_pretrim_code) /(vsns_gain_vp_posttrim_code - vsns_gain_vn_posttrim_code))
+    V2I_gain_scaled = -round(V2I_pretrim_gain * (3/20)*(2**20/64))  # convert it to the 12bit value
     V2I_gain_otp_code = dec_to_2complement(V2I_gain_scaled,v2i_gain_otp_length,False)
     I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=1)
     I2C_WRITE("0x38", field_info={'fieldname': 'otp_isense_from_vsense_gain', 'length': 12, 'registers': [{'REG': '0xBF', 'POS': 0, 'RegisterName': 'OTP FIELDS 15 - TRACEABILITY 3', 'RegisterLength': 8, 'Name': 'otp_isense_from_vsense_gain[11:8]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 11, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xC0', 'POS': 0, 'RegisterName': 'OTP FIELDS 16 - TRACEABILITY 4', 'RegisterLength': 8, 'Name': 'otp_isense_from_vsense_gain[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=V2I_gain_otp_code)
@@ -133,6 +133,7 @@ def vis_trim():
     V2I_Igain_vn_posttrim_value = V2I_Igain_vn_posttrim_code*cLSB
     I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=1)
     I2C_WRITE("0x38", field_info={'fieldname': 'tst_data_dwa', 'length': 9, 'registers': [{'REG': '0x11', 'POS': 0, 'RegisterName': 'DAC test 1', 'RegisterLength': 8, 'Name': 'tst_data_dwa[8]', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 8, 'FieldLSB': 8, 'Attribute': 'N000000N', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0x12', 'POS': 0, 'RegisterName': 'DAC test 2', 'RegisterLength': 8, 'Name': 'tst_data_dwa[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x00)
+    V2I_posttrim_gain = ((V2I_Igain_vp_posttrim_code  - V2I_Igain_vn_posttrim_code) /(vsns_gain_vp_posttrim_code - vsns_gain_vn_posttrim_code))
     print('VSNS-GAIN:~')
     print(f'VSNS-GAIN PRE-TRIM  :VP+ :> [{vsns_gain_vp_pretrim_code:#04X}] {vsns_gain_vp_pretrim_value:0.6F} V , VN- :> [{vsns_gain_vn_pretrim_code:#04X}] {vsns_gain_vn_pretrim_value:0.6F} V')
     print(f'VSNS-GAIN TRIM OTP CODE  : {vns_gain_otp_code:#04X} ')
@@ -141,6 +142,7 @@ def vis_trim():
     print('V2I-GAIN ISNS:~')
     print(f'V2I-GAIN ISNS PRE-TRIM   : VP+    :> [{V2I_Igain_vp_pretrim_code:#04X}] {V2I_Igain_vp_pretrim_value:0.6F} A , VN- :> [{V2I_Igain_vn_pretrim_code:#04X}] {V2I_Igain_vn_pretrim_value:0.6F} A')
     print(f'V2I-GAIN TRIM OTP CODE   : {V2I_gain_otp_code:#04X} ')
+    print(f'V2I GAIN                 : PRE-> {V2I_pretrim_gain:.8F}, POST-> {V2I_posttrim_gain} ')
     print(f'V2I-GAIN ISNS POST-TRIM  : VP+    :> [{V2I_Igain_vp_posttrim_code:#04X}] {V2I_Igain_vp_posttrim_value:0.6F} A , VN- :> [{V2I_Igain_vn_posttrim_code:#04X}] {V2I_Igain_vn_posttrim_value:0.6F} A')
     ##########################  VI - ISNS GAIN TRIM ####################
     ###### MECHANISM TO CONTROL THE 340mA THROUGH SUPPLY ##############
