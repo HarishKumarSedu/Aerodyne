@@ -11,13 +11,14 @@ def samples_average(fields=None, samples=8, sleep_time=5e-3):
         return []
     # Initialize data with zeros for each field
     data = [0] * no_fields
-    for _ in range(samples):
+    for i in range(samples):
         for field_no in range(no_fields):
             field = fields[field_no].get('field', {})
             expected_value = fields[field_no].get('expected_value', 0xffff)
             raw_data = I2C_READ("0x38", field_info=field, expected_value=expected_value)
             data[field_no] += complement(raw_data,field.get('length',16))
         sleep(sleep_time)
+        print(i)
     # Correct averaging: divide by samples (right-shift by log2(samples))
     shift_amount = samples.bit_length() - 1  # For samples=8, shift=3
     for field_no in range(no_fields):
