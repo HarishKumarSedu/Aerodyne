@@ -1,4 +1,4 @@
-# Processed on 2026-05-12 13:37:28
+# Processed on 2026-05-12 13:37:45
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -154,7 +154,7 @@ def vis_trim():
     print('V2I-GAIN ISNS:~')
     print(f'V2I-GAIN ISNS PRE-TRIM   : VP+    :> [{V2I_Igain_vp_pretrim_code:#04X}] {V2I_Igain_vp_pretrim_value:0.6F} A , VN- :> [{V2I_Igain_vn_pretrim_code:#04X}] {V2I_Igain_vn_pretrim_value:0.6F} A')
     print(f'V2I-GAIN TRIM OTP CODE   : {V2I_gain_otp_code:#04X} ')
-    print(f'V2I GAIN                 : PRE-> {V2I_gain_scaled:.8F}, POST-> {V2I_posttrim_gain} ')
+    print(f'V2I GAIN                 : PRE-> {V2I_pretrim_gain:.8F}, POST-> {V2I_posttrim_gain} ')
     print(f'V2I-GAIN ISNS POST-TRIM  : VP+    :> [{V2I_Igain_vp_posttrim_code:#04X}] {V2I_Igain_vp_posttrim_value:0.6F} A , VN- :> [{V2I_Igain_vn_posttrim_code:#04X}] {V2I_Igain_vn_posttrim_value:0.6F} A')
     ##########################  VI - ISNS GAIN TRIM ####################
     ###### MECHANISM TO CONTROL THE 340mA THROUGH SUPPLY ##############
