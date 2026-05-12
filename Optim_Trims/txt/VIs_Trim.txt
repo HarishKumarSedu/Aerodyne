@@ -1,4 +1,4 @@
-# Processed on 2026-05-12 09:25:25
+# Processed on 2026-05-12 09:31:10
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -34,6 +34,7 @@ def vis_trim():
     # [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9C, data=0x0, Mask=0xFF, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9B, data=0x10, Mask=0x10, Default=0x81
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB2, data=0x0, Mask=0xF, Default=0x84
     # turn the Vmid buffer Vmid = Vddp/2
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x40, Mask=0x40, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x40, Mask=0x40, Default=0x0
