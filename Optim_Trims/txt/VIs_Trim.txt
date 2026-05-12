@@ -1,4 +1,4 @@
-# Processed on 2026-05-12 08:50:02
+# Processed on 2026-05-12 08:50:29
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -100,11 +100,8 @@ def vis_trim():
     ##########################  VI - VSNS GAIN CALCULATIONS ####################
     Scale_Factor = (5/5.5)
     Scale_Down = (64/2**20)
-    print(f'vsns_gain_vp_pretrim_code : {vsns_gain_vp_pretrim_code}, vsns_gain_vn_pretrim_code {vsns_gain_vn_pretrim_code}')
     ratio = (vsns_gain_vp_pretrim_code - vsns_gain_vn_pretrim_code)/ (2*2.5)
-    print(f'ratio : {ratio}')
     vsns_gain_calculated = -round(((ratio *vLSB ) -1 ) /Scale_Down) 
-    print(f'vsns_gain_calculated : {vsns_gain_calculated}')
     vns_gain_otp_code = dec_to_2complement(vsns_gain_calculated,vsns_gain_otp_length,False)
     ##########################  VI - V2I GAIN CALCULATIONS ####################
     V2I_gain = ((V2I_Igain_vp_pretrim_code  - V2I_Igain_vn_pretrim_code) /(vsns_gain_vp_pretrim_code - vsns_gain_vn_pretrim_code))
