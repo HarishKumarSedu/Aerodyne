@@ -94,8 +94,9 @@ def vis_trim():
     ##########################  VI - VSNS GAIN CALCULATIONS ####################
     Scale_Factor = (5/5.5)
     Scale_Down = (64/2**20)
-    ratio = (vsns_gain_vp_pretrim_code - vsns_gain_vn_pretrim_code)/ (2*pvdd_value)
-    vsns_gain_calculated = -round(((ratio *vLSB ) -1 ) /Scale_Down) 
+    vsns_pretrim_ratio = (vsns_gain_vp_pretrim_code - vsns_gain_vn_pretrim_code)/ (2*pvdd_value)
+    vsns_pretrim_gain_correction = (vsns_pretrim_ratio *vLSB ) -1
+    vsns_gain_calculated = -round(vsns_pretrim_gain_correction /Scale_Down) 
     vns_gain_otp_code = dec_to_2complement(vsns_gain_calculated,vsns_gain_otp_length,False)
     ##########################  VI - VSNS GAIN OTP  ####################
     I2C_WRITE("0x38", field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '000000YY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}, write_value=1)
@@ -112,6 +113,8 @@ def vis_trim():
     [vsns_gain_vn_posttrim_code,V2I_Igain_vn_pretrim_code] = samples_average([{'field':{'fieldname': 'v_sense', 'length': 16, 'registers': [{'REG': '0x69', 'POS': 0, 'RegisterName': 'V SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'v_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6A', 'POS': 0, 'RegisterName': 'V SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'v_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':0XC5DC},{'field':{'fieldname': 'i_sense', 'length': 16, 'registers': [{'REG': '0x6B', 'POS': 0, 'RegisterName': 'I SENSE readback reg 1', 'RegisterLength': 8, 'Name': 'i_sense[15:8]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 15, 'FieldLSB': 8, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x6C', 'POS': 0, 'RegisterName': 'I SENSE readback reg 2', 'RegisterLength': 8, 'Name': 'i_sense[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': 'YYYYYYYY', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':0XFD92}])
     vsns_gain_vn_posttrim_value = vsns_gain_vn_posttrim_code*vLSB
     V2I_Igain_vn_pretrim_value = V2I_Igain_vn_pretrim_code*cLSB
+    vsns_posttrim_ratio = (vsns_gain_vp_pretrim_code - vsns_gain_vn_pretrim_code)/ (2*pvdd_value)
+    vsns_posttrim_gain_correction = (vsns_posttrim_ratio *vLSB ) -1
     ##########################  VI - V2I GAIN CALCULATIONS ####################
     V2I_gain = ((V2I_Igain_vp_pretrim_code  - V2I_Igain_vn_pretrim_code) /(vsns_gain_vp_posttrim_code - vsns_gain_vn_posttrim_code))
     V2I_gain_scaled = -round(V2I_gain * (3/20)*(2**20/64))  # convert it to the 12bit value
@@ -133,6 +136,7 @@ def vis_trim():
     print('VSNS-GAIN:~')
     print(f'VSNS-GAIN PRE-TRIM  :VP+ :> [{vsns_gain_vp_pretrim_code:#04X}] {vsns_gain_vp_pretrim_value:0.6F} V , VN- :> [{vsns_gain_vn_pretrim_code:#04X}] {vsns_gain_vn_pretrim_value:0.6F} V')
     print(f'VSNS-GAIN TRIM OTP CODE  : {vns_gain_otp_code:#04X} ')
+    print(f'VSNS-GAIN CORRECTION     : PRE-> {vsns_pretrim_gain_correction:.8F}, POST-> {vsns_posttrim_gain_correction} ')
     print(f'VSNS-GAIN POST-TRIM :VP+ :> [{vsns_gain_vp_posttrim_code:#04X}] {vsns_gain_vp_posttrim_value:0.6F} V , VN- :> [{vsns_gain_vn_posttrim_code:#04X}] {vsns_gain_vn_posttrim_value:0.6F} V')
     print('V2I-GAIN ISNS:~')
     print(f'V2I-GAIN ISNS PRE-TRIM   : VP+    :> [{V2I_Igain_vp_pretrim_code:#04X}] {V2I_Igain_vp_pretrim_value:0.6F} A , VN- :> [{V2I_Igain_vn_pretrim_code:#04X}] {V2I_Igain_vn_pretrim_value:0.6F} A')
