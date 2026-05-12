@@ -19,6 +19,7 @@ def samples_average(fields=None, samples=8, sleep_time=5e-3):
             data[field_no] += complement(raw_data,field.get('length',16))
         sleep(sleep_time)
     # Correct averaging: divide by samples (right-shift by log2(samples))
+    print(data)
     shift_amount = samples.bit_length() - 1  # For samples=8, shift=3
     for field_no in range(no_fields):
         data[field_no] = round(data[field_no] / samples)
