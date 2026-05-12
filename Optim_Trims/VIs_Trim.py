@@ -195,9 +195,9 @@ def vis_trim():
     I2C_WRITE("0x38", field_info={'fieldname': 'tst_data_dwa', 'length': 9, 'registers': [{'REG': '0x11', 'POS': 0, 'RegisterName': 'DAC test 1', 'RegisterLength': 8, 'Name': 'tst_data_dwa[8]', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 8, 'FieldLSB': 8, 'Attribute': 'N000000N', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0x12', 'POS': 0, 'RegisterName': 'DAC test 2', 'RegisterLength': 8, 'Name': 'tst_data_dwa[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x00)
     I2C_WRITE("0x38", field_info={'fieldname': 'tst_dac', 'length': 1, 'registers': [{'REG': '0x11', 'POS': 7, 'RegisterName': 'DAC test 1', 'RegisterLength': 8, 'Name': 'tst_dac', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'N000000N', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x00)
     print('ISNS-GAIN:~')
-    print(f'ISNS-GAIN PRE-TRIM [{isns_gain_vp_current:.6F}A]   : VP+    :> [{ISNS_gain_vp_pretrim_code:#04X}] {ISNS_gain_vp_pretrim_value:0.6F} A , [{isns_gain_vn_current:.6F}A] VN- :> [{ISNS_gain_vn_pretrim_code:#04X}] {ISNS_gain_vn_pretrim_value:0.6F} A')
+    print(f'ISNS-GAIN PRE-TRIM [{isns_gain_vp_current:.6F} A ]   : VP+    :> [{ISNS_gain_vp_pretrim_code:#04X}] {ISNS_gain_vp_pretrim_value:0.6F} A , [{isns_gain_vn_current:.6F} A ] VN- :> [{ISNS_gain_vn_pretrim_code:#04X}] {ISNS_gain_vn_pretrim_value:0.6F} A')
     print(f'ISNS-GAIN TRIM OTP CODE   : {ISNS_gain_otp_code:#04X} ')
-    print(f'ISNS-GAIN POST-TRIM  [{isns_gain_vp_current:.6F}A] : VP+    :> [{ISNS_gain_vp_post_code:#04X}] {ISNS_gain_vp_post_code_value:0.6F} A , [{isns_gain_vn_current:.6F}A] VN- :> [{ISNS_gain_vn_postrim_code:#04X}] {ISNS_gain_vn_postrim_value:0.6F} A')
+    print(f'ISNS-GAIN POST-TRIM  [{isns_gain_vp_current:.6F} A ] : VP+    :> [{ISNS_gain_vp_post_code:#04X}] {ISNS_gain_vp_post_code_value:0.6F} A , [{isns_gain_vn_current:.6F} A ] VN- :> [{ISNS_gain_vn_postrim_code:#04X}] {ISNS_gain_vn_postrim_value:0.6F} A')
     
 if __name__ == '__main__':
     vis_trim()

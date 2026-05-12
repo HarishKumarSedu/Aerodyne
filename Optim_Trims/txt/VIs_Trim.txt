@@ -1,4 +1,4 @@
-# Processed on 2026-05-12 12:43:19
+# Processed on 2026-05-12 12:43:59
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -213,9 +213,9 @@ def vis_trim():
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x12, data=0x0, Mask=0xFF, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x11, data=0x0, Mask=0x80, Default=0x0
     print('ISNS-GAIN:~')
-    print(f'ISNS-GAIN PRE-TRIM [{isns_gain_vp_current:.6F}A]   : VP+    :> [{ISNS_gain_vp_pretrim_code:#04X}] {ISNS_gain_vp_pretrim_value:0.6F} A , [{isns_gain_vn_current:.6F}A] VN- :> [{ISNS_gain_vn_pretrim_code:#04X}] {ISNS_gain_vn_pretrim_value:0.6F} A')
+    print(f'ISNS-GAIN PRE-TRIM [{isns_gain_vp_current:.6F} A ]   : VP+    :> [{ISNS_gain_vp_pretrim_code:#04X}] {ISNS_gain_vp_pretrim_value:0.6F} A , [{isns_gain_vn_current:.6F} A ] VN- :> [{ISNS_gain_vn_pretrim_code:#04X}] {ISNS_gain_vn_pretrim_value:0.6F} A')
     print(f'ISNS-GAIN TRIM OTP CODE   : {ISNS_gain_otp_code:#04X} ')
-    print(f'ISNS-GAIN POST-TRIM  [{isns_gain_vp_current:.6F}A] : VP+    :> [{ISNS_gain_vp_post_code:#04X}] {ISNS_gain_vp_post_code_value:0.6F} A , [{isns_gain_vn_current:.6F}A] VN- :> [{ISNS_gain_vn_postrim_code:#04X}] {ISNS_gain_vn_postrim_value:0.6F} A')
+    print(f'ISNS-GAIN POST-TRIM  [{isns_gain_vp_current:.6F} A ] : VP+    :> [{ISNS_gain_vp_post_code:#04X}] {ISNS_gain_vp_post_code_value:0.6F} A , [{isns_gain_vn_current:.6F} A ] VN- :> [{ISNS_gain_vn_postrim_code:#04X}] {ISNS_gain_vn_postrim_value:0.6F} A')
     
 if __name__ == '__main__':
     vis_trim()
