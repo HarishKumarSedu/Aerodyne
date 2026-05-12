@@ -1,4 +1,4 @@
-# Processed on 2026-05-12 08:53:33
+# Processed on 2026-05-12 08:53:53
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -74,7 +74,7 @@ def vis_trim():
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1B, data=0x0, Mask=0x40, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x1A, data=0x0, Mask=0x40, Default=0x0
     ##########################  VI - VSNS GAIN #############################
-    pvdd_value = VFORCE("PVDD","GND",2.5,0.01)
+    pvdd_value = VFORCE("PVDD","GND",2.5,0)
     vsns_gain_otp_length = {'fieldname': 'otp_vsense_gain', 'length': 14, 'registers': [{'REG': '0xB9', 'POS': 0, 'RegisterName': 'OTP FIELDS 9', 'RegisterLength': 8, 'Name': 'otp_vsense_gain[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xCC', 'POS': 0, 'RegisterName': 'OTP FIELDS 28', 'RegisterLength': 8, 'Name': 'otp_vsense_gain[13:8]', 'Mask': '0x3F', 'Length': 6, 'FieldMSB': 13, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get( 'length',14)
     v2i_gain_otp_length = {'fieldname': 'otp_isense_from_vsense_gain', 'length': 12, 'registers': [{'REG': '0xBF', 'POS': 0, 'RegisterName': 'OTP FIELDS 15 - TRACEABILITY 3', 'RegisterLength': 8, 'Name': 'otp_isense_from_vsense_gain[11:8]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 11, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xC0', 'POS': 0, 'RegisterName': 'OTP FIELDS 16 - TRACEABILITY 4', 'RegisterLength': 8, 'Name': 'otp_isense_from_vsense_gain[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get( 'length',7)
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
