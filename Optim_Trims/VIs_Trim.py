@@ -21,7 +21,7 @@ def samples_average(fields=None, samples=8, sleep_time=5e-3):
     # Correct averaging: divide by samples (right-shift by log2(samples))
     shift_amount = samples.bit_length() - 1  # For samples=8, shift=3
     for field_no in range(no_fields):
-        data[field_no] = round(data[field_no] / samples)
+        data[field_no] = data[field_no] >> shift_amount
     return data
 def vis_trim():
     test_name = 'VIs_Trim'
