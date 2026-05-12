@@ -1,4 +1,4 @@
-# Processed on 2026-05-12 10:00:13
+# Processed on 2026-05-12 10:02:48
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -160,7 +160,8 @@ def vis_trim():
     initial_v = VFORCE("PVDD","GND",3.7,0)
     init_v = initial_v
     while True:
-        isns_gain_vp_current = AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) # 1% error
+        # isns_gain_vp_current must alsways posotive , lab purpose we are making abs
+        isns_gain_vp_current = abs(AFORCE(signal="OUTP",reference="OUTN",value=-source_current, error_spread=source_current*0.01) )
         VFORCE(signal="PVDD",reference="GND",value=init_v)
         if isns_gain_vp_current < 345e-3 and isns_gain_vp_current > 100e-3: # check if the current is sourced successfully, with 1% margin
           break
@@ -183,8 +184,9 @@ def vis_trim():
     ISNS_gain_vn_pretrim_value = ISNS_gain_vn_pretrim_code*cLSB
     AFORCE(signal="OUTP",reference="OUTN",value=float('Inf'))
     ###### ISNS GAIN CALCULATIONS ##############
-    # m = (isns_gain_vp_current - isns_gain_vn_current) / ((ISNS_gain_vp_pretrim_code - ISNS_gain_vn_pretrim_code) * cLSB)
-    m = (2*0.340) / ((ISNS_gain_vp_pretrim_code - ISNS_gain_vn_pretrim_code) * cLSB)
+    print(isns_gain_vp_current,isns_gain_vn_current)
+    m = (isns_gain_vp_current - isns_gain_vn_current) / ((ISNS_gain_vp_pretrim_code - ISNS_gain_vn_pretrim_code) * cLSB)
+    # m = (2*0.340) / ((ISNS_gain_vp_pretrim_code - ISNS_gain_vn_pretrim_code) * cLSB)
     gain =  m - 1
     isns_gain_code = round(gain * ((2 ** 20) / 64)) 
     ISNS_gain_otp_code = dec_to_2complement(isns_gain_code,14,False)
