@@ -18,7 +18,8 @@ def bgs_trim():
     }
     lsb_v = 7.57e-3 # 7.57mV
     num_bits=4
-    percentage = 2.5e-2 # 2.5% deviation
+    # percentage = 2.5e-2 # 2.5% deviation
+    percentage = lsb_v*4 # 4lsbs
     min_code    = -(2 ** (num_bits - 1))        # e.g. -8  for 4-bit
     max_code    =  (2 ** (num_bits - 1)) - 1    # e.g. +7  for 4-bit
     data={}
@@ -51,8 +52,8 @@ def bgs_trim():
         posttrim_bg_measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=target,error_spread=lsb_v/2) - buffer_offset
         min_error = (posttrim_bg_measured_value - target) /  target *100
         ############### LIMIT CHECK #######################
-        lower_limit = target - target*percentage
-        higher_limit = target + target*percentage
+        lower_limit = target - percentage
+        higher_limit = target + percentage
         if lower_limit < posttrim_bg_measured_value < higher_limit:
             print(f'{test_name} PASSED !!!')
         else:
