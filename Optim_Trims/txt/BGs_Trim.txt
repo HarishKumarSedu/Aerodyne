@@ -1,4 +1,4 @@
-# Processed on 2026-05-14 09:25:43
+# Processed on 2026-05-14 09:26:38
 from dfttools import *
 
 def bgs_trim():
@@ -104,8 +104,10 @@ def bgs_trim():
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCD, data=otp_trim_code, Mask=0xF, Default=0x0
     posttrim_ldo_measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=LDO_TARGET,error_spread=LDO_LSB/2)
     ############### LIMIT CHECK #######################
-    lower_limit = LDO_TARGET - LDO_TARGET*LDO_ERROR_PERCENTAGE
-    higher_limit = LDO_TARGET + LDO_TARGET*LDO_ERROR_PERCENTAGE
+    # lower_limit = LDO_TARGET - LDO_TARGET*LDO_ERROR_PERCENTAGE
+    # higher_limit = LDO_TARGET + LDO_TARGET*LDO_ERROR_PERCENTAGE
+    lower_limit = LDO_TARGET - 4*LDO_LSB
+    higher_limit = LDO_TARGET + 4*LDO_LSB
     min_error = (posttrim_ldo_measured_value - LDO_TARGET) /  LDO_TARGET *100
     if lower_limit < posttrim_ldo_measured_value < higher_limit:
         print(f'{test_name} PASSED !!!')

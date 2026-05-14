@@ -103,8 +103,10 @@ def bgs_trim():
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_ref_self_ref_trm_0v4', 'length': 4, 'registers': [{'REG': '0xCD', 'POS': 0, 'RegisterName': 'OTP FIELDS 29', 'RegisterLength': 8, 'Name': 'otp_ds_ref_self_ref_trm_0v4[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=otp_trim_code)
     posttrim_ldo_measured_value = VMEASURE(signal="IODATA1", reference="GND", expected_value=LDO_TARGET,error_spread=LDO_LSB/2)
     ############### LIMIT CHECK #######################
-    lower_limit = LDO_TARGET - LDO_TARGET*LDO_ERROR_PERCENTAGE
-    higher_limit = LDO_TARGET + LDO_TARGET*LDO_ERROR_PERCENTAGE
+    # lower_limit = LDO_TARGET - LDO_TARGET*LDO_ERROR_PERCENTAGE
+    # higher_limit = LDO_TARGET + LDO_TARGET*LDO_ERROR_PERCENTAGE
+    lower_limit = LDO_TARGET - 4*LDO_LSB
+    higher_limit = LDO_TARGET + 4*LDO_LSB
     min_error = (posttrim_ldo_measured_value - LDO_TARGET) /  LDO_TARGET *100
     if lower_limit < posttrim_ldo_measured_value < higher_limit:
         print(f'{test_name} PASSED !!!')
