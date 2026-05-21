@@ -1,4 +1,4 @@
-# Processed on 2026-05-21 08:48:40
+# Processed on 2026-05-21 08:49:32
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -91,7 +91,7 @@ def gpadc_vbat_gain_off_trim():
     print(f'VB0 (@ 2.8V) : {VB0_2P8v_posttrim_V:.6F} V , CODE0 : [ {VB0_2P8v_posttrim_code :#04X} ]')
     print(f'VB1 (@ 4.8V) : {VB1_4P8v_posttrim_V:.6F} V , CODE1 : [ {VB1_4P8v_posttrim_code :#04X} ]')
     print(f'VBAT POST :> GAIN : {vbat_posttrim_gain:.6F}, OFFSET : {vbat_posttrim_offset:.6F}')
-    print(f'VBAT-GAIN OTP CODE : [ {vbat_gain_otp_code:#04X} ], VBAT-OFFSET OTP CODE : [ {vbat_offset_otp_code:#04X} ]')
+    
     
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x0F, data=0x0, Mask=0x1, Default=0x0

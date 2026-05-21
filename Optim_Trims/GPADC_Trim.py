@@ -89,7 +89,7 @@ def gpadc_vbat_gain_off_trim():
     print(f'VB0 (@ 2.8V) : {VB0_2P8v_posttrim_V:.6F} V , CODE0 : [ {VB0_2P8v_posttrim_code :#04X} ]')
     print(f'VB1 (@ 4.8V) : {VB1_4P8v_posttrim_V:.6F} V , CODE1 : [ {VB1_4P8v_posttrim_code :#04X} ]')
     print(f'VBAT POST :> GAIN : {vbat_posttrim_gain:.6F}, OFFSET : {vbat_posttrim_offset:.6F}')
-    print(f'VBAT-GAIN OTP CODE : [ {vbat_gain_otp_code:#04X} ], VBAT-OFFSET OTP CODE : [ {vbat_offset_otp_code:#04X} ]')
+    
     
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0x0)
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'global_en', 'length': 1, 'registers': [{'REG': '0x0F', 'POS': 0, 'RegisterName': 'GLOBAL_EN_REG', 'RegisterLength': 8, 'Name': 'global_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '0000000Y', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0x0)
