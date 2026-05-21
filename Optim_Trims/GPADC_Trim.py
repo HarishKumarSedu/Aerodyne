@@ -47,7 +47,6 @@ def gpadc_vbat_gain_off_trim():
     vbat_gain=(VB1_4P8v_pretrim_V-VB0_2P8v_pretrim_V)/(VB1_4P8v_pretrim_code-VB0_2P8v_pretrim_code)
     vbat_off=round((VB0_2P8v_pretrim_V/vbat_gain)-VB0_2P8v_pretrim_code)
     vbat_gain_correction_scaled=round((vbat_gain/VBAT_LSB-1)*1024)
-    print(vbat_gain_correction_scaled,vbat_gain_otp_length)
     # complement the value 
     vbat_gain_otp_code = dec_to_2complement(vbat_gain_correction_scaled,vbat_gain_otp_length,False)
     vbat_offset_otp_code = dec_to_2complement(vbat_off,vbat_offset_otp_length,False)
@@ -57,6 +56,7 @@ def gpadc_vbat_gain_off_trim():
     print(f'GPADC-VBAT GAIN OFFSET :~')
     print(f'VB0 (@ 2.8V) : {VB0_2P8v_pretrim_V:.6F} V , CODE0 : [ {VB0_2P8v_pretrim_code :#04X} ]')
     print(f'VB1 (@ 2.8V) : {VB1_4P8v_pretrim_V:.6F} V , CODE1 : [ {VB1_4P8v_pretrim_code :#04X} ]')
+    print(f'VBAT PRE-GAIN: {vbat_gain:.6F}')
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'i2c_page_sel_1', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel_1', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=1)
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_sar_offs', 'length': 10, 'registers': [{'REG': '0xBF', 'POS': 4, 'RegisterName': 'OTP FIELDS 15 - TRACEABILITY 3', 'RegisterLength': 8, 'Name': 'otp_sar_offs[9:8]', 'Mask': '0x30', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xC1', 'POS': 0, 'RegisterName': 'OTP FIELDS 17 - TRACEABILITY 5', 'RegisterLength': 8, 'Name': 'otp_sar_offs[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=vbat_offset_otp_code)
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_sar_gain_vbat', 'length': 8, 'registers': [{'REG': '0xC2', 'POS': 0, 'RegisterName': 'OTP FIELDS 18 - TRACEABILITY 6', 'RegisterLength': 8, 'Name': 'otp_sar_gain_vbat[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=vbat_gain_otp_code)
