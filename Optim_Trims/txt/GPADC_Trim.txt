@@ -1,4 +1,4 @@
-# Processed on 2026-05-21 08:58:25
+# Processed on 2026-05-21 08:59:16
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -69,7 +69,7 @@ def gpadc_vbat_gain_off_trim():
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC1, data=vbat_offset_otp_code, Mask=0xFF, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC2, data=vbat_gain_otp_code, Mask=0xFF, Default=0x0
     ####################### PRETRIM-LOG #######################
-    print(f'GPADC-VBAT GAIN OFFSET :~')
+    print(f'GPADC-VBAT PRETRIM GAIN OFFSET :~')
     VB0_2P8v_pretrim_cal_V = VB0_2P8v_pretrim_code*VBAT_LSB
     VB1_4P8v_pretrim_cal_V = VB1_4P8v_pretrim_code*VBAT_LSB
     print(f'VB0 (@ 2.8V) : {VB0_2P8v_pretrim_V:.6F} V , CAL : [ {VB0_2P8v_pretrim_code :#04X} ] {VB0_2P8v_pretrim_cal_V:.6f} V')
@@ -91,7 +91,7 @@ def gpadc_vbat_gain_off_trim():
     vbat_posttrim_offset = posttrim_results['vbat_off']
 
     ####################### PRETRIM-LOG #######################
-    print(f'GPADC-VBAT GAIN OFFSET :~')
+    print(f'GPADC-VBAT POSTTRIM GAIN OFFSET :~')
     VB0_2P8v_posttrim_cal_V = VB0_2P8v_posttrim_code*VBAT_LSB
     VB1_4P8v_posttrim_cal_V = VB1_4P8v_posttrim_code*VBAT_LSB
     VB2_3P7v_posttrim_cal_V = VB2_3P7v_posttrim_code*VBAT_LSB

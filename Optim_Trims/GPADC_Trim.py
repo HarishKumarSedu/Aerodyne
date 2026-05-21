@@ -67,7 +67,7 @@ def gpadc_vbat_gain_off_trim():
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_sar_offs', 'length': 10, 'registers': [{'REG': '0xBF', 'POS': 4, 'RegisterName': 'OTP FIELDS 15 - TRACEABILITY 3', 'RegisterLength': 8, 'Name': 'otp_sar_offs[9:8]', 'Mask': '0x30', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xC1', 'POS': 0, 'RegisterName': 'OTP FIELDS 17 - TRACEABILITY 5', 'RegisterLength': 8, 'Name': 'otp_sar_offs[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=vbat_offset_otp_code)
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_sar_gain_vbat', 'length': 8, 'registers': [{'REG': '0xC2', 'POS': 0, 'RegisterName': 'OTP FIELDS 18 - TRACEABILITY 6', 'RegisterLength': 8, 'Name': 'otp_sar_gain_vbat[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=vbat_gain_otp_code)
     ####################### PRETRIM-LOG #######################
-    print(f'GPADC-VBAT GAIN OFFSET :~')
+    print(f'GPADC-VBAT PRETRIM GAIN OFFSET :~')
     VB0_2P8v_pretrim_cal_V = VB0_2P8v_pretrim_code*VBAT_LSB
     VB1_4P8v_pretrim_cal_V = VB1_4P8v_pretrim_code*VBAT_LSB
     print(f'VB0 (@ 2.8V) : {VB0_2P8v_pretrim_V:.6F} V , CAL : [ {VB0_2P8v_pretrim_code :#04X} ] {VB0_2P8v_pretrim_cal_V:.6f} V')
@@ -89,7 +89,7 @@ def gpadc_vbat_gain_off_trim():
     vbat_posttrim_offset = posttrim_results['vbat_off']
 
     ####################### PRETRIM-LOG #######################
-    print(f'GPADC-VBAT GAIN OFFSET :~')
+    print(f'GPADC-VBAT POSTTRIM GAIN OFFSET :~')
     VB0_2P8v_posttrim_cal_V = VB0_2P8v_posttrim_code*VBAT_LSB
     VB1_4P8v_posttrim_cal_V = VB1_4P8v_posttrim_code*VBAT_LSB
     VB2_3P7v_posttrim_cal_V = VB2_3P7v_posttrim_code*VBAT_LSB
