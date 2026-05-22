@@ -1,4 +1,4 @@
-# Processed on 2026-05-22 08:17:06
+# Processed on 2026-05-22 10:02:46
 from dfttools import *
 def limit_check(target:0.0,measured:0.0,error_percentage:0.0):
     lower_limit = target - target*error_percentage
@@ -26,7 +26,7 @@ def ref_analog_tests():
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x80, Mask=0x80, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x40, Mask=0x40, Default=0x0
     for testname, test_values in BUFFER_VOLTAGE_TESTS.items():
-        testsel_code = test_values.get('test_values',0)
+        testsel_code = test_values.get('testsel_code',0)
         target = test_values.get('target',0)
         erro_percentage = test_values.get('error%',0)
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=testsel_code, Mask=0xF, Default=0x0 # PROGRAM THE TEST SEL CODE 
@@ -46,7 +46,7 @@ def ref_analog_tests():
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x80, Default=0x0
     # NON BUFFERED MEASURED VOLTAGES
     for testname, test_values in VOLTAGE_TESTS.items():
-        testsel_code = test_values.get('test_values',0)
+        testsel_code = test_values.get('testsel_code',0)
         target = test_values.get('target',0)
         erro_percentage = test_values.get('error%',0)
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=testsel_code, Mask=0xF, Default=0x0 # PROGRAM THE TEST SEL CODE 
@@ -59,7 +59,7 @@ def ref_analog_tests():
     VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
     # CURRENT MEASURE TESTS
     for testname, test_values in CURRENT_TESTS.items():
-        testsel_code = test_values.get('test_values',0)
+        testsel_code = test_values.get('testsel_code',0)
         target = test_values.get('target',0)
         erro_percentage = test_values.get('error%',0)
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=testsel_code, Mask=0xF, Default=0x0 # PROGRAM THE TEST SEL CODE 

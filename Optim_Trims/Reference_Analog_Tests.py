@@ -25,7 +25,7 @@ def ref_analog_tests():
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en_vos_buff', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 7, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'ref_test_en_vos_buff', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en_buff', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 6, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'ref_test_en_buff', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
     for testname, test_values in BUFFER_VOLTAGE_TESTS.items():
-        testsel_code = test_values.get('test_values',0)
+        testsel_code = test_values.get('testsel_code',0)
         target = test_values.get('target',0)
         erro_percentage = test_values.get('error%',0)
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=testsel_code) # PROGRAM THE TEST SEL CODE 
@@ -45,7 +45,7 @@ def ref_analog_tests():
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en_vos_buff', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 7, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'ref_test_en_vos_buff', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
     # NON BUFFERED MEASURED VOLTAGES
     for testname, test_values in VOLTAGE_TESTS.items():
-        testsel_code = test_values.get('test_values',0)
+        testsel_code = test_values.get('testsel_code',0)
         target = test_values.get('target',0)
         erro_percentage = test_values.get('error%',0)
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=testsel_code) # PROGRAM THE TEST SEL CODE 
@@ -58,7 +58,7 @@ def ref_analog_tests():
     VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
     # CURRENT MEASURE TESTS
     for testname, test_values in CURRENT_TESTS.items():
-        testsel_code = test_values.get('test_values',0)
+        testsel_code = test_values.get('testsel_code',0)
         target = test_values.get('target',0)
         erro_percentage = test_values.get('error%',0)
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=testsel_code) # PROGRAM THE TEST SEL CODE 
