@@ -15,7 +15,7 @@ def ref_analog_tests():
     }
     VOLTAGE_TESTS = {
         'ANALDO_FEEDBACK' : {'target':0.461, 'testsel_code':2,'error%':5e-3,},
-        'SELF_LDO_1P2V_AON' : {'target':0.6, 'testsel_code':11,'error%':5e-3},
+        'SELF_LDO_1P2V_AON' : {'target':1.2, 'testsel_code':11,'error%':5e-3},
     }
     # BUFFERED MEASURED VOLTAGES
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en_vos_buff', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 7, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'ref_test_en_vos_buff', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)

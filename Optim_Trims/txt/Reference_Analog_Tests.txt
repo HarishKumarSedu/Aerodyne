@@ -1,4 +1,4 @@
-# Processed on 2026-05-22 08:03:02
+# Processed on 2026-05-22 08:03:23
 from dfttools import *
 def limit_check(target:0.0,measured:0.0,error_percentage:0.0):
     lower_limit = target - target*error_percentage
@@ -16,7 +16,7 @@ def ref_analog_tests():
     }
     VOLTAGE_TESTS = {
         'ANALDO_FEEDBACK' : {'target':0.461, 'testsel_code':2,'error%':5e-3,},
-        'SELF_LDO_1P2V_AON' : {'target':0.6, 'testsel_code':11,'error%':5e-3},
+        'SELF_LDO_1P2V_AON' : {'target':1.2, 'testsel_code':11,'error%':5e-3},
     }
     # BUFFERED MEASURED VOLTAGES
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x80, Mask=0x80, Default=0x0
