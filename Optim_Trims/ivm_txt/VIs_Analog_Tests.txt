@@ -1,0 +1,20 @@
+
+
+Command;Check;Page;SAD;ADD;DATA;MSB;LSB;Comment
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: fe; DATA: 1;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 16; DATA: 2;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 17; DATA: 1;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 17; DATA: 3;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 15; DATA: 1;;
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'V', 'Signal/SAD': 'IODATA1', 'Reference/ADD': 'ADDR', 'Value/DATA': 1.5, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 15; DATA: 5;;
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'V', 'Signal/SAD': 'IODATA1', 'Reference/ADD': 'ADDR', 'Value/DATA': 1.6, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'V', 'Signal/SAD': 'IODATA1', 'Reference/ADD': 'GND', 'Value/DATA': inf, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 15; DATA: 4;;
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'A', 'Signal/SAD': 'IODATA1', 'Reference/ADD': 'GND', 'Value/DATA': 1e-06, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'A', 'Signal/SAD': 'ADDR', 'Reference/ADD': 'GND', 'Value/DATA': 5e-07, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'A', 'Signal/SAD': 'IODATA1', 'Reference/ADD': 'GND', 'Value/DATA': inf, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 16; DATA: 0;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 17; DATA: 2;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 17; DATA: 0;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 15; DATA: 0;;

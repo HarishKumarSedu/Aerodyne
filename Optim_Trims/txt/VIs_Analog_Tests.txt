@@ -1,0 +1,60 @@
+# Processed on 2026-05-22 12:21:52
+from dfttools import *
+def limit_check(target:0.0,measured:0.0,error_percentage:0.0):
+    lower_limit = target - target*error_percentage
+    higher_limit = target + target*error_percentage
+    if measured < lower_limit or measured > higher_limit:
+        raise RuntimeError(f'FAIL ! , measured : {measured}, higherlimit : {higher_limit:.7f}, lowerlimit : {lower_limit:.7f}')
+    else:
+        print('Limits PASS!.')
+def vis_analog_tests():
+    test_name = 'VIs ANALOG TESTS'
+    print(f'............ {test_name} ........')
+    VOLTAGE_TESTS = {
+        'VIS_1V5_REF' : {'target':1.5, 'testsel_code':1,'error%':0.33E-2,},
+        'VIS_1V6_REF' : {'target':1.6, 'testsel_code':5,'error%':0.33E-2,},
+    }
+    CURRENT_TESTS = {
+        'VIS_CURR1_1uA' : {'target':1E-6, 'testsel_code':8,'error%':15e-3,},
+        'DIG_LDO_CURRENT' : {'target':0.5-6, 'testsel_code':13,'error%':5e-3},
+    }
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0  # Change page in regmap
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x2, Mask=0x2, Default=0x0  # Enable test mux
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x1, Mask=0x1, Default=0x0  
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x2, Mask=0x2, Default=0x0  
+
+    for testname, test_values in VOLTAGE_TESTS.items():
+        testsel_code = test_values.get('testsel_code',0)
+        target = test_values.get('target',0)
+        erro_percentage = test_values.get('error%',0)
+        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=testsel_code, Mask=0xF, Default=0x0 # PROGRAM THE TEST SEL CODE 
+        targeted_measured_v = VMEASURE(signal="IODATA1", reference="ADDR", expected_value=target,error_spread=1e-3) 
+        ############### LOG THE RESULTS ##################
+        print(f'VIS TEST {testname} RESULTS :~')
+        print(f"TARGET {target:.7F} V : MEASURED {targeted_measured_v:.7F} V")
+        print(f'VIS TEST {testname} LIMIT CHECK :~')
+        limit_check(target,targeted_measured_v,erro_percentage)
+    VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
+    # CURRENT MEASURE TESTS
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x4, Mask=0xF, Default=0x0
+    vis_curr1_1ua = AMEASURE(signal="IODATA1", reference="GND", expected_value=1E-6,error_spread=1e-9) 
+    ############### LOG THE RESULTS ##################
+    print(f'VIS TEST CURRENT1 1uA RESULTS :~')
+    print(f"TARGET 1uA : MEASURED {vis_curr1_1ua/1e-6:.7F} A")
+    print(f'VIS TEST  CURRENT1 1uA LIMIT CHECK :~')
+    limit_check(1e-6,vis_curr1_1ua,10e-2)
+    vis_curr1_0p5ua = AMEASURE(signal="ADDR", reference="GND", expected_value=0.5E-6,error_spread=1e-9) 
+    ############### LOG THE RESULTS ##################
+    print(f'VIS TEST CURRENT2 0.5uA RESULTS :~')
+    print(f"TARGET 0.5uA : MEASURED {vis_curr1_0p5ua/1e-6:.7F} A")
+    print(f'VIS TEST  CURRENT1 1uA LIMIT CHECK :~')
+    limit_check(0.5e-6,vis_curr1_0p5ua,10e-2)
+    AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x2, Default=0x0  # Enable test mux
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0  
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0  
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
+if __name__ == '__main__':
+    vis_analog_tests()
+        
+        
