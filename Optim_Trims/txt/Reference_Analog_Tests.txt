@@ -1,4 +1,4 @@
-# Processed on 2026-05-22 07:56:39
+# Processed on 2026-05-22 08:03:02
 from dfttools import *
 def limit_check(target:0.0,measured:0.0,error_percentage:0.0):
     lower_limit = target - target*error_percentage
@@ -14,6 +14,11 @@ def ref_analog_tests():
         'PVDD_UVLO' : {'target':0.4, 'testsel_code':1,'error%':10e-3,},
         'BG_0V4' : {'target':0.6, 'testsel_code':7,'error%':4e-3},
     }
+    VOLTAGE_TESTS = {
+        'ANALDO_FEEDBACK' : {'target':0.461, 'testsel_code':2,'error%':5e-3,},
+        'SELF_LDO_1P2V_AON' : {'target':0.6, 'testsel_code':11,'error%':5e-3},
+    }
+    # BUFFERED MEASURED VOLTAGES
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x80, Mask=0x80, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x40, Mask=0x40, Default=0x0
     for testname, test_values in BUFFER_VOLTAGE_TESTS.items():
@@ -33,8 +38,20 @@ def ref_analog_tests():
         print(f"TARGET {target:.7F} V : MEASURED {targeted_measured_v:.7F} V")
         print(f'REFERENCE TEST {testname} LIMIT CHECK :~')
         limit_check(target,targeted_measured_v,erro_percentage)
-    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x80, Mask=0x80, Default=0x0
-    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x40, Mask=0x40, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x80, Default=0x0
+    # NON BUFFERED MEASURED VOLTAGES
+    for testname, test_values in VOLTAGE_TESTS.items():
+        testsel_code = test_values.get('test_values',0)
+        target = test_values.get('target',0)
+        erro_percentage = test_values.get('error%',0)
+        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=testsel_code, Mask=0xF, Default=0x0 # PROGRAM THE TEST SEL CODE 
+        targeted_measured_v = VMEASURE(signal="IODATA1", reference="GND", expected_value=target,error_spread=1e-3) 
+        ############### LOG THE RESULTS ##################
+        print(f'REFERENCE TEST {testname} RESULTS :~')
+        print(f"TARGET {target:.7F} V : MEASURED {targeted_measured_v:.7F} V")
+        print(f'REFERENCE TEST {testname} LIMIT CHECK :~')
+        limit_check(target,targeted_measured_v,erro_percentage)
 
 if __name__ == '__main__':
     ref_analog_tests()

@@ -13,6 +13,11 @@ def ref_analog_tests():
         'PVDD_UVLO' : {'target':0.4, 'testsel_code':1,'error%':10e-3,},
         'BG_0V4' : {'target':0.6, 'testsel_code':7,'error%':4e-3},
     }
+    VOLTAGE_TESTS = {
+        'ANALDO_FEEDBACK' : {'target':0.461, 'testsel_code':2,'error%':5e-3,},
+        'SELF_LDO_1P2V_AON' : {'target':0.6, 'testsel_code':11,'error%':5e-3},
+    }
+    # BUFFERED MEASURED VOLTAGES
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en_vos_buff', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 7, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'ref_test_en_vos_buff', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en_buff', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 6, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'ref_test_en_buff', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
     for testname, test_values in BUFFER_VOLTAGE_TESTS.items():
@@ -32,8 +37,20 @@ def ref_analog_tests():
         print(f"TARGET {target:.7F} V : MEASURED {targeted_measured_v:.7F} V")
         print(f'REFERENCE TEST {testname} LIMIT CHECK :~')
         limit_check(target,targeted_measured_v,erro_percentage)
-    I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en_vos_buff', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 7, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'ref_test_en_vos_buff', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
-    I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en_buff', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 6, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'ref_test_en_buff', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x1)
+    I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en_buff', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 6, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'ref_test_en_buff', 'Mask': '0x40', 'Length': 1, 'FieldMSB': 6, 'FieldLSB': 6, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
+    I2C_WRITE(device_address="0x38",field_info={'fieldname': 'ref_test_en_vos_buff', 'length': 1, 'registers': [{'REG': '0x10', 'POS': 7, 'RegisterName': 'FORCING_REG_2', 'RegisterLength': 8, 'Name': 'ref_test_en_vos_buff', 'Mask': '0x80', 'Length': 1, 'FieldMSB': 7, 'FieldLSB': 7, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x0)
+    # NON BUFFERED MEASURED VOLTAGES
+    for testname, test_values in VOLTAGE_TESTS.items():
+        testsel_code = test_values.get('test_values',0)
+        target = test_values.get('target',0)
+        erro_percentage = test_values.get('error%',0)
+        I2C_WRITE(device_address="0x38",field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=testsel_code) # PROGRAM THE TEST SEL CODE 
+        targeted_measured_v = VMEASURE(signal="IODATA1", reference="GND", expected_value=target,error_spread=1e-3) 
+        ############### LOG THE RESULTS ##################
+        print(f'REFERENCE TEST {testname} RESULTS :~')
+        print(f"TARGET {target:.7F} V : MEASURED {targeted_measured_v:.7F} V")
+        print(f'REFERENCE TEST {testname} LIMIT CHECK :~')
+        limit_check(target,targeted_measured_v,erro_percentage)
 
 if __name__ == '__main__':
     ref_analog_tests()

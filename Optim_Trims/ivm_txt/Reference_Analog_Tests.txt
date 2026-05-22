@@ -13,5 +13,9 @@ Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Force', 'Unit': 'V', 'Signal/SAD': '
 Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'V', 'Signal/SAD': 'IODATA1', 'Reference/ADD': 'GND', 'Value/DATA': 0.6, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
 Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Force', 'Unit': 'V', 'Signal/SAD': 'ADDR', 'Reference/ADD': 'GND', 'Value/DATA': inf, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
 Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'V', 'Signal/SAD': 'IODATA1', 'Reference/ADD': 'GND', 'Value/DATA': 0.6, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
-WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 10; DATA: c0;;
-WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 10; DATA: c0;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 10; DATA: 80;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 10; DATA: 0;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 15; DATA: 0;;
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'V', 'Signal/SAD': 'IODATA1', 'Reference/ADD': 'GND', 'Value/DATA': 0.461, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 15; DATA: 0;;
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'V', 'Signal/SAD': 'IODATA1', 'Reference/ADD': 'GND', 'Value/DATA': 0.6, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
