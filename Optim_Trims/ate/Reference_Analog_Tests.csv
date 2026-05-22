@@ -17,3 +17,9 @@ I2C,WR-Reg,0x38,0x15,0x0,1,
 Measure,V,IODATA1,GND,0.461,,"args=(), kwargs={}"
 I2C,WR-Reg,0x38,0x15,0x0,1,
 Measure,V,IODATA1,GND,1.2,,"args=(), kwargs={}"
+Measure,V,IODATA1,GND,inf,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0x15,0x0,1,
+Measure,A,IODATA1,GND,8e-07,,"args=(), kwargs={}"
+I2C,WR-Reg,0x38,0x15,0x0,1,
+Measure,A,IODATA1,GND,5e-07,,"args=(), kwargs={}"
+Measure,A,IODATA1,GND,inf,,"args=(), kwargs={}"

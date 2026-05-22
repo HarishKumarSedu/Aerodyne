@@ -1,4 +1,4 @@
-# Processed on 2026-05-22 08:03:23
+# Processed on 2026-05-22 08:15:06
 from dfttools import *
 def limit_check(target:0.0,measured:0.0,error_percentage:0.0):
     lower_limit = target - target*error_percentage
@@ -17,6 +17,10 @@ def ref_analog_tests():
     VOLTAGE_TESTS = {
         'ANALDO_FEEDBACK' : {'target':0.461, 'testsel_code':2,'error%':5e-3,},
         'SELF_LDO_1P2V_AON' : {'target':1.2, 'testsel_code':11,'error%':5e-3},
+    }
+    CURRENT_TESTS = {
+        'BG_CURRENT' : {'target':800E-9, 'testsel_code':8,'error%':15e-3,},
+        'DIG_LDO_CURRENT' : {'target':500E-9, 'testsel_code':13,'error%':5e-3},
     }
     # BUFFERED MEASURED VOLTAGES
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x80, Mask=0x80, Default=0x0
@@ -52,7 +56,21 @@ def ref_analog_tests():
         print(f"TARGET {target:.7F} V : MEASURED {targeted_measured_v:.7F} V")
         print(f'REFERENCE TEST {testname} LIMIT CHECK :~')
         limit_check(target,targeted_measured_v,erro_percentage)
-
+    VMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
+    # CURRENT MEASURE TESTS
+    for testname, test_values in CURRENT_TESTS.items():
+        testsel_code = test_values.get('test_values',0)
+        target = test_values.get('target',0)
+        erro_percentage = test_values.get('error%',0)
+        print(target,erro_percentage)
+        [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=testsel_code, Mask=0xF, Default=0x0 # PROGRAM THE TEST SEL CODE 
+        targeted_measured_a = AMEASURE(signal="IODATA1", reference="GND", expected_value=target,error_spread=0) 
+        ############### LOG THE RESULTS ##################
+        print(f'REFERENCE TEST {testname} RESULTS :~')
+        print(f"TARGET {target:.7F} A : MEASURED {targeted_measured_a:.7F} A")
+        print(f'REFERENCE TEST {testname} LIMIT CHECK :~')
+        limit_check(target,targeted_measured_a,erro_percentage)
+    AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
 if __name__ == '__main__':
     ref_analog_tests()
         
