@@ -1,7 +1,7 @@
-# Processed on 2026-05-22 11:52:15
+# Processed on 2026-05-22 11:55:57
 from dfttools import *
 def ref_digital_tests():
-    Test_Name = 'Analdo UVLO'
+    Test_Name = 'REFERENCE DIGITAL TESTS '
     print(f'............ {Test_Name} ........')
     # Enabling test page
     [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1

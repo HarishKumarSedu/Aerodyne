@@ -1,6 +1,6 @@
 from dfttools import *
 def ref_digital_tests():
-    Test_Name = 'Analdo UVLO'
+    Test_Name = 'REFERENCE DIGITAL TESTS '
     print(f'............ {Test_Name} ........')
     # Enabling test page
     I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1) # page 1
