@@ -25,3 +25,10 @@ Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'A', 'Signal/SAD':
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 15; DATA: 0;;
 Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'A', 'Signal/SAD': 'IODATA1', 'Reference/ADD': 'GND', 'Value/DATA': 5e-07, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
 Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'A', 'Signal/SAD': 'IODATA1', 'Reference/ADD': 'GND', 'Value/DATA': inf, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 16; DATA: 0;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 17; DATA: 0;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 17; DATA: 0;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 10; DATA: 0;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 10; DATA: 0;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 16; DATA: 0;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 15; DATA: 0;;

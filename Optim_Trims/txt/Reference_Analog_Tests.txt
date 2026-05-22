@@ -1,4 +1,4 @@
-# Processed on 2026-05-22 08:15:40
+# Processed on 2026-05-22 08:17:06
 from dfttools import *
 def limit_check(target:0.0,measured:0.0,error_percentage:0.0):
     lower_limit = target - target*error_percentage
@@ -70,6 +70,13 @@ def ref_analog_tests():
         print(f'REFERENCE TEST {testname} LIMIT CHECK :~')
         limit_check(target,targeted_measured_a,erro_percentage)
     AMEASURE(signal="IODATA1", reference="GND", expected_value=float('Inf'))
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x2, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x17, data=0x0, Mask=0x1, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x80, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x10, data=0x0, Mask=0x40, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x16, data=0x0, Mask=0x80, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=0x0, Mask=0xF, Default=0x0
 if __name__ == '__main__':
     ref_analog_tests()
         
