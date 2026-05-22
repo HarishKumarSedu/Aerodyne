@@ -1,0 +1,10 @@
+Instruction,Unit,Signal/SAD,Reference/ADD,Value/DATA,PAGE,Comments
+I2C,WR-Reg,0x38,0xfe,0x1,1,
+I2C,WR-Reg,0x38,0x3,0x1,1,
+I2C,WR-Reg,0x38,0x4,0x21,1,
+Trigger,,IOCLK0,GND,1.8,,"(), {'simulated_measured_value': 1.801}"
+Trigger,,IOCLK1,GND,1.8,,"(), {'simulated_measured_value': 1.801}"
+Trigger,,IOCLK0,GND,1.8,,"(), {'simulated_measured_value': inf}"
+Trigger,,IOCLK1,GND,1.8,,"(), {'simulated_measured_value': inf}"
+I2C,WR-Reg,0x38,0x3,0x0,1,
+I2C,WR-Reg,0x38,0x4,0x0,1,

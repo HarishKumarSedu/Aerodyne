@@ -1,0 +1,25 @@
+# Processed on 2026-05-22 11:52:15
+from dfttools import *
+def ref_digital_tests():
+    Test_Name = 'Analdo UVLO'
+    print(f'............ {Test_Name} ........')
+    # Enabling test page
+    [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
+    #Enabling digital TMUX
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x1, Mask=0x7F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x21, Mask=0x7F, Default=0x0
+
+    LH= 1.8 # 1.8V
+    Analdo_Trig_Status = VTRIG_LH(signal="IOCLK0", reference="GND", threshold=LH, expected_value=1.801)
+    BG_READY_Trig_Status = VTRIG_LH(signal="IOCLK1", reference="GND", threshold=LH, expected_value=1.801)
+    print(f'ANALDO COMPARATOR STATUS : {Analdo_Trig_Status}')
+    print(f'BG_READY COMPARATOR STATUS : {BG_READY_Trig_Status}')
+    VTRIG_LH(signal="IOCLK0", reference="GND", threshold=LH, expected_value=float('Inf'))# disconnect the scope
+    VTRIG_LH(signal="IOCLK1", reference="GND", threshold=LH, expected_value=float('Inf'))# disconnect the scope
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0
+
+
+if __name__ == '__main__':
+  ref_digital_tests()
+

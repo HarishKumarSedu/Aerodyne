@@ -1,0 +1,12 @@
+
+
+Command;Check;Page;SAD;ADD;DATA;MSB;LSB;Comment
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: fe; DATA: 1;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 3; DATA: 1;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 4; DATA: 21;;
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Trigger', 'Unit': '', 'Signal/SAD': 'IOCLK0', 'Reference/ADD': 'GND', 'Value/DATA': 1.8, 'PAGE': '', 'Comments': "(), {'simulated_measured_value': 1.801}"};
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Trigger', 'Unit': '', 'Signal/SAD': 'IOCLK1', 'Reference/ADD': 'GND', 'Value/DATA': 1.8, 'PAGE': '', 'Comments': "(), {'simulated_measured_value': 1.801}"};
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Trigger', 'Unit': '', 'Signal/SAD': 'IOCLK0', 'Reference/ADD': 'GND', 'Value/DATA': 1.8, 'PAGE': '', 'Comments': "(), {'simulated_measured_value': inf}"};
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Trigger', 'Unit': '', 'Signal/SAD': 'IOCLK1', 'Reference/ADD': 'GND', 'Value/DATA': 1.8, 'PAGE': '', 'Comments': "(), {'simulated_measured_value': inf}"};
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 3; DATA: 0;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 4; DATA: 0;;
