@@ -61,9 +61,8 @@ def ref_analog_tests():
         testsel_code = test_values.get('test_values',0)
         target = test_values.get('target',0)
         erro_percentage = test_values.get('error%',0)
-        print(target,erro_percentage)
         I2C_WRITE(device_address="0x38",field_info={'fieldname': 'test_sel', 'length': 4, 'registers': [{'REG': '0x15', 'POS': 0, 'RegisterName': 'ANA_TESTMUX_SEL', 'RegisterLength': 8, 'Name': 'test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=testsel_code) # PROGRAM THE TEST SEL CODE 
-        targeted_measured_a = AMEASURE(signal="IODATA1", reference="GND", expected_value=target,error_spread=0) 
+        targeted_measured_a = AMEASURE(signal="IODATA1", reference="GND", expected_value=target,error_spread=1e-9) 
         ############### LOG THE RESULTS ##################
         print(f'REFERENCE TEST {testname} RESULTS :~')
         print(f"TARGET {target:.7F} A : MEASURED {targeted_measured_a:.7F} A")

@@ -1,4 +1,4 @@
-# Processed on 2026-05-22 08:15:06
+# Processed on 2026-05-22 08:15:32
 from dfttools import *
 def limit_check(target:0.0,measured:0.0,error_percentage:0.0):
     lower_limit = target - target*error_percentage
@@ -62,9 +62,8 @@ def ref_analog_tests():
         testsel_code = test_values.get('test_values',0)
         target = test_values.get('target',0)
         erro_percentage = test_values.get('error%',0)
-        print(target,erro_percentage)
         [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x15, data=testsel_code, Mask=0xF, Default=0x0 # PROGRAM THE TEST SEL CODE 
-        targeted_measured_a = AMEASURE(signal="IODATA1", reference="GND", expected_value=target,error_spread=0) 
+        targeted_measured_a = AMEASURE(signal="IODATA1", reference="GND", expected_value=target,error_spread=1e-9) 
         ############### LOG THE RESULTS ##################
         print(f'REFERENCE TEST {testname} RESULTS :~')
         print(f"TARGET {target:.7F} A : MEASURED {targeted_measured_a:.7F} A")
