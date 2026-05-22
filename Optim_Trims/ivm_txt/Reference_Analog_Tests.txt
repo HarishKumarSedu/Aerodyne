@@ -28,7 +28,5 @@ Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Measure', 'Unit': 'A', 'Signal/SAD':
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 16; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 17; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 17; DATA: 0;;
-WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 10; DATA: 0;;
-WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 10; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 16; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 15; DATA: 0;;
