@@ -1,4 +1,4 @@
-# Processed on 2026-05-25 08:44:10
+# Processed on 2026-05-25 08:44:41
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -100,7 +100,7 @@ def gpadc_vbat_gain_off_trim():
     print(f'TEMP TARGET [ {target_temp_code:#04X} ] {TEMPERATURE_TARGET} C ; MEASURED : [ {temp_pretrim_code:#04X} ] { temp_pretrim_degree:.06f} C')
     print(f'TEMP OFFSET : {temp_off:.06F} ')
     print(f'GPADC FINAL OFFSET AND CODE :~')
-    print(f'OFFSET [ {gpadc_offset_code:04X} ] {gpadc_off}')
+    print(f'OFFSET [ {gpadc_offset_code:#04X} ] {gpadc_off}')
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
     ####################### POSTTRIM #######################
     # SET VBAT@2.8V and read the 8 sample averaged code
