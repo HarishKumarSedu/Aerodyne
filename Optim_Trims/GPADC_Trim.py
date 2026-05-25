@@ -56,6 +56,7 @@ def gpadc_vbat_gain_off_trim():
     off_max = 50  # in mV
     off_min_code = round(off_min/VBAT_LSB)
     off_max_code = round(off_max/VBAT_LSB)
+    print(f'off_min_code {off_min_code }, off_max_code : {off_max_code}')
     # SET VBAT@2.8V and read the 8 sample averaged code
     VB0_2P8v_pretrim_V = VFORCE(signal="PVDD", reference="GND", value=2.8,error_spread=0)
     [VB0_2P8v_pretrim_code]=samples_average([{'field':{'fieldname': 'vbat_meas', 'length': 10, 'registers': [{'REG': '0x23', 'POS': 0, 'RegisterName': 'VBAT measurement reg 1', 'RegisterLength': 8, 'Name': 'vbat_meas[9:8]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': '000000RR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x24', 'POS': 0, 'RegisterName': 'VBAT measurement reg 2', 'RegisterLength': 8, 'Name': 'vbat_meas[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':517}])
