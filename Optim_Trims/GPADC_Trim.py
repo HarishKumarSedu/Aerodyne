@@ -94,6 +94,11 @@ def gpadc_vbat_gain_off_trim():
     print(f'VB1 (@ 4.8V) : {VB1_4P8v_pretrim_V:.6F} V , CAL : [ {VB1_4P8v_pretrim_code :#04X} ] {VB1_4P8v_pretrim_cal_V:.6f} V')
     print(f'VBAT PRE :> GAIN : {vbat_pretrim_gain:.6F}, OFFSET : {vbat_pretrim_offset:.6F}')
     print(f'VBAT-GAIN OTP CODE : [ {vbat_gain_otp_code:#04X} ], VBAT-OFFSET OTP CODE : [ {vbat_offset_otp_code:#04X} ]')
+    print(f'GPADC-TEMP PRETRIM GAIN OFFSET :~')
+    print(f'TEMP TARGET [ {target_temp_code:#04X} ] {TEMPERATURE_TARGET} C ; MEASURED : [ {temp_pretrim_code:#04X} ] { temp_pretrim_degree:.06f} C')
+    print(f'TEMP OFFSET : {temp_off:.06F} ')
+    print(f'GPADC FINAL OFFSET AND CODE :~')
+    print(f'OFFSET [ {gpadc_offset_code:04X} ] {gpadc_off}')
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'i2c_page_sel', 'length': 1, 'registers': [{'REG': '0xFE', 'POS': 0, 'RegisterName': 'Page selection', 'RegisterLength': 8, 'Name': 'i2c_page_sel', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': '0000000N', 'Default': '0x00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0)
     ####################### POSTTRIM #######################
     # SET VBAT@2.8V and read the 8 sample averaged code
