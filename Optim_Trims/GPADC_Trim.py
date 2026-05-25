@@ -72,7 +72,7 @@ def gpadc_vbat_gain_off_trim():
     [temp_pretrim_code]=samples_average([{'field':{'fieldname': 'temp_meas', 'length': 10, 'registers': [{'REG': '0x21', 'POS': 0, 'RegisterName': 'TEMP measurement reg 1', 'RegisterLength': 8, 'Name': 'temp_meas[9:8]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': '000000RR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x22', 'POS': 0, 'RegisterName': 'TEMP measurement reg 2', 'RegisterLength': 8, 'Name': 'temp_meas[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':565}])
     temp_pretrim_degree = round( ((temp_pretrim_code-674)/(-1.628904))-40 )
     temp_off = temp_pretrim_code - target_temp_code
-    delta_off = temp_off - vbat_pretrim_gain
+    delta_off = temp_off - vbat_pretrim_offset
     ################## EVALUVATE THE FINAL OFFSET CODE ######
     if delta_off < off_min_code:
     	delta_off = off_min_code

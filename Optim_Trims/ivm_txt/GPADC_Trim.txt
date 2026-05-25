@@ -60,7 +60,7 @@ RR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 21; DATA: 2;;
 RR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 22; DATA: 35;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: fe; DATA: 1;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: bf; DATA: 0;;
-WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: c1; DATA: f;;
+WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: c1; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: c2; DATA: ea;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: fe; DATA: 0;;
 Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Force', 'Unit': 'V', 'Signal/SAD': 'PVDD', 'Reference/ADD': 'GND', 'Value/DATA': 2.8, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
