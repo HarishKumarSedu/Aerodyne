@@ -74,6 +74,7 @@ def gpadc_vbat_gain_off_trim():
     temp_pretrim_degree = round( ((temp_pretrim_code-674)/(-1.628904))-40 )
     temp_off = temp_pretrim_code - target_temp_code
     delta_off = temp_off - vbat_pretrim_offset
+    print(f'delta off : {delta_off}')
     ################## EVALUVATE THE FINAL OFFSET CODE ######
     if delta_off < off_min_code:
     	delta_off = off_min_code
