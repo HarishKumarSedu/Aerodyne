@@ -33,102 +33,102 @@ I2C,WR-Reg,0x38,0x3,0x2,1,
 I2C,WR-Reg,0x38,0x4,0x21,1,
 I2C,WR-Reg,0x38,0xb3,0x72,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.194702961653269}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8589230891266249}"
 I2C,WR-Reg,0x38,0xb3,0x71,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.080612379166651}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.878948257481456}"
 I2C,WR-Reg,0x38,0xb3,0x70,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.195490291513177}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.172374379413809}"
 I2C,WR-Reg,0x38,0xb3,0x6f,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8257561869791874}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8782591819024195}"
 I2C,WR-Reg,0x38,0xb3,0x6e,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.9902992598534255}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.117485956936975}"
 I2C,WR-Reg,0x38,0xb3,0x6d,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.086966030462357}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.2085291801734526}"
 I2C,WR-Reg,0x38,0xb3,0x6c,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.7852329768653032}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.131768436211365}"
 I2C,WR-Reg,0x38,0xb3,0x6b,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.1211244958299678}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.1335518843369563}"
 I2C,WR-Reg,0x38,0xb3,0x6a,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.155185371844606}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.9537339024870677}"
 I2C,WR-Reg,0x38,0xb3,0x69,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8144066572603827}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.21782869763829}"
 I2C,WR-Reg,0x38,0xb3,0x68,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.941478539207813}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.0494463272238277}"
 I2C,WR-Reg,0x38,0xb3,0x67,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.9894930222474805}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.9721155614379142}"
 I2C,WR-Reg,0x38,0xb3,0x66,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.7939251234953608}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.147529777064439}"
 I2C,WR-Reg,0x38,0xb3,0x65,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8680497601917883}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8901811922311105}"
 I2C,WR-Reg,0x38,0xb3,0x64,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.017945160861874}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.2036092427376537}"
 I2C,WR-Reg,0x38,0xb3,0x63,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.202664057286633}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.958120630364363}"
 I2C,WR-Reg,0x38,0xb3,0x62,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.7865597763288776}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8197303387780126}"
 I2C,WR-Reg,0x38,0xb3,0x61,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.9976111213095977}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.9414871493000532}"
 I2C,WR-Reg,0x38,0xb3,0x60,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8841403986662808}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.1279936641612442}"
 I2C,WR-Reg,0x38,0xb3,0x7f,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8795870578004994}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.2127193929763407}"
 I2C,WR-Reg,0x38,0xb3,0x7e,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.786169185338182}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.0449957240943237}"
 I2C,WR-Reg,0x38,0xb3,0x7d,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8590688719935087}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8448519733513118}"
 I2C,WR-Reg,0x38,0xb3,0x7c,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8465713864829716}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.9844509195135989}"
 I2C,WR-Reg,0x38,0xb3,0x7b,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8531801624616613}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8952162048723564}"
 I2C,WR-Reg,0x38,0xb3,0x7a,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.870324811936267}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.8438660205457695}"
 I2C,WR-Reg,0x38,0xb3,0x79,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.195782370740245}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.95966400429878}"
 I2C,WR-Reg,0x38,0xb3,0x78,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.1572199226860715}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.904229035523679}"
 I2C,WR-Reg,0x38,0xb3,0x77,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.00290780306735}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.1865643985937417}"
 I2C,WR-Reg,0x38,0xb3,0x76,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.892094546824829}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.172140234483152}"
 I2C,WR-Reg,0x38,0xb3,0x75,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.025959555701495}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.0390973923154716}"
 I2C,WR-Reg,0x38,0xb3,0x74,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 2.11809490109523}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.9583633950612738}"
 I2C,WR-Reg,0x38,0xb3,0x73,1,
 Force,V,PVDD,GND,2,,"args=(), kwargs={}"
-Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.9289473739981648}"
+Trigger,,IODATA0,GND,2.25,,"(), {'simulated_measured_value': 1.9716004067498643}"
 Force,V,PVDD,GND,3.7,,"args=(), kwargs={}"
-I2C,WR-Reg,0x38,0xb3,0x63,1,
+I2C,WR-Reg,0x38,0xb3,0x69,1,
 I2C,WR-Reg,0x38,0xfe,0x1,1,
 I2C,WR-Reg,0x38,0x1d,0xb0,1,
 I2C,WR-Reg,0x38,0x1d,0xb0,1,
