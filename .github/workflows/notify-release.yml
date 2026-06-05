@@ -1,0 +1,157 @@
+name: Notify Contributors on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Send Email Notifications via SMTP
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          GH_TOKEN:      ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG:   ${{ github.event.release.tag_name }}
+          RELEASE_URL:   ${{ github.event.release.html_url }}
+          RELEASE_NAME:  ${{ github.event.release.name }}
+          RELEASE_NOTES: ${{ github.event.release.body }}
+          RELEASE_DATE:  ${{ github.event.release.published_at }}
+          RELEASE_ID:    ${{ github.event.release.id }}          # ✅ needed to fetch artifacts
+          REPO:          ${{ github.repository }}
+        run: |
+          pip install requests --break-system-packages
+
+          python3 << 'EOF'
+          import smtplib
+          import os
+          import requests
+          from email.mime.multipart import MIMEMultipart
+          from email.mime.text import MIMEText
+
+          # SMTP Configuration
+          SMTP_HOST = os.environ["SMTP_HOST"]
+          SMTP_PORT = int(os.environ["SMTP_PORT"])
+          SMTP_USER = os.environ["SMTP_USER"]
+          SMTP_PASS = os.environ["SMTP_PASS"]
+
+          # GitHub Configuration
+          GH_TOKEN   = os.environ["GH_TOKEN"]
+          REPO       = os.environ["REPO"]
+          RELEASE_ID = os.environ["RELEASE_ID"]
+
+          # Release Info
+          RELEASE_TAG   = os.environ["RELEASE_TAG"]
+          RELEASE_URL   = os.environ["RELEASE_URL"]
+          RELEASE_NAME  = os.environ["RELEASE_NAME"]
+          RELEASE_NOTES = os.environ.get("RELEASE_NOTES", "No release notes provided.")
+          RELEASE_DATE  = os.environ.get("RELEASE_DATE", "")
+
+          # ✅ Fetch release assets/artifacts from GitHub API
+          headers = {"Authorization": f"token {GH_TOKEN}"}
+          assets_url = f"https://api.github.com/repos/{REPO}/releases/{RELEASE_ID}/assets"
+          assets_response = requests.get(assets_url, headers=headers).json()
+
+          # ✅ Build artifacts section
+          if assets_response:
+              artifacts_section = ""
+              for asset in assets_response:
+                  name         = asset.get("name", "Unknown")
+                  size         = asset.get("size", 0)
+                  download_url = asset.get("browser_download_url", "")
+                  download_count = asset.get("download_count", 0)
+
+                  # Convert size to human readable
+                  if size < 1024:
+                      size_str = f"{size} B"
+                  elif size < 1024 * 1024:
+                      size_str = f"{size/1024:.1f} KB"
+                  else:
+                      size_str = f"{size/(1024*1024):.1f} MB"
+
+                  artifacts_section += f"""
+          📎 {name}
+             Size      : {size_str}
+             Downloads : {download_count}
+             Link      : {download_url}
+          """
+          else:
+              artifacts_section = "  No artifacts attached to this release.\n"
+              artifacts_section += f"  Source code available at: {RELEASE_URL}\n"
+
+          # ✅ Contributors list
+          CONTRIBUTORS = [
+              "harishkumarsedu@gmail.com",
+              "harkum@inventvm.com",
+              "dgranozio@inventvm.com",
+              "mastra@inventvm.com",
+              "galfieri@inventvm.com",
+              "giolastella@inventvm.com",
+              "eoberti@inventvm.com",
+              "e.deledinghen@synergie-cad.fr",
+              "f.tocaben@synergie-cad.fr",
+          ]
+
+          # ✅ Email subject
+          subject = f"🚀 New Release: {RELEASE_NAME} ({RELEASE_TAG})"
+
+          # ✅ Email body
+          body = f"""
+          Hello,
+
+          A new release has been published in the {REPO} repository!
+
+          ═══════════════════════════════════════
+          📦 Release  : {RELEASE_NAME}
+          🏷️  Version  : {RELEASE_TAG}
+          📅 Date     : {RELEASE_DATE}
+          🔗 Link     : {RELEASE_URL}
+          ═══════════════════════════════════════
+
+          📋 Release Notes:
+          ───────────────────────────────────────
+          {RELEASE_NOTES}
+          ───────────────────────────────────────
+
+          📦 Release Artifacts:
+          ───────────────────────────────────────
+          {artifacts_section}
+          ───────────────────────────────────────
+
+          Please review the release notes and download
+          the artifacts from the links above.
+
+          Thanks,
+          IVM6315/Aerodyne Team
+          """
+
+          # Connect to SMTP and Send
+          try:
+              server = smtplib.SMTP(SMTP_HOST, SMTP_PORT)
+              server.ehlo()
+              server.starttls()
+              server.login(SMTP_USER, SMTP_PASS)
+
+              for recipient in CONTRIBUTORS:
+                  msg = MIMEMultipart()
+                  msg["From"]    = SMTP_USER
+                  msg["To"]      = recipient
+                  msg["Subject"] = subject
+                  msg.attach(MIMEText(body, "plain"))
+
+                  server.sendmail(SMTP_USER, recipient, msg.as_string())
+                  print(f"✅ Email sent to {recipient}")
+
+              server.quit()
+              print("🎉 All emails sent successfully!")
+
+          except Exception as e:
+              print(f"❌ Failed to send email: {e}")
+              exit(1)
+          EOF
