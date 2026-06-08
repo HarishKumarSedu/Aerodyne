@@ -1,9 +1,49 @@
-# Processed on 2025-11-28 08:48:18
+# Processed on 2026-06-08 15:09:24
 from dfttools import *
 from time import sleep
 
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
+
+from Procedures.utils import complement,dec_to_2complement
+def samples_average(fields=None, samples=8, sleep_time=5e-3):
+    if fields is None:
+        fields = []
+    no_fields = len(fields)
+    if no_fields == 0:
+        return []
+    # Initialize data with zeros for each field
+    data = [0] * no_fields
+    for i in range(samples):
+        for field_no in range(no_fields):
+            field = fields[field_no].get('field', {})
+            expected_value = fields[field_no].get('expected_value', 0xffff)
+            raw_data = I2C_READ("0x38", field_info=field, expected_value=expected_value)
+            data[field_no] += raw_data
+        sleep(sleep_time)
+    # Correct averaging: divide by samples (right-shift by log2(samples))
+    shift_amount = samples.bit_length() - 1  # For samples=8, shift=3
+    for field_no in range(no_fields):
+        data[field_no] = data[field_no] >> shift_amount
+    return data
+def vbat_gpadc_gain_offset_cal(data:{}):
+    VBAT_LSB=5.5/(2**10 -1)
+    vbat_gain_otp_length = {'fieldname': 'otp_sar_gain_vbat', 'length': 8, 'registers': [{'REG': '0xC2', 'POS': 0, 'RegisterName': 'OTP FIELDS 18 - TRACEABILITY 6', 'RegisterLength': 8, 'Name': 'otp_sar_gain_vbat[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get( 'length',8)
+    vbat_offset_otp_length = {'fieldname': 'otp_sar_offs', 'length': 10, 'registers': [{'REG': '0xBF', 'POS': 4, 'RegisterName': 'OTP FIELDS 15 - TRACEABILITY 3', 'RegisterLength': 8, 'Name': 'otp_sar_offs[9:8]', 'Mask': '0x30', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xC1', 'POS': 0, 'RegisterName': 'OTP FIELDS 17 - TRACEABILITY 5', 'RegisterLength': 8, 'Name': 'otp_sar_offs[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get( 'length',8)
+    VB1 = data.get('VB1')
+    VB0 = data.get('VB0')
+    CODE1 = data.get('CODE1')
+    CODE0 = data.get('CODE0')
+    vbat_gain=(VB1-VB0)/(CODE1-CODE0)
+    vbat_off=round((VB0/vbat_gain)-CODE0)
+    vbat_gain_correction_scaled=round((vbat_gain/VBAT_LSB-1)*1024)
+    # complement the value 
+    vbat_gain_otp_code = dec_to_2complement(vbat_gain_correction_scaled,vbat_gain_otp_length,False)
+    vbat_offset_otp_code = dec_to_2complement(vbat_off,vbat_offset_otp_length,False)
+    return {'vbat_gain':vbat_gain,'vbat_off':vbat_off,'vbat_gain_otp_code':vbat_gain_otp_code,'vbat_offset_otp_code':vbat_offset_otp_code}
+
+
+
 def gpadc_vbat_gain_off_trim():
     Test_Name = 'GPADC_Vbat_Gain__Off_Trim'
     print(f'............ {Test_Name} ........')

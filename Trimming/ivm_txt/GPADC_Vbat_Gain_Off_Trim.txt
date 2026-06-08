@@ -1,6 +1,9 @@
 
 
 Command;Check;Page;SAD;ADD;DATA;MSB;LSB;Comment
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Force', 'Unit': 'V', 'Signal/SAD': 'VDD', 'Reference/ADD': 'GND', 'Value/DATA': 1.8, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Force', 'Unit': 'V', 'Signal/SAD': 'RESETB', 'Reference/ADD': 'GND', 'Value/DATA': 1.8, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Force', 'Unit': 'V', 'Signal/SAD': 'PVDD', 'Reference/ADD': 'GND', 'Value/DATA': 3.7, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: fe; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 84; DATA: 97;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 83; DATA: 10;;
@@ -22,14 +25,17 @@ WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: fe; DATA: 1;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: 10; DATA: 2;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: cf; DATA: 82;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: d1; DATA: 1;;
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Force', 'Unit': 'Hz', 'Signal/SAD': 'IOCLK0', 'Reference/ADD': 'GND', 'Value/DATA': 3072000.0, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: fe; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: d8; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: d9; DATA: 20;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: de; DATA: f;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: df; DATA: 3;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: d6; DATA: 1;;
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Force', 'Unit': 'V', 'Signal/SAD': 'PVDD', 'Reference/ADD': 'GND', 'Value/DATA': 2.8, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
 RR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 23; DATA: 1;;
 RR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 24; DATA: fe;;
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Force', 'Unit': 'V', 'Signal/SAD': 'PVDD', 'Reference/ADD': 'GND', 'Value/DATA': 4.8, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
 RR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 23; DATA: 3;;
 RR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: 24; DATA: 80;;
 WR-Reg; CHECK: O; PAGE: 1; SAD: 38; ADD: fe; DATA: 1;;
@@ -43,3 +49,4 @@ WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: d8; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: d9; DATA: 0;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: de; DATA: c;;
 WR-Reg; CHECK: O; PAGE: 0; SAD: 38; ADD: da; DATA: 1;;
+Dl-sec; CHECK: O; 1;;;COM: {'Instruction': 'Force', 'Unit': 'Hz', 'Signal/SAD': 'IOCLK0', 'Reference/ADD': 'GND', 'Value/DATA': inf, 'PAGE': '', 'Comments': 'args=(), kwargs={}'};
