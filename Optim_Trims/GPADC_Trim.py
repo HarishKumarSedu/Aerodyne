@@ -42,7 +42,7 @@ def gpadc_vbat_gain_off_trim():
     print(f'............ {Test_Name} ........')
     # FREQFORCE(signal="IOCLK0",reference="GND",value=3.072e6)   # force clock 
     I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x01,PageNo=1) # page 1
-    I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_gpadc_del_comp', 'length': 4, 'registers': [{'REG': '0xB4', 'POS': 0, 'RegisterName': 'OTP FIELDS 4', 'RegisterLength': 8, 'Name': 'otp_ds_gpadc_del_comp[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x04', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x06) # fix the gpadc settle time otp code to 6
+    #I2C_WRITE(device_address="0x38",field_info={'fieldname': 'otp_ds_gpadc_del_comp', 'length': 4, 'registers': [{'REG': '0xB4', 'POS': 0, 'RegisterName': 'OTP FIELDS 4', 'RegisterLength': 8, 'Name': 'otp_ds_gpadc_del_comp[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x04', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]},write_value=0x06) # fix the gpadc settle time otp code to 6
     I2C_REG_WRITE( device_address="0x38", register_address=0xFE, write_value=0x00,PageNo=0) # page 0
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'sar_vbat_avg_sel', 'length': 2, 'registers': [{'REG': '0xDE', 'POS': 0, 'RegisterName': 'SAR ADC settings ', 'RegisterLength': 8, 'Name': 'sar_vbat_avg_sel[1:0]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x0F', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0x3)
     I2C_WRITE(device_address="0x38",field_info={'fieldname': 'sar_temp_avg_sel', 'length': 2, 'registers': [{'REG': '0xDE', 'POS': 2, 'RegisterName': 'SAR ADC settings ', 'RegisterLength': 8, 'Name': 'sar_temp_avg_sel[1:0]', 'Mask': '0xC', 'Length': 2, 'FieldMSB': 1, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x0F', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]},write_value=0x3)
@@ -52,7 +52,7 @@ def gpadc_vbat_gain_off_trim():
     vbat_offset_otp_length = {'fieldname': 'otp_sar_offs', 'length': 10, 'registers': [{'REG': '0xBF', 'POS': 4, 'RegisterName': 'OTP FIELDS 15 - TRACEABILITY 3', 'RegisterLength': 8, 'Name': 'otp_sar_offs[9:8]', 'Mask': '0x30', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xC1', 'POS': 0, 'RegisterName': 'OTP FIELDS 17 - TRACEABILITY 5', 'RegisterLength': 8, 'Name': 'otp_sar_offs[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get( 'length',8)
     VBAT_LSB=5.5/(2**10 -1)
     TEMPERATURE_TARGET = 27 # 27c
-    off_min = -20E-3 # in mV
+    off_min = -50E-3 # in mV
     off_max = 50E-3  # in mV
     off_min_code = round(off_min/VBAT_LSB)
     off_max_code = round(off_max/VBAT_LSB)
@@ -72,7 +72,7 @@ def gpadc_vbat_gain_off_trim():
     target_temp_code = round(-(40+TEMPERATURE_TARGET)*1.625904+674)
     [temp_pretrim_code]=samples_average([{'field':{'fieldname': 'temp_meas', 'length': 10, 'registers': [{'REG': '0x21', 'POS': 0, 'RegisterName': 'TEMP measurement reg 1', 'RegisterLength': 8, 'Name': 'temp_meas[9:8]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': '000000RR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x22', 'POS': 0, 'RegisterName': 'TEMP measurement reg 2', 'RegisterLength': 8, 'Name': 'temp_meas[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':565}])
     temp_pretrim_degree = round( ((temp_pretrim_code-674)/(-1.628904))-40 )
-    temp_off = temp_pretrim_code - target_temp_code
+    temp_off = target_temp_code - temp_pretrim_code
     delta_off = temp_off - vbat_pretrim_offset
     print(f'delta off : {delta_off}')
     ################## EVALUVATE THE FINAL OFFSET CODE ######

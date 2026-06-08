@@ -1,4 +1,4 @@
-# Processed on 2026-05-25 09:03:21
+# Processed on 2026-06-08 15:00:26
 from dfttools import *
 from time import sleep
 from Procedures.utils import complement,dec_to_2complement
@@ -43,7 +43,7 @@ def gpadc_vbat_gain_off_trim():
     print(f'............ {Test_Name} ........')
     # FREQFORCE(signal="IOCLK0",reference="GND",value=3.072e6)   # force clock 
     [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
-    [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB4, data=0x6, Mask=0xF, Default=0x4 # fix the gpadc settle time otp code to 6
+    #[i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xB4, data=0x6, Mask=0xF, Default=0x4 # fix the gpadc settle time otp code to 6
     [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0x3, Mask=0x3, Default=0xF
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDE, data=0xC, Mask=0xC, Default=0xF
@@ -53,7 +53,7 @@ def gpadc_vbat_gain_off_trim():
     vbat_offset_otp_length = {'fieldname': 'otp_sar_offs', 'length': 10, 'registers': [{'REG': '0xBF', 'POS': 4, 'RegisterName': 'OTP FIELDS 15 - TRACEABILITY 3', 'RegisterLength': 8, 'Name': 'otp_sar_offs[9:8]', 'Mask': '0x30', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xC1', 'POS': 0, 'RegisterName': 'OTP FIELDS 17 - TRACEABILITY 5', 'RegisterLength': 8, 'Name': 'otp_sar_offs[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get( 'length',8)
     VBAT_LSB=5.5/(2**10 -1)
     TEMPERATURE_TARGET = 27 # 27c
-    off_min = -20E-3 # in mV
+    off_min = -50E-3 # in mV
     off_max = 50E-3  # in mV
     off_min_code = round(off_min/VBAT_LSB)
     off_max_code = round(off_max/VBAT_LSB)
@@ -73,7 +73,7 @@ def gpadc_vbat_gain_off_trim():
     target_temp_code = round(-(40+TEMPERATURE_TARGET)*1.625904+674)
     [temp_pretrim_code]=samples_average([{'field':{'fieldname': 'temp_meas', 'length': 10, 'registers': [{'REG': '0x21', 'POS': 0, 'RegisterName': 'TEMP measurement reg 1', 'RegisterLength': 8, 'Name': 'temp_meas[9:8]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': '000000RR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x22', 'POS': 0, 'RegisterName': 'TEMP measurement reg 2', 'RegisterLength': 8, 'Name': 'temp_meas[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':565}])
     temp_pretrim_degree = round( ((temp_pretrim_code-674)/(-1.628904))-40 )
-    temp_off = temp_pretrim_code - target_temp_code
+    temp_off = target_temp_code - temp_pretrim_code
     delta_off = temp_off - vbat_pretrim_offset
     print(f'delta off : {delta_off}')
     ################## EVALUVATE THE FINAL OFFSET CODE ######
