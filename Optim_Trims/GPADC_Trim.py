@@ -120,7 +120,7 @@ def gpadc_vbat_gain_off_trim():
     VB1_4P8v_posttrim_cal_V = VB1_4P8v_posttrim_code*VBAT_LSB
     VB2_3P7v_posttrim_cal_V = VB2_3P7v_posttrim_code*VBAT_LSB
     print(f'VB0 (@ 2.8V) : {VB0_2P8v_posttrim_V:.6F} V ,    CAL : [ {VB0_2P8v_posttrim_code :#04X} ] {VB0_2P8v_posttrim_cal_V:.6f} V')
-    print(f'VB2 (@ 3.7V) : {VB2_3P7v_posttrim_V:.6F} V , CAL : [ {VB2_3P7v_posttrim_code :#04X} ] {VB2_3P7v_posttrim_cal_V:.6f} V')
+    print(f'VB2 (@ 3.7V) : {VB2_3P7v_posttrim_V:.6F} V ,    CAL : [ {VB2_3P7v_posttrim_code :#04X} ] {VB2_3P7v_posttrim_cal_V:.6f} V')
     print(f'VB1 (@ 4.8V) : {VB1_4P8v_posttrim_V:.6F} V ,    CAL : [ {VB1_4P8v_posttrim_code :#04X} ] {VB1_4P8v_posttrim_cal_V:.6f} V')
     print(f'VBAT POST :> GAIN : {vbat_posttrim_gain:.6F}, OFFSET : {vbat_posttrim_offset:.6F}')
     ####################### GPADC-LOG #######################
