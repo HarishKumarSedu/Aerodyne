@@ -1,4 +1,4 @@
-# Processed on 2026-06-08 16:44:54
+# Processed on 2026-06-08 16:45:41
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -67,8 +67,8 @@ def offset_cal_cld_3lvl():
     
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0
-  v1 = VMEASURE("OUTP","OUTN",0,0)
-  print(f'"OUTP" - "OUTN" after calibration {v1}')
+  v2 = VMEASURE("OUTP","OUTN",0,0)
+  print(f'"OUTP" - "OUTN" after calibration {v2}')
     
     
 if __name__ == '__main__':
