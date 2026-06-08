@@ -1,4 +1,4 @@
-# Processed on 2025-09-19 15:16:49
+# Processed on 2026-06-08 13:21:45
 from dfttools import *
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
@@ -26,9 +26,9 @@ def gpadc_settle_time_trim():
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x4, Mask=0x7F, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x11, Mask=0x7F, Default=0x0
     [i2c_reg_write] device_addr=0x38, PageName=PAG0,register_addr=0xFE, data=0x0, Mask=0xFF # page 0
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x1
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x1, Mask=0x1, Default=0x3
     sleep(0.001)
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x4, Mask=0x4, Default=0x0
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x4, Mask=0x4, Default=0x1
     [i2c_reg_write] device_addr=0x38, PageName=PAG1,register_addr=0xFE, data=0x1, Mask=0xFF # page 1
 
     # select the mux to bring out the ana_dd_gpadc_tb_delay_clock_dvdd signal on "IOCLK1"
@@ -80,8 +80,7 @@ def gpadc_settle_time_trim():
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x03, data=0x0, Mask=0x7F, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x04, data=0x0, Mask=0x7F, Default=0x0
     [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x0, Mask=0x4, Default=0x0
-    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xDF, data=0x0, Mask=0x1, Default=0x1
+    [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xD6, data=0x0, Mask=0x4, Default=0x1
 
 
 if __name__ == '__main__':
