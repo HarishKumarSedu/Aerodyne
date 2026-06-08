@@ -1,4 +1,4 @@
-# Processed on 2026-06-08 15:34:33
+# Processed on 2026-06-08 15:39:25
 from dfttools import *
 from time import sleep
 from Procedures.Startup import startup
@@ -13,6 +13,8 @@ def offset_cal_cld_3lvl():
   playback()
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x17, data=0x0, Mask=0x1, Default=0x35 #  {'fieldname': 'input_cm_en', 'length': 1, 'registers': [{'REG': '0x17', 'POS': 0, 'RegisterName': 'Input cm settings 1', 'RegisterLength': 8, 'Name': 'input_cm_en', 'Mask': '0x1', 'Length': 1, 'FieldMSB': 0, 'FieldLSB': 0, 'Attribute': 'NNNNNN0N', 'Default': '0x35', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}=0
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x92, data=0x5, Mask=0x7, Default=0x3 #{'fieldname': 'spk_gain', 'length': 3, 'registers': [{'REG': '0x92', 'POS': 0, 'RegisterName': 'SPK setting reg 1', 'RegisterLength': 8, 'Name': 'spk_gain[2:0]', 'Mask': '0x7', 'Length': 3, 'FieldMSB': 2, 'FieldLSB': 0, 'Attribute': '000NNNNN', 'Default': '0x03', 'User': 'YYYYYYYY', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG0'}]}=5 (101)
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0x18, data=0x0, Mask=0x2, Default=0x0
   v1 = VMEASURE("OUTP","OUTN",0,0)
   print(f'"OUTP" - "OUTN" before calibration {v1}')
   [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
@@ -41,10 +43,6 @@ def offset_cal_cld_3lvl():
   cal_offs_end_value = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x79, Mask=0x10
   cal_offs_result_value = [i2c_read] device_addr=0x38, PageName=PAG0, register_addr=0x79, Mask=0x20
   print(f'cal_offs_end_value : {hex(cal_offs_end_value)} , cal_offs_result_value :{hex(cal_offs_result_value)} ')
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
-  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0
-  v1 = VMEASURE("OUTP","OUTN",0,0)
-  print(f'"OUTP" - "OUTN" befoer calibration {v1}')
  
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xFE, data=0x1, Mask=0x1, Default=0x0
   ext_offset_comp = [i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0xC7, Mask=0xFF
@@ -53,7 +51,7 @@ def offset_cal_cld_3lvl():
 [i2c_read] device_addr=0x38, PageName=PAG1, register_addr=0xCB, Mask=0x8
   print(f'{Test_Name} :> ext_offset_comp : {hex(ext_offset_comp)}, int_offset_comp : {hex(int_offset_comp)}')
 
-  #### Added code saturation to -/+ 8
+  #################### Added code saturation to -/+ 8
   interpreted_ext = ext_offset_comp - 0x200 if ext_offset_comp & 0x100 else ext_offset_comp
   ext_offset_comp = 8 if 0 <= interpreted_ext <= 8 else 0x1f8 if -8 <= interpreted_ext <= -1 else ext_offset_comp
   interpreted_int = int_offset_comp - 0x200 if int_offset_comp & 0x100 else int_offset_comp
@@ -65,8 +63,13 @@ def offset_cal_cld_3lvl():
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCB, data=ext_offset_comp, Mask=0x20, Default=0x0
   [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xC9, data=int_offset_comp, Mask=0xFF, Default=0x0
 [i2c_write] device_addr=0x38, PageName=PAG1, register_addr=0xCB, data=int_offset_comp, Mask=0x8, Default=0x0
-
-
+  ################### End code saturation
+    
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0xFE, data=0x0, Mask=0x1, Default=0x0
+  [i2c_write] device_addr=0x38, PageName=PAG0, register_addr=0x9F, data=0x1, Mask=0x1, Default=0x0
+  v1 = VMEASURE("OUTP","OUTN",0,0)
+  print(f'"OUTP" - "OUTN" after calibration {v1}')
+    
     
 if __name__ == '__main__':
   offset_cal_cld_3lvl()
