@@ -3,7 +3,6 @@ from time import sleep
 import random
 from Procedures.Startup import startup
 from Procedures.Global_enable import global_enable
-
 def uvlo_l2h():
     startup()
     global_enable()
