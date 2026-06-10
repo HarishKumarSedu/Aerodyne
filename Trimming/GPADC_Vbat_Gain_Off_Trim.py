@@ -73,7 +73,7 @@ def gpadc_vbat_gain_off_trim():
     ###################### GPAFC VBAT GAIN AND OFFSET PRETIMMING ###################
     vbat_offset_otp_length = {'fieldname': 'otp_sar_offs', 'length': 10, 'registers': [{'REG': '0xBF', 'POS': 4, 'RegisterName': 'OTP FIELDS 15 - TRACEABILITY 3', 'RegisterLength': 8, 'Name': 'otp_sar_offs[9:8]', 'Mask': '0x30', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}, {'REG': '0xC1', 'POS': 0, 'RegisterName': 'OTP FIELDS 17 - TRACEABILITY 5', 'RegisterLength': 8, 'Name': 'otp_sar_offs[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG1'}]}.get( 'length',8)
     VBAT_LSB=5.5/(2**10 -1)
-    TEMPERATURE_TARGET = 27 # 27c
+    TEMPERATURE_TARGET = 30 # 27c
     off_min = -50E-3 # in mV
     off_max = 50E-3  # in mV
     off_min_code = round(off_min/VBAT_LSB)
