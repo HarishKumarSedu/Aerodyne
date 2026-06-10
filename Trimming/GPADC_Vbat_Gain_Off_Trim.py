@@ -149,7 +149,7 @@ def gpadc_vbat_gain_off_trim():
     [temp_measurement_code]=samples_average([{'field':{'fieldname': 'temp_meas', 'length': 10, 'registers': [{'REG': '0x21', 'POS': 0, 'RegisterName': 'TEMP measurement reg 1', 'RegisterLength': 8, 'Name': 'temp_meas[9:8]', 'Mask': '0x3', 'Length': 2, 'FieldMSB': 9, 'FieldLSB': 8, 'Attribute': '000000RR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}, {'REG': '0x22', 'POS': 0, 'RegisterName': 'TEMP measurement reg 2', 'RegisterLength': 8, 'Name': 'temp_meas[7:0]', 'Mask': '0xFF', 'Length': 8, 'FieldMSB': 7, 'FieldLSB': 0, 'Attribute': 'RRRRRRRR', 'Default': '0x00', 'User': '00000000', 'Clocking': 'REF', 'Reset': 'C', 'PageName': 'PAG0'}]},'expected_value':556}])
     temperature_calculated = ((temp_measurement_code - 674)/(-1.628904))-40
     print(f'GPADC-TEMP MEASUREMENT :~')
-    print(f'TEMP (@ 27.0C) : [ {temp_measurement_code:#04X} ] {temperature_calculated:.4F}')
+    print(f'TEMP (@ 30.0C) : [ {temp_measurement_code:#04X} ] {temperature_calculated:.4F}')
     FREQFORCE(signal="IOCLK0",reference="GND",value=float('Inf')) # disable the clock at the end of the test 
 
 if __name__ == '__main__':
