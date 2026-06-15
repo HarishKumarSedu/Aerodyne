@@ -11,7 +11,7 @@ Force,V,ADDR,GND,1.2,,"args=(), kwargs={}"
 Measure,V,IODATA1,GND,1.2,,"args=(), kwargs={}"
 Force,V,ADDR,GND,inf,,"args=(), kwargs={}"
 Measure,V,IODATA1,GND,1.2,,"args=(), kwargs={}"
-I2C,WR-Reg,0x38,0xb1,0x80,1,
+I2C,WR-Reg,0x38,0xb1,0x8e,1,
 Measure,V,IODATA1,GND,1.2,,"args=(), kwargs={}"
 I2C,WR-Reg,0x38,0x15,0x5,1,
 Force,V,ADDR,GND,0.9,,"args=(), kwargs={}"
@@ -25,11 +25,11 @@ Force,V,ADDR,GND,0.6,,"args=(), kwargs={}"
 Measure,V,IODATA1,GND,0.6,,"args=(), kwargs={}"
 Force,V,ADDR,GND,inf,,"args=(), kwargs={}"
 Measure,V,IODATA1,GND,0.6,,"args=(), kwargs={}"
-I2C,WR-Reg,0x38,0xb0,0xee,1,
+I2C,WR-Reg,0x38,0xb0,0xed,1,
 Measure,V,IODATA1,GND,0.6,,"args=(), kwargs={}"
 I2C,WR-Reg,0x38,0x10,0x40,1,
 I2C,WR-Reg,0x38,0x10,0x0,1,
 I2C,WR-Reg,0x38,0x15,0xc,1,
 Measure,V,IODATA1,GND,1.2,,"args=(), kwargs={}"
-I2C,WR-Reg,0x38,0xcd,0xe,1,
+I2C,WR-Reg,0x38,0xcd,0xd,1,
 Measure,V,IODATA1,GND,1.2,,"args=(), kwargs={}"
